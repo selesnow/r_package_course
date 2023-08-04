@@ -5,5 +5,6 @@
 Coming soon!
 
 <center>
-![](/img/cover.png)
+<img src="img/cover.png" align="right" alt="Cover image" class="cover" width="230" height="366">
 </center>
+
