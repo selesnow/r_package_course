@@ -5,6 +5,6 @@
 Coming soon!
 
 <center>
-<img src="img/cover.png" align="right" alt="Cover image" class="cover" width="230" height="366">
+<img src="img/cover.png" align="center" alt="Cover image" class="cover" width="230" height="366">
 </center>
 
