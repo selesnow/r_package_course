@@ -1,7 +1,7 @@
 --- 
 title: "Курс 'Разработка пакетов на языке R'"
 author: "Алексей Селезнёв"
-date: "`r Sys.Date()`"
+date: "2023-08-05"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]

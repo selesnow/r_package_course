@@ -2,7 +2,9 @@ bookdown::bs4_book:
   css: style.css
   theme:
     primary: "#096B72"
-  repo: https://github.com/rstudio/bookdown-demo
+  includes:
+    in_header: [google_analytics.html, favicon.html]
+  repo: https://github.com/selesnow/r_package_course
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
