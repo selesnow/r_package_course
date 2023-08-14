@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Урок 2 Настройка системы и интеграция с GitHub | Курс ‘Разработка пакетов на языке R’</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content="Данный урок посвящён настройке вашей операционной системы и среды для разработки пакетов. Мы установим всё необходимое программное обеспечение, зарегистрируем бесплатный аккаунт на GitHub и...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Урок 2 Настройка системы и интеграция с GitHub | Курс ‘Разработка пакетов на языке R’">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Данный урок посвящён настройке вашей операционной системы и среды для разработки пакетов. Мы установим всё необходимое программное обеспечение, зарегистрируем бесплатный аккаунт на GitHub и...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Урок 2 Настройка системы и интеграция с GitHub | Курс ‘Разработка пакетов на языке R’">
+<meta name="twitter:description" content="Данный урок посвящён настройке вашей операционной системы и среды для разработки пакетов. Мы установим всё необходимое программное обеспечение, зарегистрируем бесплатный аккаунт на GitHub и...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114798296-1');
+    </script><link rel="shortcut icon" href="img/favicon.ico">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Курс ‘Разработка пакетов на языке R’</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="" href="%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">1</span> Обзор рабочего процесса разработки пакета</a></li>
+<li><a class="active" href="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D1%81-github.html"><span class="header-section-number">2</span> Настройка системы и интеграция с GitHub</a></li>
+<li><a class="" href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/selesnow/r_package_course">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="настройка-системы-и-интеграция-с-github" class="section level1" number="2">
+<h1>
+<span class="header-section-number">Урок 2</span> Настройка системы и интеграция с GitHub<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D1%81-github"><i class="fas fa-link"></i></a>
+</h1>
+<p>Данный урок посвящён настройке вашей операционной системы и среды для разработки пакетов. Мы установим всё необходимое программное обеспечение, зарегистрируем бесплатный аккаунт на GitHub и настроим интеграцию между RStudio и GitHub.</p>
+<div id="видео-1" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-1"><i class="fas fa-link"></i></a>
+</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OPiMVVBYZsM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+</iframe>
+<div id="тайм-коды-1" class="section level3" number="2.1.1">
+<h3>
+<span class="header-section-number">2.1.1</span> Тайм коды<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>00:00 Вступление<br>
+00:50 Настройка дефолтных опций пакета usethis<br>
+05:13 Установка утилиты rtools<br>
+06:38 Регистрация на GitHub<br>
+08:15 Установка Git<br>
+09:53 Установка учётных данных в Git<br>
+11:27 Создание персонального токена на GitHub<br>
+15:04 Проверяем систему на готовность к компиляции пакетов<br>
+15:40 Отправка пакета из RStudio на GitHub<br>
+17:25 Обзор всего процесса настройки системы для разработки пакетов и интеграции RStudio с GitHub<br>
+18:43 Заключение<br></p>
+</div>
+</div>
+<div id="презентация-1" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Презентация<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-1"><i class="fas fa-link"></i></a>
+</h2>
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/me4QQIyGHosTc9?hostedIn=slideshare&amp;page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no">
+</iframe>
+</div>
+<div id="краткий-конспект-1" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Краткий конспект<a class="anchor" aria-label="anchor" href="#%D0%BA%D1%80%D0%B0%D1%82%D0%BA%D0%B8%D0%B9-%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Для настройки системы и интеграции с GitHub скачайте и установите следующее программное обеспечение:</p>
+<ol style="list-style-type: decimal">
+<li>
+<a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> - Специальная утилита для сборки пакетов на Windows (только если работаете на Windows).</li>
+<li>
+<a href="https://git-scm.com/downloads">Git</a> - система управления версиями с распределенной архитектурой.</li>
+</ol>
+<div id="настройка-дефорлтных-опций-пакета-usethis" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> Настройка дефорлтных опций пакета usethis<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B4%D0%B5%D1%84%D0%BE%D1%80%D0%BB%D1%82%D0%BD%D1%8B%D1%85-%D0%BE%D0%BF%D1%86%D0%B8%D0%B9-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-usethis"><i class="fas fa-link"></i></a>
+</h3>
+<p>Для удобства вы можете настроить некоторые опции пакета <code>usethis</code> по умолчанию, например есть смысл проставлять по умолчанию в файле DESCRIPTION вас как автора пакета.</p>
+<p>Некоторые опции usethis:</p>
+<ul>
+<li>
+<code>usethis.description</code> - именованный список полей DESCRIPTION по умолчанию для новых пакетов, созданных с помощью <code><a href="https://usethis.r-lib.org/reference/create_package.html">usethis::create_package()</a></code>
+</li>
+<li>
+<code>usethis.full_name</code> – задаёт имя по умолчанию, которое будет использоваться например при создании файла лицензии</li>
+<li>
+<code>usethis.quiet</code> – запрещает usethis выводить сообщения в консоль</li>
+<li>
+<code>usethis.destdir</code> - каталог по умолчанию для использования в <code>create_from_github()и use_course()</code>
+</li>
+</ul>
+<p>Наиболее простой способ задать опции - отредактироваьт глобальный файл .Rprofile, выполните команду <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_profile()</a></code>, после чего в RStudio откроется .Rprofile, далее добавьте в него код определния нудных опций:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span></span>
+<span>  usethis.description <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Authors@R"</span> <span class="op">=</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/person.html">person</a></span><span class="op">(</span></span>
+<span>      <span class="st">"Alexey"</span>, <span class="st">"Seleznev"</span>,</span>
+<span>      email <span class="op">=</span> <span class="st">"selesnow@gmail.com"</span>,</span>
+<span>      role <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"aut"</span>, <span class="st">"cre"</span><span class="op">)</span>,</span>
+<span>      comment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>ORCID <span class="op">=</span> <span class="st">"0000-0003-0410-7385"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  usethis.destdir <span class="op">=</span> <span class="st">"C:/Users/SAMSUNG/Documents"</span>,</span>
+<span>  usethis.overwrite <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Теперь при создании пакета с помощью команды <code><a href="https://usethis.r-lib.org/reference/create_package.html">usethis::create_package()</a></code> файле DESCRIPTION автоматически будет заполняться поле с указанием автора пакета.</p>
+</div>
+<div id="настройка-системы" class="section level3" number="2.3.2">
+<h3>
+<span class="header-section-number">2.3.2</span> Настройка системы<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Скачайте и установите <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>, если работаете на Windows</li>
+<li>Скачайте и установите <a href="https://git-scm.com/downloads">Git</a>
+</li>
+<li>Перезагрузите систему</li>
+<li>Установите учётные данные для Git</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://usethis.r-lib.org">usethis</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># подключаем Git</span></span>
+<span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git.html">use_git</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># имя для Git вы можете задать любое, им будут подписываться коммиты</span></span>
+<span><span class="co"># email должен быть связан с учётной записью GitHub</span></span>
+<span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git_config.html">use_git_config</a></span><span class="op">(</span>user.name <span class="op">=</span> <span class="st">"Your Name"</span>, user.email <span class="op">=</span> <span class="st">"your@gmail.com"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># проверка настроек</span></span>
+<span><span class="fu"><a href="https://usethis.r-lib.org/reference/git_sitrep.html">git_sitrep</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="интеграция-rstudio-с-github" class="section level3" number="2.3.3">
+<h3>
+<span class="header-section-number">2.3.3</span> Интеграция RStudio с GitHub<a class="anchor" aria-label="anchor" href="#%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-rstudio-%D1%81-github"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Зарегистрируйте бесплатный аккаунт на <a href="https://github.com">Github</a>
+</li>
+<li>Создайте персональный токен на GitHub</li>
+<li>Добавьте созданный токен в хранилище учётных данных</li>
+<li>Опубликуйте проект вашего пакета на GitHub</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># получаем токен GitHub</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/github-token.html">create_github_token</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># добавляем токен в хранилище учётных данных</span></span>
+<span><span class="fu">gitcreds</span><span class="fu">::</span><span class="fu"><a href="https://gitcreds.r-lib.org/reference/gitcreds_get.html">gitcreds_set</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># пуьбликуем проект пакета</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_github.html">use_github</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="задание" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Задание<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5"><i class="fas fa-link"></i></a>
+</h2>
+<p>В этом уроке вместо теста у нас будет задание:</p>
+<ol style="list-style-type: decimal">
+<li>Устновите rtools (только если работаете на Windows)</li>
+<li>Устновите Git</li>
+<li>Зарегистрируйте бесплатный аккаунт на Github (если его у вас ещё нет)</li>
+<li>Настройте интеграцию RStudio с GitHub</li>
+<li>Создайте проект будущего пакета</li>
+<li>Опубликуйте его на Github</li>
+</ol>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">1</span> Обзор рабочего процесса разработки пакета</a></div>
+<div class="next"><a href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D1%81-github"><span class="header-section-number">2</span> Настройка системы и интеграция с GitHub</a></li>
+<li>
+<a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-1"><span class="header-section-number">2.1</span> Видео</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-1"><span class="header-section-number">2.1.1</span> Тайм коды</a></li></ul>
+</li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-1"><span class="header-section-number">2.2</span> Презентация</a></li>
+<li>
+<a class="nav-link" href="#%D0%BA%D1%80%D0%B0%D1%82%D0%BA%D0%B8%D0%B9-%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-1"><span class="header-section-number">2.3</span> Краткий конспект</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B4%D0%B5%D1%84%D0%BE%D1%80%D0%BB%D1%82%D0%BD%D1%8B%D1%85-%D0%BE%D0%BF%D1%86%D0%B8%D0%B9-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-usethis"><span class="header-section-number">2.3.1</span> Настройка дефорлтных опций пакета usethis</a></li>
+<li><a class="nav-link" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B"><span class="header-section-number">2.3.2</span> Настройка системы</a></li>
+<li><a class="nav-link" href="#%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-rstudio-%D1%81-github"><span class="header-section-number">2.3.3</span> Интеграция RStudio с GitHub</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">2.4</span> Задание</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/selesnow/r_package_course/blob/master/02-setup_and_github.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/selesnow/r_package_course/edit/master/02-setup_and_github.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Курс ‘Разработка пакетов на языке R’</strong>" was written by Алексей Селезнёв. It was last built on 2023-08-14.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

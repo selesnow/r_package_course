@@ -1,0 +1,109 @@
+# Настройка системы и интеграция с GitHub
+Данный урок посвящён настройке вашей операционной системы и среды для разработки пакетов. Мы установим всё необходимое программное обеспечение, зарегистрируем бесплатный аккаунт на GitHub и настроим интеграцию между RStudio и GitHub.
+
+## Видео
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OPiMVVBYZsM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### Тайм коды
+
+00:00 Вступление<Br>
+00:50 Настройка дефолтных опций пакета usethis<Br>
+05:13 Установка утилиты rtools<Br>
+06:38 Регистрация на GitHub<Br>
+08:15 Установка Git<Br>
+09:53 Установка учётных данных в Git<Br>
+11:27 Создание персонального токена на GitHub<Br>
+15:04 Проверяем систему на готовность к компиляции пакетов<Br>
+15:40 Отправка пакета из RStudio на GitHub<Br>
+17:25 Обзор всего процесса настройки системы для разработки пакетов и интеграции RStudio с GitHub<Br>
+18:43 Заключение<Br>
+
+## Презентация
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/me4QQIyGHosTc9?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+
+## Краткий конспект
+Для настройки системы и интеграции с GitHub скачайте и установите следующее программное обеспечение:
+
+1. [Rtools](https://cran.r-project.org/bin/windows/Rtools/) - Специальная утилита для сборки пакетов на Windows (только если работаете на Windows).
+2. [Git](https://git-scm.com/downloads) - система управления версиями с распределенной архитектурой.
+
+### Настройка дефорлтных опций пакета usethis
+Для удобства вы можете настроить некоторые опции пакета `usethis` по умолчанию, например есть смысл проставлять по умолчанию в файле DESCRIPTION вас как автора пакета. 
+
+Некоторые опции usethis:
+
+* `usethis.description` - именованный список полей DESCRIPTION по умолчанию для новых пакетов, созданных с помощью `usethis::create_package()`
+* `usethis.full_name` – задаёт имя по умолчанию, которое будет использоваться например при создании файла лицензии
+* `usethis.quiet` – запрещает usethis выводить сообщения в консоль
+* `usethis.destdir` - каталог по умолчанию для использования в `create_from_github()и use_course()`
+
+Наиболее простой способ задать опции - отредактироваьт глобальный файл .Rprofile, выполните команду `usethis::edit_r_profile()`, после чего в RStudio откроется .Rprofile, далее добавьте в него код определния нудных опций:
+
+```{r, eval=FALSE}
+options(
+  usethis.description = list(
+    "Authors@R" = utils::person(
+      "Alexey", "Seleznev",
+      email = "selesnow@gmail.com",
+      role = c("aut", "cre"),
+      comment = c(ORCID = "0000-0003-0410-7385")
+    )
+  ),
+  usethis.destdir = "C:/Users/SAMSUNG/Documents",
+  usethis.overwrite = TRUE
+)
+
+```
+
+Теперь при создании пакета с помощью команды `usethis::create_package()` файле DESCRIPTION автоматически будет заполняться поле с указанием автора пакета.
+
+### Настройка системы
+
+1. Скачайте и установите [Rtools](https://cran.r-project.org/bin/windows/Rtools/), если работаете на Windows
+2. Скачайте и установите [Git](https://git-scm.com/downloads)
+3. Перезагрузите систему
+4. Установите учётные данные для Git
+
+```{r, eval=FALSE}
+library(usethis)
+
+# подключаем Git
+use_git()
+
+# имя для Git вы можете задать любое, им будут подписываться коммиты
+# email должен быть связан с учётной записью GitHub
+use_git_config(user.name = "Your Name", user.email = "your@gmail.com")
+
+# проверка настроек
+git_sitrep()
+```
+
+### Интеграция RStudio с GitHub
+
+1. Зарегистрируйте бесплатный аккаунт на [Github](https://github.com)
+2. Создайте персональный токен на GitHub
+3. Добавьте созданный токен в хранилище учётных данных
+4. Опубликуйте проект вашего пакета на GitHub
+
+```{r, eval=FALSE}
+# получаем токен GitHub
+usethis::create_github_token()
+
+# добавляем токен в хранилище учётных данных
+gitcreds::gitcreds_set()
+
+# пуьбликуем проект пакета
+usethis::use_github()
+```
+
+
+## Задание
+В этом уроке вместо теста у нас будет задание:
+
+1. Устновите rtools (только если работаете на Windows)
+2. Устновите Git
+3. Зарегистрируйте бесплатный аккаунт на Github (если его у вас ещё нет)
+4. Настройте интеграцию RStudio с GitHub
+5. Создайте проект будущего пакета
+6. Опубликуйте его на Github
+
