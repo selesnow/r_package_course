@@ -1,10 +1,20 @@
 # Новости курса {-}
 
-## 2023-08-09
+## 2023-08-15 {-}
 * Сформирована первая версия программы курса
+* Опубликован второй урок курса: [Настройка системы и интеграция с GitHub]
+* На страницы курса добавлены кнопки поделиться в социальных сетях и подписаться на telegram и youtube каналы
 
 ## 2023-08-07 {-}
 * Создан проект курса
 * Видео первого урока опубликовано на YouTube
-* Страница первого урока добавлена в курс
-* Курс опубликован на selesnow.github.io
+* Страница первого урока добавлена в курс: [Обзор рабочего процесса разработки пакета]
+* Курс опубликован на [selesnow.github.io](https://selesnow.github.io/r_package_course/)
+
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
+library(r2social)
+r2social::r2social.scripts()
+r2social::shareButton(link = "https://selesnow.github.io/r_package_course/", position = "inline", whatsapp = T, telegram = T, instagram = T)
+r2social::connectButton(link = 'https://t.me/R4marketing', link.out = F, telegram = T, position = 'left')
+r2social::connectButton(link = 'https://www.youtube.com/R4marketing/?sub_confirmation=1', link.out = F, youtube = T, position = 'right')
+```
