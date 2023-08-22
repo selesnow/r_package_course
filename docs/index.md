@@ -1,7 +1,7 @@
 --- 
 title: "Курс 'Разработка пакетов на языке R'"
 author: "Алексей Селезнёв"
-date: "2023-08-14"
+date: "2023-08-22"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -75,15 +75,18 @@ csl: chicago-fullnote-bibliography.csl
 
 1. [Обзор рабочего процесса разработки пакета]
 2. [Настройка системы и интеграция с GitHub]
-3. Компоненты пакета: рекомендации по организации кода, добавление данных в пакет
-4. Метаданные пакета
-5. Тестирование
-6. Документация
-7. Публикация в CRAN
-8. Разработка пакета обёртки над API
-9. Как создать коллекцию пакетов
+3. [Рекомендации по организации R кода]
+4. Добавление данных в пакет
+5. DESCRIPTION - Метаданные пакета
+6. NAMESPACE - Зависимости пакета
+7. Тестирование
+8. Документация
+9. Публикация в CRAN
+10. Разработка пакета обёртки над API
+11. Как создать коллекцию пакетов
 
-Дата обновления курса: 14.08.2023
+<Br>
+_Дата обновления курса: 22.08.2023_
 
 ## Благодарности автору {-}
 Курс, и все сопутствующие материалы предоставляются бесплатно, но если у вас есть желание отблагодарить автора за этот видео курс вы можете перечислить любую произвольную сумму на [этой странице](https://secure.wayforpay.com/payment/r4excel_users).
@@ -167,7 +170,7 @@ csl: chicago-fullnote-bibliography.csl
 ```
 
 ```{=html}
-<div style="display:inline-block">
+<div style="display:unset">
 <div class="r2social-link-container r2social-social-right">
 <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_r2socialxlink">
 <div class="social-btn-right" style="background-color:#ff0000">

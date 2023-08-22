@@ -1,10 +1,16 @@
 bookdown::bs4_book:
-  css: style.css
+  css:
+  - style.css
+  - include/webex.css
   theme:
-    primary: "#096B72"
+    primary: '#096B72'
   includes:
-    in_header: [google_analytics.html, favicon.html]
+    in_header:
+    - google_analytics.html
+    - favicon.html
+    after_body: include/webex.js
   repo: https://github.com/selesnow/r_package_course
+  md_extensions: -smart
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex

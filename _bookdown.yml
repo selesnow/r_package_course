@@ -1,8 +1,10 @@
-book_filename: "r_package_course"
-new_session: true
-before_chapter_script: _common.R
-delete_merged_file: true
-output_dir: "docs"
+book_filename: r_package_course
+new_session: yes
+before_chapter_script:
+- _common.R
+- R/webex.R
+delete_merged_file: yes
+output_dir: docs
 language:
   ui:
-    chapter_name: "Урок "
+    chapter_name: 'Урок '

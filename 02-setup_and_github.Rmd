@@ -21,7 +21,7 @@
 ## Презентация
 <iframe src="https://www.slideshare.net/slideshow/embed_code/key/me4QQIyGHosTc9?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 
-## Краткий конспект
+## Конспект
 Для настройки системы и интеграции с GitHub скачайте и установите следующее программное обеспечение:
 
 1. [Rtools](https://cran.r-project.org/bin/windows/Rtools/) - Специальная утилита для сборки пакетов на Windows (только если работаете на Windows).
