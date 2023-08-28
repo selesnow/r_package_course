@@ -6,4 +6,17 @@
 <img src="img/cover.png" align="center" alt="Cover image" class="cover" width="230" height="366">
 </center>
 
-[Ссылка](https://selesnow.github.io/r_package_course) на сайт кураса!
+### Ссылки
+
+* [Сайт курса](https://selesnow.github.io/r_package_course)
+* [Плейлист курса на YouTube]()
+
+### Автор курса
+Алексей Селезнёв, Head of analytics dept. at [Netpeak](https://netpeak.net)
+<Br>Telegram канал автора: [R4marketing](https://t.me/R4marketing)
+<Br>Сайт с документацией к пакетам: [selesnow.github.io](https://selesnow.github.io)
+<Br>email: selesnow@gmail.com
+<Br>skype: selesnow
+<Br>facebook: [facebook.com/selesnow](https://facebook.com/selesnow)
+<Br>linkedin: [linkedin.com/in/selesnow](https://linkedin.com/in/selesnow)
+<Br>blog: [alexeyseleznev.wordpress.com](https://alexeyseleznev.wordpress.com/)
