@@ -5,8 +5,8 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
+url: https://selesnow.github.io/r_package_course
+cover-image: img/cover.jpg
 description: |
   Бесплатный видео курс по разработке собственных пакетов на языке R.
 biblio-style: apalike
@@ -45,7 +45,7 @@ csl: chicago-fullnote-bibliography.csl
 Меня зовут Алексей Селезнёв, с 2008 года я являюсь практикующим аналитиком. На данный момент основной моей деятельностью является развитие отдела аналитики в агентстве интернет-маркетинга [Netpeak](https://https://netpeak.group/).
 <a href="https://selesnow.github.io"><img src="img/author.png" width="200" height="200" align="left" alt="Алексей Селезнёв" hspace="20" vspace="7" /></a>
 
-Мною были разработаны такие R пакеты как: `rgoogleads`, `rfacebookstat`, `timeperiodsR` и некоторые другие. На данный момент написанные мной пакеты только с CRAN были установленны более 150 000 раз.
+Мною были разработаны такие R пакеты как: `rgoogleads`, `rfacebookstat`, `timeperiodsR` и некоторые другие. На данный момент написанные мной пакеты только с CRAN были установленны более 200 000 раз.
 
 Также я являюсь автором некоторых других курсов по R (ссылки на них приведу ниже), лектором академии [Web Promo Experts](https://webpromoexperts.net/) и соавтором курса ["Веб-аналитика Pro"](https://webpromoexperts.net/courses/analytics-pro/).
 
@@ -76,7 +76,7 @@ csl: chicago-fullnote-bibliography.csl
 1. [Обзор рабочего процесса разработки пакета]
 2. [Настройка системы и интеграция с GitHub]
 3. [Рекомендации по организации R кода]
-4. Добавление данных в пакет
+4. [Добавление данных в пакет]
 5. DESCRIPTION - Метаданные пакета
 6. NAMESPACE - Зависимости пакета
 7. Тестирование

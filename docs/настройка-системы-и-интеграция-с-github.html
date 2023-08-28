@@ -10,10 +10,13 @@
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Урок 2 Настройка системы и интеграция с GitHub | Курс 'Разработка пакетов на языке R'">
 <meta property="og:type" content="book">
+<meta property="og:url" content="https://selesnow.github.io/r_package_course/настройка-системы-и-интеграция-с-github.html">
+<meta property="og:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
 <meta property="og:description" content="Данный урок посвящён настройке вашей операционной системы и среды для разработки пакетов. Мы установим всё необходимое программное обеспечение, зарегистрируем бесплатный аккаунт на GitHub и...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Урок 2 Настройка системы и интеграция с GitHub | Курс 'Разработка пакетов на языке R'">
 <meta name="twitter:description" content="Данный урок посвящён настройке вашей операционной системы и среды для разработки пакетов. Мы установим всё необходимое программное обеспечение, зарегистрируем бесплатный аккаунт на GitHub и...">
+<meta name="twitter:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -55,6 +58,7 @@
 <li><a class="" href="%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">1</span> Обзор рабочего процесса разработки пакета</a></li>
 <li><a class="active" href="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D1%81-github.html"><span class="header-section-number">2</span> Настройка системы и интеграция с GitHub</a></li>
 <li><a class="" href="%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8-%D0%BF%D0%BE-%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8-r-%D0%BA%D0%BE%D0%B4%D0%B0.html"><span class="header-section-number">3</span> Рекомендации по организации R кода</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%B2-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82.html"><span class="header-section-number">4</span> Добавление данных в пакет</a></li>
 <li><a class="" href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></li>
 </ul>
 
@@ -67,6 +71,7 @@
 <h1>
 <span class="header-section-number">Урок 2</span> Настройка системы и интеграция с GitHub<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D1%81-github"><i class="fas fa-link"></i></a>
 </h1>
+<hr>
 <p>Данный урок посвящён настройке вашей операционной системы и среды для разработки пакетов. Мы установим всё необходимое программное обеспечение, зарегистрируем бесплатный аккаунт на GitHub и настроим интеграцию между RStudio и GitHub.</p>
 <div id="видео-1" class="section level2" number="2.1">
 <h2>
@@ -517,7 +522,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-08-22.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-08-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
