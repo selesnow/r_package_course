@@ -16,7 +16,6 @@
 <Br>Telegram канал автора: [R4marketing](https://t.me/R4marketing)
 <Br>Сайт с документацией к пакетам: [selesnow.github.io](https://selesnow.github.io)
 <Br>email: selesnow@gmail.com
-<Br>skype: selesnow
 <Br>facebook: [facebook.com/selesnow](https://facebook.com/selesnow)
 <Br>linkedin: [linkedin.com/in/selesnow](https://linkedin.com/in/selesnow)
 <Br>blog: [alexeyseleznev.wordpress.com](https://alexeyseleznev.wordpress.com/)
