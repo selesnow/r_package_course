@@ -9,7 +9,7 @@
 ### Ссылки
 
 * [Сайт курса](https://selesnow.github.io/r_package_course)
-* [Плейлист курса на YouTube]()
+* [Плейлист курса на YouTube](https://www.youtube.com/watch?v=3t2lbIQNQf8&list=PLD2LDq8edf4oImDbA4N9rOTzRtRFbzuud)
 
 ### Автор курса
 Алексей Селезнёв, Head of analytics dept. at [Netpeak](https://netpeak.net)

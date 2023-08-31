@@ -207,4 +207,3 @@ r2social::shareButton(link = "https://selesnow.github.io/r_package_course/", pos
 r2social::connectButton(link = 'https://t.me/R4marketing', link.out = F, telegram = T, position = 'left')
 r2social::connectButton(link = 'https://www.youtube.com/R4marketing/?sub_confirmation=1', link.out = F, youtube = T, position = 'right')
 ```
-
