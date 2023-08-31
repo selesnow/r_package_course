@@ -4,6 +4,14 @@
 
 Если вы в своём пакете используете функции из других пакетов, значит ваш пакет имеет зависимости. В этом уроке мы разберёмся с тем, как правильно организовать эти зависимости.
 
+------
+
+::: {style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;"}
+*Данный урок основан на главах ["Dependencies: Mindset and Background"](https://r-pkgs.org/description.html) и ["Dependencies: In Practice"](https://r-pkgs.org/dependencies-in-practice.html) книги ["R Packages (2e)"](https://r-pkgs.org/), под авторством Хедли Викхема и Дженни Брайан.*
+:::
+
+------
+
 ## Видео
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sqvAu-2jcPY?si=DkLYYiKZAn2efaAE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -198,7 +206,7 @@ NULL
 
 В отличае от поля `Imports`, пакеты указанные в поле `Suggest` не обязательно будут установлены у конечного пользователя вашего пакета, в связи с чем вам необходимо делать дополнительные проверки на наличие их установки. 
 
-* В коде пакета, т.е. в папке `R/` вы должны проверить наличие установленного пакета с помощью базовой функции `requireNamespace()`, или функций из пакета `rlang: is_installed()` и `check_installed()`.
+В коде пакета, т.е. в папке `R/` вы должны проверить наличие установленного пакета с помощью базовой функции `requireNamespace()`, или функций из пакета `rlang: is_installed()` и `check_installed()`.
 
 
 ```r
@@ -241,7 +249,7 @@ my_fun <- function(a, b) {
 }
 ```
 
-* В тестах вы можете использовать функцию `testthat::skip_if_not_installed()` для пропуска тестов, если у пользовтаеля не установлены необходимые для их выполнения пакетов.
+В тестах вы можете использовать функцию `testthat::skip_if_not_installed()` для пропуска тестов, если у пользовтаеля не установлены необходимые для их выполнения пакетов.
 
 
 ```r
@@ -265,7 +273,7 @@ test_that("basic plot builds without error", {
 })
 ```
 
-* Для использования пакетов указанных в Suggest в виньетках или примерах функций используйте функции require() или requireNamespace(), для проверки доступен ли необходимый пакет. 
+Для использования пакетов указанных в Suggest в виньетках или примерах функций используйте функции require() или requireNamespace(), для проверки доступен ли необходимый пакет. 
 
 
 ```r

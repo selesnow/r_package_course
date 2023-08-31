@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Урок 6 NAMESPACE - Зависимости пакета | Курс 'Разработка пакетов на языке R'</title>
 <meta name="author" content="Алексей Селезнёв">
-<meta name="description" content="Если вы в своём пакете используете функции из других пакетов, значит ваш пакет имеет зависимости. В этом уроке мы разберёмся с тем, как правильно организовать эти зависимости.  6.1 Видео   6.1.1...">
+<meta name="description" content="Если вы в своём пакете используете функции из других пакетов, значит ваш пакет имеет зависимости. В этом уроке мы разберёмся с тем, как правильно организовать эти зависимости. Данный урок основан...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Урок 6 NAMESPACE - Зависимости пакета | Курс 'Разработка пакетов на языке R'">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://selesnow.github.io/r_package_course/namespace---зависимости-пакета.html">
 <meta property="og:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
-<meta property="og:description" content="Если вы в своём пакете используете функции из других пакетов, значит ваш пакет имеет зависимости. В этом уроке мы разберёмся с тем, как правильно организовать эти зависимости.  6.1 Видео   6.1.1...">
+<meta property="og:description" content="Если вы в своём пакете используете функции из других пакетов, значит ваш пакет имеет зависимости. В этом уроке мы разберёмся с тем, как правильно организовать эти зависимости. Данный урок основан...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Урок 6 NAMESPACE - Зависимости пакета | Курс 'Разработка пакетов на языке R'">
-<meta name="twitter:description" content="Если вы в своём пакете используете функции из других пакетов, значит ваш пакет имеет зависимости. В этом уроке мы разберёмся с тем, как правильно организовать эти зависимости.  6.1 Видео   6.1.1...">
+<meta name="twitter:description" content="Если вы в своём пакете используете функции из других пакетов, значит ваш пакет имеет зависимости. В этом уроке мы разберёмся с тем, как правильно организовать эти зависимости. Данный урок основан...">
 <meta name="twitter:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -61,6 +61,8 @@
 <li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%B2-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82.html"><span class="header-section-number">4</span> Добавление данных в пакет</a></li>
 <li><a class="" href="description---%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">5</span> DESCRIPTION - Метаданные пакета</a></li>
 <li><a class="active" href="namespace---%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">6</span> NAMESPACE - Зависимости пакета</a></li>
+<li><a class="" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">7</span> Разработка юнит-тестов к функциям пакета</a></li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></li>
 <li><a class="" href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></li>
 </ul>
 
@@ -75,6 +77,11 @@
 </h1>
 <hr>
 <p>Если вы в своём пакете используете функции из других пакетов, значит ваш пакет имеет зависимости. В этом уроке мы разберёмся с тем, как правильно организовать эти зависимости.</p>
+<hr>
+<div style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;">
+<p><em>Данный урок основан на главах <a href="https://r-pkgs.org/description.html">"Dependencies: Mindset and Background"</a> и <a href="https://r-pkgs.org/dependencies-in-practice.html">"Dependencies: In Practice"</a> книги <a href="https://r-pkgs.org/">"R Packages (2e)"</a>, под авторством Хедли Викхема и Дженни Брайан.</em></p>
+</div>
+<hr>
 <div id="видео-5" class="section level2" number="6.1">
 <h2>
 <span class="header-section-number">6.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-5"><i class="fas fa-link"></i></a>
@@ -282,9 +289,7 @@ useDynLib(testthat, .registration = TRUE)</code></pre>
 <span class="header-section-number">6.3.7.2</span> При импорте пакетов через поле Suggest<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B8-%D0%B8%D0%BC%D0%BF%D0%BE%D1%80%D1%82%D0%B5-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-%D0%BF%D0%BE%D0%BB%D0%B5-suggest"><i class="fas fa-link"></i></a>
 </h4>
 <p>В отличае от поля <code>Imports</code>, пакеты указанные в поле <code>Suggest</code> не обязательно будут установлены у конечного пользователя вашего пакета, в связи с чем вам необходимо делать дополнительные проверки на наличие их установки.</p>
-<ul>
-<li>В коде пакета, т.е. в папке <code>R/</code> вы должны проверить наличие установленного пакета с помощью базовой функции <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code>, или функций из пакета <code>rlang: is_installed()</code> и <code>check_installed()</code>.</li>
-</ul>
+<p>В коде пакета, т.е. в папке <code>R/</code> вы должны проверить наличие установленного пакета с помощью базовой функции <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code>, или функций из пакета <code>rlang: is_installed()</code> и <code>check_installed()</code>.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Проверка установки пакета через базовую requireNamespace()</span></span>
 <span><span class="co">## Проверка установлен ли пакет</span></span>
@@ -323,9 +328,7 @@ useDynLib(testthat, .registration = TRUE)</code></pre>
 <span>    <span class="fu">g</span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<ul>
-<li>В тестах вы можете использовать функцию <code><a href="https://testthat.r-lib.org/reference/skip.html">testthat::skip_if_not_installed()</a></code> для пропуска тестов, если у пользовтаеля не установлены необходимые для их выполнения пакетов.</li>
-</ul>
+<p>В тестах вы можете использовать функцию <code><a href="https://testthat.r-lib.org/reference/skip.html">testthat::skip_if_not_installed()</a></code> для пропуска тестов, если у пользовтаеля не установлены необходимые для их выполнения пакетов.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">test_that</span><span class="op">(</span><span class="st">"basic plot builds without error"</span>, <span class="op">{</span></span>
 <span>  <span class="fu">skip_if_not_installed</span><span class="op">(</span><span class="st">"sf"</span><span class="op">)</span></span>
@@ -345,9 +348,7 @@ useDynLib(testthat, .registration = TRUE)</code></pre>
 <span></span>
 <span>  <span class="fu">expect_doppelganger</span><span class="op">(</span><span class="st">"sf-polygons"</span>, <span class="fu">ggplot</span><span class="op">(</span><span class="va">nc</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_sf</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">coord_sf</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<ul>
-<li>Для использования пакетов указанных в Suggest в виньетках или примерах функций используйте функции require() или requireNamespace(), для проверки доступен ли необходимый пакет.</li>
-</ul>
+<p>Для использования пакетов указанных в Suggest в виньетках или примерах функций используйте функции require() или requireNamespace(), для проверки доступен ли необходимый пакет.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @examples</span></span>
 <span><span class="co">#' if (require("maps")) {</span></span>
@@ -688,7 +689,7 @@ window.onload = function() {
 
 </script><div class="chapter-nav">
 <div class="prev"><a href="description---%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">5</span> DESCRIPTION - Метаданные пакета</a></div>
-<div class="next"><a href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></div>
+<div class="next"><a href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">7</span> Разработка юнит-тестов к функциям пакета</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
