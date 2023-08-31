@@ -4,6 +4,14 @@
 
 В этом уроке мы разберёмся с базовыми рекомендациями по организации кода вашего пакета, а так же узнаем чем принципиально отличается разработка пакета от написания обычного R сценария.
 
+------
+
+::: {style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;"}
+*Данный урок основан на главе ["R code"](https://r-pkgs.org/code.html) книги ["R Packages (2e)"](https://r-pkgs.org/), под авторством Хедли Викхема и Дженни Брайан.*
+:::
+
+------
+
 ## Видео
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pMeJ1DvnLFs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 

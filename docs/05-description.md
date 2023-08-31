@@ -1,67 +1,150 @@
-# Обзор рабочего процесса разработки пакета
+# DESCRIPTION - Метаданные пакета
 
 ------
 
-В этом уроке мы поверхностно разберём весь процесс разработки пакета.
-
-**Если вы работаете на Windows предварительно устновите [Rtools](https://cran.r-project.org/bin/windows/Rtools/).**
-
-------
-
-::: {style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;"}
-*Данный урок основан на главе ["The Whole Game"](https://r-pkgs.org/whole-game.html) книги ["R Packages (2e)"](https://r-pkgs.org/), под авторством Хедли Викхема и Дженни Брайан.*
-:::
-
-------
+В этом видео мы с вами подробно разберёмся с содержимым одного из главных файлов в вашем пакете - DESCRIPTION, в котором хранятся его метаданные. 
 
 ## Видео
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3t2lbIQNQf8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QchPCM9T33s?si=_gT7ejiBMrjgUhG-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### Тайм коды
 
 00:00 Вступление<Br>
-00:43 Как создать проект пакета<Br>
-01:50 Структура проекта пакета<Br>
-02:47 Добавляем проекту контроль версий<Br>
-03:14 Как добавить функцию в свой пакет<Br>
-04:17 Как загрузить текущий пакет (`load_all()`)<Br>
-05:05 Как запустить проверку пакета (`check()`)<Br>
-05:56 Файл DESCRIPTION<Br>
-06:52 Добавляем лицензию пакету<Br>
-07:08 Добавляем документацию к функциям пакета<Br>
-09:47 Файл NAMESPACE<Br>
-10:10 Добавляем юнит тесты для функций пакета<Br>
-13:34 Как использовать в своём пакете функции из других пакетов<Br>
-16:46 Обзор всего рабочего процесса<Br>
-19:03 Заключение<Br>
+00:39 Назначение и минимальный пример файла DESCRIPTION<Br>
+01:53 Настройка дефолтных значений полей файла DESCRIPTION с помощью опции usethis.description<Br>
+03:04 Поля Title и Description<Br>
+04:09 Поле Authors@R для указания авторства пакета<Br>
+06:03 Поля URL и BugReports<Br>
+06:34 Поле License<Br>
+09:24 Поля Imports и Suggests<Br>
+12:30 Прочие поля файла DESCRIPTION<Br>
+14:20 Использование пользовательских полей в файле DESCRIPTION<Br>
+15:17 Заключение<Br>
 
 ## Презентация
-<iframe src="https://www.slideshare.net/slideshow/embed_code/key/jRKxyjUM5qUrYe?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/1c5YjFEp4rdG1P?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 
 ## Конспект
-### Вспомогательные пакеты
+Задача файла DESCRIPTION— хранить важные метаданные о вашем пакете. При создании пакета функцией `usethis::create_package()` в созданном проекте будет сразу добавлен минимальный пример файл DESCRIPTION.
 
-1. `devtools` - инструменты разработчика пакета
-2. `usethis` - автоматизация настройки разрабатываемого пакета
-3. `testthat` - разработка юнит тестов к функциям пакета
-4. `roxygen2` - упрощённое написание документации к функциям пакета
+```
+Package: package_name
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person("Alexey", "Seleznev", , "selesnow@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-0410-7385"))
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+```
 
-### Процесс разработки пакета
+Во втором уроке курса я уже рассказывал о том, что вы можете задать дефолтные значения любых полей файла `DESCRIPTION`, для этого добавьте код определения опции `usethis.description` в файл `.Rprofile`.
 
-1. Создаём проект пакета с помощью команды `create_package()`
-2. Включаем контроль версий с помощью функции `use_git()`
-3. Добавляем лицензию командой `use_mit_licence()`
-4. Добавляем в пакет функции с помощью команды `use_r()`
-5. Документируем созданные функции добавляя специализированиы комментарии сочетанием клавиш **Ctrl+Alt+Shift+R**
-6. генерируем файлы документации функций командой `document()`
-7. Для тестирования добавляем в файл DESCRIPTION пакет `testthat` командой `use_testthat()`
-8. Добавляем для каждой функции юнит тесты командой `use_test()`
-9. Запускаем тестирование функций командой `test()`
-10. Для использования функций из стороних пакетов добавляем их в блок Imports файлв DESCRIPTION командой `use_package()`, в коде используем импортированные функции с помощью `package_name::function_name()`
-11. Проверяем пакет командой `check()`
+
+```r
+options(
+  usethis.description = list(
+    "Authors@R" = utils::person(
+        "Jane", "Doe",
+        email = "jane@example.com",
+        role = c("aut", "cre"),
+        comment = c(ORCID = "JANE'S-ORCID-ID")
+    )
+  )
+)
+```
+
+
+Далее подробно разберёмся все обязательные поля файла DESCRIPTION
+
+### Title и Description
+
+* *Title* представляет собой однострочное описание пакета и часто отображается в листинге пакета. Это должен быть обычный текст (без разметки), каждое слово должно начинаться с заглавной буквы, и НЕ заканчивающийся точкой. Будьте краткими: списки часто урезают заголовок до 65 символов.
+* *Description* более подробное описание, чем заголовок. Вы можете использовать несколько предложений, но вы ограничены одним абзацем. Если ваше описание занимает несколько строк (а так и должно быть!), ширина каждой строки не должна превышать 80 символов. Отступ последующих строк с 4 пробелами.
+
+### Authors@R
+
+Ранее для указания авторства использовались поля `Author` и `Mainter`, но сейчас более гибким способом является поле `Authors@R`, в которое вам необходимо перечислить авторов и сопровождающих вашего пакета с помощью функции `utils::person()`. 
+
+Аргументы функции `utils::person()`:
+
+* Имя, указанное первыми двумя аргументами `given` и `family` (обычно они задаются по положению, а не по имени). 
+* `email`, который является абсолютным требованием для сопровождающего. Важно отметить, что это адрес, который CRAN использует, чтобы сообщить вам, нужно ли исправить ваш пакет, чтобы остаться в CRAN. 
+* Один или несколько трехбуквенных кодов, определяющих расширение `role`. Вот самые важные роли, о которых нужно знать:
+    * `cre`: создатель или сопровождающий, человек, которого вы должны беспокоить, если у вас есть проблемы. 
+    * `aut`: авторы, внесшие значительный вклад в разработку пакета.
+    * `ctb`: участники, те, кто внес меньший вклад, например патчи.
+    * `cph`: правообладатель. Это используется для перечисления дополнительных правообладателей, которые не являются авторами, как правило, компаний, таких как работодатель одного или нескольких авторов.
+    * `fnd`: спонсор, люди или организации, предоставившие финансовую поддержку для разработки пакета.
+
+### URL и BugReports
+
+* Поле `URL` обычно используется для рекламы веб-сайта пакета и для ссылки на общедоступный репозиторий исходных кодов, где происходит разработка. 
+* `BugReports` это URL-адрес, по которому следует отправлять отчеты об ошибках, например, как раздел issues GitHub. 
+
+### License
+
+данное поле отвечает за тип лицензии вашего пакета, лицензия может регулировать законные права сторонних разработчиков на использование вашего кода, и в частности всего пакета в их собственных разработках или публикациях. Важно понимать, что это, по сути, машиночитаемое `License` поле, и не стоит заполнять его руками, для каждого типа лицензии в пакете `usethis` есть отдельная функция, которая заполняет поле `License` и добавляет в ваш пакет отдельный файл с описанием лицензии.
+
+* `use_mit_license()` – если вам нужна лицензия, чтобы люди могли использовать ваш код с минимальными ограничениями
+* `use_gpl_license()` - если вам нужна лицензия с авторским левом, чтобы все производные и пакеты вашего кода также имели открытый исходный код
+* `use_cc0_license()` - если ваш пакет в основном содержит данные, а не код, и вам нужны минимальные ограничения
+* `use_ccby_license()` – если ваш пакет содержит только данные, но вы хотите указания вашего авторства
+* `use_proprietary_license()` - если вы не хотите делать свой код открытым (На CRAN не пустят)
+
+### Imports, Suggests, Depends
+
+* Пакеты, перечисленные в, `Imports` необходимы вашим пользователям во время выполнения и будут установлены (или потенциально обновлены), когда пользователи установят ваш пакет через `install.packages()`.
+* Пакеты, перечисленные в, `Suggests` либо необходимы для задач разработки, либо могут разблокировать дополнительные возможности пакета для ваших пользователей.
+
+Для добавления необходимых пакетов в зависимости, т.е. в поля `Imports` или `Description` используйте функцию `usethis::use_package()`.
+
+
+```r
+usethis::use_package("dplyr") # Default is "Imports"
+#> ✔ Adding 'dplyr' to Imports field in DESCRIPTION
+#> • Refer to functions with `dplyr::fun()`
+
+usethis::use_package("ggplot2", "Suggests")
+#> ✔ Adding 'ggplot2' to Suggests field in DESCRIPTION
+#> • Use `requireNamespace("ggplot2", quietly = TRUE)` to test if package is installed
+#> • Then directly refer to functions with `ggplot2::fun()`
+```
+
+Так же вы можете использовать аргумент `min_version` для указания минимальной или текущей версии пакета, от которого щависит ваш пакет:
+
+
+```r
+# exact version
+usethis::use_package("dplyr", min_version = "1.0.0")
+
+# min version = currently installed version
+usethis::use_package("dplyr", min_version = TRUE)
+```
+
+### Другие поля
+
+Выше я перечислил все обязательные поля файла DESCRIPTION, но вам также доступны некоторые другие поля:
+
+* `Version` – Версия вашего пакета, удобный способ сообщить на какой версии разработки находится ваш пакет.
+* `LazyData` – актуален если ваш пакет делает данные доступными для пользователя. Если вы укажете LazyData: true, наборы данных загружаются отложенно, что делает их более доступными, т. е. пользователям не нужно использовать data().
+* `Encoding` – Описывает кодировку файлов вашего пакета.
+* `Collate` - управляет порядком получения файлов R. 
+* `VignetteBuilder` - перечисляет любой пакет, который нужен вашему пакету в качестве механизма виньетирования.
+* `SystemRequirements` - Здесь вы описываете зависимости, внешние по отношению к R. Это обычное текстовое поле, которое, например, фактически не устанавливает и не проверяет что-либо, поэтому вам может потребоваться включить дополнительные сведения об установке в файл README.
+
+### Пользовательские поля
+
+Существует также некоторая гибкость для создания собственных полей для добавления дополнительных метаданных. В самом узком смысле единственным ограничением является то, что вы не должны переназначать официальные имена полей, используемые R. Вы также должны ограничить себя допустимыми английскими словами, чтобы имена полей не помечались проверкой орфографии.
+
+На практике, если вы планируете отправлять в CRAN, мы рекомендуем, чтобы имя любого настраиваемого поля начиналось с `Config/`.
 
 ## Тест
-<iframe id="otp_wgt_3q2sbgk6kmico" src="https://onlinetestpad.com/3q2sbgk6kmico" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_3q2sbgk6kmico'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
+<iframe id="otp_wgt_b4wf4wkcv2mgi" src="https://onlinetestpad.com/b4wf4wkcv2mgi" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_b4wf4wkcv2mgi'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
 </iframe>
 
 

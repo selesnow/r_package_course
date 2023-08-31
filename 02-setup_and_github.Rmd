@@ -4,6 +4,14 @@
 
 Данный урок посвящён настройке вашей операционной системы и среды для разработки пакетов. Мы установим всё необходимое программное обеспечение, зарегистрируем бесплатный аккаунт на GitHub и настроим интеграцию между RStudio и GitHub.
 
+------
+
+::: {style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;"}
+*Данный урок основан на главе ["System setup"](https://r-pkgs.org/setup.html) книги ["R Packages (2e)"](https://r-pkgs.org/), под авторством Хедли Викхема и Дженни Брайан. А так же ["usethis setup"](https://usethis.r-lib.org/articles/usethis-setup.html), входящую в документацию пакета usethis.*
+:::
+
+------
+
 ## Видео
 <iframe width="560" height="315" src="https://www.youtube.com/embed/OPiMVVBYZsM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
