@@ -101,6 +101,8 @@ _Дата обновления курса: `r format(Sys.Date(), "%d.%m.%Y")`_
 
 Так же вы можете поделиться ссылкой на курс у себя в соц сетях, за что я тоже буду вам благдарен!
 
+------
+
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 library(r2social)
 r2social::r2social.scripts()

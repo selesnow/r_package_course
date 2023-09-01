@@ -299,6 +299,8 @@ Duration: 0.3 s
 Woot!
 ```
 
+------
+
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 library(r2social)
 r2social::r2social.scripts()

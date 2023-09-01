@@ -118,6 +118,8 @@ usethis::use_github()
 5. Создайте проект будущего пакета
 6. Опубликуйте его на Github
 
+------
+
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 library(r2social)
 r2social::r2social.scripts()
