@@ -1,0 +1,284 @@
+# Написание документации к функциям пакета
+
+------
+
+Этим уроком мы начинаем обширную тему документации вашего пакета. В этом видео мы разберёмся с тем, как добавить документацию к функциям пакета с помощью специальных комментариев и пакета `roxygen2`.
+
+------
+
+::: {style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;"}
+*Данный урок основан на главе ["Function documentation"](https://r-pkgs.org/man.html) книги ["R Packages (2e)"](https://r-pkgs.org/), под авторством Хедли Викхема и Дженни Брайан.*
+:::
+
+------
+
+## Видео
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oTgrv8tsIYw?si=nEwIMS3FkCcn2Ve0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### Тайм коды
+
+00:00 Вступление<Br>
+00:43 Какие компоненты пакета отвечают за документацию функций<Br>
+01:31 Рабочий процесс<Br>
+04:47 Структура roxygen комментариев<Br>
+05:34 Особенности разметки roxygen комментариев<Br>
+07:10 Из каких разделов состоит документация к функциям пакета<Br>
+09:06 Title, Description и Details<Br>
+12:07 Документирование аргументов функции<Br>
+14:55 Возвращаемое функцией значение<Br>
+16:42 Примеры использования функции<Br>
+20:12 Повторное использование документации<Br>
+22:23 Документация уровня пакета<Br>
+23:50 Заключение<Br>
+
+## Презентация
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/KffxaXNARhTENk?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+
+## Конспект
+### Рабочий процесс
+
+Рабочий процесс по добавлению документации к функциям состоит из следующих этапов:
+
+1. Добавляете `roxygen2` комментарии над объектами, к которым хотите сгенерировать документацию (Ctrl+Shift+Alt+R когда курсор находится внутри кода функции или кода генерирующего объект)
+2. Запускаете `devtools::document()` (Ctrl/Cmd + Shift + D), чтобы преобразовать комментарии `roxygen2` в `.Rd` файлы.
+3. Запускаете предварительный просмотрт сгенерированной документации с помощью `?function_name`.
+4. Исправляете ошибки, повторяете процесс до тех пор, пока не получите нужный результат.
+
+### Структура roxygen комментариев
+
+Например, для нашего оператора `%+%`, который мы с вами добавили в пакет ещё в первом уроке, можно добавить следующие roxygen комментарии для генерации документации:
+
+```
+#' Concatenate Strings
+#'
+#' Operator for concatenate two strings.
+#'
+#' Use `%+%` operator for join two or more strings
+#' @section Main:
+#' The main ......
+#' @param x Character, first string
+#' @param y Character, second string
+#'
+#' @returns A character vector with lenght 1
+#' @export
+#'
+#' @examples
+#' # two values
+#' "first" %+% "second"
+#'
+#' # three values
+#' "first" %+% "second" %+% "three"
+```
+
+roxygen комментарии имеют следующие структуру:
+
+* Комментарии `roxygen2` начинаются с `#'`
+* Все комментарии `roxygen2`, предшествующие функции называются блоком
+* Блоки разбиваются на теги , которые выглядят как `@tagName` `tagValue`
+* По умолчанию каждый блок генерирует один топик документации , т.е. один `.Rd` файл в `man/` каталоге.
+
+### Особенности разметки .Rd файлов
+
+* Используйте апострофы для выделения блока текста как кода: `#' I like \`thisfunction()\`, because it's great`.
+* Для добавление ссылки на документацию к другой функции вашего или стороннего пакета используйте квадратные скобки: 
+
+```
+#' It's obvious that `thisfunction()` is better than [otherpkg::otherfunction()]
+#' or even our own [olderfunction()].
+```
+
+* Ссылайтесь на виньетки с помощью кода: `vignette("rd-formatting", package = "roxygen2")`
+* Маркированные списки прописываются так же, как и в обычном markdown:
+
+```
+#' Best features of `thisfunction()`:
+#' * Smells nice
+#' * Has good vibes
+```
+
+### Разделы документации
+
+* Заголовок (`@title`) – Обычно задаётся позиционно в первой строке roxygen комментария
+* Описание (`@description`) – Более подробное описание, что делает ваша функция, можно задать позиционно, второй строкой roxygen комментария
+* Детали (`@details`) – Тут описывают важные детали использования вашей функций, можно задать позиционно третей строкой комментария
+* Аргументы функции (`@param`) – Описание каждого аргумента функции
+* Возвращаемое значение (`@return`) – Какой объект возвращает ваша функция
+* Примеры (`@examples`) – Примеры использования вашей функции
+
+#### Title, description и details
+
+Первые 3 тега roxygen можно использовать позиционно, без указания их названий:
+
+* `Title` – заголовок должен быть написан в регистре заголовков, не заканчиваться точкой и после него должна идти пустая строка. 
+* `Description` – более подробное описание того, что делает функция, как правило занимает один абзац. Если ваше описание требует более чем один абзац вам придётся явно использовать тег @description.
+* `Details` – описание деталей работы вашей функции, в осном этот блок не используется в документации. Хорошей практикой является создание пользовательских разделов подробностей с помощью тега `@section`.
+
+#### Аргументы
+
+* Для документирования аргументов функции используйте тег `@param`
+* Если использование нескольких аргументов тесно связано между собой можете объединить их через запятую, без указания пробела: `#' @param x,y A pair of character vectors`.
+* Тег `@inheritParams` позволяет наследовать описание аргументов из других функций вашего или даже стороннего пакета. При этом будут унаследованы только те аргументы, которые присутвуют в новой функции, и которые в ней отдельно не были задокументированы.
+
+#### Возвращаемое значение
+
+За возвращаемое значение отвечает тег `@returns`. Для возвращаемого значения вам необходимо описать класс, тип и размер возвращаемого функцией значения. 
+
+#### Примеры
+
+* Примеры описываются с использованием тега `@examples`
+* Все прописанные примеры должны выполняться без ошибок, поскольку они регулярно проверяются:
+    * В интерактивном режиме с помощью команды example()
+    * Во время работы R CMD check на вашем компьютере
+    * Во время проверки R CMD check на CRAN.
+    * Когда генерируется веб-сайт вашего пакета с помощью `pkgdown`
+* При использовании нестабильных ресурсов в ваших примерах, например веб-сайтах используйте тег `@examplesIf`, который позволяет пропускать такие примеры, так же можно завернуть ваши примеры в `\dontrun{}`, для избегания запуска примеров, которые заведомо заканчиваются ошибками.
+
+Примеры использования `\dontrun{}` и `@examplesIf` можно подсмотреть в коде пакета `googledrive`:
+
+Пример `\dontrun{}` используется в функции [drive_find](https://github.com/tidyverse/googledrive/blob/main/R/drive_find.R#L72C1-L127C3):
+
+```{r, eval=FALSE}
+#' @examples
+#' \dontrun{
+#' # list "My Drive" w/o regard for folder hierarchy
+#' drive_find()
+#'
+#' # filter for folders, the easy way and the hard way
+#' drive_find(type = "folder")
+#' drive_find(q = "mimeType = 'application/vnd.google-apps.folder'")
+#'
+#' # filter for Google Sheets, the easy way and the hard way
+#' drive_find(type = "spreadsheet")
+#' drive_find(q = "mimeType='application/vnd.google-apps.spreadsheet'")
+#'
+#' }
+#'
+```
+
+`@examplesIf` используется в функции [drive_publish](https://github.com/tidyverse/googledrive/blob/main/R/drive_publish.R#L21-L35):
+
+```{r, eval=FALSE}
+#' @examplesIf drive_has_token()
+#' # Create a file to publish
+#' file <- drive_example_remote("chicken_sheet") %>%
+#'   drive_cp()
+#'
+#' # Publish file
+#' file <- drive_publish(file)
+#' file$published
+#'
+#' # Unpublish file
+#' file <- drive_unpublish(file)
+#' file$published
+#'
+#' # Clean up
+#' drive_rm(file)
+```
+
+В данном случае с помощью функции `drive_has_token()` мы проверяем есть ли кеш авторизационных данных, для доступа к данным, если учётные данные доступны то примеры выполняются, если не доступны то нет.
+
+### Объединить документацию к нескольким функциям в один файл
+
+Документацию к нескольким близким по функционалу функциям имеет смысл объединить в один файл документации, сделать это можно с помощью тега `@rdname`. Например в пакете `stringr` в один файл объеденена документация к функциям `str_length()` и `str_width()`:
+
+Изначально общее описание документации обеих функций мы привязываем к функции `str_length()`:
+
+```
+#' The length/width of a string
+#'
+#' @description
+#' `str_length()` returns the number of codepoints in a string. These are
+#' the individual elements (which are often, but not always letters) that
+#' can be extracted with [str_sub()].
+#'
+#' `str_width()` returns how much space the string will occupy when printed
+#' in a fixed width font (i.e. when printed in the console).
+#'
+#' ...
+str_length <- function(string) {
+  ...
+}
+```
+
+Далее используем в функции `str_width()` тег `@rdname` для её объединения с `str_length()`:
+
+```
+#' @rdname str_length
+str_width <- function(string) {
+  ...
+}
+```
+
+### Повторное использование документации
+
+При необходимости объединить документацию нескольких функций в один файл документации используйте тег `@rdname`, и передайте в него название функции, в которой подробно описана документация всех функций.
+
+Теги отвечающие за наследование частей документации:
+
+* `@inherit source_function` - унаследует все поддерживаемые компоненты от source_function().
+* `@inheritSection source_function Section title` - унаследует один раздел с заголовком «Section title» от source_function().
+* `@inheritDotParams` - автоматически генерирует документацию по параметрам для ... общего случая, когда вы переходите ... к другой функции.
+
+Пример из пакета `stringr`, в котором практически в каждой функции доступны оноимённые аргументы `string` и `pattern`. Прописывать их отдельно для каждой функции не удобно, поскльку при необходимости внести в описание этих аргументов изменения, нам бы пришлось их руками вносить практически во все фукции пакета, поэтому в одной функции, в нашем случае `str_length()` мы прописали описание этих аргументов, а в других функциях мы их можем переиспользовать:
+
+Описание аргументов в функции [str_length()](https://github.com/tidyverse/stringr/blob/main/R/detect.R#L7C1-L22C30):
+
+```
+#' @param string Input vector. Either a character vector, or something
+#'  coercible to one.
+#' @param pattern Pattern to look for.
+#'
+#'   The default interpretation is a regular expression, as described in
+#'   `vignette("regular-expressions")`. Use [regex()] for finer control of the
+#'   matching behaviour.
+#'
+#'   Match a fixed string (i.e. by comparing only bytes), using
+#'   [fixed()]. This is fast, but approximate. Generally,
+#'   for matching human text, you'll want [coll()] which
+#'   respects character matching rules for the specified locale.
+#'
+#'   Match character, word, line and sentence boundaries with
+#'   [boundary()]. An empty pattern, "", is equivalent to
+#'   `boundary("character")`.
+```
+
+Далее с помощью тега `@inheritParams` в других функциях, например [str_match()]()
+
+```
+#' @inheritParams str_detect
+#' @param pattern Unlike other stringr functions, `str_match()` only supports
+#'   regular expressions, as described `vignette("regular-expressions")`.
+#'   The pattern should contain at least one capturing group.
+```
+
+При этом унаследованы будут только те аргументы, которые присутвуют в новой функции, и не задокументированы в ней. В примере выше мы унаследуем описание аргумента `string`, но переопределяем описание аргумента `pattern`.
+
+### Раздел справки по пакету
+
+Используйте функцию `usethis::use_package_doc()` для генерации файла `R/{pkgname}-package.R`, который содердит документацию уровня пакета. Так же это хорошее место для хранения импорта, т.е. тегов `@import` и `@importFrom`. Данный файл по умолчанию будет иметь следующий вид:
+
+```
+#' @keywords internal 
+"_PACKAGE"
+
+# The following block is used by usethis to automatically manage
+# roxygen namespace tags. Modify with care!
+## usethis namespace: start
+#' @importFrom glue glue_collapse
+## usethis namespace: end
+NULL
+```
+
+## Тест
+<iframe id="otp_wgt_z6e43m2kpclmw" src="https://onlinetestpad.com/z6e43m2kpclmw" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_z6e43m2kpclmw'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
+</iframe>
+
+------
+
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
+library(r2social)
+r2social::r2social.scripts()
+r2social::shareButton(link = "https://selesnow.github.io/r_package_course/", position = "inline", whatsapp = T, telegram = T, instagram = T)
+r2social::connectButton(link = 'https://t.me/R4marketing', link.out = F, telegram = T, position = 'left')
+r2social::connectButton(link = 'https://www.youtube.com/R4marketing/?sub_confirmation=1', link.out = F, youtube = T, position = 'right')
+```

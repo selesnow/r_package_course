@@ -61,20 +61,20 @@ pak::pkg_deps_tree("tibble")
 #> ℹ Loading metadata database
 #> ✔ Loading metadata database ... done
 #> 
-#> tibble 3.2.1 [new][dl] (690.64 kB)
-#> ├─fansi 1.0.4 [new][dl] (312.77 kB)
-#> ├─lifecycle 1.0.3 [new][dl] (139.11 kB)
-#> │ ├─cli 3.6.1 [new][dl] (1.34 MB)
-#> │ ├─glue 1.6.2 [new][dl] (162.41 kB)
+#> tibble 3.2.1 [new][dl] (690.77 kB)
+#> ├─fansi 1.0.4 [new][dl] (312.84 kB)
+#> ├─lifecycle 1.0.3 [new][dl] (139.02 kB)
+#> │ ├─cli 3.6.1 [new][dl] (1.33 MB)
+#> │ ├─glue 1.6.2 [new][dl] (162.52 kB)
 #> │ └─rlang 1.1.1 [new][dl] (1.57 MB)
-#> ├─magrittr 2.0.3 [new][dl] (226.78 kB)
-#> ├─pillar 1.9.0 [new][dl] (659.11 kB)
+#> ├─magrittr 2.0.3 [new][dl] (226.89 kB)
+#> ├─pillar 1.9.0 [new][dl] (659.28 kB)
 #> │ ├─cli
 #> │ ├─fansi
 #> │ ├─glue
 #> │ ├─lifecycle
 #> │ ├─rlang
-#> │ ├─utf8 1.2.3 [new][dl] (149.64 kB)
+#> │ ├─utf8 1.2.3 [new][dl] (149.69 kB)
 #> │ └─vctrs 0.6.3 [new][dl] (1.33 MB)
 #> │   ├─cli
 #> │   ├─glue
@@ -331,6 +331,8 @@ export(count)
 ## Тест
 <iframe id="otp_wgt_6fpaqkxtjrlta" src="https://onlinetestpad.com/6fpaqkxtjrlta" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_6fpaqkxtjrlta'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
 </iframe>
+
+------
 
 
 ```{=html}
