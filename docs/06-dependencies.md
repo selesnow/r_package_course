@@ -58,11 +58,8 @@
 ## просмотр дерева зависимостей
 ### низкоуровневые пакеты
 pak::pkg_deps_tree("tibble")
-#> 
-#> ✔ Updated metadata database: 4.29 MB in 9 files.
-#> 
-#> ℹ Updating metadata database
-#> ✔ Updating metadata database ... done
+#> ℹ Loading metadata database
+#> ✔ Loading metadata database ... done
 #> 
 #> tibble 3.2.1 [new][dl] (690.77 kB)
 #> ├─fansi 1.0.4 [new][dl] (312.84 kB)
