@@ -4,7 +4,7 @@ before_chapter_script:
 - _common.R
 - R/webex.R
 delete_merged_file: yes
-output_dir: docs
+output_dir: _book
 language:
   ui:
     chapter_name: 'Урок '
