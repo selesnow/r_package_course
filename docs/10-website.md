@@ -1,338 +1,340 @@
-# NAMESPACE - Зависимости пакета
+# Разработка сайта пакета (пакет pkgdown)
 
 ------
 
-Если вы в своём пакете используете функции из других пакетов, значит ваш пакет имеет зависимости. В этом уроке мы разберёмся с тем, как правильно организовать эти зависимости.
+К этому уроку мы уже изучили множество типов документации, которые можно добавить в ваш пакет, в этом уроке мы разберёмся с тем, как объединить всю разработанную ранее документацию и сформировать из неё сайт вашего пакета.
 
 ------
 
 ::: {style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;"}
-*Данный урок основан на главах ["Dependencies: Mindset and Background"](https://r-pkgs.org/description.html) и ["Dependencies: In Practice"](https://r-pkgs.org/dependencies-in-practice.html) книги ["R Packages (2e)"](https://r-pkgs.org/), под авторством Хедли Викхема и Дженни Брайан.*
+*Данный урок основан на следующих материалах: *
+
++ *Глава ["Website"](https://r-pkgs.org/website.html) книги ["R Packages (2e)"](https://r-pkgs.org/), под авторством Хедли Викхема и Дженни Брайан.*
++ *Статья ["Customise your site"](https://pkgdown.r-lib.org/articles/customise.html) на официальном сайте пакета pkgdown*
++ *[README](https://github.com/GuangchuangYu/hexSticker) пакета hexSticker*
 :::
 
 ------
 
 ## Видео
-<iframe width="560" height="315" src="https://www.youtube.com/embed/sqvAu-2jcPY?si=DkLYYiKZAn2efaAE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3_kGMO-UV3M?si=75v_fA0Z02Lzi0dx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### Тайм коды
 
 00:00 Вступление<Br>
-00:50 Преимущества и недостатки зависимостей<Br>
-02:41 Анализ зависимостей пакетов<Br>
-05:50 Какие компоненты пакета отвечают за его зависимости<Br>
-07:37 Файл NAMESPACE<Br>
-08:35 Рабочий процесс установки зависимостей<Br>
-14:56 Когда стоит импортировать объекты из других пакетов<Br>
-16:38 Как обращаться к функциям импортированным из других пакетов в коде, тестах и примерах вашего пакета, если поля указаны в поле Imports<Br>
-18:04 Как обращаться к функциям импортированным из других пакетов в коде вашего пакета, если поля указаны в поле Suggest<Br>
-21:34 Как обращаться к функциям импортированным из других пакетов в тестах вашего пакета, если поля указаны в поле Suggest<Br>
-23:10 Как обращаться к функциям импортированным из других пакетов в виньетках и примерах к функциям вашего пакета, если поля указаны в поле Suggest<Br>
-24:26 Как обращаться к функциям импортированным из других пакетов в коде, тестах и примерах вашего пакета, если поля указаны в поле Depends<Br>
-26:05 Импорт и экспорт S3 методов<Br>
-28:30 Заключение<Br>
+01:13 Обзор рабочего процесса<Br>
+02:41 Настройка пакет для разработки сайта<Br>
+03:38 Запуск процесса создания сайта<Br>
+04:09 Обзор разделов сайта пакета<Br>
+05:21 Публикация сайта на GitHub, и настройка автоматической её пересборки при любом изменении пакета<Br>
+06:40 Разница между виньеткой и статьёй сайта<Br>
+07:42 Раздел reference, группировка и сортировка документации к функциям<Br>
+11:01 Раздел articles, группировка и сортировка списка статей сайта<Br>
+12:36 Управление навигационной панелью сайта<Br>
+15:11 Управление боковой панелью сайта<Br>
+17:50 Изменение темы сайта пакета<Br>
+19:05 Разработка логотипа пакета<Br>
+23:01 Как добавить счётчик Google Analytics на сайт пакета<Br>
+23:51 Заключение<Br>
 
 ## Презентация
-<iframe src="https://www.slideshare.net/slideshow/embed_code/key/u1aubbyyuMQ2a8?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/gD7WiHFfz7grkP?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 
 ## Конспект
-
-Зависимости в вашем пакете появляются когда вы в коде своего пакета используете функции из сторонних пакетов. 
-
-### Преимущества и недостатоки зависимости
-
-Преимуществом является то, что экономите массу времени, на том, что используете чей то готовый код, который наверняка уже прошел определённое тестирование. Вам не придётся часть вспомогательного для вашего пакета функцила реализовывать самостоятельно, вы просто берёте нужные функции из дургого пакета, и используете в своём коде, так же как вы это делаете, когда пишите любой R скрипт.
-
-Но, за всё надо платить, поэтому в использовании зависимостей есть и ряд недостатоков:
-
-* Ваш код становится чувствителен к изменениям в сторонних пакетах, и даже пакетов указанных в зависимостях используемыми вами пакетов.
-* При установке вашего пакета, так же будут устанавливаться все пакеты от которых он зависит, что увеличивает занимаемое им место на жестком диске. Подавляющее большинство пакетов не занимают много места, но некторые могут весить более 100 мб.
-
-### Анализ зависимостей пакета
-
-По началу у вас может сложиться мнение, что лучше вообще избавиться от всех зависимостей в своём пакете, но это не так, использование стороннего кода сократит вам очень много времени. Единственное - старайтесь использовать в зависимостях своего пакета низкоуровневые пакеты, у которых мало собственных зависимотей. Провести анализ зависимостей пакета можно с помощью пакета `pak` и функции `pkg_deps_tree()`, которая визуально отображает дерево зависимостей указанного пакета:
-
-
-```r
-# анализ зависимостей
-## просмотр дерева зависимостей
-### низкоуровневые пакеты
-pak::pkg_deps_tree("tibble")
-#> 
-#> ✔ Updated metadata database: 4.29 MB in 9 files.
-#> 
-#> ℹ Updating metadata database
-#> ✔ Updating metadata database ... done
-#> 
-#> tibble 3.2.1 [new][dl] (690.77 kB)
-#> ├─fansi 1.0.4 [new][dl] (312.84 kB)
-#> ├─lifecycle 1.0.3 [new][dl] (139.02 kB)
-#> │ ├─cli 3.6.1 [new][dl] (1.33 MB)
-#> │ ├─glue 1.6.2 [new][dl] (162.52 kB)
-#> │ └─rlang 1.1.1 [new][dl] (1.57 MB)
-#> ├─magrittr 2.0.3 [new][dl] (226.89 kB)
-#> ├─pillar 1.9.0 [new][dl] (659.28 kB)
-#> │ ├─cli
-#> │ ├─fansi
-#> │ ├─glue
-#> │ ├─lifecycle
-#> │ ├─rlang
-#> │ ├─utf8 1.2.3 [new][dl] (149.69 kB)
-#> │ └─vctrs 0.6.3 [new][dl] (1.33 MB)
-#> │   ├─cli
-#> │   ├─glue
-#> │   ├─lifecycle
-#> │   └─rlang
-#> ├─pkgconfig 2.0.3 [new][dl] (22.45 kB)
-#> ├─rlang
-#> └─vctrs
-#> 
-#> Key:  [new] new | [dl] download
-```
-
-Также вы можете использовать функцию `tools::package_dependencies()`:
-
-
-```r
-## высокоуровневые пакеты
-n_hard_deps <- function(pkg) {
-  deps <- tools::package_dependencies(pkg, recursive = TRUE)
-  sapply(deps, length)
-}
-
-n_hard_deps(c("tidyverse", "devtools", "rlang", "cli"))
-```
-
-```
-tidyverse  devtools     rlang       cli 
-      114       101         1         1 
-```
-
-Пакеты `tidyverse` и `devtools` являются не просто высокоуровневыми, они являются мета-пакетами, т.е. коллекциями из других пакетов, поэтому у них в зависомтях более 100 сторонних пакетов, в то время как у низкоуровневых `rlang` и `cli` всего 1 зависимость. Крайне изегайте использования в своих зависимостях мета-пакетов, при необходимости используйте нужный из коллекции пакет. Ниже пример, если вам необходимы функции из `dplyr` или `tidyr`, которые входят в `tidyverse`, то импортируйте именно конкретные пакеты, т.к. у них гораздо меньше зависимостей:
-
-
-```r
-n_hard_deps(c("dplyr", "tidyr"))
-```
-
-```
-dplyr tidyr 
-   20    26 
-```
-
-### Какие компоненты пакета отвечают за зависимости
-
-* Файл `DESCRIPTION`, позволяет указать какие пакеты будут установлены или рекомендованы к установке вместе с вашим пакетом:
-    * Поле `Imports`: указанные пакеты будут установлены вместе с вашим пакетом;
-    * Поле `Suggest`: указанные пакеты будут рекомендованы к установке;
-    * Поле `Depends`: указанные пакеты будут установлены и экспортированы вместе с вашим пакетом.
-* Файл `NAMESPACE`, управляет экспортом объектов в рабочее окружение
-
-Пакеты указанные в поле `Imports` файла `DESCRIPTION` не обязательно должны быть указаны в `NAMESPACE`, но все пакеты и функции перечисленные в файле `NAMESPACE`, так же обязательно должны быть указаны в полях `Imports` или `Depends` файла `DESCRIPTION`.
-
-### Директивы файла NAMESPACE
-
-Файл NAMESPACE зачустую выглядит примерно следующим образом:
-
-```
-# Generated by roxygen2: do not edit by hand
-
-S3method(compare,character)
-S3method(print,testthat_results)
-export(compare)
-export(expect_equal)
-import(rlang)
-importFrom(brio,readLines)
-useDynLib(testthat, .registration = TRUE)
-```
-
-* `export()`: экспортировать функцию (включая дженерики S3 и S4).
-* `S3method()`: экспортировать метод S3.
-* `importFrom()`: импортировать выбранный объект из другого пространства имен (включая дженерики S4).
-* `import()`: импортировать все объекты из пространства имен другого пакета.
-* `useDynLib()`: регистрирует процедуры из DLL (для пакетов с скомпилированным кодом).
-
-Есть ещё директива `exportPattern()`, которая экспортирует функции из вашего пакета по паттерну их имён с использованием регулярных выражений. Использовать эту жирективу не рекомендуется для избежания неожиданного экпорта.
-
 ### Рабочий процесс
 
-Весь рабочий процесс по добавлению зависимостей в пакет состоит из следующих этапов:
+По гачалу может казаться, что создание сайта пакета весьма трудоёмкий процесс, но на самом деле создание первой версии пакета займёт у вас не более пяти минут. Рабочий процесс состоит из следующих 3 этапов:
 
-1. Изначально добавляете с помощью команды `usethis::use_package()` необходимые пакеты в нужные поля файла `DESCRIPTION`.
-2. Над кодом функций используйте специальные roxygen комментарии `import` для импорта всего пространства имён стороннего пакета, или `importFrom`, для импорта отдельный функций из сторонних пакетов.
+1. Настройка вашего пакета для создания сайта - `usethis::use_pkgdown()`
+    1. Создаёт файл конфигурации сайта `_pkgdown.yml`
+    2. Добавляет различные шаблоны в `.Rbuildignore`, чтобы файлы и каталоги, специфичные для pkgdown, не включались в сборку вашего пакета.
+    3. Добавляет docs, место назначения по умолчанию для отображаемого сайта, в `.gitignore`.
+2. Функция `pkgdown::build_site()` запускает процесс создания сайта
+3. Опубликуйте ваш сайт на GitHub командой usethis::use_pkgdown_github_pages():
+    1. Инициализирует пустую ветку в вашем репозитории GitHub с именем `gh-pages`
+    2. Включает GitHub Pages для вашего репозитория
+    3. Копирует файл конфигурации для GitHub Action, для автоматической пересборки сайта при любом коммите
+    4. Добавляет URL-адрес вашего сайта в DESCRIPTION и `_pkgdown.yml`. 
 
+Теперь у вашего пакета есть сайт, и при отправке любого коммита на GitHub он будет автоматически пересобираться.
 
-```r
-#' @importFrom aaapkg aaa_fun
-#' @import bbbpkg
-#' @export
-foo <- function(x, y, z) {
-  ...
-}
+### Разделы сайта по умолчанию
+
+Теперь давайте разберёмся из каких компоненотов документации был сгенерирован наш сайт. По умолчанию он имеет следующие разделы:
+
+1. главная страница сайта была сгенерирована из файла README
+2. reference - раздел со списоком функций вашего пакета, и ссылками на их документацию
+3. articles - со списком статей, сгенерированных из виньеток сайта
+4. changelog - сформированный из файла NEWS
+5. get started - данный раздел формируется из виньетки, название которой соответвует названию вашего пакета, т.е. `pkg_name.Rmd`. Если такой виньетки в вашем пакете нет, то раздел "Get started" не будет добавлен на навигационную панель.
+
+### Файл _pkgdown.yml
+
+Файл `_pkgdown.yml` является основным кофигом вашего сайта, и именну с его помощью вы можете контролировать и изменять его внешний вид и структуру любого его элемента. Вся остальная часть урока будет посвящена его настройке. По умолчанию этот файл содержит всего 3 строки:
+
+```
+url: https://selesnow.github.io/firstpackage/
+template:
+  bootstrap: 5
 ```
 
-3. Запускаете функцию `devtools::document()` для генерации файла `NAMESPACE`.
+### Группировка списка документации функций
 
-Но, где удобнее всего прописать roxygen комментарии для импорта функций и целых пакетов, если вы их многократно используете в своём коде? Первое, что наверняка придёт вам в голову - писать roxygen комментарии для импорта над. каждой функцией, в которой используются импортируемые объекты. Но это слишком избыточно, ведь один roxygen комментарий уже добавит нужную директутиву в файл `NAMESPACE`, поэтому имеет смысл прописать все комментарии для импорта объектов в одном месте, для чего наиболее удобно использовать функцию `usethis::usethis::use_package_doc()`. Данная функция создаёт файл `R/pkg-package.R`, в котом и будут собираться все ваши roxygen комментари для импорта над пустым объектом `NULL`, выглядит этот файл примерно так:
+По умолчанию все функции представленные в разделе reference упорядочены в алфавитном порядке, что далеко не всегда удобно. Но вы можете настроить группировку функций в отдельные разделы, и отсортировать как порядок этих разделов, так и список функций, входящих в каждый раздел. Для управления списком функций в разделе reference добавьте их описание в поле reference файла `_pkgdown.yml`, ниже пример из моего пакета `rgoogleads`:
 
-
-```r
-# The following block is used by usethis to automatically manage
-# roxygen namespace tags. Modify with care!
-## usethis namespace: start
-#' @importFrom glue glue_collapse
-## usethis namespace: end
-NULL
+```
+reference:
+  - title: Main page
+    desc: >
+      rgoogleads documentation main page
+    contents:
+      - rgoogleads-package
+  - title: Authorization
+    desc: >
+      Managing authorization process
+    contents:
+      - gads_auth_configure
+      - gads_auth
+      - gads_developer_token
+      - gads_api_key
+      - gads_oauth_app
+      - gads_auth_cache_path
+      - gads_deauth
+      - gads_has_token
+      - gads_token
+      - gads_user
+  - title: Options
+    desc: >
+      Package options setters
+    contents:
+      - gads_set_customer_id
+      - gads_set_login_customer_id
+  - title: Accounts data
+    desc: >
+      Loading account hierarchy and metadata
+    contents:
+      - gads_get_accessible_customers
+      - gads_get_account_hierarchy
+  - title: Account objects
+    desc: >
+      Loading account objects list
+    contents:
+      - gads_get_campaigns
+      - gads_get_ad_groups
+      - gads_get_ads
+      - gads_get_keywords
+      - gads_get_ad_group_criterions
+  - title: Reporting
+    desc: >
+      Loading report data
+    contents:
+      - gads_get_metadata
+      - gads_get_fields
+      - gads_get_report
+  - title: Keywords Planing Data
+    desc: >
+      Loading Keyword Plan data
+    contents:
+      - gads_keyword_plan_historical_metrics
+      - gads_keyword_plan_forecast_timeseries
+      - gads_keyword_plan_forecast_metrics
+  - title: Reference data
+    desc: >
+      Loading dictionaries
+    contents:
+      - gads_get_geo_targets
+  - title: Helpers
+    desc: >
+      Helper functions
+    contents:
+      - gads_check_errors
+      - gads_customer
+      - gads_customer_id_from_env
+      - gads_customer_id_to_env
+      - gads_fix_names
+      - gads_last_request_ids
 ```
 
-Далее вы будете добавлять в этот файл roxygen комментари с помощью `use_import_from()`.
+Т.е. поле `reference` включает описание каждого раздела функций, которое состоит из следующих компонентов:
 
-### Когда необходимо экспортировать объекты из сторонних пакетов
+* `title` - название раздела
+* `subtitle` - подзаголовок
+* `desc` – описание раздела
+* `contents` - список названий функций для включения в раздел
 
-В ходе курса я неоднократно говорил о том, что зачастую вам не потербуется экспортировать в рабочее окружение функции из стороних пакетов, а вместо этого просто пропишите все необходимые вам пакеты в поле `Imports` файла `DESCRIPTION`, а в коде ваших функций образайтесь к функциям импортированных пакетов с помощью `package_name::function()`. Но из этого правила есть некоторые исключения:
+### Организация списка статей
 
-* Оператор: Вы не можете вызвать оператора из другого пакета через `::`, поэтому его необходимо импортировать. Примеры: оператор объединения `NULL` `%||%` из `rlang` или пайплайн `%>%` из `magrittr`.
-* Функция, которую вы часто используете. Если импорт функции делает ваш код более читабельным, это достаточная причина для ее импорта. Это буквально уменьшает количество символов, необходимых для вызова внешней функции.
-* Функция, которую вы вызываете в жестком цикле с `::`. Поиск объекта вызванного через два двоеточия составляет порядка 100 нс, поэтому оно будет иметь значение только в том случае, если вы вызываете функцию миллионы раз.
+Раздел `articles` состоит из статей, которые формируются из виньеток пакета. Вам не обязательно включать в сборку пакета абсолютно все статьи в виде виньеток. Виньетки вы добавляете функцией `usethis::use_vignette()`, но, если вы хотите добавить статью в раздел `articles` сайта пакета, но не планируюете включать её в сборку пакета, используйте функцию `usethis::use_article()`. В таком случае путь к этой статье будет добавлен в файл `.Rbuildignore`, и будет исключён из сборки пакета, а на сайте это будет обычная статья.
 
-### Как обращаться к функциям сторонних пакетов 
+Так же как и список функций, список статей на вашем сайте тоже можно группировать в разделы, и сортировать. За управление списком статей в файле `_pkgdown.yml` отвечает поле `articles`. Например, в пакете `dplyr` оно выглядит следующим образом:
 
-В зависимости от того как вы импортируете в свой пакет сторонние пакеты зависит то, как вы будете вызывать функции этих пакетов. На это влияет то, какие поля файла `DESCRIPTION` вы используете.
+```
+articles:
+- title: Get started
+  navbar: ~
+  contents:
+  - dplyr
+  - grouping
+  - two-table
+  - base
 
-#### При импорте пакетов через поле Imports
+- title: Automate
+  navbar: Automation
+  contents:
+  - colwise
+  - rowwise
+  - programming
 
-* В коде пакета, т.е. в папке `R/` обращайтесь к функциям из указанных в поле Imports пакетов `package::function()`.
-* В тестах обращайтесь к функциям из указанных в поле Imports пакетов `package::function()`. Но если вы импортировали определенную функцию отдельно или как часть всего пространства имен, вы можете просто вызвать ее непосредственно в тестовом коде.
-* Если вы используете пакет, который указанный в `Imports` в одном из ваших примеров или виньеток, вам нужно будет либо прикрепить пакет с помощью, `library(package)` либо использовать `package::function()`. 
+- title: Other
+  contents:
+  - window-functions
+  - in-packages
+  ```
 
-#### При импорте пакетов через поле Suggest
+Каждый раздел статей содержит следующие дополнительные поля:
 
-В отличае от поля `Imports`, пакеты указанные в поле `Suggest` не обязательно будут установлены у конечного пользователя вашего пакета, в связи с чем вам необходимо делать дополнительные проверки на наличие их установки. 
+* `title` - название раздела
+* `desc` – описание раздела
+* `navbar` – пара слов для обозначения этого раздела на панели навигации
+* `contents` - список названий статей для включения в раздел
 
-В коде пакета, т.е. в папке `R/` вы должны проверить наличие установленного пакета с помощью базовой функции `requireNamespace()`, или функций из пакета `rlang: is_installed()` и `check_installed()`.
+Виньетки, которые не были перечислены в поле `articles` попадают в блок `Other`.
 
+### Навигационная панель
 
-```r
-# Проверка установки пакета через базовую requireNamespace()
-## Проверка установлен ли пакет
-my_fun <- function(a, b) {
-  if (!requireNamespace("aaapkg", quietly = TRUE)) {
-    stop(
-      "Package \"aaapkg\" must be installed to use this function.",
-      call. = FALSE
-    )
-  }
-  # code that includes calls such as aaapkg::aaa_fun()
-}
+Контролироваьт навигационную панель вашего сайта можно с помощью поля `navbar` вашего `_pkgdown.yml`. Для примера на сайте пакета `rgoogleads` она описана следующим образом:
 
-# Альтрнативный сценарий выполнения
-my_fun <- function(a, b) {
-  if (requireNamespace("aaapkg", quietly = TRUE)) {
-    aaapkg::aaa_fun()
-  } else {
-    g()
-  }
-}
-
-
-# С помощью пакета rlang
-## пакет указанный в Suggest обязателен для выполнения функции
-my_fun <- function(a, b) {
-  rlang::check_installed("aaapkg", reason = "to use `aaa_fun()`")
-  # code that includes calls such as aaapkg::aaa_fun()
-}
-
-## Функция с двумя альтернативными сценариями
-my_fun <- function(a, b) {
-  if (rlang::is_installed("aaapkg")) {
-    aaapkg::aaa_fun()
-  } else {
-    g()
-  }
-}
+```
+navbar:
+  structure:
+    left: [intro, reference, articles, tutorials, api_docs, news]
+    right: [telegram, youtube, github]
+  components:
+    tutorials:
+      text: Video Tutorials
+      href: https://www.youtube.com/playlist?list=PLD2LDq8edf4qprTxRcflDwV9IvStiChHi
+    api_docs:
+      text: Google Ads API
+      href: https://developers.google.com/google-ads/api/docs/start
+    youtube:
+      icon: fa-youtube
+      href: https://www.youtube.com/R4marketing/?sub_confirmation=1
+      aria-label: YouTube
+    telegram:
+      icon: fa-telegram
+      href: https://t.me/R4marketing
+      aria-label: Telegram
 ```
 
-В тестах вы можете использовать функцию `testthat::skip_if_not_installed()` для пропуска тестов, если у пользовтаеля не установлены необходимые для их выполнения пакетов.
+Т.е. навигационна панель описывается двумя компонентами:
+
+* `structure` – общий макет навигационной панели, который позволяет редактировать правую и левую её часть
+* `сomponents` – настройки отдельных компонентов, элементами menu могут быть:
+    * Ссылка (text + href)
+    * Заголовок (text)
+    * Разделитель (text: ——-)
+    * Иконка (icon), используйте иконки с сайта [fontawesome](https://fontawesome.com/icons?d=gallery)
+
+### Боковая панель
+
+За боковую панель отвечает поле `home.sidebar`, вот небольшой пример её описания:
+
+```
+home:
+  links:
+    - text: Facebook
+      href: https://facebook.com/selesnow
+    - text: Telegram
+      href: https://t.me/R4marketing
+  sidebar:
+    structure: [links, authors]
+```
+
+* `links` - автоматические ссылки, созданные из полей URL и ссылки прописанные вручную из полей: BugReports в DESCRIPTION и `home.links`
+* `license` – информация о лицензии
+* `community` – ссылки на ссылки на `.github/CONTRIBUTING.md`, `.github/CODE_OF_CONDUCT.md` и т. д.
+* `citation` - ссылка на информацию о цитировании пакета.
+* `authors` – авторы указанные в `DESCRIPTION`
+* `dev` - значки состояния разработки
+* `toc` – оглавление файла `README`
+
+### Тема сайта
+
+Помимо того, что вы можете изменять любые элемента сайта, вы в целом можете изменять его цветовую схему. Для этого посмотрите галерею тем на сайте [bootswatch](https://bootswatch.com/). И укажите название нужной темы в поле `template.bootswatch`.
+
+```
+url: https://selesnow.github.io/firstpackage/
+template:
+  bootstrap: 5
+  bootswatch: solar
+```
+
+### Логотип пакета
+
+Для начала создайте шестиугольный логотип вашего пакета либо в любом графическом редакторе, либо с помощью пакета `hexSticker`. Ниже небольшой пример создания логотипа с помощью изображения по ссылке, или графика `ggplot2`:
 
 
 ```r
-test_that("basic plot builds without error", {
-  skip_if_not_installed("sf")
+library(hexSticker)
 
-  nc_tiny_coords <- matrix(
-    c(-81.473, -81.741, -81.67, -81.345, -81.266, -81.24, -81.473,
-      36.234, 36.392, 36.59, 36.573, 36.437, 36.365, 36.234),
-    ncol = 2
+# из изображения
+imgurl <- 'https://freepngimg.com/download/cat/22193-3-adorable-cat.png'
+
+sticker(
+  imgurl,
+  package="firtspackage",
+  p_size=10, p_y = 1.6,
+  s_x=0.9,
+  s_y=0.9,
+  s_width=.5,
+  filename="inst/figures/imgfile.png"
   )
 
-  nc <- sf::st_as_sf(
-    data_frame(
-      NAME = "ashe",
-      geometry = sf::st_sfc(sf::st_polygon(list(nc_tiny_coords)), crs = 4326)
-    )
+# из графика
+library(ggplot2)
+
+p <- ggplot(aes(x = mpg, y = wt), data = mtcars) + geom_point()
+p <- p + theme_void() + theme_transparent()
+sticker(
+  p,
+  package="hexSticker",
+  p_size=20,
+  s_x=1,
+  s_y=.75,
+  s_width=1.3,
+  s_height=1,
+  filename="inst/figures/ggplot2.png"
   )
 
-  expect_doppelganger("sf-polygons", ggplot(nc) + geom_sf() + coord_sf())
-})
 ```
 
-Для использования пакетов указанных в Suggest в виньетках или примерах функций используйте функции require() или requireNamespace(), для проверки доступен ли необходимый пакет. 
+Функция `sticker()` имеет три основных аргумента:
 
+* `subplot` - путь к файлу с изображением, или ссылка на изображение, или объект графика
+* `package` - название вашего пакета
+* `filename` - файл в который будет сохранён стикер
 
-```r
-#' @examples
-#' if (require("maps")) {
-#'   nz <- map_data("nz")
-#'   # Prepare a map of NZ
-#'   nzmap <- ggplot(nz, aes(x = long, y = lat, group = group)) +
-#'     geom_polygon(fill = "white", colour = "black")
-#'
-#'   # Plot it in cartesian coordinates
-#'   nzmap
-#' }
-```
+Большая часть остальных аргументов отвечает за расположение жлементов стикера.
 
-#### При импорте пакетов через поле Depends
+После того как логотип создан используйте функцию `usethis::use_logo()`:
 
-В этом случае рекомендации будут примерно теже, что и при использовании поля `Imports`, единственное, что при использовании поля `Depends` указанные в нём пакеты автоматически импортируются, и экспортируются в рабочее окружение, в связи с чем при использовании их в примерах функций и виньетках нет необходимости подключать их повторно командой `library()`.
+* функция помещает копию файла изображения в соответствующем масштабе в `man/figures/logo.png`
+* Даст вам фргмент markdown разметки для добавления логотипа в README файл
+* Включит логотип в ваш сайт
 
-### Импорт и экспорт S3 методов
+### Добавляем счётчик Google Analytics
 
-* Экспортируете основную дженерик функцию через директиву `export()`
-* Регистрируете её методы написанные под обработку объектов различных классов с помощью директивы `S3method()`
-
-Ниже пример дженерик функции и метода под обработку  `data.frame` с её помощью:
-
-
-```r
-#' ... all the usual documentation for count() ...
-#' @export
-count <- function(x, ..., wt = NULL, sort = FALSE, name = NULL) {
-  UseMethod("count")
-}
-
-#' @export
-count.data.frame <- function(
-  x,
-  ...,
-  wt = NULL,
-  sort = FALSE,
-  name = NULL,
-  .drop = group_by_drop_default(x)) { ... }
-```
-
-Для их экспорта  прописываются следующие директивы в файле `NAMESPACE`:
+Настроить отслеживание посещения сайта вашего пакета можно прописав в поле `template.params.ganalytics` идентификатор вашего аккаунта Google Analytics:
 
 ```
-...
-S3method(count,data.frame)
-...
-export(count)
-...
+template:
+  bootstrap: 5
+  params:
+    ganalytics: UA-114798296-1
 ```
 
 ## Тест
-<iframe id="otp_wgt_6fpaqkxtjrlta" src="https://onlinetestpad.com/6fpaqkxtjrlta" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_6fpaqkxtjrlta'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
+<iframe id="otp_wgt_7xsedqfxdea7u" src="https://onlinetestpad.com/7xsedqfxdea7u" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_7xsedqfxdea7u'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
 </iframe>
 
 ------

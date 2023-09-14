@@ -1,0 +1,347 @@
+# Разработка сайта пакета (пакет pkgdown)
+
+------
+
+К этому уроку мы уже изучили множество типов документации, которые можно добавить в ваш пакет, в этом уроке мы разберёмся с тем, как объединить всю разработанную ранее документацию и сформировать из неё сайт вашего пакета.
+
+------
+
+::: {style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;"}
+*Данный урок основан на следующих материалах: *
+
++ *Глава ["Website"](https://r-pkgs.org/website.html) книги ["R Packages (2e)"](https://r-pkgs.org/), под авторством Хедли Викхема и Дженни Брайан.*
++ *Статья ["Customise your site"](https://pkgdown.r-lib.org/articles/customise.html) на официальном сайте пакета pkgdown*
++ *[README](https://github.com/GuangchuangYu/hexSticker) пакета hexSticker*
+:::
+
+------
+
+## Видео
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3_kGMO-UV3M?si=75v_fA0Z02Lzi0dx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### Тайм коды
+
+00:00 Вступление<Br>
+01:13 Обзор рабочего процесса<Br>
+02:41 Настройка пакет для разработки сайта<Br>
+03:38 Запуск процесса создания сайта<Br>
+04:09 Обзор разделов сайта пакета<Br>
+05:21 Публикация сайта на GitHub, и настройка автоматической её пересборки при любом изменении пакета<Br>
+06:40 Разница между виньеткой и статьёй сайта<Br>
+07:42 Раздел reference, группировка и сортировка документации к функциям<Br>
+11:01 Раздел articles, группировка и сортировка списка статей сайта<Br>
+12:36 Управление навигационной панелью сайта<Br>
+15:11 Управление боковой панелью сайта<Br>
+17:50 Изменение темы сайта пакета<Br>
+19:05 Разработка логотипа пакета<Br>
+23:01 Как добавить счётчик Google Analytics на сайт пакета<Br>
+23:51 Заключение<Br>
+
+## Презентация
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/gD7WiHFfz7grkP?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+
+## Конспект
+### Рабочий процесс
+
+По гачалу может казаться, что создание сайта пакета весьма трудоёмкий процесс, но на самом деле создание первой версии пакета займёт у вас не более пяти минут. Рабочий процесс состоит из следующих 3 этапов:
+
+1. Настройка вашего пакета для создания сайта - `usethis::use_pkgdown()`
+    1. Создаёт файл конфигурации сайта `_pkgdown.yml`
+    2. Добавляет различные шаблоны в `.Rbuildignore`, чтобы файлы и каталоги, специфичные для pkgdown, не включались в сборку вашего пакета.
+    3. Добавляет docs, место назначения по умолчанию для отображаемого сайта, в `.gitignore`.
+2. Функция `pkgdown::build_site()` запускает процесс создания сайта
+3. Опубликуйте ваш сайт на GitHub командой usethis::use_pkgdown_github_pages():
+    1. Инициализирует пустую ветку в вашем репозитории GitHub с именем `gh-pages`
+    2. Включает GitHub Pages для вашего репозитория
+    3. Копирует файл конфигурации для GitHub Action, для автоматической пересборки сайта при любом коммите
+    4. Добавляет URL-адрес вашего сайта в DESCRIPTION и `_pkgdown.yml`. 
+
+Теперь у вашего пакета есть сайт, и при отправке любого коммита на GitHub он будет автоматически пересобираться.
+
+### Разделы сайта по умолчанию
+
+Теперь давайте разберёмся из каких компоненотов документации был сгенерирован наш сайт. По умолчанию он имеет следующие разделы:
+
+1. главная страница сайта была сгенерирована из файла README
+2. reference - раздел со списоком функций вашего пакета, и ссылками на их документацию
+3. articles - со списком статей, сгенерированных из виньеток сайта
+4. changelog - сформированный из файла NEWS
+5. get started - данный раздел формируется из виньетки, название которой соответвует названию вашего пакета, т.е. `pkg_name.Rmd`. Если такой виньетки в вашем пакете нет, то раздел "Get started" не будет добавлен на навигационную панель.
+
+### Файл _pkgdown.yml
+
+Файл `_pkgdown.yml` является основным кофигом вашего сайта, и именну с его помощью вы можете контролировать и изменять его внешний вид и структуру любого его элемента. Вся остальная часть урока будет посвящена его настройке. По умолчанию этот файл содержит всего 3 строки:
+
+```
+url: https://selesnow.github.io/firstpackage/
+template:
+  bootstrap: 5
+```
+
+### Группировка списка документации функций
+
+По умолчанию все функции представленные в разделе reference упорядочены в алфавитном порядке, что далеко не всегда удобно. Но вы можете настроить группировку функций в отдельные разделы, и отсортировать как порядок этих разделов, так и список функций, входящих в каждый раздел. Для управления списком функций в разделе reference добавьте их описание в поле reference файла `_pkgdown.yml`, ниже пример из моего пакета `rgoogleads`:
+
+```
+reference:
+  - title: Main page
+    desc: >
+      rgoogleads documentation main page
+    contents:
+      - rgoogleads-package
+  - title: Authorization
+    desc: >
+      Managing authorization process
+    contents:
+      - gads_auth_configure
+      - gads_auth
+      - gads_developer_token
+      - gads_api_key
+      - gads_oauth_app
+      - gads_auth_cache_path
+      - gads_deauth
+      - gads_has_token
+      - gads_token
+      - gads_user
+  - title: Options
+    desc: >
+      Package options setters
+    contents:
+      - gads_set_customer_id
+      - gads_set_login_customer_id
+  - title: Accounts data
+    desc: >
+      Loading account hierarchy and metadata
+    contents:
+      - gads_get_accessible_customers
+      - gads_get_account_hierarchy
+  - title: Account objects
+    desc: >
+      Loading account objects list
+    contents:
+      - gads_get_campaigns
+      - gads_get_ad_groups
+      - gads_get_ads
+      - gads_get_keywords
+      - gads_get_ad_group_criterions
+  - title: Reporting
+    desc: >
+      Loading report data
+    contents:
+      - gads_get_metadata
+      - gads_get_fields
+      - gads_get_report
+  - title: Keywords Planing Data
+    desc: >
+      Loading Keyword Plan data
+    contents:
+      - gads_keyword_plan_historical_metrics
+      - gads_keyword_plan_forecast_timeseries
+      - gads_keyword_plan_forecast_metrics
+  - title: Reference data
+    desc: >
+      Loading dictionaries
+    contents:
+      - gads_get_geo_targets
+  - title: Helpers
+    desc: >
+      Helper functions
+    contents:
+      - gads_check_errors
+      - gads_customer
+      - gads_customer_id_from_env
+      - gads_customer_id_to_env
+      - gads_fix_names
+      - gads_last_request_ids
+```
+
+Т.е. поле `reference` включает описание каждого раздела функций, которое состоит из следующих компонентов:
+
+* `title` - название раздела
+* `subtitle` - подзаголовок
+* `desc` – описание раздела
+* `contents` - список названий функций для включения в раздел
+
+### Организация списка статей
+
+Раздел `articles` состоит из статей, которые формируются из виньеток пакета. Вам не обязательно включать в сборку пакета абсолютно все статьи в виде виньеток. Виньетки вы добавляете функцией `usethis::use_vignette()`, но, если вы хотите добавить статью в раздел `articles` сайта пакета, но не планируюете включать её в сборку пакета, используйте функцию `usethis::use_article()`. В таком случае путь к этой статье будет добавлен в файл `.Rbuildignore`, и будет исключён из сборки пакета, а на сайте это будет обычная статья.
+
+Так же как и список функций, список статей на вашем сайте тоже можно группировать в разделы, и сортировать. За управление списком статей в файле `_pkgdown.yml` отвечает поле `articles`. Например, в пакете `dplyr` оно выглядит следующим образом:
+
+```
+articles:
+- title: Get started
+  navbar: ~
+  contents:
+  - dplyr
+  - grouping
+  - two-table
+  - base
+
+- title: Automate
+  navbar: Automation
+  contents:
+  - colwise
+  - rowwise
+  - programming
+
+- title: Other
+  contents:
+  - window-functions
+  - in-packages
+  ```
+
+Каждый раздел статей содержит следующие дополнительные поля:
+
+* `title` - название раздела
+* `desc` – описание раздела
+* `navbar` – пара слов для обозначения этого раздела на панели навигации
+* `contents` - список названий статей для включения в раздел
+
+Виньетки, которые не были перечислены в поле `articles` попадают в блок `Other`.
+
+### Навигационная панель
+
+Контролироваьт навигационную панель вашего сайта можно с помощью поля `navbar` вашего `_pkgdown.yml`. Для примера на сайте пакета `rgoogleads` она описана следующим образом:
+
+```
+navbar:
+  structure:
+    left: [intro, reference, articles, tutorials, api_docs, news]
+    right: [telegram, youtube, github]
+  components:
+    tutorials:
+      text: Video Tutorials
+      href: https://www.youtube.com/playlist?list=PLD2LDq8edf4qprTxRcflDwV9IvStiChHi
+    api_docs:
+      text: Google Ads API
+      href: https://developers.google.com/google-ads/api/docs/start
+    youtube:
+      icon: fa-youtube
+      href: https://www.youtube.com/R4marketing/?sub_confirmation=1
+      aria-label: YouTube
+    telegram:
+      icon: fa-telegram
+      href: https://t.me/R4marketing
+      aria-label: Telegram
+```
+
+Т.е. навигационна панель описывается двумя компонентами:
+
+* `structure` – общий макет навигационной панели, который позволяет редактировать правую и левую её часть
+* `сomponents` – настройки отдельных компонентов, элементами menu могут быть:
+    * Ссылка (text + href)
+    * Заголовок (text)
+    * Разделитель (text: ——-)
+    * Иконка (icon), используйте иконки с сайта [fontawesome](https://fontawesome.com/icons?d=gallery)
+
+### Боковая панель
+
+За боковую панель отвечает поле `home.sidebar`, вот небольшой пример её описания:
+
+```
+home:
+  links:
+    - text: Facebook
+      href: https://facebook.com/selesnow
+    - text: Telegram
+      href: https://t.me/R4marketing
+  sidebar:
+    structure: [links, authors]
+```
+
+* `links` - автоматические ссылки, созданные из полей URL и ссылки прописанные вручную из полей: BugReports в DESCRIPTION и `home.links`
+* `license` – информация о лицензии
+* `community` – ссылки на ссылки на `.github/CONTRIBUTING.md`, `.github/CODE_OF_CONDUCT.md` и т. д.
+* `citation` - ссылка на информацию о цитировании пакета.
+* `authors` – авторы указанные в `DESCRIPTION`
+* `dev` - значки состояния разработки
+* `toc` – оглавление файла `README`
+
+### Тема сайта
+
+Помимо того, что вы можете изменять любые элемента сайта, вы в целом можете изменять его цветовую схему. Для этого посмотрите галерею тем на сайте [bootswatch](https://bootswatch.com/). И укажите название нужной темы в поле `template.bootswatch`.
+
+```
+url: https://selesnow.github.io/firstpackage/
+template:
+  bootstrap: 5
+  bootswatch: solar
+```
+
+### Логотип пакета
+
+Для начала создайте шестиугольный логотип вашего пакета либо в любом графическом редакторе, либо с помощью пакета `hexSticker`. Ниже небольшой пример создания логотипа с помощью изображения по ссылке, или графика `ggplot2`:
+
+```{r, eval=FALSE}
+library(hexSticker)
+
+# из изображения
+imgurl <- 'https://freepngimg.com/download/cat/22193-3-adorable-cat.png'
+
+sticker(
+  imgurl,
+  package="firtspackage",
+  p_size=10, p_y = 1.6,
+  s_x=0.9,
+  s_y=0.9,
+  s_width=.5,
+  filename="inst/figures/imgfile.png"
+  )
+
+# из графика
+library(ggplot2)
+
+p <- ggplot(aes(x = mpg, y = wt), data = mtcars) + geom_point()
+p <- p + theme_void() + theme_transparent()
+sticker(
+  p,
+  package="hexSticker",
+  p_size=20,
+  s_x=1,
+  s_y=.75,
+  s_width=1.3,
+  s_height=1,
+  filename="inst/figures/ggplot2.png"
+  )
+
+```
+
+Функция `sticker()` имеет три основных аргумента:
+
+* `subplot` - путь к файлу с изображением, или ссылка на изображение, или объект графика
+* `package` - название вашего пакета
+* `filename` - файл в который будет сохранён стикер
+
+Большая часть остальных аргументов отвечает за расположение жлементов стикера.
+
+После того как логотип создан используйте функцию `usethis::use_logo()`:
+
+* функция помещает копию файла изображения в соответствующем масштабе в `man/figures/logo.png`
+* Даст вам фргмент markdown разметки для добавления логотипа в README файл
+* Включит логотип в ваш сайт
+
+### Добавляем счётчик Google Analytics
+
+Настроить отслеживание посещения сайта вашего пакета можно прописав в поле `template.params.ganalytics` идентификатор вашего аккаунта Google Analytics:
+
+```
+template:
+  bootstrap: 5
+  params:
+    ganalytics: UA-114798296-1
+```
+
+## Тест
+<iframe id="otp_wgt_7xsedqfxdea7u" src="https://onlinetestpad.com/7xsedqfxdea7u" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_7xsedqfxdea7u'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
+</iframe>
+
+------
+
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
+library(r2social)
+r2social::r2social.scripts()
+r2social::shareButton(link = "https://selesnow.github.io/r_package_course/", position = "inline", whatsapp = T, telegram = T, instagram = T)
+r2social::connectButton(link = 'https://t.me/R4marketing', link.out = F, telegram = T, position = 'left')
+r2social::connectButton(link = 'https://www.youtube.com/R4marketing/?sub_confirmation=1', link.out = F, youtube = T, position = 'right')
+```
