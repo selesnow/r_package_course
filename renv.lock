@@ -379,6 +379,18 @@
       ],
       "Hash": "18e9c28c1d3ca1560ce30658b22ce104"
     },
+    "pak": {
+      "Package": "pak",
+      "Version": "0.5.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "tools",
+        "utils"
+      ],
+      "Hash": "7ef6f300721d2beb43e73f476ec3476e"
+    },
     "promises": {
       "Package": "promises",
       "Version": "1.2.0.1",
