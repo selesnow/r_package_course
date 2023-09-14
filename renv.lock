@@ -378,6 +378,13 @@
       ],
       "Hash": "1de7ab598047a87bba48434ba35d497d"
     },
+    "rstudioapi": {
+      "Package": "rstudioapi",
+      "Version": "0.14",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "690bd2acc42a9166ce34845884459320"
+    },
     "sass": {
       "Package": "sass",
       "Version": "0.4.6",
@@ -445,6 +452,28 @@
         "rlang"
       ],
       "Hash": "a745bda7aff4734c17294bb41d4e4607"
+    },
+    "webexercises": {
+      "Package": "webexercises",
+      "Version": "1.1.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "webexercises",
+      "RemoteUsername": "psyteachr",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "01ea77227fe39b9b4c208517038521c227ff1eb3",
+      "Requirements": [
+        "R",
+        "grDevices",
+        "jsonlite",
+        "knitr",
+        "rmarkdown",
+        "rstudioapi",
+        "utils",
+        "yaml"
+      ],
+      "Hash": "13997c6e2f4dc775bbf5b5334471b890"
     },
     "withr": {
       "Package": "withr",
