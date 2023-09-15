@@ -58,33 +58,32 @@
 ## просмотр дерева зависимостей
 ### низкоуровневые пакеты
 pak::pkg_deps_tree("tibble")
-#> ℹ Loading metadata database
-#> ✔ Loading metadata database ... done
-#> 
-#> tibble 3.2.1 [new][dl] (690.77 kB)
-#> ├─fansi 1.0.4 [new][dl] (312.84 kB)
-#> ├─lifecycle 1.0.3 [new][dl] (139.02 kB)
-#> │ ├─cli 3.6.1 [new][dl] (1.33 MB)
-#> │ ├─glue 1.6.2 [new][dl] (162.52 kB)
-#> │ └─rlang 1.1.1 [new][dl] (1.57 MB)
-#> ├─magrittr 2.0.3 [new][dl] (226.89 kB)
-#> ├─pillar 1.9.0 [new][dl] (659.28 kB)
-#> │ ├─cli
-#> │ ├─fansi
-#> │ ├─glue
-#> │ ├─lifecycle
-#> │ ├─rlang
-#> │ ├─utf8 1.2.3 [new][dl] (149.69 kB)
-#> │ └─vctrs 0.6.3 [new][dl] (1.33 MB)
-#> │   ├─cli
-#> │   ├─glue
-#> │   ├─lifecycle
-#> │   └─rlang
-#> ├─pkgconfig 2.0.3 [new][dl] (22.45 kB)
-#> ├─rlang
-#> └─vctrs
-#> 
-#> Key:  [new] new | [dl] download
+✔ Updated metadata database: 4.68 MB in 5 files.                          
+✔ Updating metadata database ... done                                     
+tibble 3.2.1 [new][dl] (690.77 kB)                                         
+├─fansi 1.0.4 [new][dl] (312.84 kB)
+├─lifecycle 1.0.3 [new][dl] (139.02 kB)
+│ ├─cli 3.6.1 [new][dl] (1.33 MB)
+│ ├─glue 1.6.2 [new][dl] (162.52 kB)
+│ └─rlang 1.1.1 [new][dl] (1.57 MB)
+├─magrittr 2.0.3 [new][dl] (226.89 kB)
+├─pillar 1.9.0 [new][dl] (659.28 kB)
+│ ├─cli
+│ ├─fansi
+│ ├─glue
+│ ├─lifecycle
+│ ├─rlang
+│ ├─utf8 1.2.3 [new][dl] (149.69 kB)
+│ └─vctrs 0.6.3 [new][dl] (1.33 MB)
+│   ├─cli
+│   ├─glue
+│   ├─lifecycle
+│   └─rlang
+├─pkgconfig 2.0.3 [new][dl] (22.45 kB)
+├─rlang
+└─vctrs
+
+Key:  [new] new | [dl] download
 ```
 
 Также вы можете использовать функцию `tools::package_dependencies()`:
