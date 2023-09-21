@@ -1,0 +1,719 @@
+# Разработка пакета обёртки над API (пакет httr2)
+
+------
+
+В этом видео мы разберёмся с тем, зачем покрывать код вашего пакета юнит-тестам, и как технически это реализовать.
+
+------
+
+::: {style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;"}
+*Данный урок основан на документации к пакету httr2:*
+
+* Статья ["httr2"](https://httr2.r-lib.org/articles/httr2.html)
+* Статья ["Wrapping APIs
+"](https://httr2.r-lib.org/articles/wrapping-apis.html)
+:::
+
+------
+
+## Видео
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ktPGh7HY8Tg?si=XS5PXrZry2fzxOwa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### Тайм коды
+00:00 Вступление<Br>
+00:45 Что такое API<Br>
+01:49 Компоненты HTTP запросов и ответов<Br>
+03:26 Введение в пакет httr2<Br>
+08:04 Функции пакета httr2<Br>
+09:36 Этапы работы с API<Br>
+10:10 Простейший пример обёртки над Faker API<Br>
+18:44 Управление конфиденциальными данными<Br>
+29:33 Пример обёртки над NYTimes Books API<Br>
+30:51 Обработка ошибок в HTTP ответах<Br>
+34:06 Ограничение скорости отправки запросов<Br>
+37:18 Как работать с API токена в пакетах-обёртках над API<Br>
+39:32 Протокол OAuth<Br>
+41:00 Пример обёртки над Facebook API<Br>
+49:46 Обзор всего рабочего процесса<Br>
+52:11 Заключение<Br>
+
+## Презентация
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/gRkzcDqIM23tw0?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+
+## Конспект
+### Построение HTTP запроса
+
+Работа с `httr2` начинается с создания HTTP запроса. Это ключевое отличие от предшественника `httr`, в предыдущей версии вы одной командой выполняли сразу несколько действий: создавали запрос, отправляли его, и получали ответ. httr2 имеет явный объект запроса, что значительно упрощает процесс компоновки сложных запросов. Процесс построения запроса начинается с базового URL:
+
+```{r, eval=FALSE}
+req <- request("https://httpbin.org/get")
+req
+#> <httr2_request>
+#> GET https://httpbin.org/get
+#> Body: empty
+```
+
+Перед отправкой запроса на сервер мы можем посмотреть, что именно будет отправлено:
+
+```{r, eval=FALSE}
+req %>% req_dry_run()
+#> GET /get HTTP/1.1
+#> Host: httpbin.org
+#> User-Agent: httr2/0.1.1 r-curl/4.3.2 libcurl/7.64.1
+#> Accept: */*
+#> Accept-Encoding: deflate, gzip
+```
+
+Первая строка содержит три важных составляющих запроса
+
+* HTTP метод, т.е. глагол, который сообщает серверу, какое действие должен выполнить ваш запрос. По умолчанию подразумевается метод GET, самый распространенный метод, указывающий, что мы хотим получить ресурс от сервера. Другие так же есть и другие HTTP методы: POST, для создания ресурса, PUT, для изменения ресурса, и DELETE, для его удаления.
+* Путь, URL адрес сервера, который состоит из: протокола (httpили https), хоста (httpbin.org), и порта (в нашем примере не использовался).
+* Версия протокола HTTP. В данном случае эта информация нам не важна, т.к. обработка протокола идёт на более низком уровне.
+
+Далее идут заголовки запроса. В заголовках зачастую передаётся некоторая служебная информация, представленная в виде пар ключ-значение, разделенных знаком :. Заголовки в нашем примере были автоматически добавлены `httr2`, но вы можете переопределить их или добавить свои с помощью `req_headers()`:
+
+```{r, eval=FALSE}
+req %>%
+ req_headers(
+ Name = "Hadley", 
+ `Shoe-Size` = "11", 
+ Accept = "application/json"
+ ) %>% 
+ req_dry_run()
+#> GET /get HTTP/1.1
+#> Host: httpbin.org
+#> User-Agent: httr2/0.1.1 r-curl/4.3.2 libcurl/7.64.1
+#> Accept-Encoding: deflate, gzip
+#> Name: Hadley
+#> Shoe-Size: 11
+#> Accept: application/json
+```
+
+Имена заголовков не чувствительны к регистру, и сервера игнорируют неизвестные им заголовки.
+
+Заголовки заканчиваются пустой строкой, за которой следует тело запроса. Приведённые выше запросы (как и все GET запросы) не имеют тела, поэтому давайте добавим его, чтобы посмотреть, что произойдет. функции семейства `req_body_*()` обеспечивают различные способы добавить данные к телу запроса. В качестве примера мы используем `req_body_json()` для добавления данных в виде JSON структуры:
+
+```{r, eval=FALSE}
+req %>%
+ req_body_json(list(x = 1, y = "a")) %>% 
+ req_dry_run()
+#> POST /get HTTP/1.1
+#> Host: httpbin.org
+#> User-Agent: httr2/0.1.1 r-curl/4.3.2 libcurl/7.64.1
+#> Accept: */*
+#> Accept-Encoding: deflate, gzip
+#> Content-Type: application/json
+#> Content-Length: 15
+#> 
+#> {"x":1,"y":"a"}
+```
+
+Что изменилось?
+
+* Метод запроса автоматически изменился с GET на POST. POST - это стандартный метод отправки данных на веб-сервер, который автоматически используется всякий раз, когда вы добавляете тело запроса. Вы можете использовать `req_method()` для переопределения метода.
+* К запросу добавлены два новых заголовка: Content-Type и Content-Length. Они сообщают серверу, как интерпретировать тело - в нашем случае это JSON структура размером 15 байт.
+* У запроса есть тело, состоящее из какого-то JSON.
+
+Разные API могут требовать различных вариантов кодировки тела запроса, поэтому httr2 предоставляет семейство функций, для реализации наиболее часто встречающихся форматов. Например, `req_body_form()` преобразует тело запроса, в вид отправляемой браузером формы:
+
+```{r, eval=FALSE}
+req %>%
+ req_body_form(list(x = "1", y = "a")) %>% 
+ req_dry_run()
+#> POST /get HTTP/1.1
+#> Host: httpbin.org
+#> User-Agent: httr2/0.1.1 r-curl/4.3.2 libcurl/7.64.1
+#> Accept: */*
+#> Accept-Encoding: deflate, gzip
+#> Content-Type: application/x-www-form-urlencoded
+#> Content-Length: 7
+#> 
+#> x=1&y=a
+```
+
+Для отправки данных большого объёма или бинарных файлов используйте `req_body_multipart()`:
+
+```{r, eval=FALSE}
+req %>%
+ req_body_multipart(list(x = "1", y = "a")) %>% 
+ req_dry_run()
+#> POST /get HTTP/1.1
+#> Host: httpbin.org
+#> User-Agent: httr2/0.1.1 r-curl/4.3.2 libcurl/7.64.1
+#> Accept: */*
+#> Accept-Encoding: deflate, gzip
+#> Content-Length: 228
+#> Content-Type: multipart/form-data; boundary=------------------------cc86fca72508d8b0
+#> 
+#> --------------------------cc86fca72508d8b0
+#> Content-Disposition: form-data; name="x"
+#> 
+#> 1
+#> --------------------------cc86fca72508d8b0
+#> Content-Disposition: form-data; name="y"
+#> 
+#> a
+#> --------------------------cc86fca72508d8b0--
+```
+
+Если вам нужно отправить данные, закодированные в другой форме, вы можете использовать `req_body_raw()` для добавления данных в тело и передать тип отправляемых данных в заголовке Content-Type.
+
+### Отправка запроса и обработка ответа
+
+Чтобы фактически выполнить запрос и получить ответ от сервера, используйте функцию  req_perform():
+
+```{r, eval=FALSE}
+req <- request("https://httpbin.org/json")
+resp <- req %>% req_perform()
+resp
+#> <httr2_response>
+#> GET https://httpbin.org/json
+#> Status: 200 OK
+#> Content-Type: application/json
+#> Body: In memory (429 bytes)
+```
+
+Посмотреть имитацию полученного ответа можно с помощью `resp_raw()`:
+
+```{r, eval=FALSE}
+resp %>% resp_raw()
+#> HTTP/1.1 200 OK
+#> date: Mon, 27 Sep 2021 20:40:32 GMT
+#> content-type: application/json
+#> content-length: 429
+#> server: gunicorn/19.9.0
+#> access-control-allow-origin: *
+#> access-control-allow-credentials: true
+#> 
+#> {
+#> "slideshow": {
+#> "author": "Yours Truly", 
+#> "date": "date of publication", 
+#> "slides": [
+#> {
+#> "title": "Wake up to WonderWidgets!", 
+#> "type": "all"
+#> }, 
+#> {
+#> "items": [
+#> "Why <em>WonderWidgets</em> are great", 
+#> "Who <em>buys</em> WonderWidgets"
+#> ], 
+#> "title": "Overview", 
+#> "type": "all"
+#> }
+#> ], 
+#> "title": "Sample Slide Show"
+#> }
+#> }
+```
+
+Структура HTTP ответа очень похожа на структуру запроса. В первой строке указывается версия используемого HTTP и код состояния, за которым (необязательно) следует его краткое описание. Затем идут заголовки, за которыми следует пустая строка, за которой следует тело ответа. В отличие от запросов большинство ответов будет иметь тело.
+
+Вы можете извлечь данные из ответа с помощью функций семейства `resp_()`:
+
+* `resp_status()` возвращает код состояния и `resp_status_desc()` возвращает его описание:
+
+```{r, eval=FALSE}
+resp %>% resp_status()
+#> [1] 200
+resp %>% resp_status_desc()
+#> [1] "OK"
+```
+
+* Вы можете извлечь все заголовки используя `resp_headers()` или получить значение конкретного заголовок с помощью `resp_header()`:
+
+```{r, eval=FALSE}
+resp %>% resp_headers()
+#> <httr2_headers>
+#> date: Mon, 27 Sep 2021 20:40:32 GMT
+#> content-type: application/json
+#> content-length: 429
+#> server: gunicorn/19.9.0
+#> access-control-allow-origin: *
+#> access-control-allow-credentials: true
+resp %>% resp_header("Content-Length")
+#> [1] "429"
+```
+
+Заголовки нечувствительны к регистру:
+
+```{r, eval=FALSE}
+resp %>% resp_header("ConTEnT-LeNgTH")
+#> [1] "429"
+```
+
+Тело ответа, так же как и тело запроса, в зависимости от устройства API может приходить в разных форматах. Для извлечения тела ответа используйте функции семейства  `resp_body_*()`. В нашем примере мы получили ответ в виде JSON структуры, поэтому для его извлечения необходимо использовать `resp_body_json()`:
+
+```{r, eval=FALSE}
+resp %>% resp_body_json() %>% str()
+#> List of 1
+#> $ slideshow:List of 4
+#> ..$ author: chr "Yours Truly"
+#> ..$ date : chr "date of publication"
+#> ..$ slides:List of 2
+#> .. ..$ :List of 2
+#> .. .. ..$ title: chr "Wake up to WonderWidgets!"
+#> .. .. ..$ type : chr "all"
+#> .. ..$ :List of 3
+#> .. .. ..$ items:List of 2
+#> .. .. .. ..$ : chr "Why <em>WonderWidgets</em> are great"
+#> .. .. .. ..$ : chr "Who <em>buys</em> WonderWidgets"
+#> .. .. ..$ title: chr "Overview"
+#> .. .. ..$ type : chr "all"
+#> ..$ title : chr "Sample Slide Show"
+```
+
+Ответы с кодами состояния 4xx и 5xx являются ошибками HTTP. `httr2` автоматически преобразует их в ошибки R:
+
+```{r, eval=FALSE}
+request("https://httpbin.org/status/404") %>% req_perform()
+#> Error: HTTP 404 Not Found.
+request("https://httpbin.org/status/500") %>% req_perform()
+#> Error: HTTP 500 Internal Server Error.
+```
+
+Это еще одно важное отличие от httr, который требовал явного вызова `httr::stop_for_status()` для преобразования ошибок HTTP в ошибки R. Вы можете вернуться к поведению `httr` с помощью `req_error(req, is_error = ~ FALSE)`.
+
+### Оборачиваем API с помощью httr2
+#### Faker API
+
+Мы начнем с очень простого API, [faker API](https://fakerapi.it/en) , который предоставляет набор методов для генерации случайных выборок данных. Перед тем как приступить к разработке функции, которые вы могли бы поместить в пакет, мы выполним пробный запрос, что бы разобраться с устройством этого API:
+
+```{r, eval=FALSE}
+# We start by creating a request that uses the base API url
+req <- request("https://fakerapi.it/api/v1")
+resp <- req %>% 
+  # Then we add on the images path
+  req_url_path_append("images") %>% 
+  # Add query parameters _width and _quantity
+  req_url_query(`_width` = 380, `_quantity` = 1) %>% 
+  req_perform()
+
+# The result comes back as JSON
+resp %>% resp_body_json() %>% str()
+
+#> List of 4
+#>  $ status: chr "OK"
+#>  $ code  : int 200
+#>  $ total : int 1
+#>  $ data  :List of 1
+#>   ..$ :List of 3
+#>   .. ..$ title      : chr "Nisi totam nobis non."
+#>   .. ..$ description: chr "Repellendus natus dolore eius in similique est est. Magnam maiores labore est expedita occaecati tenetur excepturi."
+#>   .. ..$ url        : chr "http://placeimg.com/380/480/any"
+```
+
+##### Основная функция генерации запроса
+
+Сделав несколько успешных запросов к изучаемому API стоит обратить внимание, есть ли какие-нибудь общие паттерны запросов к различным конечным точкам. Делается это с целью разработки основной функции пакета, генерирующей основу HTTP запроса для всех остальных функций.
+
+Немного изучив документацию Faker API я отметил некоторые общие паттерны:
+
+* Каждый URL-адрес имеет форму https://fakerapi.it/api/v1/{resource}, и данные передаются ресурсу с параметрами запроса. Все параметры начинаются с `_`.
+* Каждый ресурс имеет три общих параметра запроса: `_locale`, `_quantity` и `_seed`.
+* Все конечные точки возвращают данные в виде JSON структуры.
+
+Это привело меня к созданию следующей функции:
+```{r, eval=FALSE}
+faker <- function(resource, ..., quantity = 1, locale = "en_US", seed = NULL) {
+  params <- list(
+    ...,
+    quantity = quantity,
+    locale = locale,
+    seed = seed
+  )
+  names(params) <- paste0("_", names(params))
+  
+  request("https://fakerapi.it/api/v1") %>% 
+    req_url_path_append(resource) %>% 
+    req_url_query(!!!params) %>% 
+    req_user_agent("my_package_name (http://my.package.web.site)") %>% 
+    req_perform() %>% 
+    resp_body_json()
+}
+
+str(faker("images", width = 300))
+#> List of 4
+#>  $ status: chr "OK"
+#>  $ code  : int 200
+#>  $ total : int 1
+#>  $ data  :List of 1
+#>   ..$ :List of 3
+#>   .. ..$ title      : chr "Nihil beatae tenetur minus."
+#>   .. ..$ description: chr "Provident pariatur iste consequatur enim id neque. Odio blanditiis libero aut. Accusantium ipsam et ex est."
+#>   .. ..$ url        : chr "http://placeimg.com/300/480/any"
+```
+
+Тут я сделал несколько важных решений:
+
+* Я решил указать значения по умолчанию для параметров `quantity` и `locale.` Это упрощает демонстрацию моей функции в этой статье.
+* Я использовал значение по умолчанию `NULL` для аргумента seed . `req_url_query()` автоматически отбрасывает аргументы со значением `NULL`, это означает, что в API не отправляется значение по умолчанию, но когда вы смотрите определение функции, вы видите, что значение seed установлено.
+* Я автоматически добавляю ко всем параметрам запроса префикс, `_` т.к. имена параметров в API начинаются с `_`.
+* Моя функция генерирует запрос, выполняет его и извлекает тело ответа. Такой подход будет работать в общих случаях с простыми API, для более сложных API возможно вам будет удобнее вернуть объект запроса, который можно изменить перед выполнением.
+
+Я использовал один приём: `req_url_query()` использует динамические точки, поэтому можно использовать `!!!` для их преобразования, например `req_url_query(req, !!!list(`_quantity` = 1, `_locale` = "en_US"))` конвертируется в `req_url_query(req, `_quantity` = 1, `_locale` = "en_US")`.
+
+##### Обёртывание конечных точек
+
+`faker()` является довольно обобщённой функцией — это хороший инструмент для разработчика пакета, т.к. вы можете прочитать документацию Faker API и перевести ее в вызов функции. Но это не очень удобно для пользователя пакета, который может ничего не знать о веб-API, и тем более об особенностях устройства Faker API и параметров вызовов отдельных его методов. Поэтому следующим шагом в процессе разработки пакета - обёртки к API является обертывание отдельных конечных точек их собственными функциями.
+
+Например, возьмем конечную точку persons с тремя дополнительными параметрами: gender (мужчина или женщина),  birthday_start и birthday_end. Простейшая обёртка этой конечной точки будет выглядеть примерно следующим образом:
+
+```{r, eval=FALSE}
+faker_person <- function(gender = NULL, birthday_start = NULL, birthday_end = NULL, quantity = 1, locale = "en_US", seed = NULL) {
+  faker(
+    "persons",
+    gender = gender,
+    birthday_start = birthday_start,
+    birthday_end = birthday_end,
+    quantity = quantity,
+    locale = locale,
+    seed = seed
+  )  
+}
+str(faker_person("male"))
+#> List of 4
+#>  $ status: chr "OK"
+#>  $ code  : int 200
+#>  $ total : int 1
+#>  $ data  :List of 1
+#>   ..$ :List of 10
+#>   .. ..$ id       : int 1
+#>   .. ..$ firstname: chr "Terence"
+#>   .. ..$ lastname : chr "Reinger"
+#>   .. ..$ email    : chr "brennan.effertz@barton.com"
+#>   .. ..$ phone    : chr "+8608217930964"
+#>   .. ..$ birthday : chr "2021-06-01"
+#>   .. ..$ gender   : chr "male"
+#>   .. ..$ address  :List of 10
+#>   .. .. ..$ id            : int 0
+#>   .. .. ..$ street        : chr "950 Barrows Plains Suite 474"
+#>   .. .. ..$ streetName    : chr "Barrows Extensions"
+#>   .. .. ..$ buildingNumber: chr "864"
+#>   .. .. ..$ city          : chr "North Cicero"
+#>   .. .. ..$ zipcode       : chr "39030"
+#>   .. .. ..$ country       : chr "Tokelau"
+#>   .. .. ..$ county_code   : chr "TD"
+#>   .. .. ..$ latitude      : num -57.3
+#>   .. .. ..$ longitude     : num -40.4
+#>   .. ..$ website  : chr "http://mills.com"
+#>   .. ..$ image    : chr "http://placeimg.com/640/480/people"
+```
+
+Можно сделать эту функцию ещё более удобной для пользователя, проверив типы ввода и преобразовав полученный результат в таблицу. Я по-быстрому накидал небольшой вариант преобразования полученного ответа в таблицу с использованием функционала пакета purrr; в зависимости от ваших потребностей и предпочтений вы можете использовать для той же операции базовый R или `tidyr::hoist()`.
+
+```{r, eval=FALSE}
+library(purrr)
+
+faker_person <- function(gender = NULL, birthday_start = NULL, birthday_end = NULL, quantity = 1, locale = "en_US", seed = NULL) {
+  if (!is.null(gender)) {
+    gender <- match.arg(gender, c("male", "female"))
+  }
+  if (!is.null(birthday_start)) {
+    if (!inherits(birthday_start, "Date")) {
+      stop("`birthday_start` must be a date")
+    }
+    birthday_start <- format(birthday_start, "%Y-%m-%d")
+  }
+  if (!is.null(birthday_end)) {
+    if (!inherits(birthday_end, "Date")) {
+      stop("`birthday_end` must be a date")
+    }
+    birthday_end <- format(birthday_end, "%Y-%m-%d")
+  }
+  
+  json <- faker(
+    "persons",
+    gender = gender,
+    birthday_start = birthday_start,
+    birthday_end = birthday_end,
+    quantity = quantity,
+    locale = locale,
+    seed = seed
+  )  
+  
+  tibble::tibble(
+    firstname = map_chr(json$data, "firstname"),
+    lastname = map_chr(json$data, "lastname"),
+    email = map_chr(json$data, "email"),
+    gender = map_chr(json$data, "gender")
+  )
+}
+faker_person("male", quantity = 5)
+#> # A tibble: 5 × 4
+#>   firstname lastname   email                          gender
+#>   <chr>     <chr>      <chr>                          <chr> 
+#> 1 Trey      Kassulke   haufderhar@konopelski.net      male  
+#> 2 Weldon    Stiedemann elta.wolf@yahoo.com            male  
+#> 3 Leonard   Runolfsson francisco.jacobson@hotmail.com male  
+#> 4 Rashawn   Hegmann    fstroman@hotmail.com           male  
+#> 5 Derick    Crooks     nikolaus.russel@gmail.com      male
+```
+
+Следующими шагами разработки пакета будет экспорт и документирование этой функции.
+
+#### Управление секретными данными
+
+Немного отвлечёмся от работы непосредственно с вызовами API и поговорим об управлении секретными данными. Секретные данные важны т.к. практически каждый API с которым вы будете работать, за исключением очень простых вроде Faker API, будут требовать от вас некой идентификации, зачастую идентификация пользователей в API реализована через ключи API или токены.
+
+Описанный в этом разделе подход может быть для вас избыточным. Например, если у вас всего один токен, который вы используете в нескольких скриптах пакета, то достаточно будет поместить его в файл `.Renviron` и обращаться к нему с помощью `Sys.getenv()`. Но со временем количество хранимых API ключей и токенов будет расти, и вам потребуется разобраться с более эффективными способами хранения и распространения секретных данных, которые вам предоставляет пакет `httr2.`
+
+##### Основы
+
+httr2 предоставляет вам функции  `secret_encrypt()` и `secret_decrypt()` позволяющие шифровать секретные данные, и использовать их в своём коде не беспокоясь о том, что они попадут в третьи руки. Процесс шифрования состоит из трёх основных шагов:
+
+1. С помощью функции `secret_make_key()` создаётся ключ шифрования, который используется для шифрования и дешифрования секретов с использованием симметричной криптографии:
+
+```{r, eval=FALSE}
+key <- secret_make_key()
+key
+#> [1] "-6cGNKmH2WTfH5pVUll-sg"
+```
+
+(Обратите внимание, что в `secret_make_key()` используется криптографически безопасный генератор случайных чисел, предоставляемый OpenSSL; на него не влияют настройки RNG R, и нет никакого способа сделать его воспроизводимым.)
+
+2. Далее шифруете секретные данные с помощью `secret_encrypt()` и сохраняете полученный текст непосредственно в исходном коде вашего пакета:
+
+```{r, eval=FALSE}
+secret_scrambled <- secret_encrypt("secret I need to work with an API", key)
+secret_scrambled
+#> [1] "ohd9iBHJ66k5j8trIPVeENIPmINN2YWs4ceD1l6tz3B8GjotwFhI4f92lHDCSW_p6A"
+```
+
+3. При необходимости вы дешифруете ваши данные, используя `secret_decrypt()`:
+
+```{r, eval=FALSE}
+secret_decrypt(secret_scrambled, key)
+#> [1] "secret I need to work with an API"
+```
+
+##### Пакетные ключи и секретные данные
+
+Вы можете создать любое количество ключей шифрования, но я настоятельно рекомендую создавать один ключ для каждого пакета, который я буду называть ключом пакета. В этом разделе я покажу, как сохранить этот ключ, так чтобы к нему имели доступ только вы и написанные вами автоматические тесты.
+
+В httr2 заложена идея, что ключ должен хранится в переменной окружения. Итак, первый шаг — сделать созданный вами ключ пакета доступным на вашем локальном компьютере, добавив строку с переменной на уровене пользователя в файл `.Renviron` (который вы можете открыть или при необходимости создать с помощью `usethis::edit_r_environ()`):
+
+```
+YOURPACKAGE_KEY=key_you_generated_with_secret_make_key
+```
+
+Теперь (после перезапуска R) вы сможете воспользоваться специальной возможностью `secret_encrypt()` и `secret_decrypt()`: аргументом `key` может быть имя переменной среды, а не сам ключ шифрования. На самом деле, это наиболее эффективное использование данного аргумента.
+
+```{r, eval=FALSE}
+secret_scrambled <- secret_encrypt("secret I need to work with an API", "YOURPACKAGE_KEY")
+secret_scrambled
+#> [1] "aoErRT9hj9M5N_zFZ4ehQIdKTKplbwaCovmYwrtpLkYt1HKa4aiKBWxriMjtpV2KBA"
+secret_decrypt(secret_scrambled, "YOURPACKAGE_KEY")
+#> [1] "secret I need to work with an API"
+```
+
+Вам также нужно будет сделать ключ доступным в GitHub Actions вашего репозитория (как check, так и pkgdown), чтобы к ключю имели доступ ваши автоматические тесты. Для этого требуется два шага:
+
+1. Добавьте ключ в раздел [repository secrets](https://docs.github.com/en/actions/reference/encrypted-secrets).
+2. Расшарьте ключ на рабочие процессы, которым он нужен, добавив строку в соответствующий рабочий процесс:
+
+```
+    env:
+      YOURPACKAGE_KEY: ${{ secrets.YOURPACKAGE_KEY }}
+```
+
+Другие платформы непрерывной интеграции предлагают аналогичные способы сделать ключ доступным в качестве безопасной переменной среды.
+
+##### Когда ключ пакета недоступен
+
+Есть несколько важных случаев, когда ваш код не будет иметь доступа к ключу вашего пакета: в CRAN, на личных машинах внешних разработчиков и при прогонке автоматических тестов. Поэтому, если вы хотите поделиться своим пакетом на CRAN или облегчить другим пользователям возможность внести свой вклад в его развитие, вам нужно убедиться, что ваши примеры, виньетки и тесты работают без ошибок:
+
+* В виньетках вы можете запустить `knitr::opts_chunk(eval = secret_has_key("YOURPACKAGE_KEY"))`, чтобы код внутри чанков выполнялся только в том случае, если ваш ключ доступен.
+* В примерах вы можете окружить блоки кода, для которых требуется ключ, с помощью `if (httr2::secret_has_key("YOURPACKAGE_KEY")) {}` .
+* Тесты не требуют от вас дополнительных действий, т.к. когда `secret_decrypt()` запускается в `testthat`, он автоматически запускает `skip()` для пропуска теста, если ключ недоступен.
+
+#### NYTimes Books API
+
+Далее мы рассмотрим NYTimes Books API. Данный API требует от вас простую авторизацию через ключи API, которыми необходимо подписывать каждый отправляемый запрос. Разрабатывая пакет для работы с API требующий указания API ключи в каждом запросе, вы столкнётесь с двумя проблемами:
+
+Как организовать авто тесты не раскрывая свой ключ API;
+
+Как упростить пользователям пакета передачу API ключа в каждый запрос, не дублируя его в каждую отдельную функцию.
+
+Итак, на данном этапе вам уже понятно, как работает приведённый ниже код для получения моего ключа API NYTimes Book:
+
+```{r, eval=FALSE}
+my_key <- secret_decrypt("4Nx84VPa83dMt3X6bv0fNBlLbv3U4D1kHM76YisKEfpCarBm1UHJHARwJHCFXQSV", "HTTR2_KEY")
+```
+
+Я начну с решения первой проблемы, ко второму мы вернёмся в самом конце этого раздела, потому что с ним проще разобраться, когда у нас есть готовая функция.
+
+###### Базовый запрос
+
+Теперь давайте выполним тестовый запрос и посмотрим на ответ:
+
+```{r, eval=FALSE}
+resp <- request("https://api.nytimes.com/svc/books/v3") %>% 
+  req_url_path_append("/reviews.json") %>% 
+  req_url_query(`api-key` = my_key, isbn = 9780307476463) %>% 
+  req_perform()
+resp
+```
+
+Как и большинство современных API, NYTimes Books API возвращает результат в JSON формате:
+
+```{r, eval=FALSE}
+resp %>% 
+  resp_body_json() %>% 
+  str()
+```
+
+Прежде чем привести этот код в вид функции немного поэксперементируем с ошибочными запросами.
+
+#### Обработка ошибок
+
+Что произойдет, в случае ошибки? Например, если мы преднамеренно предоставим неверный ключ:
+
+```{r, eval=FALSE}
+resp <- request("https://api.nytimes.com/svc/books/v3") %>% 
+  req_url_path_append("/reviews.json") %>% 
+  req_url_query(`api-key` = "invalid", isbn = 9780307476463) %>% 
+  req_perform()
+```
+
+Посмотреть, есть ли в ответе какая-либо дополнительная полезная информация, можно с помощью `last_response()`:
+
+```{r, eval=FALSE}
+resp <- last_response()
+resp
+resp %>% resp_body_json()
+```
+
+Полезную дополнительную информация об ошибке можно найти в `faultstring`:
+
+```{r, eval=FALSE}
+resp %>% resp_body_json() %>% .$fault %>% .$faultstring
+```
+
+Для того, что бы наш пакет выводил эту дополнительную информацию об ошибках полученных в ходе работы с API необходимо использовать функцию `req_error()` и её аргумент `body.` В body необходимо передать функцию, принимающую в качестве аргумента объект ответа от сервера, и возвращающую строку с дополнительной информацией о причине ошибке. Давайте попробуем доработать наш запрос:
+
+```{r, eval=FALSE}
+nytimes_error_body <- function(resp) {
+  resp %>% resp_body_json() %>% .$fault %>% .$faultstring
+}
+
+resp <- request("https://api.nytimes.com/svc/books/v3") %>% 
+  req_url_path_append("/reviews.json") %>% 
+  req_url_query(`api-key` = "invalid", isbn = 9780307476463) %>% 
+  req_error(body = nytimes_error_body) %>% 
+  req_perform()
+```
+
+#### Ограничения скорости
+
+Другим распространенным источником ошибок является ограничение скорости — этот лимит используется многими серверами, для избежание черезмерного потребления ресурсов одним пользователем. На странице часто задаваемых вопросов описаны ограничения скорости для API NYT:
+
+> Существует два ограничения скорости: 4000 запросов в день и 10 запросов в минуту. Вы должны выдержать паузу в 6 секунд между запросами, чтобы избежать превышения предельного лимита количества отправленных запросов в минуту. Если вам нужен более высокий предел скорости, свяжитесь с нами по дресу code@nytimes.com.
+
+Не редко API в ответе возвращают допонительную информацию, о том, какую паузу необходимо выждать для успешной отправки следующего запроса, если вы превысили какой то из описанных выще лимитов. Часто эта информация хранится в заголовке `Retry-After`.
+
+Я намеренно нарушил лимит скорости, быстро сделав 11 запросов; к сожалению, хотя код статуса ответа был стандартным 429 (Too many requests), он не содержал ни в теле ответа, ни в заголовках никакой информации о том, какую паузу необходимо выдержать перед отправкой следующего запроса. Это означает, что мы не можем использовать `req_retry()`, которая ожидает информацию о времени таймаута в ответе сервера. Вместо этого мы будем использовать `req_throttle()`, которая позволяет ограничить количество отправляемых запросов, в данном случае мы будем уверены, что отправляем не более 10 запросов каждые 60 секунд:
+
+```{r, eval=FALSE}
+req <- request("https://api.nytimes.com/svc/books/v3") %>% 
+  req_url_path_append("/reviews.json") %>% 
+  req_url_query(`api-key` = "invalid", isbn = 9780307476463) %>% 
+  req_throttle(10 / 60)
+```
+
+По умолчанию `req_throttle()` разделяет ограничение на все запросы к указанному хосту (т.е.  api.nytimes.com). Поскольку документы предполагают, что ограничение скорости применяется к отдельным конечным точкам API, вы можете использовать аргумент realm, чтобы более точно определить конечную точку, на которую действует указанное вами ограничение скорости отправки запроса:
+
+```{r, eval=FALSE}
+req <- request("https://api.nytimes.com/svc/books/v3") %>% 
+  req_url_path_append("/reviews.json") %>% 
+  req_url_query(`api-key` = "invalid", isbn = 9780307476463) %>% 
+  req_throttle(10 / 60, realm = "https://api.nytimes.com/svc/books")
+```
+
+#### Оборачиваем функцию
+
+Объединение всех вышеперечисленных примеров дает примерно такую ​​функцию:
+
+```{r, eval=FALSE}
+nytimes_books <- function(api_key, path, ...) {
+  request("https://api.nytimes.com/svc/books/v3") %>% 
+    req_url_path_append("/reviews.json") %>% 
+    req_url_query(..., `api-key` = api_key) %>% 
+    req_error(body = nytimes_error_body) %>% 
+    req_throttle(10 / 60, realm = "https://api.nytimes.com/svc/books") %>% 
+    req_perform() %>% 
+    resp_body_json()
+}
+
+drunk <- nytimes_books(my_key, "/reviews.json", isbn = "0316453382")
+drunk$results[[1]]$summary
+```
+
+Чтобы доработать этот код, до уровня пакета, надо:
+
+1. Добавить явные аргументы и убедиться, что они имеют правильный тип.
+2. Задокументировать и экспортировать функцию.
+3. Преобразовать полученный список в более удобную для пользователя структуру данных (возможно, в фрейм данных с одной строкой на обзор).
+4. Также лучше предоставить пользователю удобный способ использовать свой собственный ключ API.
+
+#### Пользовательский ключ
+
+Хорошим местом для хранения API ключа являются переменные среды, т.к. их легко установить, не вводя ничего в консоли (которая может быть случайно передана через ваш файл .Rhistory), и их легко установить в автоматизированных процессах. Затем вы должны написать функцию для получения ключа API, возвращающую сообщение, если он не найден:
+
+```{r, eval=FALSE}
+get_api_key <- function() {
+  key <- Sys.getenv("NYTIMES_KEY")
+  if (identical(key, "")) {
+    stop("No API key found, please supply with `api_key` argument or with NYTIMES_KEY env var")
+  }
+  key
+}
+```
+
+Теперь можно доработать `nytimes_books()`, и использовать `get_api_key()` как значение по умолчанию для аргумента `api_key.` Поскольку аргумент теперь является необязательным, мы можем переместить его в конец списка аргументов, так как он понадобится только в исключительных случаях.
+
+```{r, eval=FALSE}
+nytimes_books <- function(path, ..., api_key = get_api_key()) {
+  ...
+}
+```
+
+Вы можете сделать этот подход более удобным для пользователя, предоставив вспомогательную функцию, которая устанавливает переменную среды:
+
+```{r, eval=FALSE}
+set_api_key <- function(key = NULL) {
+  if (is.null(key)) {
+    key <- askpass::askpass("Please enter your API key")
+  }
+  Sys.setenv("NYTIMES_KEY" = key)
+}
+```
+
+Использование `askpass()` (или её аналогов) является хорошей практикой, поскольку это даёт возможность скрыть вводимый пользователем ключь, в отличае от использования для этого консоли.
+
+Рекомендуется доработать `get_api_key()` добавив автоматическое использование зашифрованного ключа, чтобы упростить написание авто тестов:
+
+```{r, eval=FALSE}
+get_api_key <- function() {
+  key <- Sys.getenv("NYTIMES_KEY")
+  if (!identical(key, "")) {
+    return(key)
+  }
+  
+  if (is_testing()) {
+    return(testing_key())
+  } else {
+    stop("No API key found, please supply with `api_key` argument or with NYTIMES_KEY env var") 
+  }
+}
+
+is_testing <- function() {
+  identical(Sys.getenv("TESTTHAT"), "true")
+}
+
+testing_key <- function() {
+  secret_decrypt("4Nx84VPa83dMt3X6bv0fNBlLbv3U4D1kHM76YisKEfpCarBm1UHJHARwJHCFXQSV", "HTTR2_KEY")
+}
+```
+
