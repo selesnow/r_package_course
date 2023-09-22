@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Урок 8 Разработка пакета обёртки над API (пакет httr2) | Курс 'Разработка пакетов на языке R'</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content='В этом видео мы разберёмся с тем, зачем покрывать код вашего пакета юнит-тестам, и как технически это реализовать. Данный урок основан на документации к пакету httr2: Статья "httr2" Статья...'>
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="Урок 8 Разработка пакета обёртки над API (пакет httr2) | Курс 'Разработка пакетов на языке R'">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://selesnow.github.io/r_package_course/разработка-пакета-обёртки-над-api-пакет-httr2.html">
+<meta property="og:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
+<meta property="og:description" content='В этом видео мы разберёмся с тем, зачем покрывать код вашего пакета юнит-тестам, и как технически это реализовать. Данный урок основан на документации к пакету httr2: Статья "httr2" Статья...'>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Урок 8 Разработка пакета обёртки над API (пакет httr2) | Курс 'Разработка пакетов на языке R'">
+<meta name="twitter:description" content='В этом видео мы разберёмся с тем, зачем покрывать код вашего пакета юнит-тестам, и как технически это реализовать. Данный урок основан на документации к пакету httr2: Статья "httr2" Статья...'>
+<meta name="twitter:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114798296-1');
+    </script><link rel="shortcut icon" href="img/favicon.ico">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="include/webex.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Курс 'Разработка пакетов на языке R'</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="" href="%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">1</span> Обзор рабочего процесса разработки пакета</a></li>
+<li><a class="" href="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D1%81-github.html"><span class="header-section-number">2</span> Настройка системы и интеграция с GitHub</a></li>
+<li><a class="" href="%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8-%D0%BF%D0%BE-%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8-r-%D0%BA%D0%BE%D0%B4%D0%B0.html"><span class="header-section-number">3</span> Рекомендации по организации R кода</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%B2-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82.html"><span class="header-section-number">4</span> Добавление данных в пакет</a></li>
+<li><a class="" href="description---%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">5</span> DESCRIPTION - Метаданные пакета</a></li>
+<li><a class="" href="namespace---%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">6</span> NAMESPACE - Зависимости пакета</a></li>
+<li><a class="" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-testthat.html"><span class="header-section-number">7</span> Разработка юнит-тестов к функциям пакета (пакет testthat)</a></li>
+<li><a class="active" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BE%D0%B1%D1%91%D1%80%D1%82%D0%BA%D0%B8-%D0%BD%D0%B0%D0%B4-api-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-httr2.html"><span class="header-section-number">8</span> Разработка пакета обёртки над API (пакет httr2)</a></li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></li>
+<li><a class="" href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/selesnow/r_package_course">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="разработка-пакета-обёртки-над-api-пакет-httr2" class="section level1" number="8">
+<h1>
+<span class="header-section-number">Урок 8</span> Разработка пакета обёртки над API (пакет httr2)<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BE%D0%B1%D1%91%D1%80%D1%82%D0%BA%D0%B8-%D0%BD%D0%B0%D0%B4-api-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-httr2"><i class="fas fa-link"></i></a>
+</h1>
+<hr>
+<p>В этом видео мы разберёмся с тем, зачем покрывать код вашего пакета юнит-тестам, и как технически это реализовать.</p>
+<hr>
+<div style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;">
+<p><em>Данный урок основан на документации к пакету httr2:</em></p>
+<ul>
+<li>Статья <a href="https://httr2.r-lib.org/articles/httr2.html">"httr2"</a>
+</li>
+<li>Статья <a href="https://httr2.r-lib.org/articles/wrapping-apis.html">"Wrapping APIs
+"</a>
+</li>
+</ul>
+</div>
+<hr>
+<div id="видео-7" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-7"><i class="fas fa-link"></i></a>
+</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ktPGh7HY8Tg?si=XS5PXrZry2fzxOwa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+</iframe>
+<div id="тайм-коды-7" class="section level3" number="8.1.1">
+<h3>
+<span class="header-section-number">8.1.1</span> Тайм коды<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-7"><i class="fas fa-link"></i></a>
+</h3>
+<p>00:00 Вступление<br>
+00:45 Что такое API<br>
+01:49 Компоненты HTTP запросов и ответов<br>
+03:26 Введение в пакет httr2<br>
+08:04 Функции пакета httr2<br>
+09:36 Этапы работы с API<br>
+10:10 Простейший пример обёртки над Faker API<br>
+18:44 Управление конфиденциальными данными<br>
+29:33 Пример обёртки над NYTimes Books API<br>
+30:51 Обработка ошибок в HTTP ответах<br>
+34:06 Ограничение скорости отправки запросов<br>
+37:18 Как работать с API токена в пакетах-обёртках над API<br>
+39:32 Протокол OAuth<br>
+41:00 Пример обёртки над Facebook API<br>
+49:46 Обзор всего рабочего процесса<br>
+52:11 Заключение<br></p>
+</div>
+</div>
+<div id="презентация-7" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Презентация<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-7"><i class="fas fa-link"></i></a>
+</h2>
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/gRkzcDqIM23tw0?hostedIn=slideshare&amp;page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no">
+</iframe>
+</div>
+<div id="конспект-7" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> Конспект<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-7"><i class="fas fa-link"></i></a>
+</h2>
+<div id="построение-http-запроса" class="section level3" number="8.3.1">
+<h3>
+<span class="header-section-number">8.3.1</span> Построение HTTP запроса<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-http-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0"><i class="fas fa-link"></i></a>
+</h3>
+<p>Работа с <code>httr2</code> начинается с создания HTTP запроса. Это ключевое отличие от предшественника <code>httr</code>, в предыдущей версии вы одной командой выполняли сразу несколько действий: создавали запрос, отправляли его, и получали ответ. httr2 имеет явный объект запроса, что значительно упрощает процесс компоновки сложных запросов. Процесс построения запроса начинается с базового URL:</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">"https://httpbin.org/get"</span><span class="op">)</span></span>
+<span><span class="va">req</span></span>
+<span><span class="co">#&gt; &lt;httr2_request&gt;</span></span>
+<span><span class="co">#&gt; GET https://httpbin.org/get</span></span>
+<span><span class="co">#&gt; Body: empty</span></span></code></pre></div>
+<p>Перед отправкой запроса на сервер мы можем посмотреть, что именно будет отправлено:</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">req</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">req_dry_run</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; GET /get HTTP/1.1</span></span>
+<span><span class="co">#&gt; Host: httpbin.org</span></span>
+<span><span class="co">#&gt; User-Agent: httr2/0.1.1 r-curl/4.3.2 libcurl/7.64.1</span></span>
+<span><span class="co">#&gt; Accept: */*</span></span>
+<span><span class="co">#&gt; Accept-Encoding: deflate, gzip</span></span></code></pre></div>
+<p>Первая строка содержит три важных составляющих запроса</p>
+<ul>
+<li>HTTP метод, т.е. глагол, который сообщает серверу, какое действие должен выполнить ваш запрос. По умолчанию подразумевается метод GET, самый распространенный метод, указывающий, что мы хотим получить ресурс от сервера. Другие так же есть и другие HTTP методы: POST, для создания ресурса, PUT, для изменения ресурса, и DELETE, для его удаления.</li>
+<li>Путь, URL адрес сервера, который состоит из: протокола (httpили https), хоста (httpbin.org), и порта (в нашем примере не использовался).</li>
+<li>Версия протокола HTTP. В данном случае эта информация нам не важна, т.к. обработка протокола идёт на более низком уровне.</li>
+</ul>
+<p>Далее идут заголовки запроса. В заголовках зачастую передаётся некоторая служебная информация, представленная в виде пар ключ-значение, разделенных знаком :. Заголовки в нашем примере были автоматически добавлены <code>httr2</code>, но вы можете переопределить их или добавить свои с помощью <code>req_headers()</code>:</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">req</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span> <span class="fu">req_headers</span><span class="op">(</span></span>
+<span> Name <span class="op">=</span> <span class="st">"Hadley"</span>, </span>
+<span> `Shoe-Size` <span class="op">=</span> <span class="st">"11"</span>, </span>
+<span> Accept <span class="op">=</span> <span class="st">"application/json"</span></span>
+<span> <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="fu">req_dry_run</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; GET /get HTTP/1.1</span></span>
+<span><span class="co">#&gt; Host: httpbin.org</span></span>
+<span><span class="co">#&gt; User-Agent: httr2/0.1.1 r-curl/4.3.2 libcurl/7.64.1</span></span>
+<span><span class="co">#&gt; Accept-Encoding: deflate, gzip</span></span>
+<span><span class="co">#&gt; Name: Hadley</span></span>
+<span><span class="co">#&gt; Shoe-Size: 11</span></span>
+<span><span class="co">#&gt; Accept: application/json</span></span></code></pre></div>
+<p>Имена заголовков не чувствительны к регистру, и сервера игнорируют неизвестные им заголовки.</p>
+<p>Заголовки заканчиваются пустой строкой, за которой следует тело запроса. Приведённые выше запросы (как и все GET запросы) не имеют тела, поэтому давайте добавим его, чтобы посмотреть, что произойдет. функции семейства <code>req_body_*()</code> обеспечивают различные способы добавить данные к телу запроса. В качестве примера мы используем <code>req_body_json()</code> для добавления данных в виде JSON структуры:</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">req</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span> <span class="fu">req_body_json</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="st">"a"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="fu">req_dry_run</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; POST /get HTTP/1.1</span></span>
+<span><span class="co">#&gt; Host: httpbin.org</span></span>
+<span><span class="co">#&gt; User-Agent: httr2/0.1.1 r-curl/4.3.2 libcurl/7.64.1</span></span>
+<span><span class="co">#&gt; Accept: */*</span></span>
+<span><span class="co">#&gt; Accept-Encoding: deflate, gzip</span></span>
+<span><span class="co">#&gt; Content-Type: application/json</span></span>
+<span><span class="co">#&gt; Content-Length: 15</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; {"x":1,"y":"a"}</span></span></code></pre></div>
+<p>Что изменилось?</p>
+<ul>
+<li>Метод запроса автоматически изменился с GET на POST. POST - это стандартный метод отправки данных на веб-сервер, который автоматически используется всякий раз, когда вы добавляете тело запроса. Вы можете использовать <code>req_method()</code> для переопределения метода.</li>
+<li>К запросу добавлены два новых заголовка: Content-Type и Content-Length. Они сообщают серверу, как интерпретировать тело - в нашем случае это JSON структура размером 15 байт.</li>
+<li>У запроса есть тело, состоящее из какого-то JSON.</li>
+</ul>
+<p>Разные API могут требовать различных вариантов кодировки тела запроса, поэтому httr2 предоставляет семейство функций, для реализации наиболее часто встречающихся форматов. Например, <code>req_body_form()</code> преобразует тело запроса, в вид отправляемой браузером формы:</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">req</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span> <span class="fu">req_body_form</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"1"</span>, y <span class="op">=</span> <span class="st">"a"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="fu">req_dry_run</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; POST /get HTTP/1.1</span></span>
+<span><span class="co">#&gt; Host: httpbin.org</span></span>
+<span><span class="co">#&gt; User-Agent: httr2/0.1.1 r-curl/4.3.2 libcurl/7.64.1</span></span>
+<span><span class="co">#&gt; Accept: */*</span></span>
+<span><span class="co">#&gt; Accept-Encoding: deflate, gzip</span></span>
+<span><span class="co">#&gt; Content-Type: application/x-www-form-urlencoded</span></span>
+<span><span class="co">#&gt; Content-Length: 7</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; x=1&amp;y=a</span></span></code></pre></div>
+<p>Для отправки данных большого объёма или бинарных файлов используйте <code>req_body_multipart()</code>:</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">req</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span> <span class="fu">req_body_multipart</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"1"</span>, y <span class="op">=</span> <span class="st">"a"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="fu">req_dry_run</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; POST /get HTTP/1.1</span></span>
+<span><span class="co">#&gt; Host: httpbin.org</span></span>
+<span><span class="co">#&gt; User-Agent: httr2/0.1.1 r-curl/4.3.2 libcurl/7.64.1</span></span>
+<span><span class="co">#&gt; Accept: */*</span></span>
+<span><span class="co">#&gt; Accept-Encoding: deflate, gzip</span></span>
+<span><span class="co">#&gt; Content-Length: 228</span></span>
+<span><span class="co">#&gt; Content-Type: multipart/form-data; boundary=------------------------cc86fca72508d8b0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; --------------------------cc86fca72508d8b0</span></span>
+<span><span class="co">#&gt; Content-Disposition: form-data; name="x"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 1</span></span>
+<span><span class="co">#&gt; --------------------------cc86fca72508d8b0</span></span>
+<span><span class="co">#&gt; Content-Disposition: form-data; name="y"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; a</span></span>
+<span><span class="co">#&gt; --------------------------cc86fca72508d8b0--</span></span></code></pre></div>
+<p>Если вам нужно отправить данные, закодированные в другой форме, вы можете использовать <code>req_body_raw()</code> для добавления данных в тело и передать тип отправляемых данных в заголовке Content-Type.</p>
+</div>
+<div id="отправка-запроса-и-обработка-ответа" class="section level3" number="8.3.2">
+<h3>
+<span class="header-section-number">8.3.2</span> Отправка запроса и обработка ответа<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0-%D0%B8-%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h3>
+<p>Чтобы фактически выполнить запрос и получить ответ от сервера, используйте функцию req_perform():</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">"https://httpbin.org/json"</span><span class="op">)</span></span>
+<span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="va">req</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">resp</span></span>
+<span><span class="co">#&gt; &lt;httr2_response&gt;</span></span>
+<span><span class="co">#&gt; GET https://httpbin.org/json</span></span>
+<span><span class="co">#&gt; Status: 200 OK</span></span>
+<span><span class="co">#&gt; Content-Type: application/json</span></span>
+<span><span class="co">#&gt; Body: In memory (429 bytes)</span></span></code></pre></div>
+<p>Посмотреть имитацию полученного ответа можно с помощью <code>resp_raw()</code>:</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_raw</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; HTTP/1.1 200 OK</span></span>
+<span><span class="co">#&gt; date: Mon, 27 Sep 2021 20:40:32 GMT</span></span>
+<span><span class="co">#&gt; content-type: application/json</span></span>
+<span><span class="co">#&gt; content-length: 429</span></span>
+<span><span class="co">#&gt; server: gunicorn/19.9.0</span></span>
+<span><span class="co">#&gt; access-control-allow-origin: *</span></span>
+<span><span class="co">#&gt; access-control-allow-credentials: true</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; {</span></span>
+<span><span class="co">#&gt; "slideshow": {</span></span>
+<span><span class="co">#&gt; "author": "Yours Truly", </span></span>
+<span><span class="co">#&gt; "date": "date of publication", </span></span>
+<span><span class="co">#&gt; "slides": [</span></span>
+<span><span class="co">#&gt; {</span></span>
+<span><span class="co">#&gt; "title": "Wake up to WonderWidgets!", </span></span>
+<span><span class="co">#&gt; "type": "all"</span></span>
+<span><span class="co">#&gt; }, </span></span>
+<span><span class="co">#&gt; {</span></span>
+<span><span class="co">#&gt; "items": [</span></span>
+<span><span class="co">#&gt; "Why &lt;em&gt;WonderWidgets&lt;/em&gt; are great", </span></span>
+<span><span class="co">#&gt; "Who &lt;em&gt;buys&lt;/em&gt; WonderWidgets"</span></span>
+<span><span class="co">#&gt; ], </span></span>
+<span><span class="co">#&gt; "title": "Overview", </span></span>
+<span><span class="co">#&gt; "type": "all"</span></span>
+<span><span class="co">#&gt; }</span></span>
+<span><span class="co">#&gt; ], </span></span>
+<span><span class="co">#&gt; "title": "Sample Slide Show"</span></span>
+<span><span class="co">#&gt; }</span></span>
+<span><span class="co">#&gt; }</span></span></code></pre></div>
+<p>Структура HTTP ответа очень похожа на структуру запроса. В первой строке указывается версия используемого HTTP и код состояния, за которым (необязательно) следует его краткое описание. Затем идут заголовки, за которыми следует пустая строка, за которой следует тело ответа. В отличие от запросов большинство ответов будет иметь тело.</p>
+<p>Вы можете извлечь данные из ответа с помощью функций семейства <code>resp_()</code>:</p>
+<ul>
+<li>
+<code>resp_status()</code> возвращает код состояния и <code>resp_status_desc()</code> возвращает его описание:</li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_status</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 200</span></span>
+<span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_status_desc</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "OK"</span></span></code></pre></div>
+<ul>
+<li>Вы можете извлечь все заголовки используя <code>resp_headers()</code> или получить значение конкретного заголовок с помощью <code>resp_header()</code>:</li>
+</ul>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_headers</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;httr2_headers&gt;</span></span>
+<span><span class="co">#&gt; date: Mon, 27 Sep 2021 20:40:32 GMT</span></span>
+<span><span class="co">#&gt; content-type: application/json</span></span>
+<span><span class="co">#&gt; content-length: 429</span></span>
+<span><span class="co">#&gt; server: gunicorn/19.9.0</span></span>
+<span><span class="co">#&gt; access-control-allow-origin: *</span></span>
+<span><span class="co">#&gt; access-control-allow-credentials: true</span></span>
+<span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_header</span><span class="op">(</span><span class="st">"Content-Length"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "429"</span></span></code></pre></div>
+<p>Заголовки нечувствительны к регистру:</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_header</span><span class="op">(</span><span class="st">"ConTEnT-LeNgTH"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "429"</span></span></code></pre></div>
+<p>Тело ответа, так же как и тело запроса, в зависимости от устройства API может приходить в разных форматах. Для извлечения тела ответа используйте функции семейства <code>resp_body_*()</code>. В нашем примере мы получили ответ в виде JSON структуры, поэтому для его извлечения необходимо использовать <code>resp_body_json()</code>:</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 1</span></span>
+<span><span class="co">#&gt; $ slideshow:List of 4</span></span>
+<span><span class="co">#&gt; ..$ author: chr "Yours Truly"</span></span>
+<span><span class="co">#&gt; ..$ date : chr "date of publication"</span></span>
+<span><span class="co">#&gt; ..$ slides:List of 2</span></span>
+<span><span class="co">#&gt; .. ..$ :List of 2</span></span>
+<span><span class="co">#&gt; .. .. ..$ title: chr "Wake up to WonderWidgets!"</span></span>
+<span><span class="co">#&gt; .. .. ..$ type : chr "all"</span></span>
+<span><span class="co">#&gt; .. ..$ :List of 3</span></span>
+<span><span class="co">#&gt; .. .. ..$ items:List of 2</span></span>
+<span><span class="co">#&gt; .. .. .. ..$ : chr "Why &lt;em&gt;WonderWidgets&lt;/em&gt; are great"</span></span>
+<span><span class="co">#&gt; .. .. .. ..$ : chr "Who &lt;em&gt;buys&lt;/em&gt; WonderWidgets"</span></span>
+<span><span class="co">#&gt; .. .. ..$ title: chr "Overview"</span></span>
+<span><span class="co">#&gt; .. .. ..$ type : chr "all"</span></span>
+<span><span class="co">#&gt; ..$ title : chr "Sample Slide Show"</span></span></code></pre></div>
+<p>Ответы с кодами состояния 4xx и 5xx являются ошибками HTTP. <code>httr2</code> автоматически преобразует их в ошибки R:</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">request</span><span class="op">(</span><span class="st">"https://httpbin.org/status/404"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: HTTP 404 Not Found.</span></span>
+<span><span class="fu">request</span><span class="op">(</span><span class="st">"https://httpbin.org/status/500"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: HTTP 500 Internal Server Error.</span></span></code></pre></div>
+<p>Это еще одно важное отличие от httr, который требовал явного вызова <code><a href="https://httr.r-lib.org/reference/stop_for_status.html">httr::stop_for_status()</a></code> для преобразования ошибок HTTP в ошибки R. Вы можете вернуться к поведению <code>httr</code> с помощью <code>req_error(req, is_error = ~ FALSE)</code>.</p>
+</div>
+<div id="оборачиваем-api-с-помощью-httr2" class="section level3" number="8.3.3">
+<h3>
+<span class="header-section-number">8.3.3</span> Оборачиваем API с помощью httr2<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-api-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-httr2"><i class="fas fa-link"></i></a>
+</h3>
+<div id="faker-api" class="section level4" number="8.3.3.1">
+<h4>
+<span class="header-section-number">8.3.3.1</span> Faker API<a class="anchor" aria-label="anchor" href="#faker-api"><i class="fas fa-link"></i></a>
+</h4>
+<p>Мы начнем с очень простого API, <a href="https://fakerapi.it/en">faker API</a> , который предоставляет набор методов для генерации случайных выборок данных. Перед тем как приступить к разработке функции, которые вы могли бы поместить в пакет, мы выполним пробный запрос, что бы разобраться с устройством этого API:</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># We start by creating a request that uses the base API url</span></span>
+<span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">"https://fakerapi.it/api/v1"</span><span class="op">)</span></span>
+<span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="va">req</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># Then we add on the images path</span></span>
+<span>  <span class="fu">req_url_path_append</span><span class="op">(</span><span class="st">"images"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># Add query parameters _width and _quantity</span></span>
+<span>  <span class="fu">req_url_query</span><span class="op">(</span>`_width` <span class="op">=</span> <span class="fl">380</span>, `_quantity` <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># The result comes back as JSON</span></span>
+<span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; List of 4</span></span>
+<span><span class="co">#&gt;  $ status: chr "OK"</span></span>
+<span><span class="co">#&gt;  $ code  : int 200</span></span>
+<span><span class="co">#&gt;  $ total : int 1</span></span>
+<span><span class="co">#&gt;  $ data  :List of 1</span></span>
+<span><span class="co">#&gt;   ..$ :List of 3</span></span>
+<span><span class="co">#&gt;   .. ..$ title      : chr "Nisi totam nobis non."</span></span>
+<span><span class="co">#&gt;   .. ..$ description: chr "Repellendus natus dolore eius in similique est est. Magnam maiores labore est expedita occaecati tenetur excepturi."</span></span>
+<span><span class="co">#&gt;   .. ..$ url        : chr "http://placeimg.com/380/480/any"</span></span></code></pre></div>
+<div id="основная-функция-генерации-запроса" class="section level5" number="8.3.3.1.1">
+<h5>
+<span class="header-section-number">8.3.3.1.1</span> Основная функция генерации запроса<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D0%B0%D1%8F-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-%D0%B3%D0%B5%D0%BD%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0"><i class="fas fa-link"></i></a>
+</h5>
+<p>Сделав несколько успешных запросов к изучаемому API стоит обратить внимание, есть ли какие-нибудь общие паттерны запросов к различным конечным точкам. Делается это с целью разработки основной функции пакета, генерирующей основу HTTP запроса для всех остальных функций.</p>
+<p>Немного изучив документацию Faker API я отметил некоторые общие паттерны:</p>
+<ul>
+<li>Каждый URL-адрес имеет форму <a href="https://fakerapi.it/api/v1/%7Bresource%7D" class="uri">https://fakerapi.it/api/v1/{resource}</a>, и данные передаются ресурсу с параметрами запроса. Все параметры начинаются с <code>_</code>.</li>
+<li>Каждый ресурс имеет три общих параметра запроса: <code>_locale</code>, <code>_quantity</code> и <code>_seed</code>.</li>
+<li>Все конечные точки возвращают данные в виде JSON структуры.</li>
+</ul>
+<p>Это привело меня к созданию следующей функции:</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">faker</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">resource</span>, <span class="va">...</span>, <span class="va">quantity</span> <span class="op">=</span> <span class="fl">1</span>, <span class="va">locale</span> <span class="op">=</span> <span class="st">"en_US"</span>, <span class="va">seed</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    <span class="va">...</span>,</span>
+<span>    quantity <span class="op">=</span> <span class="va">quantity</span>,</span>
+<span>    locale <span class="op">=</span> <span class="va">locale</span>,</span>
+<span>    seed <span class="op">=</span> <span class="va">seed</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu">request</span><span class="op">(</span><span class="st">"https://fakerapi.it/api/v1"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">req_url_path_append</span><span class="op">(</span><span class="va">resource</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">req_url_query</span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">params</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">req_user_agent</span><span class="op">(</span><span class="st">"my_package_name (http://my.package.web.site)"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="fu">faker</span><span class="op">(</span><span class="st">"images"</span>, width <span class="op">=</span> <span class="fl">300</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 4</span></span>
+<span><span class="co">#&gt;  $ status: chr "OK"</span></span>
+<span><span class="co">#&gt;  $ code  : int 200</span></span>
+<span><span class="co">#&gt;  $ total : int 1</span></span>
+<span><span class="co">#&gt;  $ data  :List of 1</span></span>
+<span><span class="co">#&gt;   ..$ :List of 3</span></span>
+<span><span class="co">#&gt;   .. ..$ title      : chr "Nihil beatae tenetur minus."</span></span>
+<span><span class="co">#&gt;   .. ..$ description: chr "Provident pariatur iste consequatur enim id neque. Odio blanditiis libero aut. Accusantium ipsam et ex est."</span></span>
+<span><span class="co">#&gt;   .. ..$ url        : chr "http://placeimg.com/300/480/any"</span></span></code></pre></div>
+<p>Тут я сделал несколько важных решений:</p>
+<ul>
+<li>Я решил указать значения по умолчанию для параметров <code>quantity</code> и <code>locale.</code> Это упрощает демонстрацию моей функции в этой статье.</li>
+<li>Я использовал значение по умолчанию <code>NULL</code> для аргумента seed . <code>req_url_query()</code> автоматически отбрасывает аргументы со значением <code>NULL</code>, это означает, что в API не отправляется значение по умолчанию, но когда вы смотрите определение функции, вы видите, что значение seed установлено.</li>
+<li>Я автоматически добавляю ко всем параметрам запроса префикс, <code>_</code> т.к. имена параметров в API начинаются с <code>_</code>.</li>
+<li>Моя функция генерирует запрос, выполняет его и извлекает тело ответа. Такой подход будет работать в общих случаях с простыми API, для более сложных API возможно вам будет удобнее вернуть объект запроса, который можно изменить перед выполнением.</li>
+</ul>
+<p>Я использовал один приём: <code>req_url_query()</code> использует динамические точки, поэтому можно использовать <code>!!!</code> для их преобразования, например <code>req_url_query(req, !!!list(</code>_quantity<code>= 1,</code>_locale<code>= "en_US"))</code> конвертируется в <code>req_url_query(req,</code>_quantity<code>= 1,</code>_locale<code>= "en_US")</code>.</p>
+</div>
+<div id="обёртывание-конечных-точек" class="section level5" number="8.3.3.1.2">
+<h5>
+<span class="header-section-number">8.3.3.1.2</span> Обёртывание конечных точек<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D1%91%D1%80%D1%82%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BD%D0%B5%D1%87%D0%BD%D1%8B%D1%85-%D1%82%D0%BE%D1%87%D0%B5%D0%BA"><i class="fas fa-link"></i></a>
+</h5>
+<p><code>faker()</code> является довольно обобщённой функцией — это хороший инструмент для разработчика пакета, т.к. вы можете прочитать документацию Faker API и перевести ее в вызов функции. Но это не очень удобно для пользователя пакета, который может ничего не знать о веб-API, и тем более об особенностях устройства Faker API и параметров вызовов отдельных его методов. Поэтому следующим шагом в процессе разработки пакета - обёртки к API является обертывание отдельных конечных точек их собственными функциями.</p>
+<p>Например, возьмем конечную точку persons с тремя дополнительными параметрами: gender (мужчина или женщина), birthday_start и birthday_end. Простейшая обёртка этой конечной точки будет выглядеть примерно следующим образом:</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">faker_person</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">gender</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">birthday_start</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">birthday_end</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">quantity</span> <span class="op">=</span> <span class="fl">1</span>, <span class="va">locale</span> <span class="op">=</span> <span class="st">"en_US"</span>, <span class="va">seed</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">faker</span><span class="op">(</span></span>
+<span>    <span class="st">"persons"</span>,</span>
+<span>    gender <span class="op">=</span> <span class="va">gender</span>,</span>
+<span>    birthday_start <span class="op">=</span> <span class="va">birthday_start</span>,</span>
+<span>    birthday_end <span class="op">=</span> <span class="va">birthday_end</span>,</span>
+<span>    quantity <span class="op">=</span> <span class="va">quantity</span>,</span>
+<span>    locale <span class="op">=</span> <span class="va">locale</span>,</span>
+<span>    seed <span class="op">=</span> <span class="va">seed</span></span>
+<span>  <span class="op">)</span>  </span>
+<span><span class="op">}</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="fu">faker_person</span><span class="op">(</span><span class="st">"male"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 4</span></span>
+<span><span class="co">#&gt;  $ status: chr "OK"</span></span>
+<span><span class="co">#&gt;  $ code  : int 200</span></span>
+<span><span class="co">#&gt;  $ total : int 1</span></span>
+<span><span class="co">#&gt;  $ data  :List of 1</span></span>
+<span><span class="co">#&gt;   ..$ :List of 10</span></span>
+<span><span class="co">#&gt;   .. ..$ id       : int 1</span></span>
+<span><span class="co">#&gt;   .. ..$ firstname: chr "Terence"</span></span>
+<span><span class="co">#&gt;   .. ..$ lastname : chr "Reinger"</span></span>
+<span><span class="co">#&gt;   .. ..$ email    : chr "brennan.effertz@barton.com"</span></span>
+<span><span class="co">#&gt;   .. ..$ phone    : chr "+8608217930964"</span></span>
+<span><span class="co">#&gt;   .. ..$ birthday : chr "2021-06-01"</span></span>
+<span><span class="co">#&gt;   .. ..$ gender   : chr "male"</span></span>
+<span><span class="co">#&gt;   .. ..$ address  :List of 10</span></span>
+<span><span class="co">#&gt;   .. .. ..$ id            : int 0</span></span>
+<span><span class="co">#&gt;   .. .. ..$ street        : chr "950 Barrows Plains Suite 474"</span></span>
+<span><span class="co">#&gt;   .. .. ..$ streetName    : chr "Barrows Extensions"</span></span>
+<span><span class="co">#&gt;   .. .. ..$ buildingNumber: chr "864"</span></span>
+<span><span class="co">#&gt;   .. .. ..$ city          : chr "North Cicero"</span></span>
+<span><span class="co">#&gt;   .. .. ..$ zipcode       : chr "39030"</span></span>
+<span><span class="co">#&gt;   .. .. ..$ country       : chr "Tokelau"</span></span>
+<span><span class="co">#&gt;   .. .. ..$ county_code   : chr "TD"</span></span>
+<span><span class="co">#&gt;   .. .. ..$ latitude      : num -57.3</span></span>
+<span><span class="co">#&gt;   .. .. ..$ longitude     : num -40.4</span></span>
+<span><span class="co">#&gt;   .. ..$ website  : chr "http://mills.com"</span></span>
+<span><span class="co">#&gt;   .. ..$ image    : chr "http://placeimg.com/640/480/people"</span></span></code></pre></div>
+<p>Можно сделать эту функцию ещё более удобной для пользователя, проверив типы ввода и преобразовав полученный результат в таблицу. Я по-быстрому накидал небольшой вариант преобразования полученного ответа в таблицу с использованием функционала пакета purrr; в зависимости от ваших потребностей и предпочтений вы можете использовать для той же операции базовый R или <code><a href="https://tidyr.tidyverse.org/reference/hoist.html">tidyr::hoist()</a></code>.</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/">purrr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">faker_person</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">gender</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">birthday_start</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">birthday_end</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">quantity</span> <span class="op">=</span> <span class="fl">1</span>, <span class="va">locale</span> <span class="op">=</span> <span class="st">"en_US"</span>, <span class="va">seed</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">gender</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/match.arg.html">match.arg</a></span><span class="op">(</span><span class="va">gender</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"male"</span>, <span class="st">"female"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">birthday_start</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">inherits</a></span><span class="op">(</span><span class="va">birthday_start</span>, <span class="st">"Date"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"`birthday_start` must be a date"</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>    <span class="va">birthday_start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">birthday_start</span>, <span class="st">"%Y-%m-%d"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">birthday_end</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">inherits</a></span><span class="op">(</span><span class="va">birthday_end</span>, <span class="st">"Date"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"`birthday_end` must be a date"</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>    <span class="va">birthday_end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">birthday_end</span>, <span class="st">"%Y-%m-%d"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="va">json</span> <span class="op">&lt;-</span> <span class="fu">faker</span><span class="op">(</span></span>
+<span>    <span class="st">"persons"</span>,</span>
+<span>    gender <span class="op">=</span> <span class="va">gender</span>,</span>
+<span>    birthday_start <span class="op">=</span> <span class="va">birthday_start</span>,</span>
+<span>    birthday_end <span class="op">=</span> <span class="va">birthday_end</span>,</span>
+<span>    quantity <span class="op">=</span> <span class="va">quantity</span>,</span>
+<span>    locale <span class="op">=</span> <span class="va">locale</span>,</span>
+<span>    seed <span class="op">=</span> <span class="va">seed</span></span>
+<span>  <span class="op">)</span>  </span>
+<span>  </span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>    firstname <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">data</span>, <span class="st">"firstname"</span><span class="op">)</span>,</span>
+<span>    lastname <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">data</span>, <span class="st">"lastname"</span><span class="op">)</span>,</span>
+<span>    email <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">data</span>, <span class="st">"email"</span><span class="op">)</span>,</span>
+<span>    gender <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">data</span>, <span class="st">"gender"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">faker_person</span><span class="op">(</span><span class="st">"male"</span>, quantity <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 5 × 4</span></span>
+<span><span class="co">#&gt;   firstname lastname   email                          gender</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;                          &lt;chr&gt; </span></span>
+<span><span class="co">#&gt; 1 Trey      Kassulke   haufderhar@konopelski.net      male  </span></span>
+<span><span class="co">#&gt; 2 Weldon    Stiedemann elta.wolf@yahoo.com            male  </span></span>
+<span><span class="co">#&gt; 3 Leonard   Runolfsson francisco.jacobson@hotmail.com male  </span></span>
+<span><span class="co">#&gt; 4 Rashawn   Hegmann    fstroman@hotmail.com           male  </span></span>
+<span><span class="co">#&gt; 5 Derick    Crooks     nikolaus.russel@gmail.com      male</span></span></code></pre></div>
+<p>Следующими шагами разработки пакета будет экспорт и документирование этой функции.</p>
+</div>
+</div>
+<div id="управление-секретными-данными" class="section level4" number="8.3.3.2">
+<h4>
+<span class="header-section-number">8.3.3.2</span> Управление секретными данными<a class="anchor" aria-label="anchor" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D0%B5%D0%BA%D1%80%D0%B5%D1%82%D0%BD%D1%8B%D0%BC%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8"><i class="fas fa-link"></i></a>
+</h4>
+<p>Немного отвлечёмся от работы непосредственно с вызовами API и поговорим об управлении секретными данными. Секретные данные важны т.к. практически каждый API с которым вы будете работать, за исключением очень простых вроде Faker API, будут требовать от вас некой идентификации, зачастую идентификация пользователей в API реализована через ключи API или токены.</p>
+<p>Описанный в этом разделе подход может быть для вас избыточным. Например, если у вас всего один токен, который вы используете в нескольких скриптах пакета, то достаточно будет поместить его в файл <code>.Renviron</code> и обращаться к нему с помощью <code><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv()</a></code>. Но со временем количество хранимых API ключей и токенов будет расти, и вам потребуется разобраться с более эффективными способами хранения и распространения секретных данных, которые вам предоставляет пакет <code>httr2.</code></p>
+<div id="основы" class="section level5" number="8.3.3.2.1">
+<h5>
+<span class="header-section-number">8.3.3.2.1</span> Основы<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D1%8B"><i class="fas fa-link"></i></a>
+</h5>
+<p>httr2 предоставляет вам функции <code>secret_encrypt()</code> и <code>secret_decrypt()</code> позволяющие шифровать секретные данные, и использовать их в своём коде не беспокоясь о том, что они попадут в третьи руки. Процесс шифрования состоит из трёх основных шагов:</p>
+<ol style="list-style-type: decimal">
+<li>С помощью функции <code>secret_make_key()</code> создаётся ключ шифрования, который используется для шифрования и дешифрования секретов с использованием симметричной криптографии:</li>
+</ol>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">key</span> <span class="op">&lt;-</span> <span class="fu">secret_make_key</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">key</span></span>
+<span><span class="co">#&gt; [1] "-6cGNKmH2WTfH5pVUll-sg"</span></span></code></pre></div>
+<p>(Обратите внимание, что в <code>secret_make_key()</code> используется криптографически безопасный генератор случайных чисел, предоставляемый OpenSSL; на него не влияют настройки RNG R, и нет никакого способа сделать его воспроизводимым.)</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Далее шифруете секретные данные с помощью <code>secret_encrypt()</code> и сохраняете полученный текст непосредственно в исходном коде вашего пакета:</li>
+</ol>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">secret_scrambled</span> <span class="op">&lt;-</span> <span class="fu">secret_encrypt</span><span class="op">(</span><span class="st">"secret I need to work with an API"</span>, <span class="va">key</span><span class="op">)</span></span>
+<span><span class="va">secret_scrambled</span></span>
+<span><span class="co">#&gt; [1] "ohd9iBHJ66k5j8trIPVeENIPmINN2YWs4ceD1l6tz3B8GjotwFhI4f92lHDCSW_p6A"</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>При необходимости вы дешифруете ваши данные, используя <code>secret_decrypt()</code>:</li>
+</ol>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">secret_decrypt</span><span class="op">(</span><span class="va">secret_scrambled</span>, <span class="va">key</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "secret I need to work with an API"</span></span></code></pre></div>
+</div>
+<div id="пакетные-ключи-и-секретные-данные" class="section level5" number="8.3.3.2.2">
+<h5>
+<span class="header-section-number">8.3.3.2.2</span> Пакетные ключи и секретные данные<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BD%D1%8B%D0%B5-%D0%BA%D0%BB%D1%8E%D1%87%D0%B8-%D0%B8-%D1%81%D0%B5%D0%BA%D1%80%D0%B5%D1%82%D0%BD%D1%8B%D0%B5-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5"><i class="fas fa-link"></i></a>
+</h5>
+<p>Вы можете создать любое количество ключей шифрования, но я настоятельно рекомендую создавать один ключ для каждого пакета, который я буду называть ключом пакета. В этом разделе я покажу, как сохранить этот ключ, так чтобы к нему имели доступ только вы и написанные вами автоматические тесты.</p>
+<p>В httr2 заложена идея, что ключ должен хранится в переменной окружения. Итак, первый шаг — сделать созданный вами ключ пакета доступным на вашем локальном компьютере, добавив строку с переменной на уровене пользователя в файл <code>.Renviron</code> (который вы можете открыть или при необходимости создать с помощью <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code>):</p>
+<pre><code>YOURPACKAGE_KEY=key_you_generated_with_secret_make_key</code></pre>
+<p>Теперь (после перезапуска R) вы сможете воспользоваться специальной возможностью <code>secret_encrypt()</code> и <code>secret_decrypt()</code>: аргументом <code>key</code> может быть имя переменной среды, а не сам ключ шифрования. На самом деле, это наиболее эффективное использование данного аргумента.</p>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">secret_scrambled</span> <span class="op">&lt;-</span> <span class="fu">secret_encrypt</span><span class="op">(</span><span class="st">"secret I need to work with an API"</span>, <span class="st">"YOURPACKAGE_KEY"</span><span class="op">)</span></span>
+<span><span class="va">secret_scrambled</span></span>
+<span><span class="co">#&gt; [1] "aoErRT9hj9M5N_zFZ4ehQIdKTKplbwaCovmYwrtpLkYt1HKa4aiKBWxriMjtpV2KBA"</span></span>
+<span><span class="fu">secret_decrypt</span><span class="op">(</span><span class="va">secret_scrambled</span>, <span class="st">"YOURPACKAGE_KEY"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "secret I need to work with an API"</span></span></code></pre></div>
+<p>Вам также нужно будет сделать ключ доступным в GitHub Actions вашего репозитория (как check, так и pkgdown), чтобы к ключю имели доступ ваши автоматические тесты. Для этого требуется два шага:</p>
+<ol style="list-style-type: decimal">
+<li>Добавьте ключ в раздел <a href="https://docs.github.com/en/actions/reference/encrypted-secrets">repository secrets</a>.</li>
+<li>Расшарьте ключ на рабочие процессы, которым он нужен, добавив строку в соответствующий рабочий процесс:</li>
+</ol>
+<pre><code>    env:
+      YOURPACKAGE_KEY: ${{ secrets.YOURPACKAGE_KEY }}</code></pre>
+<p>Другие платформы непрерывной интеграции предлагают аналогичные способы сделать ключ доступным в качестве безопасной переменной среды.</p>
+</div>
+<div id="когда-ключ-пакета-недоступен" class="section level5" number="8.3.3.2.3">
+<h5>
+<span class="header-section-number">8.3.3.2.3</span> Когда ключ пакета недоступен<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%B3%D0%B4%D0%B0-%D0%BA%D0%BB%D1%8E%D1%87-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BD%D0%B5%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B5%D0%BD"><i class="fas fa-link"></i></a>
+</h5>
+<p>Есть несколько важных случаев, когда ваш код не будет иметь доступа к ключу вашего пакета: в CRAN, на личных машинах внешних разработчиков и при прогонке автоматических тестов. Поэтому, если вы хотите поделиться своим пакетом на CRAN или облегчить другим пользователям возможность внести свой вклад в его развитие, вам нужно убедиться, что ваши примеры, виньетки и тесты работают без ошибок:</p>
+<ul>
+<li>В виньетках вы можете запустить <code>knitr::opts_chunk(eval = secret_has_key("YOURPACKAGE_KEY"))</code>, чтобы код внутри чанков выполнялся только в том случае, если ваш ключ доступен.</li>
+<li>В примерах вы можете окружить блоки кода, для которых требуется ключ, с помощью <code>if (httr2::secret_has_key("YOURPACKAGE_KEY")) {}</code> .</li>
+<li>Тесты не требуют от вас дополнительных действий, т.к. когда <code>secret_decrypt()</code> запускается в <code>testthat</code>, он автоматически запускает <code><a href="https://testthat.r-lib.org/reference/skip.html">skip()</a></code> для пропуска теста, если ключ недоступен.</li>
+</ul>
+</div>
+</div>
+<div id="nytimes-books-api" class="section level4" number="8.3.3.3">
+<h4>
+<span class="header-section-number">8.3.3.3</span> NYTimes Books API<a class="anchor" aria-label="anchor" href="#nytimes-books-api"><i class="fas fa-link"></i></a>
+</h4>
+<p>Далее мы рассмотрим NYTimes Books API. Данный API требует от вас простую авторизацию через ключи API, которыми необходимо подписывать каждый отправляемый запрос. Разрабатывая пакет для работы с API требующий указания API ключи в каждом запросе, вы столкнётесь с двумя проблемами:</p>
+<p>Как организовать авто тесты не раскрывая свой ключ API;</p>
+<p>Как упростить пользователям пакета передачу API ключа в каждый запрос, не дублируя его в каждую отдельную функцию.</p>
+<p>Итак, на данном этапе вам уже понятно, как работает приведённый ниже код для получения моего ключа API NYTimes Book:</p>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_key</span> <span class="op">&lt;-</span> <span class="fu">secret_decrypt</span><span class="op">(</span><span class="st">"4Nx84VPa83dMt3X6bv0fNBlLbv3U4D1kHM76YisKEfpCarBm1UHJHARwJHCFXQSV"</span>, <span class="st">"HTTR2_KEY"</span><span class="op">)</span></span></code></pre></div>
+<p>Я начну с решения первой проблемы, ко второму мы вернёмся в самом конце этого раздела, потому что с ним проще разобраться, когда у нас есть готовая функция.</p>
+<div id="базовый-запрос" class="section level6" number="8.3.3.3.0.1">
+<h6>
+<span class="header-section-number">8.3.3.3.0.1</span> Базовый запрос<a class="anchor" aria-label="anchor" href="#%D0%B1%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B9-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81"><i class="fas fa-link"></i></a>
+</h6>
+<p>Теперь давайте выполним тестовый запрос и посмотрим на ответ:</p>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">"https://api.nytimes.com/svc/books/v3"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_path_append</span><span class="op">(</span><span class="st">"/reviews.json"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_query</span><span class="op">(</span>`api-key` <span class="op">=</span> <span class="va">my_key</span>, isbn <span class="op">=</span> <span class="fl">9780307476463</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">resp</span></span></code></pre></div>
+<p>Как и большинство современных API, NYTimes Books API возвращает результат в JSON формате:</p>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Прежде чем привести этот код в вид функции немного поэксперементируем с ошибочными запросами.</p>
+</div>
+</div>
+<div id="обработка-ошибок" class="section level4" number="8.3.3.4">
+<h4>
+<span class="header-section-number">8.3.3.4</span> Обработка ошибок<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BE%D1%88%D0%B8%D0%B1%D0%BE%D0%BA"><i class="fas fa-link"></i></a>
+</h4>
+<p>Что произойдет, в случае ошибки? Например, если мы преднамеренно предоставим неверный ключ:</p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">"https://api.nytimes.com/svc/books/v3"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_path_append</span><span class="op">(</span><span class="st">"/reviews.json"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_query</span><span class="op">(</span>`api-key` <span class="op">=</span> <span class="st">"invalid"</span>, isbn <span class="op">=</span> <span class="fl">9780307476463</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Посмотреть, есть ли в ответе какая-либо дополнительная полезная информация, можно с помощью <code>last_response()</code>:</p>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">last_response</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">resp</span></span>
+<span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Полезную дополнительную информация об ошибке можно найти в <code>faultstring</code>:</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">fault</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">faultstring</span></span></code></pre></div>
+<p>Для того, что бы наш пакет выводил эту дополнительную информацию об ошибках полученных в ходе работы с API необходимо использовать функцию <code>req_error()</code> и её аргумент <code>body.</code> В body необходимо передать функцию, принимающую в качестве аргумента объект ответа от сервера, и возвращающую строку с дополнительной информацией о причине ошибке. Давайте попробуем доработать наш запрос:</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nytimes_error_body</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">resp</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">fault</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">faultstring</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">"https://api.nytimes.com/svc/books/v3"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_path_append</span><span class="op">(</span><span class="st">"/reviews.json"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_query</span><span class="op">(</span>`api-key` <span class="op">=</span> <span class="st">"invalid"</span>, isbn <span class="op">=</span> <span class="fl">9780307476463</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_error</span><span class="op">(</span>body <span class="op">=</span> <span class="va">nytimes_error_body</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="ограничения-скорости" class="section level4" number="8.3.3.5">
+<h4>
+<span class="header-section-number">8.3.3.5</span> Ограничения скорости<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D0%BD%D0%B8%D1%8F-%D1%81%D0%BA%D0%BE%D1%80%D0%BE%D1%81%D1%82%D0%B8"><i class="fas fa-link"></i></a>
+</h4>
+<p>Другим распространенным источником ошибок является ограничение скорости — этот лимит используется многими серверами, для избежание черезмерного потребления ресурсов одним пользователем. На странице часто задаваемых вопросов описаны ограничения скорости для API NYT:</p>
+<blockquote>
+<p>Существует два ограничения скорости: 4000 запросов в день и 10 запросов в минуту. Вы должны выдержать паузу в 6 секунд между запросами, чтобы избежать превышения предельного лимита количества отправленных запросов в минуту. Если вам нужен более высокий предел скорости, свяжитесь с нами по дресу <a href="mailto:code@nytimes.com" class="email">code@nytimes.com</a>.</p>
+</blockquote>
+<p>Не редко API в ответе возвращают допонительную информацию, о том, какую паузу необходимо выждать для успешной отправки следующего запроса, если вы превысили какой то из описанных выще лимитов. Часто эта информация хранится в заголовке <code>Retry-After</code>.</p>
+<p>Я намеренно нарушил лимит скорости, быстро сделав 11 запросов; к сожалению, хотя код статуса ответа был стандартным 429 (Too many requests), он не содержал ни в теле ответа, ни в заголовках никакой информации о том, какую паузу необходимо выдержать перед отправкой следующего запроса. Это означает, что мы не можем использовать <code>req_retry()</code>, которая ожидает информацию о времени таймаута в ответе сервера. Вместо этого мы будем использовать <code>req_throttle()</code>, которая позволяет ограничить количество отправляемых запросов, в данном случае мы будем уверены, что отправляем не более 10 запросов каждые 60 секунд:</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">"https://api.nytimes.com/svc/books/v3"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_path_append</span><span class="op">(</span><span class="st">"/reviews.json"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_query</span><span class="op">(</span>`api-key` <span class="op">=</span> <span class="st">"invalid"</span>, isbn <span class="op">=</span> <span class="fl">9780307476463</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_throttle</span><span class="op">(</span><span class="fl">10</span> <span class="op">/</span> <span class="fl">60</span><span class="op">)</span></span></code></pre></div>
+<p>По умолчанию <code>req_throttle()</code> разделяет ограничение на все запросы к указанному хосту (т.е. api.nytimes.com). Поскольку документы предполагают, что ограничение скорости применяется к отдельным конечным точкам API, вы можете использовать аргумент realm, чтобы более точно определить конечную точку, на которую действует указанное вами ограничение скорости отправки запроса:</p>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">"https://api.nytimes.com/svc/books/v3"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_path_append</span><span class="op">(</span><span class="st">"/reviews.json"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_query</span><span class="op">(</span>`api-key` <span class="op">=</span> <span class="st">"invalid"</span>, isbn <span class="op">=</span> <span class="fl">9780307476463</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_throttle</span><span class="op">(</span><span class="fl">10</span> <span class="op">/</span> <span class="fl">60</span>, realm <span class="op">=</span> <span class="st">"https://api.nytimes.com/svc/books"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="оборачиваем-функцию" class="section level4" number="8.3.3.6">
+<h4>
+<span class="header-section-number">8.3.3.6</span> Оборачиваем функцию<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8E"><i class="fas fa-link"></i></a>
+</h4>
+<p>Объединение всех вышеперечисленных примеров дает примерно такую ​​функцию:</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nytimes_books</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">api_key</span>, <span class="va">path</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">request</span><span class="op">(</span><span class="st">"https://api.nytimes.com/svc/books/v3"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">req_url_path_append</span><span class="op">(</span><span class="st">"/reviews.json"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">req_url_query</span><span class="op">(</span><span class="va">...</span>, `api-key` <span class="op">=</span> <span class="va">api_key</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">req_error</span><span class="op">(</span>body <span class="op">=</span> <span class="va">nytimes_error_body</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">req_throttle</span><span class="op">(</span><span class="fl">10</span> <span class="op">/</span> <span class="fl">60</span>, realm <span class="op">=</span> <span class="st">"https://api.nytimes.com/svc/books"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">drunk</span> <span class="op">&lt;-</span> <span class="fu">nytimes_books</span><span class="op">(</span><span class="va">my_key</span>, <span class="st">"/reviews.json"</span>, isbn <span class="op">=</span> <span class="st">"0316453382"</span><span class="op">)</span></span>
+<span><span class="va">drunk</span><span class="op">$</span><span class="va">results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">summary</span></span></code></pre></div>
+<p>Чтобы доработать этот код, до уровня пакета, надо:</p>
+<ol style="list-style-type: decimal">
+<li>Добавить явные аргументы и убедиться, что они имеют правильный тип.</li>
+<li>Задокументировать и экспортировать функцию.</li>
+<li>Преобразовать полученный список в более удобную для пользователя структуру данных (возможно, в фрейм данных с одной строкой на обзор).</li>
+<li>Также лучше предоставить пользователю удобный способ использовать свой собственный ключ API.</li>
+</ol>
+</div>
+<div id="пользовательский-ключ" class="section level4" number="8.3.3.7">
+<h4>
+<span class="header-section-number">8.3.3.7</span> Пользовательский ключ<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B9-%D0%BA%D0%BB%D1%8E%D1%87"><i class="fas fa-link"></i></a>
+</h4>
+<p>Хорошим местом для хранения API ключа являются переменные среды, т.к. их легко установить, не вводя ничего в консоли (которая может быть случайно передана через ваш файл .Rhistory), и их легко установить в автоматизированных процессах. Затем вы должны написать функцию для получения ключа API, возвращающую сообщение, если он не найден:</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">get_api_key</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">key</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"NYTIMES_KEY"</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="va">key</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"No API key found, please supply with `api_key` argument or with NYTIMES_KEY env var"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">key</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Теперь можно доработать <code>nytimes_books()</code>, и использовать <code>get_api_key()</code> как значение по умолчанию для аргумента <code>api_key.</code> Поскольку аргумент теперь является необязательным, мы можем переместить его в конец списка аргументов, так как он понадобится только в исключительных случаях.</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nytimes_books</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">path</span>, <span class="va">...</span>, <span class="va">api_key</span> <span class="op">=</span> <span class="fu">get_api_key</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Вы можете сделать этот подход более удобным для пользователя, предоставив вспомогательную функцию, которая устанавливает переменную среды:</p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">set_api_key</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">key</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">key</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">key</span> <span class="op">&lt;-</span> <span class="fu">askpass</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/askpass/man/askpass.html">askpass</a></span><span class="op">(</span><span class="st">"Please enter your API key"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"NYTIMES_KEY"</span> <span class="op">=</span> <span class="va">key</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Использование <code>askpass()</code> (или её аналогов) является хорошей практикой, поскольку это даёт возможность скрыть вводимый пользователем ключь, в отличае от использования для этого консоли.</p>
+<p>Рекомендуется доработать <code>get_api_key()</code> добавив автоматическое использование зашифрованного ключа, чтобы упростить написание авто тестов:</p>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">get_api_key</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">key</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"NYTIMES_KEY"</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="va">key</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">key</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://testthat.r-lib.org/reference/is_testing.html">is_testing</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu">testing_key</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"No API key found, please supply with `api_key` argument or with NYTIMES_KEY env var"</span><span class="op">)</span> </span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">is_testing</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"TESTTHAT"</span><span class="op">)</span>, <span class="st">"true"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">testing_key</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">secret_decrypt</span><span class="op">(</span><span class="st">"4Nx84VPa83dMt3X6bv0fNBlLbv3U4D1kHM76YisKEfpCarBm1UHJHARwJHCFXQSV"</span>, <span class="st">"HTTR2_KEY"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><div class="chapter-nav">
+<div class="prev"><a href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-testthat.html"><span class="header-section-number">7</span> Разработка юнит-тестов к функциям пакета (пакет testthat)</a></div>
+<div class="next"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BE%D0%B1%D1%91%D1%80%D1%82%D0%BA%D0%B8-%D0%BD%D0%B0%D0%B4-api-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-httr2"><span class="header-section-number">8</span> Разработка пакета обёртки над API (пакет httr2)</a></li>
+<li>
+<a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-7"><span class="header-section-number">8.1</span> Видео</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-7"><span class="header-section-number">8.1.1</span> Тайм коды</a></li></ul>
+</li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-7"><span class="header-section-number">8.2</span> Презентация</a></li>
+<li>
+<a class="nav-link" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-7"><span class="header-section-number">8.3</span> Конспект</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-http-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0"><span class="header-section-number">8.3.1</span> Построение HTTP запроса</a></li>
+<li><a class="nav-link" href="#%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0-%D0%B8-%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B0"><span class="header-section-number">8.3.2</span> Отправка запроса и обработка ответа</a></li>
+<li><a class="nav-link" href="#%D0%BE%D0%B1%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-api-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-httr2"><span class="header-section-number">8.3.3</span> Оборачиваем API с помощью httr2</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/selesnow/r_package_course/blob/master/12-wrapping_apis.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/selesnow/r_package_course/edit/master/12-wrapping_apis.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-09-21.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
