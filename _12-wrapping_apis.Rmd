@@ -1,3 +1,4 @@
+# (PART) Пакеты-обёртки {-}
 # Разработка пакета обёртки над API (пакет httr2)
 
 ------
@@ -717,3 +718,225 @@ testing_key <- function() {
 }
 ```
 
+### OAuth протокол
+
+Протокол OAuth был придуман с целью безопасности, для того, что бы вам в HTTP запросе не надо было предоставлять свои учётные данные, т.е. логин и пароль. Но, сам протокол является более сложным, чем вариант, когда ваш токен находится в настройках аккаунта. 
+
+Весь процесс прохождения авторизации по протоколу OAuth отличается в разных API, но ниже я напишу общий процесс, который применим в большинстве случаев:
+
+1. Создаёте приложение, для получения его ID и Secret
+2. Далее из R запускаете браузер для генерации токена, либо кода для обмена на токен
+3. Если на предыдущем шаге вы получили код, следующим шагом надо его обменять на токен
+4. Далее кешируете полученный токен, можно в локальный файл
+5. Многие API выдают токены с ограниченным сроком работы, такие токены по истечению этого срока необходимо обновлять, зачастую отдельным запросом
+
+Далее мы в качестве примера возьмём Facebook API. В [справке по авторизации](https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow?locale=ru_RU) говорится о том, что для авторизации вам необходимо перейти по следующиему URL - https://www.facebook.com/v18.0/dialog/oauth, и указать некоторые дополнительные параметры:
+
+* `client_id`. ID приложения, который можно найти в его панели.
+* `redirect_uri`. URL, на который будет перенаправлен входящий пользователь. Этот URL получает ответ из диалога входа. Если вы используете веб-просмотр в приложении для ПК, для этого URL должно быть задано значение https://www.facebook.com/connect/login_success.html. Проверить, установлен ли этот URL для вашего приложения, можно в Панели приложений. В меню навигации в левой части Панели приложений выберите раздел Продукты, нажмите Вход через Facebook, а затем выберите Настройки. Проверьте Действительные URI для перенаправления OAuth в разделе Клиентские настройки OAuth.
+* `state`. Строковое значение, создаваемое приложением для сохранения статуса между запросом и обратным вызовом. Этот параметр предназначен для защиты от подделки межсайтовых запросов и передается обратно без изменений в URI перенаправления.
+* `response_type`. Указывает, куда будут добавлены данные ответа при перенаправлении обратно в приложение: в параметры или во фрагменты URL. Сведения о том, какой тип приложения выбрать, см. в этом разделе. Имеются следующие варианты:
+* `code`. Данные ответа добавляются в параметры URL и содержат параметр code (зашифрованную строку, уникальную для каждого запроса входа). Если этот параметр не указан, по умолчанию функция работает именно так. Этот вариант подходит лучше всего, если маркер обрабатывается сервером.
+* `token`. Данные ответа добавляются в виде фрагмента URL и содержат маркер доступа. Это значение response_type необходимо использовать в приложениях для ПК. Этот вариант подходит лучше всего, если маркер обрабатывается клиентом.
+* `code%20token`. Данные ответа добавляются в виде фрагмента URL и содержат как маркер доступа, так и параметр code.
+* `granted_scopes`. Возвращает разделенный запятыми список всех разрешений, предоставленных приложению пользователем на этапе входа. Может комбинироваться с другими значениями response_type. При использовании с параметром token данные ответа добавляются в виде фрагмента URL, в противном случае — в виде параметра URL.
+* `scope`. Разделенный запятыми или пробелами список разрешений, которые нужно запросить у пользователя приложения.
+
+Далеко не все из этих параметров являются обязательными, на самом деле обязательным являются только `client_id` и `redirect_uri`, остальные параметры опциональны. Так же в справке есть пример URL с параметрами, на который вы должны перейти для прохождения авторизации.
+
+```
+https://www.facebook.com/v18.0/dialog/oauth?
+  client_id={app-id}
+  &redirect_uri={"https://www.domain.com/login"}
+  &state={"{st=state123abc,ds=123456789}"}
+```
+
+Для прохождения процесса авторизации нам потребуется `client_id`, а для того, что бы заменить краткосрочный токен на долгосрочный понадобится `secret`. Это параметры вашего OAuth клиента, который также в контексте протокола OAuth могут назвать приложением. Т.е. перед тем, как начать процесс авторизации вам необходимо перейти в раздел ["Мои Приложения"](https://developers.facebook.com/apps), создать приложения, и далее в разделе его настроект скопироваьт его id и secret. 
+
+После того, как вы это сделаете, в R с помощью следующего кода можно инициировать процесс авторизации через браузер, получить краткосрочный токен, передать его в переменную, и обменять на долгосрочнй.
+
+```{r, eval=FALSE}
+library(urltools)
+library(magrittr)
+library(tidyr)
+library(httr2)
+
+app_id <- "ID вашего приложения"
+secret <- "Секрет вашего приложения"
+
+# разрешения
+browseURL('https://developers.facebook.com/docs/permissions/reference')
+scopes <- c("ads_read", "pages_manage_ads", "ads_management", "public_profile")
+scopes <- paste(scopes, collapse = ",")
+
+# авторизация
+"https://www.facebook.com/v18.0/dialog/oauth" %>% 
+  param_set(key = "client_id",     value = app_id) %>% 
+  param_set(key = "display",       value = "popup") %>% 
+  param_set(key = "redirect_uri",  value = "https://selesnow.github.io/rfacebookstat/getToken/get_token.html") %>% 
+  param_set(key = "response_type", value = "token") %>% 
+  param_set(key = "scope",         value = scopes) %>% 
+  browseURL()
+
+shorttime_token <- "ПОЛУЧЕНЫЙ ВАМИ КРАТКОСРОЧНЫЙ ТОКЕН"
+
+# обмен на долгосрочный токен
+browseURL('https://developers.facebook.com/docs/facebook-login/guides/access-tokens/get-long-lived')
+lt_token <- request("https://graph.facebook.com/oauth/access_token") %>% 
+  req_url_query(
+    grant_type = "fb_exchange_token",
+    client_id = app_id,
+    client_secret = "40ed3b067df92249372c7501d512c198",
+    fb_exchange_token = shorttime_token
+  ) %>% 
+  req_perform() %>% 
+  resp_body_json()
+```
+
+`scopes` - это набор разрешений, т.е. с помощью этого параметра вы можете дать определённые права вашему токену, примерно также, как вы расшариваете доступ к какому то сервису на других пользователей, указав их роль, тем самым регулируя их возможности на просмотр или редактивание данных. Посмотреть список разрешений в Facebook API можно [тут](https://developers.facebook.com/docs/permissions/reference).
+
+Т.к. мы проверили наш код авторизации, теперь мы можем упаковать его в готовую функцию:
+
+```{r, eval=FALSE}
+fb_auth <- function(app_id, client_secret, scopes) {
+  
+  scopes <- paste(scopes, collapse = ",")
+  
+  "https://www.facebook.com/v18.0/dialog/oauth" %>% 
+    param_set(key = "client_id",     value = app_id) %>% 
+    param_set(key = "display",       value = "popup") %>% 
+    param_set(key = "redirect_uri",  value = "https://selesnow.github.io/rfacebookstat/getToken/get_token.html") %>% 
+    param_set(key = "response_type", value = "token") %>% 
+    param_set(key = "scope",         value = scopes) %>% 
+    browseURL()
+  
+  shorttime_token <- askpass::askpass("Please enter your API key")
+  
+  lt_token <- request("https://graph.facebook.com/oauth/access_token") %>% 
+    req_url_query(
+      grant_type = "fb_exchange_token",
+      client_id = app_id,
+      client_secret = client_secret,
+      fb_exchange_token = shorttime_token
+    ) %>% 
+    req_perform() %>% 
+    resp_body_json()
+  
+  Sys.setenv("FB_APIKEY"=lt_token$access_token)
+  lt_token
+  
+}
+
+# тесируем
+fb_token <- fb_auth(
+  app_id = "ID вашего приложения", 
+  client_secret = "Секрет вашего приложения", 
+  scopes = c("ads_read", "pages_manage_ads", "ads_management", "public_profile")
+)
+```
+
+Теперь у нас есть токен, которым мы должны подписывать все запросы к API, в справке Facebook API говорится о том, что токен необходимо передавать с каждым запросом через GET параметр `access_token`.
+
+Далее мы можем попробовать запросить какие нибудь данные, например данные узла [/me](https://developers.facebook.com/docs/graph-api/overview#me), в справке указан следующий пример:
+
+```
+curl -i -X GET \
+  "https://graph.facebook.com/me?access_token=ACCESS-TOKEN"
+```
+
+В R код это можно перевести следующим образом:
+
+```{r, eval=FALSE}
+resp <- request('https://graph.facebook.com/') %>% 
+  req_url_path('me') %>% 
+  req_url_query(access_token = Sys.getenv("FB_APIKEY")) %>%
+  req_perform() %>% 
+  resp_body_json()
+```
+
+Так же указав дополнительный параметр `metadata` можно запросить метаданные узла, в справке приведён следующий пример:
+
+```
+curl -i -X GET \
+  "https://graph.facebook.com/USER-ID?
+    metadata=1&access_token=ACCESS-TOKEN"
+```
+
+В R это выглядит так:
+
+```{r, eval=FALSE}
+metadata <- request('https://graph.facebook.com/') %>% 
+  req_url_path('me') %>% 
+  req_url_query(access_token = Sys.getenv("FB_APIKEY"), metadata = 1) %>%
+  req_perform() %>% 
+  resp_body_json()
+```
+
+В результате мы получим список метаданных в виде списка:
+
+```
+{
+  "name": "Jane Smith",
+  "metadata": {
+    "fields": [
+      {
+        "name": "id",
+        "description": "The app user's App-Scoped User ID. This ID is unique to the app and cannot be used by other apps.",
+        "type": "numeric string"
+      },
+      {
+        "name": "age_range",
+        "description": "The age segment for this person expressed as a minimum and maximum age. For example, more than 18, less than 21.",
+        "type": "agerange"
+      },
+      {
+        "name": "birthday",
+        "description": "The person's birthday.  This is a fixed format string, like `MM/DD/YYYY`.  However, people can control who can see the year they were born separately from the month and day so this string can be only the year (YYYY) or the month + day (MM/DD)",
+        "type": "string"
+      },
+...
+```
+
+Имеет смысл преобразовать полученый список в таблицу с тремя полями: name, description, type:
+
+```{r, eval=FALSE}
+metadata_res <- tibble(metadata = metadata$metadata$fields) %>% 
+  unnest_wider(metadata)
+```
+
+Теперь мы можем обернуть эндпоинт для получения метаданных узла `/me` в функцию:
+
+```{r, eval=FALSE}
+# заворачиваем в функцию
+fb_get_metadata <- function() {
+  
+  metadata <- request('https://graph.facebook.com/') %>% 
+    req_url_path('me') %>% 
+    req_url_query(access_token = Sys.getenv("FB_APIKEY"), metadata = 1) %>%
+    req_perform() %>% 
+    resp_body_json()
+  
+  # разворачиваем ответ
+  metadata_res <- tibble(metadata = metadata$metadata$fields) %>% 
+    unnest_wider(metadata)
+  
+  metadata_res
+  
+}
+
+meta <- fb_get_metadata()
+```
+
+## Тест
+<iframe id="otp_wgt_lehi63pzmq24e" src="https://onlinetestpad.com/lehi63pzmq24e" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_lehi63pzmq24e'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
+</iframe>
+
+------
+
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
+library(r2social)
+r2social::r2social.scripts()
+r2social::shareButton(link = "https://selesnow.github.io/r_package_course/", position = "inline", whatsapp = T, telegram = T, instagram = T)
+r2social::connectButton(link = 'https://t.me/R4marketing', link.out = F, telegram = T, position = 'left')
+r2social::connectButton(link = 'https://www.youtube.com/R4marketing/?sub_confirmation=1', link.out = F, youtube = T, position = 'right')
+```

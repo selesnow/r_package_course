@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Урок 6 Написание документации к функциям пакета | Курс 'Разработка пакетов на языке R'</title>
+<title>Урок 8 Написание документации к функциям пакета | Курс 'Разработка пакетов на языке R'</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="Этим уроком мы начинаем обширную тему документации вашего пакета. В этом видео мы разберёмся с тем, как добавить документацию к функциям пакета с помощью специальных комментариев и пакета...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Урок 6 Написание документации к функциям пакета | Курс 'Разработка пакетов на языке R'">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="Урок 8 Написание документации к функциям пакета | Курс 'Разработка пакетов на языке R'">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://selesnow.github.io/r_package_course/написание-документации-к-функциям-пакета.html">
 <meta property="og:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
 <meta property="og:description" content="Этим уроком мы начинаем обширную тему документации вашего пакета. В этом видео мы разберёмся с тем, как добавить документацию к функциям пакета с помощью специальных комментариев и пакета...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Урок 6 Написание документации к функциям пакета | Курс 'Разработка пакетов на языке R'">
+<meta name="twitter:title" content="Урок 8 Написание документации к функциям пакета | Курс 'Разработка пакетов на языке R'">
 <meta name="twitter:description" content="Этим уроком мы начинаем обширную тему документации вашего пакета. В этом видео мы разберёмся с тем, как добавить документацию к функциям пакета с помощью специальных комментариев и пакета...">
 <meta name="twitter:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -55,12 +55,20 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Введение</a></li>
+<li class="book-part">Начало разработки</li>
 <li><a class="" href="%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">1</span> Обзор рабочего процесса разработки пакета</a></li>
 <li><a class="" href="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D1%81-github.html"><span class="header-section-number">2</span> Настройка системы и интеграция с GitHub</a></li>
+<li class="book-part">Компоненты пакета</li>
 <li><a class="" href="%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8-%D0%BF%D0%BE-%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8-r-%D0%BA%D0%BE%D0%B4%D0%B0.html"><span class="header-section-number">3</span> Рекомендации по организации R кода</a></li>
 <li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%B2-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82.html"><span class="header-section-number">4</span> Добавление данных в пакет</a></li>
 <li><a class="" href="description---%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">5</span> DESCRIPTION - Метаданные пакета</a></li>
-<li><a class="active" href="%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">6</span> Написание документации к функциям пакета</a></li>
+<li><a class="" href="namespace---%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">6</span> NAMESPACE - Зависимости пакета</a></li>
+<li class="book-part">Тестирование</li>
+<li><a class="" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-testthat.html"><span class="header-section-number">7</span> Разработка юнит-тестов к функциям пакета (пакет testthat)</a></li>
+<li class="book-part">Документация</li>
+<li><a class="active" href="%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">8</span> Написание документации к функциям пакета</a></li>
+<li class="book-part">Прочее</li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></li>
 <li><a class="" href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></li>
 </ul>
 
@@ -69,9 +77,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="написание-документации-к-функциям-пакета" class="section level1" number="6">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="написание-документации-к-функциям-пакета" class="section level1" number="8">
 <h1>
-<span class="header-section-number">Урок 6</span> Написание документации к функциям пакета<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Урок 8</span> Написание документации к функциям пакета<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h1>
 <hr>
 <p>Этим уроком мы начинаем обширную тему документации вашего пакета. В этом видео мы разберёмся с тем, как добавить документацию к функциям пакета с помощью специальных комментариев и пакета <code>roxygen2</code>.</p>
@@ -80,15 +88,15 @@
 <p><em>Данный урок основан на главе <a href="https://r-pkgs.org/man.html">"Function documentation"</a> книги <a href="https://r-pkgs.org/">"R Packages (2e)"</a>, под авторством Хедли Викхема и Дженни Брайан.</em></p>
 </div>
 <hr>
-<div id="видео-5" class="section level2" number="6.1">
+<div id="видео-7" class="section level2" number="8.1">
 <h2>
-<span class="header-section-number">6.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-7"><i class="fas fa-link"></i></a>
 </h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/oTgrv8tsIYw?si=nEwIMS3FkCcn2Ve0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
 </iframe>
-<div id="тайм-коды-5" class="section level3" number="6.1.1">
+<div id="тайм-коды-7" class="section level3" number="8.1.1">
 <h3>
-<span class="header-section-number">6.1.1</span> Тайм коды<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.1.1</span> Тайм коды<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-7"><i class="fas fa-link"></i></a>
 </h3>
 <p>00:00 Вступление<br>
 00:43 Какие компоненты пакета отвечают за документацию функций<br>
@@ -105,20 +113,20 @@
 23:50 Заключение<br></p>
 </div>
 </div>
-<div id="презентация-5" class="section level2" number="6.2">
+<div id="презентация-7" class="section level2" number="8.2">
 <h2>
-<span class="header-section-number">6.2</span> Презентация<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2</span> Презентация<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-7"><i class="fas fa-link"></i></a>
 </h2>
 <iframe src="https://www.slideshare.net/slideshow/embed_code/key/KffxaXNARhTENk?hostedIn=slideshare&amp;page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no">
 </iframe>
 </div>
-<div id="конспект-5" class="section level2" number="6.3">
+<div id="конспект-7" class="section level2" number="8.3">
 <h2>
-<span class="header-section-number">6.3</span> Конспект<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3</span> Конспект<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-7"><i class="fas fa-link"></i></a>
 </h2>
-<div id="рабочий-процесс" class="section level3" number="6.3.1">
+<div id="рабочий-процесс-1" class="section level3" number="8.3.1">
 <h3>
-<span class="header-section-number">6.3.1</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3.1</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Рабочий процесс по добавлению документации к функциям состоит из следующих этапов:</p>
 <ol style="list-style-type: decimal">
@@ -128,9 +136,9 @@
 <li>Исправляете ошибки, повторяете процесс до тех пор, пока не получите нужный результат.</li>
 </ol>
 </div>
-<div id="структура-roxygen-комментариев" class="section level3" number="6.3.2">
+<div id="структура-roxygen-комментариев" class="section level3" number="8.3.2">
 <h3>
-<span class="header-section-number">6.3.2</span> Структура roxygen комментариев<a class="anchor" aria-label="anchor" href="#%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0-roxygen-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%B8%D0%B5%D0%B2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3.2</span> Структура roxygen комментариев<a class="anchor" aria-label="anchor" href="#%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0-roxygen-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%B8%D0%B5%D0%B2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Например, для нашего оператора <code>%+%</code>, который мы с вами добавили в пакет ещё в первом уроке, можно добавить следующие roxygen комментарии для генерации документации:</p>
 <pre><code>#' Concatenate Strings
@@ -162,9 +170,9 @@
 <li>По умолчанию каждый блок генерирует один топик документации , т.е. один <code>.Rd</code> файл в <code>man/</code> каталоге.</li>
 </ul>
 </div>
-<div id="особенности-разметки-.rd-файлов" class="section level3" number="6.3.3">
+<div id="особенности-разметки-.rd-файлов" class="section level3" number="8.3.3">
 <h3>
-<span class="header-section-number">6.3.3</span> Особенности разметки .Rd файлов<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%82%D0%BA%D0%B8-.rd-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3.3</span> Особенности разметки .Rd файлов<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%82%D0%BA%D0%B8-.rd-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>Используйте апострофы для выделения блока текста как кода: <code>#' I like \</code>thisfunction()`, because it's great`.</li>
@@ -181,9 +189,9 @@
 #' * Smells nice
 #' * Has good vibes</code></pre>
 </div>
-<div id="разделы-документации" class="section level3" number="6.3.4">
+<div id="разделы-документации" class="section level3" number="8.3.4">
 <h3>
-<span class="header-section-number">6.3.4</span> Разделы документации<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%D1%8B-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3.4</span> Разделы документации<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%D1%8B-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>Заголовок (<code>@title</code>) – Обычно задаётся позиционно в первой строке roxygen комментария</li>
@@ -193,9 +201,9 @@
 <li>Возвращаемое значение (<code>@return</code>) – Какой объект возвращает ваша функция</li>
 <li>Примеры (<code>@examples</code>) – Примеры использования вашей функции</li>
 </ul>
-<div id="title-description-и-details" class="section level4" number="6.3.4.1">
+<div id="title-description-и-details" class="section level4" number="8.3.4.1">
 <h4>
-<span class="header-section-number">6.3.4.1</span> Title, description и details<a class="anchor" aria-label="anchor" href="#title-description-%D0%B8-details"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3.4.1</span> Title, description и details<a class="anchor" aria-label="anchor" href="#title-description-%D0%B8-details"><i class="fas fa-link"></i></a>
 </h4>
 <p>Первые 3 тега roxygen можно использовать позиционно, без указания их названий:</p>
 <ul>
@@ -208,9 +216,9 @@
 <code>Details</code> – описание деталей работы вашей функции, в осном этот блок не используется в документации. Хорошей практикой является создание пользовательских разделов подробностей с помощью тега <code>@section</code>.</li>
 </ul>
 </div>
-<div id="аргументы" class="section level4" number="6.3.4.2">
+<div id="аргументы" class="section level4" number="8.3.4.2">
 <h4>
-<span class="header-section-number">6.3.4.2</span> Аргументы<a class="anchor" aria-label="anchor" href="#%D0%B0%D1%80%D0%B3%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3.4.2</span> Аргументы<a class="anchor" aria-label="anchor" href="#%D0%B0%D1%80%D0%B3%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B"><i class="fas fa-link"></i></a>
 </h4>
 <ul>
 <li>Для документирования аргументов функции используйте тег <code>@param</code>
@@ -219,15 +227,15 @@
 <li>Тег <code>@inheritParams</code> позволяет наследовать описание аргументов из других функций вашего или даже стороннего пакета. При этом будут унаследованы только те аргументы, которые присутвуют в новой функции, и которые в ней отдельно не были задокументированы.</li>
 </ul>
 </div>
-<div id="возвращаемое-значение" class="section level4" number="6.3.4.3">
+<div id="возвращаемое-значение" class="section level4" number="8.3.4.3">
 <h4>
-<span class="header-section-number">6.3.4.3</span> Возвращаемое значение<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%BE%D0%B7%D0%B2%D1%80%D0%B0%D1%89%D0%B0%D0%B5%D0%BC%D0%BE%D0%B5-%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3.4.3</span> Возвращаемое значение<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%BE%D0%B7%D0%B2%D1%80%D0%B0%D1%89%D0%B0%D0%B5%D0%BC%D0%BE%D0%B5-%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5"><i class="fas fa-link"></i></a>
 </h4>
 <p>За возвращаемое значение отвечает тег <code>@returns</code>. Для возвращаемого значения вам необходимо описать класс, тип и размер возвращаемого функцией значения.</p>
 </div>
-<div id="примеры" class="section level4" number="6.3.4.4">
+<div id="примеры" class="section level4" number="8.3.4.4">
 <h4>
-<span class="header-section-number">6.3.4.4</span> Примеры<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3.4.4</span> Примеры<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B"><i class="fas fa-link"></i></a>
 </h4>
 <ul>
 <li>Примеры описываются с использованием тега <code>@examples</code>
@@ -245,7 +253,7 @@
 </ul>
 <p>Примеры использования <code>\dontrun{}</code> и <code>@examplesIf</code> можно подсмотреть в коде пакета <code>googledrive</code>:</p>
 <p>Пример <code>\dontrun{}</code> используется в функции <a href="https://github.com/tidyverse/googledrive/blob/main/R/drive_find.R#L72C1-L127C3">drive_find</a>:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @examples</span></span>
 <span><span class="co">#' \dontrun{</span></span>
 <span><span class="co">#' # list "My Drive" w/o regard for folder hierarchy</span></span>
@@ -262,7 +270,7 @@
 <span><span class="co">#' }</span></span>
 <span><span class="co">#'</span></span></code></pre></div>
 <p><code>@examplesIf</code> используется в функции <a href="https://github.com/tidyverse/googledrive/blob/main/R/drive_publish.R#L21-L35">drive_publish</a>:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @examplesIf drive_has_token()</span></span>
 <span><span class="co">#' # Create a file to publish</span></span>
 <span><span class="co">#' file &lt;- drive_example_remote("chicken_sheet") %&gt;%</span></span>
@@ -281,9 +289,9 @@
 <p>В данном случае с помощью функции <code>drive_has_token()</code> мы проверяем есть ли кеш авторизационных данных, для доступа к данным, если учётные данные доступны то примеры выполняются, если не доступны то нет.</p>
 </div>
 </div>
-<div id="объединить-документацию-к-нескольким-функциям-в-один-файл" class="section level3" number="6.3.5">
+<div id="объединить-документацию-к-нескольким-функциям-в-один-файл" class="section level3" number="8.3.5">
 <h3>
-<span class="header-section-number">6.3.5</span> Объединить документацию к нескольким функциям в один файл<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%82%D1%8C-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8E-%D0%BA-%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%B8%D0%BC-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%B2-%D0%BE%D0%B4%D0%B8%D0%BD-%D1%84%D0%B0%D0%B9%D0%BB"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3.5</span> Объединить документацию к нескольким функциям в один файл<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%82%D1%8C-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8E-%D0%BA-%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%B8%D0%BC-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%B2-%D0%BE%D0%B4%D0%B8%D0%BD-%D1%84%D0%B0%D0%B9%D0%BB"><i class="fas fa-link"></i></a>
 </h3>
 <p>Документацию к нескольким близким по функционалу функциям имеет смысл объединить в один файл документации, сделать это можно с помощью тега <code>@rdname</code>. Например в пакете <code>stringr</code> в один файл объеденена документация к функциям <code>str_length()</code> и <code>str_width()</code>:</p>
 <p>Изначально общее описание документации обеих функций мы привязываем к функции <code>str_length()</code>:</p>
@@ -307,9 +315,9 @@ str_width &lt;- function(string) {
   ...
 }</code></pre>
 </div>
-<div id="повторное-использование-документации" class="section level3" number="6.3.6">
+<div id="повторное-использование-документации" class="section level3" number="8.3.6">
 <h3>
-<span class="header-section-number">6.3.6</span> Повторное использование документации<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%BE%D0%B2%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B5-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3.6</span> Повторное использование документации<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%BE%D0%B2%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B5-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8"><i class="fas fa-link"></i></a>
 </h3>
 <p>При необходимости объединить документацию нескольких функций в один файл документации используйте тег <code>@rdname</code>, и передайте в него название функции, в которой подробно описана документация всех функций.</p>
 <p>Теги отвечающие за наследование частей документации:</p>
@@ -346,9 +354,9 @@ str_width &lt;- function(string) {
 #'   The pattern should contain at least one capturing group.</code></pre>
 <p>При этом унаследованы будут только те аргументы, которые присутвуют в новой функции, и не задокументированы в ней. В примере выше мы унаследуем описание аргумента <code>string</code>, но переопределяем описание аргумента <code>pattern</code>.</p>
 </div>
-<div id="раздел-справки-по-пакету" class="section level3" number="6.3.7">
+<div id="раздел-справки-по-пакету" class="section level3" number="8.3.7">
 <h3>
-<span class="header-section-number">6.3.7</span> Раздел справки по пакету<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB-%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B8-%D0%BF%D0%BE-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D1%83"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3.7</span> Раздел справки по пакету<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB-%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B8-%D0%BF%D0%BE-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D1%83"><i class="fas fa-link"></i></a>
 </h3>
 <p>Используйте функцию <code><a href="https://usethis.r-lib.org/reference/use_package_doc.html">usethis::use_package_doc()</a></code> для генерации файла <code>R/{pkgname}-package.R</code>, который содердит документацию уровня пакета. Так же это хорошее место для хранения импорта, т.е. тегов <code>@import</code> и <code>@importFrom</code>. Данный файл по умолчанию будет иметь следующий вид:</p>
 <pre><code>#' @keywords internal 
@@ -362,9 +370,9 @@ str_width &lt;- function(string) {
 NULL</code></pre>
 </div>
 </div>
-<div id="тест-4" class="section level2" number="6.4">
+<div id="тест-5" class="section level2" number="8.4">
 <h2>
-<span class="header-section-number">6.4</span> Тест<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.4</span> Тест<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82-5"><i class="fas fa-link"></i></a>
 </h2>
 <iframe id="otp_wgt_z6e43m2kpclmw" src="https://onlinetestpad.com/z6e43m2kpclmw" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_z6e43m2kpclmw'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
 </iframe>
@@ -443,6 +451,9 @@ NULL</code></pre>
 
 </div>
 </div>
+
+
+
 
 <script>
 
@@ -650,28 +661,28 @@ window.onload = function() {
 }
 
 </script><div class="chapter-nav">
-<div class="prev"><a href="description---%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">5</span> DESCRIPTION - Метаданные пакета</a></div>
-<div class="next"><a href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></div>
+<div class="prev"><a href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-testthat.html"><span class="header-section-number">7</span> Разработка юнит-тестов к функциям пакета (пакет testthat)</a></div>
+<div class="next"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><span class="header-section-number">6</span> Написание документации к функциям пакета</a></li>
+<li><a class="nav-link" href="#%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><span class="header-section-number">8</span> Написание документации к функциям пакета</a></li>
 <li>
-<a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-5"><span class="header-section-number">6.1</span> Видео</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-5"><span class="header-section-number">6.1.1</span> Тайм коды</a></li></ul>
+<a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-7"><span class="header-section-number">8.1</span> Видео</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-7"><span class="header-section-number">8.1.1</span> Тайм коды</a></li></ul>
 </li>
-<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-5"><span class="header-section-number">6.2</span> Презентация</a></li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-7"><span class="header-section-number">8.2</span> Презентация</a></li>
 <li>
-<a class="nav-link" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-5"><span class="header-section-number">6.3</span> Конспект</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81"><span class="header-section-number">6.3.1</span> Рабочий процесс</a></li>
-<li><a class="nav-link" href="#%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0-roxygen-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%B8%D0%B5%D0%B2"><span class="header-section-number">6.3.2</span> Структура roxygen комментариев</a></li>
-<li><a class="nav-link" href="#%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%82%D0%BA%D0%B8-.rd-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2"><span class="header-section-number">6.3.3</span> Особенности разметки .Rd файлов</a></li>
-<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%D1%8B-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8"><span class="header-section-number">6.3.4</span> Разделы документации</a></li>
-<li><a class="nav-link" href="#%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%82%D1%8C-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8E-%D0%BA-%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%B8%D0%BC-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%B2-%D0%BE%D0%B4%D0%B8%D0%BD-%D1%84%D0%B0%D0%B9%D0%BB"><span class="header-section-number">6.3.5</span> Объединить документацию к нескольким функциям в один файл</a></li>
-<li><a class="nav-link" href="#%D0%BF%D0%BE%D0%B2%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B5-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8"><span class="header-section-number">6.3.6</span> Повторное использование документации</a></li>
-<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB-%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B8-%D0%BF%D0%BE-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D1%83"><span class="header-section-number">6.3.7</span> Раздел справки по пакету</a></li>
+<a class="nav-link" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-7"><span class="header-section-number">8.3</span> Конспект</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-1"><span class="header-section-number">8.3.1</span> Рабочий процесс</a></li>
+<li><a class="nav-link" href="#%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0-roxygen-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%B8%D0%B5%D0%B2"><span class="header-section-number">8.3.2</span> Структура roxygen комментариев</a></li>
+<li><a class="nav-link" href="#%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%82%D0%BA%D0%B8-.rd-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2"><span class="header-section-number">8.3.3</span> Особенности разметки .Rd файлов</a></li>
+<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%D1%8B-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8"><span class="header-section-number">8.3.4</span> Разделы документации</a></li>
+<li><a class="nav-link" href="#%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%82%D1%8C-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8E-%D0%BA-%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%B8%D0%BC-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%B2-%D0%BE%D0%B4%D0%B8%D0%BD-%D1%84%D0%B0%D0%B9%D0%BB"><span class="header-section-number">8.3.5</span> Объединить документацию к нескольким функциям в один файл</a></li>
+<li><a class="nav-link" href="#%D0%BF%D0%BE%D0%B2%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B5-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8"><span class="header-section-number">8.3.6</span> Повторное использование документации</a></li>
+<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB-%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B8-%D0%BF%D0%BE-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D1%83"><span class="header-section-number">8.3.7</span> Раздел справки по пакету</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82-4"><span class="header-section-number">6.4</span> Тест</a></li>
+<li><a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82-5"><span class="header-section-number">8.4</span> Тест</a></li>
 </ul>
 
       <div class="book-extra">
@@ -689,7 +700,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-09-11.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-09-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
