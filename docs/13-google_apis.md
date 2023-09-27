@@ -1,105 +1,222 @@
---- 
-title: "Курс 'Разработка пакетов на языке R'"
-author: "Алексей Селезнёв"
-date: "2023-09-27"
-site: bookdown::bookdown_site
-documentclass: book
-bibliography: [book.bib, packages.bib]
-url: https://selesnow.github.io/r_package_course
-cover-image: img/cover.jpg
-description: |
-  Бесплатный видео курс по разработке собственных пакетов на языке R.
-biblio-style: apalike
-csl: chicago-fullnote-bibliography.csl
----
-
-# Введение {-}
+# Разработка пакета обёртки для Google API (пакет gargle)
 
 ------
 
-## О курсе {-}
-<a href="https://selesnow.github.io"><img src="img/cover.png" align="right" alt="Cover image" class="cover" width="230" height="366" /></a>Моё знакомство с языком R состоялось в 2016 году. На тот момент я планировал его использовать для сбора данных по API из различных рекламных платформ. Для части из этих платформ я нашел готовые решения в видео пакетов, но для некоторых, менее известных рекламных площадок готов пакетов не оказалось. И тогда я попробовал разобраться самостоятельно с тем, как устроены R пакеты. На тот момент я не нашел полноценного гайда, и создавал пакеты методом тыка, используя встроенный в базовую комплектацию R функционал, вроде функции  `package.skeleton()`, далее я руками правил все `.Rmd` файлы, из которых генерируется докуметация к функциям, и вообще делал в ходе разработки пакетов очень много лишней работы.
+Компания Google разработала сотни полезных сервисов, которыми пользуются миллионы людей по всему миру, большинство этих сервисов предоставляют API, и в этом уроке мы разберёмся как обёртывать эти API в пакет. В ходе урока мы разберёмся со специальным пакетом gargle, который очень упрощает разработку пакетов взаимодействующих с Google API.
 
-На данный момент в главном репозитории хранения R пакетов - CRAN уже опубликовано [14](https://cran.r-project.org/web/checks/check_results_selesnow_at_gmail.com.html) разработанных мной пакетов, за годы разработки пакетов я уже набил довлльно много шишек, и ознакомился с замечательной книгой Хедли Викхема ["R Packages (2e)"](https://r-pkgs.org/), которая и легла в основу этого курса. Тем не менее данный курс не является полным повторением книги, некоторые главы мы рассматривать не будем, но и в ходе курса будут рассмотрены некоторые темы, которые Хедли не упоминал в своей книге.
+------
 
-Разработка пакетов один из лучших способов повысить свои навыки написания кода на R, и углуюиться в его изучение. Данный курс поможет вам пошагово освоить процесс разработки собственных пакетов. К тому же таким образом вы сможете внести свой вклад в развитие языка поделившись своими наработками, упакованными в R пакет.
+::: {style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;"}
+*Данный урок основан на статье ["How to use gargle for auth in a client package"](https://gargle.r-lib.org/articles/gargle-auth-in-client-package.html) под автортством Дженни Брайан.*
+:::
 
-Добро пожаловать на курс "Разработка пакетов на языке R", и успехов в его прохождении!
+------
 
-## Для кого этот курс {-}
-Данный курс я не могу рекомендовать новичкам. Заниматься разработкой пакетов лучше имея за плечами определённый опыт написания кода на R. Поэтому не стоит начинать изучения R с данного курса, ниже я дам небольшую подборку подготовительных курсов, изучив которые можно попробовать себя в разработке пакетов.
+## Видео
+<iframe width="560" height="315" src="https://www.youtube.com/embed/s58ZJj1HYBk?si=XvUSeLIPqsZhd0X-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-## По поводу поддержки обучающихся на данном курса {-}
-**Важно!** Поддержки учащихся на этом курсе со стороны автора нет. Я не занимаюсь частными консультациями, тем более не консультирую студентов бесплатных курсов. Поэтому не имеет никакого смысла писать мне в личку или на почту просьбы помочь с прохождением этого, или любого другого моего бесплатного курса. Если вы столкнулись с трудностями при прохождении курса и вам нужна помощь, то все вопросы можно адресовать в следующие telegram чаты:
+### Тайм коды
 
-* [R (язык программирования)](https://t.me/rlang_ru)
-* [Горячая линия R](https://t.me/hotlineR_EU)
+00:00 Вступление<Br>
+00:55 Создание учётных данных в Google Cloud<Br>
+08:52 Функционал пакета gargle<Br>
+09:50 Пример работы с пакетом gargle<Br>
+17:08 Обзор рабочего процесса создания пакета обёртки над Google API<Br>
+17:34 Интерфейс авторизации<Br>
+26:08 Объект отвечающий за состояние авторизации в вашем пакете<Br>
+27:38 Как обращаться к токену для подписи HTTP запросов<Br>
+29:54 Заключение<Br>
 
-Отдельного чата со студентами непосредственно этого курса не существует, но при желании вы самостоятельно можете его организовать, и я с радостью добавлю на него ссылку.
+## Презентация
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/rIikh4gEuvgESK?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 
-К тому же, если у вас есть вопросы по одной из лекций курса, вы можете задавать его под видео лекции на YouTube, это приветствуется, и на такие комментарии я с радостью отвечу.
+## Конспект
+### Создание учётных данных
 
-Буду рад любой конструктивной критике, и предложениям по улучшению курса "разработка пакетов на языке R", направлять их можно мне на почту selesnow@gmail.com. Если вы хотите выразить благодарность мне за курс, то в конце раздела описано как это можно сделать.
+Для работы с любым Google API изначально вам необходимо создать учётные данные, делается это в 4 этапа:
 
-## Об авторе {-}
-Меня зовут Алексей Селезнёв, с 2008 года я являюсь практикующим аналитиком. На данный момент основной моей деятельностью является развитие отдела аналитики в агентстве интернет-маркетинга [Netpeak](https://https://netpeak.group/).
-<a href="https://selesnow.github.io"><img src="img/author.png" width="200" height="200" align="left" alt="Алексей Селезнёв" hspace="20" vspace="7" /></a>
+1. Создайте проект в [Google Cloud](https://console.cloud.google.com/)
+2. Настройте экран авторизации (основное меню -> APIs & Sevices -> OAuth Consent Screen)
+3. Создайте учётные данных (основное меню -> APIs & Sevices -> Credentials)
+4. Активируйте нужные вам API (основное меню -> APIs & Sevices -> Library)
 
-Мною были разработаны такие R пакеты как: `rgoogleads`, `rfacebookstat`, `timeperiodsR` и некоторые другие. На данный момент написанные мной пакеты только с CRAN были установленны более 200 000 раз.
+Большинство Google API требуют для авторизации OAuth клиент, поэтому зачастую именно тип учётных данных вам надо будет создавать на шаге 3. Для использрвания в вашем коде созданного OAuth клиента скопируйте его Client ID и Client Secret.
 
-Также я являюсь автором некоторых других курсов по R (ссылки на них приведу ниже), лектором академии [Web Promo Experts](https://webpromoexperts.net/) и соавтором курса ["Веб-аналитика Pro"](https://webpromoexperts.net/courses/analytics-pro/).
+Некоторые API позволяют подписывать запросы с помощью API ключа, например Google Maps API, или даже Google Spreadsheets API, если вы хотите получить данные из опубликованной с отрытым доступом таблицы.
 
-Веду свой авторский [Telegram](https://t.me/R4marketing) и [YouTube](https://www.youtube.com/R4marketing/?sub_confirmation=1) канал R4marketing. Буду рад видеть вас в рядах подписчиков.
+### Основные функции пакета gargle
 
-Периодически публикую статью на различных интернет медиа, зачастую это [Хабр](https://habr.com/ru/users/selesnow/) и [Netpeak Journal](https://netpeak.net/ru/blog/user/publication/826/).
+* Авторизация:
+  * `token_fetch()` – запрос учётных данных;
+* Компоновка и отправка HTTP запроса:
+  * `request_build()` – составление запроса;
+  * `request_make()` и `request_retry()` – отправка запроса;
+* Парсинг полученного ответа:
+* `response_process()` – парсинг ответа.
 
-Неоднократно выступал на профильных конференциях по аналитике и интернет маркетингу, среди которых Матемаркетинг, GoAnalytics, Analyze, eCommerce, 8P и прочие.
+Ниже пример кода работы с Google Ads API с помощью пакета gargle:
 
-## Другие курсы автора {-}
-Как я уже писал выше, помимо курса "Разработка пакетов на языке R" у меня есть ряд других бесплатных курсов:
 
-1. [Язык R для интернет маркетинга](https://r-for-marketing.netpeak.net/auth/sign/in), для начинающих, требуется бесплатная регистрация
-2. [Язык R для пользователей Excel](https://selesnow.github.io/r4excel_users/), для начинающих
-3. [Введение в dplyr 1.0.0](https://selesnow.github.io/dplyr_1_0_0_course), средней уровень сложности
-4. [Циклы и функционалы в языке R](https://selesnow.github.io/iterations_in_r/), средней уровень сложности
-5. [Разработка telegram ботов на языке R](https://selesnow.github.io/build_telegram_bot_using_r/), высокий уровень сложности
+```r
+library(gargle)
+library(httr)
 
-## Каналы автора {-}
-Если вы интересуетесь языком R, применяете его в работе, или планируете изучать, то думаю вам будут интересны мои каналы, о которых я писал выше. Буду рад видеть вас среди подписчиков:
+# OAuth клиент
+app <- oauth_app(
+  appname = 'myapp',
+  key = 'CLIENT_ID.apps.googleusercontent.com',
+  secret = 'CLIENT_SECRET'
+)
 
-* [Telegram канал R4marketing](https://t.me/R4marketing)
-* [Youtube канал R4marketing](https://www.youtube.com/R4marketing/?sub_confirmation=1)
+# Авторизация
+cred <- token_fetch(
+  scopes  = 'https://www.googleapis.com/auth/adwords',
+  app     = app,
+  email   = 'me@gmail.com',
+  cache   = TRUE
+)
 
-## Программа курса {-}
-В данный момент курс "разработка пакетов на языке R" назодится в активной стадии разработки, поэтому программа постоянно расширяется, следить за обновлениями курса можно на страницк [Новости курса]. Ниже представлена актуальная программа на текущий момент:
+# Создаём запрос
+req <- request_build(
+  method   = "GET",
+  path     = 'v14/customers:listAccessibleCustomers',
+  token    = cred,
+  base_url = "https://googleads.googleapis.com/"
+)
 
-1. [Обзор рабочего процесса разработки пакета]
-2. [Настройка системы и интеграция с GitHub]
-3. [Рекомендации по организации R кода]
-4. [Добавление данных в пакет]
-5. [DESCRIPTION - Метаданные пакета]
-6. [NAMESPACE - Зависимости пакета]
-7. [Разработка юнит-тестов к функциям пакета (пакет testthat)]
-8. [Написание документации к функциям пакета]
-9. Виньетки и прочая опциональная документация пакета
-10. Разработка сайта пакета (пакет pkgdown)
-11. Публикация в CRAN
-12. Разработка пакета обёртки над API (пакет httr2)
-13. Разработка пакета обёртки для Google API (пакет gargle)
-14. Как создать коллекцию пакетов
+# Отправляем запрос
+resp <- request_retry(
+  req,
+  add_headers(
+    `developer-token`= "DEVELOPER_TOKEN"
+  ), 
+  max_tries_total = 5, 
+  max_total_wait_time_in_seconds = 10
+)
 
-<Br>
-_Дата обновления курса: 27.09.2023_
+# Парсим ответ
+result <- response_process(resp)
+```
 
-## Благодарности автору {-}
-Курс, и все сопутствующие материалы предоставляются бесплатно, но если у вас есть желание отблагодарить автора за этот видео курс вы можете перечислить любую произвольную сумму на [этой странице](https://secure.wayforpay.com/payment/r4excel_users).
+В приведённом выше коде вам необходимо подставить полученные ранее учётные данные, т.е. CLIENT_ID и CLIENT_SECRET.
 
-Либо с помощью кнопки:
-<center>
-<script type="text/javascript" id="widget-wfp-script" src="https://secure.wayforpay.com/server/pay-widget.js?ref=button"></script> <script type="text/javascript">function runWfpWdgt(url){var wayforpay=new Wayforpay();wayforpay.invoice(url);}</script> <button type="button" onclick="runWfpWdgt('https://secure.wayforpay.com/button/b9c8a14345975');" style="display:inline-block!important;background:#2B3160 url('https://s3.eu-central-1.amazonaws.com/w4p-merch/button/bg2x2.png') no-repeat center right;background-size:cover;width: 256px!important;height:54px!important;border:none!important;border-radius:14px!important;padding:18px!important;box-shadow:3px 2px 8px rgba(71,66,66,0.22)!important;text-align:left!important;box-sizing:border-box!important;" onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';"><span style="font-family:Verdana,Arial,sans-serif!important;font-weight:bold!important;font-size:14px!important;color:#ffffff!important;line-height:18px!important;vertical-align:middle!important;">Оплатить</span></button>
-</center>
+Некоторые Google API, например Google Ads API, требуют от вас дополнительные авторизационные данные, в данном случае developer-token, о таких особенностях вы узнаете из раздела авторизации в справке нужного вам API. В данном случае мы прокидываем токен разработчика в специальном заголовке `developer-token` внутри функции `request_retry()`.
 
-Так же вы можете поделиться ссылкой на курс у себя в соц сетях, за что я тоже буду вам благдарен!
+Аргументы `max_tries_total` и `max_total_wait_time_in_seconds` позволяют управлять политикой повторных отправок запросов в случае временных ошибок, первый аргумент позволяет указать количество повторных попыток отправки запроса, а второй отвечает за тайм аут в секундах между попытки отправки запроса.
+
+### Процесс создания пакета на основе gargle
+
+1. Добавьте gargle в зависимости вашего пакета в поле Imports.
+2. Создайте файл `R/YOURPKG_auth.R`.
+3. Создайте внутренний `gargle::AuthClass` объект для хранения состояния аутентификации.
+4. Определите стандартные функции для интерфейса аутентификации между gargle и вашим пакетом; сделать это в `R/YOURPKG_auth.R`.
+5. Используйте помощники roxygen от gargle для создания документации для ваших функций аутентификации. Это избавляет вас от необходимости писать документы и вы 6. наследуете стандартные формулировки.
+7. Используйте функции `YOURPKG_token()` и `YOURPKG_api_key()` (определенные в стандартном интерфейсе аутентификации), чтобы вставить токен или ключ API в запросы вашего пакета.
+
+Файл `R/YOURPKG_auth.R` будет содержать интерфейс авторизации вашего пакета, в основе этого интерйеса, как вы уже убедились из первого примера работы с пакетом `gargle`, будет функция `token_fetch()`, ниже упрощённый пример её использования внутри пакета `googledrive`:
+
+
+```r
+# googledrive::
+drive_auth <- function(email = gargle::gargle_oauth_email(),
+                       path = NULL,
+                       scopes = "https://www.googleapis.com/auth/drive",
+                       cache = gargle::gargle_oauth_cache(),
+                       use_oob = gargle::gargle_oob_default(),
+                       token = NULL) {
+  # this catches a common error, where the user passes JSON for an OAuth client
+  # to the `path` argument, which only expects a service account token
+  gargle::check_is_service_account(path, hint = "drive_auth_configure")
+
+  cred <- gargle::token_fetch(
+    scopes = scopes,
+    client = drive_oauth_client() %||% <BUILT_IN_DEFAULT_CLIENT>,
+    email = email,
+    path = path,
+    package = "googledrive",
+    cache = cache,
+    use_oob = use_oob,
+    token = token
+  )
+  if (!inherits(cred, "Token2.0")) {
+    # throw an informative error here
+  }
+  .auth$set_cred(cred)
+  .auth$set_auth_active(TRUE)
+
+  invisible()
+}
+```
+
+### Интерфейс авторизации
+
+Наиболее простым способом добавить интерфейс авторизации в свой пакет - просто скопировать его из файла [drive_auth.R](https://github.com/tidyverse/googledrive/blob/main/R/drive_auth.R) и немного доработать его под ваш пакет, переназвав функции, и изменив дефолтные значения аргументов `package` и `scopes` в функции `gargle::token_fetch()`. 
+
+Scopes это набор разрешений, т.е. доступов, которые пользователь будет предоставлять вашего OAuth клиенту. информацию о том, какие именно разрешения нужны будут вашему пакету вы найдёте в справке к нужному вам API, в разделе Scopes. Для примера Google Ads API требует разрешение `https://www.googleapis.com/auth/adwords`, Google Drive API `ttps://www.googleapis.com/auth/drive`.
+
+Сам интерфейс автоизации будет состоять из следующих функций:
+
+* `drive_token()` - извлекает текущие учетные данные в форме, готовой для включения в HTTP-запросы. 
+* `drive_auth()` - при первом запуске инициирует процесс авторизации через браузер, кешрует полученные учётные данные в файл (`cache = TRUE`), при последующих запусках получает учётные данные из кеша. 
+* `drive_deauth()` - очищает текущий токен.
+* `drive_oauth_client()` - возвращается `.auth$client`.
+* `drive_api_key()` - возвращается `.auth$api_key`.
+* `drive_auth_configure()` - может использоваться для настройки аутентификации. 
+* `drive_user()` - сообщает некоторую информацию о пользователе, связанном с текущим токеном. 
+
+### Состояние авторизации в ходе сеанса
+
+Авторизация это динамическая сущность, поэтому в вашем пакете должен быть создан объект `gargle::AuthState`, который будет отвечать за изменения состояния авторизации. Создавать его надо внутри функции `.OnLoad()` в файле `zzz.R`:
+
+
+```r
+.onLoad <- function(libname, pkgname) {
+  utils::assignInMyNamespace(
+    ".auth",
+    gargle::init_AuthState(package = "googledrive", auth_active = TRUE)
+  )
+  
+  # other stuff
+}
+```
+
+### Подпись запросов токеном авторизации
+
+После того, как вы прописали в своём пакете интерфейс авторизации, и добавили объект `.auth`, для получения из этого объекта самого токена, и подписи запросов используйте функцию типа `drive_token()`, передав её в аргумент `token` при компоновке самого запроса с помозью функции `request_build()`. Ниже пример основной функции компонубщей и отправляющей запросы из пакета googledrive:
+
+
+```r
+# googledrive::
+request_generate <- function(endpoint = character(),
+                             params = list(),
+                             key = NULL,
+                             token = drive_token()) {
+  ept <- drive_endpoint(endpoint)
+  if (is.null(ept)) {
+    # throw error about unrecognized endpoint
+  }
+
+  ## modifications specific to googledrive package
+  params$key <- key %||% params$key %||%
+    drive_api_key() %||% <BUILT_IN_DEFAULT_API_KEY>
+  if (!is.null(ept$parameters$supportsAllDrives)) {
+    params$supportsAllDrives <- TRUE
+  }
+
+  req <- gargle::request_develop(endpoint = ept, params = params)
+  gargle::request_build(
+    path = req$path,
+    method = req$method,
+    params = req$params,
+    body = req$body,
+    token = token
+  )
+}
+```
+
+## Тест
+<iframe id="otp_wgt_5atjjx6klllhk" src="https://onlinetestpad.com/5atjjx6klllhk" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_5atjjx6klllhk'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
+</iframe>
 
 ------
 
@@ -175,7 +292,7 @@ _Дата обновления курса: 27.09.2023_
 ```
 
 ```{=html}
-<div style="display:unset">
+<div style="display:inline-block">
 <div class="r2social-link-container r2social-social-right">
 <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_r2socialxlink">
 <div class="social-btn-right" style="background-color:#ff0000">

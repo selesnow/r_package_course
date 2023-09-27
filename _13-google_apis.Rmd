@@ -1,0 +1,225 @@
+# Разработка пакета обёртки для Google API (пакет gargle)
+
+------
+
+Компания Google разработала сотни полезных сервисов, которыми пользуются миллионы людей по всему миру, большинство этих сервисов предоставляют API, и в этом уроке мы разберёмся как обёртывать эти API в пакет. В ходе урока мы разберёмся со специальным пакетом gargle, который очень упрощает разработку пакетов взаимодействующих с Google API.
+
+------
+
+::: {style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;"}
+*Данный урок основан на статье ["How to use gargle for auth in a client package"](https://gargle.r-lib.org/articles/gargle-auth-in-client-package.html) под автортством Дженни Брайан.*
+:::
+
+------
+
+## Видео
+<iframe width="560" height="315" src="https://www.youtube.com/embed/s58ZJj1HYBk?si=XvUSeLIPqsZhd0X-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### Тайм коды
+
+00:00 Вступление<Br>
+00:55 Создание учётных данных в Google Cloud<Br>
+08:52 Функционал пакета gargle<Br>
+09:50 Пример работы с пакетом gargle<Br>
+17:08 Обзор рабочего процесса создания пакета обёртки над Google API<Br>
+17:34 Интерфейс авторизации<Br>
+26:08 Объект отвечающий за состояние авторизации в вашем пакете<Br>
+27:38 Как обращаться к токену для подписи HTTP запросов<Br>
+29:54 Заключение<Br>
+
+## Презентация
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/rIikh4gEuvgESK?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+
+## Конспект
+### Создание учётных данных
+
+Для работы с любым Google API изначально вам необходимо создать учётные данные, делается это в 4 этапа:
+
+1. Создайте проект в [Google Cloud](https://console.cloud.google.com/)
+2. Настройте экран авторизации (основное меню -> APIs & Sevices -> OAuth Consent Screen)
+3. Создайте учётные данных (основное меню -> APIs & Sevices -> Credentials)
+4. Активируйте нужные вам API (основное меню -> APIs & Sevices -> Library)
+
+Большинство Google API требуют для авторизации OAuth клиент, поэтому зачастую именно тип учётных данных вам надо будет создавать на шаге 3. Для использрвания в вашем коде созданного OAuth клиента скопируйте его Client ID и Client Secret.
+
+Некоторые API позволяют подписывать запросы с помощью API ключа, например Google Maps API, или даже Google Spreadsheets API, если вы хотите получить данные из опубликованной с отрытым доступом таблицы.
+
+### Основные функции пакета gargle
+
+* Авторизация:
+  * `token_fetch()` – запрос учётных данных;
+* Компоновка и отправка HTTP запроса:
+  * `request_build()` – составление запроса;
+  * `request_make()` и `request_retry()` – отправка запроса;
+* Парсинг полученного ответа:
+* `response_process()` – парсинг ответа.
+
+Ниже пример кода работы с Google Ads API с помощью пакета gargle:
+
+```{r, eval=FALSE}
+library(gargle)
+library(httr)
+
+# OAuth клиент
+app <- oauth_app(
+  appname = 'myapp',
+  key = 'CLIENT_ID.apps.googleusercontent.com',
+  secret = 'CLIENT_SECRET'
+)
+
+# Авторизация
+cred <- token_fetch(
+  scopes  = 'https://www.googleapis.com/auth/adwords',
+  app     = app,
+  email   = 'me@gmail.com',
+  cache   = TRUE
+)
+
+# Создаём запрос
+req <- request_build(
+  method   = "GET",
+  path     = 'v14/customers:listAccessibleCustomers',
+  token    = cred,
+  base_url = "https://googleads.googleapis.com/"
+)
+
+# Отправляем запрос
+resp <- request_retry(
+  req,
+  add_headers(
+    `developer-token`= "DEVELOPER_TOKEN"
+  ), 
+  max_tries_total = 5, 
+  max_total_wait_time_in_seconds = 10
+)
+
+# Парсим ответ
+result <- response_process(resp)
+```
+
+В приведённом выше коде вам необходимо подставить полученные ранее учётные данные, т.е. CLIENT_ID и CLIENT_SECRET.
+
+Некоторые Google API, например Google Ads API, требуют от вас дополнительные авторизационные данные, в данном случае developer-token, о таких особенностях вы узнаете из раздела авторизации в справке нужного вам API. В данном случае мы прокидываем токен разработчика в специальном заголовке `developer-token` внутри функции `request_retry()`.
+
+Аргументы `max_tries_total` и `max_total_wait_time_in_seconds` позволяют управлять политикой повторных отправок запросов в случае временных ошибок, первый аргумент позволяет указать количество повторных попыток отправки запроса, а второй отвечает за тайм аут в секундах между попытки отправки запроса.
+
+### Процесс создания пакета на основе gargle
+
+1. Добавьте gargle в зависимости вашего пакета в поле Imports.
+2. Создайте файл `R/YOURPKG_auth.R`.
+3. Создайте внутренний `gargle::AuthClass` объект для хранения состояния аутентификации.
+4. Определите стандартные функции для интерфейса аутентификации между gargle и вашим пакетом; сделать это в `R/YOURPKG_auth.R`.
+5. Используйте помощники roxygen от gargle для создания документации для ваших функций аутентификации. Это избавляет вас от необходимости писать документы и вы 6. наследуете стандартные формулировки.
+7. Используйте функции `YOURPKG_token()` и `YOURPKG_api_key()` (определенные в стандартном интерфейсе аутентификации), чтобы вставить токен или ключ API в запросы вашего пакета.
+
+Файл `R/YOURPKG_auth.R` будет содержать интерфейс авторизации вашего пакета, в основе этого интерйеса, как вы уже убедились из первого примера работы с пакетом `gargle`, будет функция `token_fetch()`, ниже упрощённый пример её использования внутри пакета `googledrive`:
+
+```{r, eval=FALSE}
+# googledrive::
+drive_auth <- function(email = gargle::gargle_oauth_email(),
+                       path = NULL,
+                       scopes = "https://www.googleapis.com/auth/drive",
+                       cache = gargle::gargle_oauth_cache(),
+                       use_oob = gargle::gargle_oob_default(),
+                       token = NULL) {
+  # this catches a common error, where the user passes JSON for an OAuth client
+  # to the `path` argument, which only expects a service account token
+  gargle::check_is_service_account(path, hint = "drive_auth_configure")
+
+  cred <- gargle::token_fetch(
+    scopes = scopes,
+    client = drive_oauth_client() %||% <BUILT_IN_DEFAULT_CLIENT>,
+    email = email,
+    path = path,
+    package = "googledrive",
+    cache = cache,
+    use_oob = use_oob,
+    token = token
+  )
+  if (!inherits(cred, "Token2.0")) {
+    # throw an informative error here
+  }
+  .auth$set_cred(cred)
+  .auth$set_auth_active(TRUE)
+
+  invisible()
+}
+```
+
+### Интерфейс авторизации
+
+Наиболее простым способом добавить интерфейс авторизации в свой пакет - просто скопировать его из файла [drive_auth.R](https://github.com/tidyverse/googledrive/blob/main/R/drive_auth.R) и немного доработать его под ваш пакет, переназвав функции, и изменив дефолтные значения аргументов `package` и `scopes` в функции `gargle::token_fetch()`. 
+
+Scopes это набор разрешений, т.е. доступов, которые пользователь будет предоставлять вашего OAuth клиенту. информацию о том, какие именно разрешения нужны будут вашему пакету вы найдёте в справке к нужному вам API, в разделе Scopes. Для примера Google Ads API требует разрешение `https://www.googleapis.com/auth/adwords`, Google Drive API `ttps://www.googleapis.com/auth/drive`.
+
+Сам интерфейс автоизации будет состоять из следующих функций:
+
+* `drive_token()` - извлекает текущие учетные данные в форме, готовой для включения в HTTP-запросы. 
+* `drive_auth()` - при первом запуске инициирует процесс авторизации через браузер, кешрует полученные учётные данные в файл (`cache = TRUE`), при последующих запусках получает учётные данные из кеша. 
+* `drive_deauth()` - очищает текущий токен.
+* `drive_oauth_client()` - возвращается `.auth$client`.
+* `drive_api_key()` - возвращается `.auth$api_key`.
+* `drive_auth_configure()` - может использоваться для настройки аутентификации. 
+* `drive_user()` - сообщает некоторую информацию о пользователе, связанном с текущим токеном. 
+
+### Состояние авторизации в ходе сеанса
+
+Авторизация это динамическая сущность, поэтому в вашем пакете должен быть создан объект `gargle::AuthState`, который будет отвечать за изменения состояния авторизации. Создавать его надо внутри функции `.OnLoad()` в файле `zzz.R`:
+
+```{r, eval=FALSE}
+.onLoad <- function(libname, pkgname) {
+  utils::assignInMyNamespace(
+    ".auth",
+    gargle::init_AuthState(package = "googledrive", auth_active = TRUE)
+  )
+  
+  # other stuff
+}
+```
+
+### Подпись запросов токеном авторизации
+
+После того, как вы прописали в своём пакете интерфейс авторизации, и добавили объект `.auth`, для получения из этого объекта самого токена, и подписи запросов используйте функцию типа `drive_token()`, передав её в аргумент `token` при компоновке самого запроса с помозью функции `request_build()`. Ниже пример основной функции компонубщей и отправляющей запросы из пакета googledrive:
+
+```{r, eval=FALSE}
+# googledrive::
+request_generate <- function(endpoint = character(),
+                             params = list(),
+                             key = NULL,
+                             token = drive_token()) {
+  ept <- drive_endpoint(endpoint)
+  if (is.null(ept)) {
+    # throw error about unrecognized endpoint
+  }
+
+  ## modifications specific to googledrive package
+  params$key <- key %||% params$key %||%
+    drive_api_key() %||% <BUILT_IN_DEFAULT_API_KEY>
+  if (!is.null(ept$parameters$supportsAllDrives)) {
+    params$supportsAllDrives <- TRUE
+  }
+
+  req <- gargle::request_develop(endpoint = ept, params = params)
+  gargle::request_build(
+    path = req$path,
+    method = req$method,
+    params = req$params,
+    body = req$body,
+    token = token
+  )
+}
+```
+
+## Тест
+<iframe id="otp_wgt_5atjjx6klllhk" src="https://onlinetestpad.com/5atjjx6klllhk" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_5atjjx6klllhk'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
+</iframe>
+
+------
+
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
+library(r2social)
+r2social::r2social.scripts()
+r2social::shareButton(link = "https://selesnow.github.io/r_package_course/", position = "inline", whatsapp = T, telegram = T, instagram = T)
+r2social::connectButton(link = 'https://t.me/R4marketing', link.out = F, telegram = T, position = 'left')
+r2social::connectButton(link = 'https://www.youtube.com/R4marketing/?sub_confirmation=1', link.out = F, youtube = T, position = 'right')
+```
