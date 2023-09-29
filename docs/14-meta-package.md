@@ -1,105 +1,64 @@
---- 
-title: "Курс 'Разработка пакетов на языке R'"
-author: "Алексей Селезнёв"
-date: "2023-09-29"
-site: bookdown::bookdown_site
-documentclass: book
-bibliography: [book.bib, packages.bib]
-url: https://selesnow.github.io/r_package_course
-cover-image: img/cover.jpg
-description: |
-  Бесплатный видео курс по разработке собственных пакетов на языке R.
-biblio-style: apalike
-csl: chicago-fullnote-bibliography.csl
----
-
-# Введение {-}
+# Как создать коллекцию пакетов
 
 ------
 
-## О курсе {-}
-<a href="https://selesnow.github.io"><img src="img/cover.png" align="right" alt="Cover image" class="cover" width="230" height="366" /></a>Моё знакомство с языком R состоялось в 2016 году. На тот момент я планировал его использовать для сбора данных по API из различных рекламных платформ. Для части из этих платформ я нашел готовые решения в видео пакетов, но для некоторых, менее известных рекламных площадок готов пакетов не оказалось. И тогда я попробовал разобраться самостоятельно с тем, как устроены R пакеты. На тот момент я не нашел полноценного гайда, и создавал пакеты методом тыка, используя встроенный в базовую комплектацию R функционал, вроде функции  `package.skeleton()`, далее я руками правил все `.Rmd` файлы, из которых генерируется докуметация к функциям, и вообще делал в ходе разработки пакетов очень много лишней работы.
+В заключительном уроке мы с вами научимся создавать собственные мета пакета. Мета пакет это не самостоятельный пакет, а просто коллекция объединённых пакетов, одним из наиболее известных мета-пакетов является `tidyverse`, в ядро которого входят такие пакеты как: `dplyr`, `tidyr`, `ggplot2`, `stringr` и т.д. 
 
-На данный момент в главном репозитории хранения R пакетов - CRAN уже опубликовано [14](https://cran.r-project.org/web/checks/check_results_selesnow_at_gmail.com.html) разработанных мной пакетов, за годы разработки пакетов я уже набил довлльно много шишек, и ознакомился с замечательной книгой Хедли Викхема ["R Packages (2e)"](https://r-pkgs.org/), которая и легла в основу этого курса. Тем не менее данный курс не является полным повторением книги, некоторые главы мы рассматривать не будем, но и в ходе курса будут рассмотрены некоторые темы, которые Хедли не упоминал в своей книге.
+------
 
-Разработка пакетов один из лучших способов повысить свои навыки написания кода на R, и углуюиться в его изучение. Данный курс поможет вам пошагово освоить процесс разработки собственных пакетов. К тому же таким образом вы сможете внести свой вклад в развитие языка поделившись своими наработками, упакованными в R пакет.
+::: {style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;"}
+*Данный урок основан на [официальной документации](https://pkgverse.mikewk.com/) к пакету pkgverse.*
+:::
 
-Добро пожаловать на курс "Разработка пакетов на языке R", и успехов в его прохождении!
+------
 
-## Для кого этот курс {-}
-Данный курс я не могу рекомендовать новичкам. Заниматься разработкой пакетов лучше имея за плечами определённый опыт написания кода на R. Поэтому не стоит начинать изучения R с данного курса, ниже я дам небольшую подборку подготовительных курсов, изучив которые можно попробовать себя в разработке пакетов.
+## Видео
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NkXTDv8CyB4?si=-vBK8cLAdwEoYWg5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-## По поводу поддержки обучающихся на данном курса {-}
-**Важно!** Поддержки учащихся на этом курсе со стороны автора нет. Я не занимаюсь частными консультациями, тем более не консультирую студентов бесплатных курсов. Поэтому не имеет никакого смысла писать мне в личку или на почту просьбы помочь с прохождением этого, или любого другого моего бесплатного курса. Если вы столкнулись с трудностями при прохождении курса и вам нужна помощь, то все вопросы можно адресовать в следующие telegram чаты:
+### Тайм коды
 
-* [R (язык программирования)](https://t.me/rlang_ru)
-* [Горячая линия R](https://t.me/hotlineR_EU)
+00:00 Вступление<Br>
+01:10 Пример создания мета-пакета с помощью пакета pkgverse<Br>
+05:47 Аргументы функции pkgverse()<Br>
+07:12 Заключение<Br>
 
-Отдельного чата со студентами непосредственно этого курса не существует, но при желании вы самостоятельно можете его организовать, и я с радостью добавлю на него ссылку.
+## Презентация
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/5x9dVyBZMhVQ3S?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 
-К тому же, если у вас есть вопросы по одной из лекций курса, вы можете задавать его под видео лекции на YouTube, это приветствуется, и на такие комментарии я с радостью отвечу.
+## Конспект
 
-Буду рад любой конструктивной критике, и предложениям по улучшению курса "разработка пакетов на языке R", направлять их можно мне на почту selesnow@gmail.com. Если вы хотите выразить благодарность мне за курс, то в конце раздела описано как это можно сделать.
+Мета пакет это коллекция пакетов, одним из наиболее известных примеров является `tidyverse`. Для создания мета-пакета наиболее удобно использовать пакет `pkgverse`, ниже пример кода, который создаёт мета-пакет `googleverse`:
 
-## Об авторе {-}
-Меня зовут Алексей Селезнёв, с 2008 года я являюсь практикующим аналитиком. На данный момент основной моей деятельностью является развитие отдела аналитики в агентстве интернет-маркетинга [Netpeak](https://https://netpeak.group/).
-<a href="https://selesnow.github.io"><img src="img/author.png" width="200" height="200" align="left" alt="Алексей Селезнёв" hspace="20" vspace="7" /></a>
 
-Мною были разработаны такие R пакеты как: `rgoogleads`, `rfacebookstat`, `timeperiodsR` и некоторые другие. На данный момент написанные мной пакеты только с CRAN были установленны более 200 000 раз.
+```r
+library(pkgverse)
 
-Также я являюсь автором некоторых других курсов по R (ссылки на них приведу ниже), лектором академии [Web Promo Experts](https://webpromoexperts.net/) и соавтором курса ["Веб-аналитика Pro"](https://webpromoexperts.net/courses/analytics-pro/).
+## vector of pkgs
+gpaks <- c('googlesheets4', 'googledrive', 'rgoogleads', 'rytstat', 'mapsapi', 'googleAnalyticsR')
 
-Веду свой авторский [Telegram](https://t.me/R4marketing) и [YouTube](https://www.youtube.com/R4marketing/?sub_confirmation=1) канал R4marketing. Буду рад видеть вас в рядах подписчиков.
+## create packages dir
+dir.create("~/packages")
 
-Периодически публикую статью на различных интернет медиа, зачастую это [Хабр](https://habr.com/ru/users/selesnow/) и [Netpeak Journal](https://netpeak.net/ru/blog/user/publication/826/).
+## create tidyweb pkgverse
+pkgverse(
+  "googleverse", 
+  gpaks,
+  keep = "~/packages",
+  use = c("readme_rmd", "rstudio", "testthat", "mit_license", "git"),
+  install_if = TRUE
+)
 
-Неоднократно выступал на профильных конференциях по аналитике и интернет маркетингу, среди которых Матемаркетинг, GoAnalytics, Analyze, eCommerce, 8P и прочие.
+```
 
-## Другие курсы автора {-}
-Как я уже писал выше, помимо курса "Разработка пакетов на языке R" у меня есть ряд других бесплатных курсов:
+После запуска функции `pkgverse()` начнётся процесс создания метапакета, по завершению его проект будет создан в папке, которую вы указали в аргументе `keep`.
 
-1. [Язык R для интернет маркетинга](https://r-for-marketing.netpeak.net/auth/sign/in), для начинающих, требуется бесплатная регистрация
-2. [Язык R для пользователей Excel](https://selesnow.github.io/r4excel_users/), для начинающих
-3. [Введение в dplyr 1.0.0](https://selesnow.github.io/dplyr_1_0_0_course), средней уровень сложности
-4. [Циклы и функционалы в языке R](https://selesnow.github.io/iterations_in_r/), средней уровень сложности
-5. [Разработка telegram ботов на языке R](https://selesnow.github.io/build_telegram_bot_using_r/), высокий уровень сложности
+Ниже список аргументов функции `pkgverse()`:
 
-## Каналы автора {-}
-Если вы интересуетесь языком R, применяете его в работе, или планируете изучать, то думаю вам будут интересны мои каналы, о которых я писал выше. Буду рад видеть вас среди подписчиков:
-
-* [Telegram канал R4marketing](https://t.me/R4marketing)
-* [Youtube канал R4marketing](https://www.youtube.com/R4marketing/?sub_confirmation=1)
-
-## Программа курса {-}
-В данный момент курс "разработка пакетов на языке R" назодится в активной стадии разработки, поэтому программа постоянно расширяется, следить за обновлениями курса можно на страницк [Новости курса]. Ниже представлена актуальная программа на текущий момент:
-
-1. [Обзор рабочего процесса разработки пакета]
-2. [Настройка системы и интеграция с GitHub]
-3. [Рекомендации по организации R кода]
-4. [Добавление данных в пакет]
-5. [DESCRIPTION - Метаданные пакета]
-6. [NAMESPACE - Зависимости пакета]
-7. [Разработка юнит-тестов к функциям пакета (пакет testthat)]
-8. [Написание документации к функциям пакета]
-9. Виньетки и прочая опциональная документация пакета
-10. Разработка сайта пакета (пакет pkgdown)
-11. Публикация в CRAN
-12. Разработка пакета обёртки над API (пакет httr2)
-13. Разработка пакета обёртки для Google API (пакет gargle)
-14. Как создать коллекцию пакетов
-
-<Br>
-_Дата обновления курса: 29.09.2023_
-
-## Благодарности автору {-}
-Курс, и все сопутствующие материалы предоставляются бесплатно, но если у вас есть желание отблагодарить автора за этот видео курс вы можете перечислить любую произвольную сумму на [этой странице](https://secure.wayforpay.com/payment/r4excel_users).
-
-Либо с помощью кнопки:
-<center>
-<script type="text/javascript" id="widget-wfp-script" src="https://secure.wayforpay.com/server/pay-widget.js?ref=button"></script> <script type="text/javascript">function runWfpWdgt(url){var wayforpay=new Wayforpay();wayforpay.invoice(url);}</script> <button type="button" onclick="runWfpWdgt('https://secure.wayforpay.com/button/b9c8a14345975');" style="display:inline-block!important;background:#2B3160 url('https://s3.eu-central-1.amazonaws.com/w4p-merch/button/bg2x2.png') no-repeat center right;background-size:cover;width: 256px!important;height:54px!important;border:none!important;border-radius:14px!important;padding:18px!important;box-shadow:3px 2px 8px rgba(71,66,66,0.22)!important;text-align:left!important;box-sizing:border-box!important;" onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';"><span style="font-family:Verdana,Arial,sans-serif!important;font-weight:bold!important;font-size:14px!important;color:#ffffff!important;line-height:18px!important;vertical-align:middle!important;">Оплатить</span></button>
-</center>
-
-Так же вы можете поделиться ссылкой на курс у себя в соц сетях, за что я тоже буду вам благдарен!
+* `pkg` – название вашего мета-пакета
+* `pkgs` – вектор из названий пакетов, которые будут включены в мета-пакет
+* `keep` – путь к директории, в которой будет создан проект вашего мета пакета, если не заполнять этот аргумент то мета пакет просто будет установлен в вашу библиотеку без создания проекта
+* `use` – вектор функций из пакета usethis, которые выполняют первоначальную настройку пакета, например c("readme_rmd", "rstudio", "testthat", "mit_license", "git")
+* `install_if` – если TRUE то из CRAN будут установлены пакеты, которые не были найдены в вашей библиотеке
 
 ------
 
@@ -175,7 +134,7 @@ _Дата обновления курса: 29.09.2023_
 ```
 
 ```{=html}
-<div style="display:unset">
+<div style="display:inline-block">
 <div class="r2social-link-container r2social-social-right">
 <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_r2socialxlink">
 <div class="social-btn-right" style="background-color:#ff0000">

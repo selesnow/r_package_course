@@ -1,0 +1,70 @@
+# Как создать коллекцию пакетов
+
+------
+
+В заключительном уроке мы с вами научимся создавать собственные мета пакета. Мета пакет это не самостоятельный пакет, а просто коллекция объединённых пакетов, одним из наиболее известных мета-пакетов является `tidyverse`, в ядро которого входят такие пакеты как: `dplyr`, `tidyr`, `ggplot2`, `stringr` и т.д. 
+
+------
+
+::: {style="border: 2px solid #4682B4; background: #EEE8AA; padding: 15px; border-radius: 9px;"}
+*Данный урок основан на [официальной документации](https://pkgverse.mikewk.com/) к пакету pkgverse.*
+:::
+
+------
+
+## Видео
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NkXTDv8CyB4?si=-vBK8cLAdwEoYWg5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### Тайм коды
+
+00:00 Вступление<Br>
+01:10 Пример создания мета-пакета с помощью пакета pkgverse<Br>
+05:47 Аргументы функции pkgverse()<Br>
+07:12 Заключение<Br>
+
+## Презентация
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/5x9dVyBZMhVQ3S?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+
+## Конспект
+
+Мета пакет это коллекция пакетов, одним из наиболее известных примеров является `tidyverse`. Для создания мета-пакета наиболее удобно использовать пакет `pkgverse`, ниже пример кода, который создаёт мета-пакет `googleverse`:
+
+```{r, eval=FALSE}
+library(pkgverse)
+
+## vector of pkgs
+gpaks <- c('googlesheets4', 'googledrive', 'rgoogleads', 'rytstat', 'mapsapi', 'googleAnalyticsR')
+
+## create packages dir
+dir.create("~/packages")
+
+## create tidyweb pkgverse
+pkgverse(
+  "googleverse", 
+  gpaks,
+  keep = "~/packages",
+  use = c("readme_rmd", "rstudio", "testthat", "mit_license", "git"),
+  install_if = TRUE
+)
+
+```
+
+После запуска функции `pkgverse()` начнётся процесс создания метапакета, по завершению его проект будет создан в папке, которую вы указали в аргументе `keep`.
+
+Ниже список аргументов функции `pkgverse()`:
+
+* `pkg` – название вашего мета-пакета
+* `pkgs` – вектор из названий пакетов, которые будут включены в мета-пакет
+* `keep` – путь к директории, в которой будет создан проект вашего мета пакета, если не заполнять этот аргумент то мета пакет просто будет установлен в вашу библиотеку без создания проекта
+* `use` – вектор функций из пакета usethis, которые выполняют первоначальную настройку пакета, например c("readme_rmd", "rstudio", "testthat", "mit_license", "git")
+* `install_if` – если TRUE то из CRAN будут установлены пакеты, которые не были найдены в вашей библиотеке
+
+------
+
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
+library(r2social)
+r2social::r2social.scripts()
+r2social::shareButton(link = "https://selesnow.github.io/r_package_course/", position = "inline", whatsapp = T, telegram = T, instagram = T)
+r2social::connectButton(link = 'https://t.me/R4marketing', link.out = F, telegram = T, position = 'left')
+r2social::connectButton(link = 'https://www.youtube.com/R4marketing/?sub_confirmation=1', link.out = F, youtube = T, position = 'right')
+```
