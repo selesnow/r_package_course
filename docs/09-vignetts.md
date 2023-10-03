@@ -1130,8 +1130,8 @@ DT::datatable(mtcars)
 ```
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-37bce53a29ef4d7be8e8" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-37bce53a29ef4d7be8e8">{"x":{"filter":"none","vertical":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],[6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],[160,160,108,258,360,225,360,146.7,140.8,167.6,167.6,275.8,275.8,275.8,472,460,440,78.7,75.7,71.1,120.1,318,304,350,400,79,120.3,95.1,351,145,301,121],[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92,3.92,3.07,3.07,3.07,2.93,3,3.23,4.08,4.93,4.22,3.7,2.76,3.15,3.73,3.08,4.08,4.43,3.77,4.22,3.62,3.54,4.11],[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3,18.9,17.4,17.6,18,17.98,17.82,17.42,19.47,18.52,19.9,20.01,16.87,17.3,15.41,17.05,18.9,16.7,16.9,14.5,15.5,14.6,18.6],[0,0,1,1,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,0,1],[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1],[4,4,4,3,3,3,3,4,4,4,4,3,3,3,3,3,3,4,4,4,3,3,3,3,3,4,5,5,5,5,5,4],[4,4,1,1,2,1,4,2,2,4,4,3,3,3,4,4,4,1,2,1,1,2,2,4,2,1,2,2,4,6,8,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-42fd813a64c03a05cb9c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-42fd813a64c03a05cb9c">{"x":{"filter":"none","vertical":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],[6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],[160,160,108,258,360,225,360,146.7,140.8,167.6,167.6,275.8,275.8,275.8,472,460,440,78.7,75.7,71.1,120.1,318,304,350,400,79,120.3,95.1,351,145,301,121],[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92,3.92,3.07,3.07,3.07,2.93,3,3.23,4.08,4.93,4.22,3.7,2.76,3.15,3.73,3.08,4.08,4.43,3.77,4.22,3.62,3.54,4.11],[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3,18.9,17.4,17.6,18,17.98,17.82,17.42,19.47,18.52,19.9,20.01,16.87,17.3,15.41,17.05,18.9,16.7,16.9,14.5,15.5,14.6,18.6],[0,0,1,1,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,0,1],[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1],[4,4,4,3,3,3,3,4,4,4,4,3,3,3,3,3,3,4,4,4,3,3,3,3,3,4,5,5,5,5,5,4],[4,4,1,1,2,1,4,2,2,4,4,3,3,3,4,4,4,1,2,1,1,2,2,4,2,1,2,2,4,6,8,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 * `gt`
@@ -1152,23 +1152,23 @@ gt(mtcars, rownames_to_stub = T) %>%
 ```
 
 ```{=html}
-<div id="xwleddhodf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xwleddhodf table {
+<div id="apgwenkfrm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#apgwenkfrm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xwleddhodf thead, #xwleddhodf tbody, #xwleddhodf tfoot, #xwleddhodf tr, #xwleddhodf td, #xwleddhodf th {
+#apgwenkfrm thead, #apgwenkfrm tbody, #apgwenkfrm tfoot, #apgwenkfrm tr, #apgwenkfrm td, #apgwenkfrm th {
   border-style: none;
 }
 
-#xwleddhodf p {
+#apgwenkfrm p {
   margin: 0;
   padding: 0;
 }
 
-#xwleddhodf .gt_table {
+#apgwenkfrm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1194,12 +1194,12 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-left-color: #D3D3D3;
 }
 
-#xwleddhodf .gt_caption {
+#apgwenkfrm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xwleddhodf .gt_title {
+#apgwenkfrm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1211,7 +1211,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-bottom-width: 0;
 }
 
-#xwleddhodf .gt_subtitle {
+#apgwenkfrm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1223,7 +1223,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-top-width: 0;
 }
 
-#xwleddhodf .gt_heading {
+#apgwenkfrm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1235,13 +1235,13 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-right-color: #D3D3D3;
 }
 
-#xwleddhodf .gt_bottom_border {
+#apgwenkfrm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xwleddhodf .gt_col_headings {
+#apgwenkfrm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1256,7 +1256,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-right-color: #D3D3D3;
 }
 
-#xwleddhodf .gt_col_heading {
+#apgwenkfrm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1276,7 +1276,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   overflow-x: hidden;
 }
 
-#xwleddhodf .gt_column_spanner_outer {
+#apgwenkfrm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1288,15 +1288,15 @@ gt(mtcars, rownames_to_stub = T) %>%
   padding-right: 4px;
 }
 
-#xwleddhodf .gt_column_spanner_outer:first-child {
+#apgwenkfrm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xwleddhodf .gt_column_spanner_outer:last-child {
+#apgwenkfrm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xwleddhodf .gt_column_spanner {
+#apgwenkfrm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1308,11 +1308,11 @@ gt(mtcars, rownames_to_stub = T) %>%
   width: 100%;
 }
 
-#xwleddhodf .gt_spanner_row {
+#apgwenkfrm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xwleddhodf .gt_group_heading {
+#apgwenkfrm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1338,7 +1338,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   text-align: left;
 }
 
-#xwleddhodf .gt_empty_group_heading {
+#apgwenkfrm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1353,15 +1353,15 @@ gt(mtcars, rownames_to_stub = T) %>%
   vertical-align: middle;
 }
 
-#xwleddhodf .gt_from_md > :first-child {
+#apgwenkfrm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xwleddhodf .gt_from_md > :last-child {
+#apgwenkfrm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xwleddhodf .gt_row {
+#apgwenkfrm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1380,7 +1380,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   overflow-x: hidden;
 }
 
-#xwleddhodf .gt_stub {
+#apgwenkfrm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1393,7 +1393,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   padding-right: 5px;
 }
 
-#xwleddhodf .gt_stub_row_group {
+#apgwenkfrm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1407,15 +1407,15 @@ gt(mtcars, rownames_to_stub = T) %>%
   vertical-align: top;
 }
 
-#xwleddhodf .gt_row_group_first td {
+#apgwenkfrm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xwleddhodf .gt_row_group_first th {
+#apgwenkfrm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xwleddhodf .gt_summary_row {
+#apgwenkfrm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1425,16 +1425,16 @@ gt(mtcars, rownames_to_stub = T) %>%
   padding-right: 5px;
 }
 
-#xwleddhodf .gt_first_summary_row {
+#apgwenkfrm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xwleddhodf .gt_first_summary_row.thick {
+#apgwenkfrm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xwleddhodf .gt_last_summary_row {
+#apgwenkfrm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1444,7 +1444,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#xwleddhodf .gt_grand_summary_row {
+#apgwenkfrm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1454,7 +1454,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   padding-right: 5px;
 }
 
-#xwleddhodf .gt_first_grand_summary_row {
+#apgwenkfrm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1464,7 +1464,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-top-color: #D3D3D3;
 }
 
-#xwleddhodf .gt_last_grand_summary_row_top {
+#apgwenkfrm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1474,11 +1474,11 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#xwleddhodf .gt_striped {
+#apgwenkfrm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xwleddhodf .gt_table_body {
+#apgwenkfrm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1487,7 +1487,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#xwleddhodf .gt_footnotes {
+#apgwenkfrm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1501,7 +1501,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-right-color: #D3D3D3;
 }
 
-#xwleddhodf .gt_footnote {
+#apgwenkfrm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1510,7 +1510,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   padding-right: 5px;
 }
 
-#xwleddhodf .gt_sourcenotes {
+#apgwenkfrm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1524,7 +1524,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-right-color: #D3D3D3;
 }
 
-#xwleddhodf .gt_sourcenote {
+#apgwenkfrm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1532,63 +1532,63 @@ gt(mtcars, rownames_to_stub = T) %>%
   padding-right: 5px;
 }
 
-#xwleddhodf .gt_left {
+#apgwenkfrm .gt_left {
   text-align: left;
 }
 
-#xwleddhodf .gt_center {
+#apgwenkfrm .gt_center {
   text-align: center;
 }
 
-#xwleddhodf .gt_right {
+#apgwenkfrm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xwleddhodf .gt_font_normal {
+#apgwenkfrm .gt_font_normal {
   font-weight: normal;
 }
 
-#xwleddhodf .gt_font_bold {
+#apgwenkfrm .gt_font_bold {
   font-weight: bold;
 }
 
-#xwleddhodf .gt_font_italic {
+#apgwenkfrm .gt_font_italic {
   font-style: italic;
 }
 
-#xwleddhodf .gt_super {
+#apgwenkfrm .gt_super {
   font-size: 65%;
 }
 
-#xwleddhodf .gt_footnote_marks {
+#apgwenkfrm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xwleddhodf .gt_asterisk {
+#apgwenkfrm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xwleddhodf .gt_indent_1 {
+#apgwenkfrm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xwleddhodf .gt_indent_2 {
+#apgwenkfrm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xwleddhodf .gt_indent_3 {
+#apgwenkfrm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xwleddhodf .gt_indent_4 {
+#apgwenkfrm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xwleddhodf .gt_indent_5 {
+#apgwenkfrm .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
