@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Урок 7 Виньетки и прочая опциональная документация пакета | Курс 'Разработка пакетов на языке R'</title>
+<title>Урок 9 Виньетки и прочая опциональная документация пакета | Курс 'Разработка пакетов на языке R'</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="В этом уроке мы разберёмся с опциональной документацией уровня пакета: Виньетки - Статьи, подробно описывающие в свободной форме функционал пакета; README - Общее описание цели пакета и нескольких...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Урок 7 Виньетки и прочая опциональная документация пакета | Курс 'Разработка пакетов на языке R'">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="Урок 9 Виньетки и прочая опциональная документация пакета | Курс 'Разработка пакетов на языке R'">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://selesnow.github.io/r_package_course/виньетки-и-прочая-опциональная-документация-пакета.html">
 <meta property="og:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
 <meta property="og:description" content="В этом уроке мы разберёмся с опциональной документацией уровня пакета: Виньетки - Статьи, подробно описывающие в свободной форме функционал пакета; README - Общее описание цели пакета и нескольких...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Урок 7 Виньетки и прочая опциональная документация пакета | Курс 'Разработка пакетов на языке R'">
+<meta name="twitter:title" content="Урок 9 Виньетки и прочая опциональная документация пакета | Курс 'Разработка пакетов на языке R'">
 <meta name="twitter:description" content="В этом уроке мы разберёмся с опциональной документацией уровня пакета: Виньетки - Статьи, подробно описывающие в свободной форме функционал пакета; README - Общее описание цели пакета и нескольких...">
 <meta name="twitter:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -58,16 +58,34 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Урок 7</span> Виньетки и прочая опциональная документация пакета</a></li></ul>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li class="book-part">Начало разработки</li>
+<li><a class="" href="%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">1</span> Обзор рабочего процесса разработки пакета</a></li>
+<li><a class="" href="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D1%81-github.html"><span class="header-section-number">2</span> Настройка системы и интеграция с GitHub</a></li>
+<li class="book-part">Компоненты пакета</li>
+<li><a class="" href="%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8-%D0%BF%D0%BE-%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8-r-%D0%BA%D0%BE%D0%B4%D0%B0.html"><span class="header-section-number">3</span> Рекомендации по организации R кода</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%B2-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82.html"><span class="header-section-number">4</span> Добавление данных в пакет</a></li>
+<li><a class="" href="description---%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">5</span> DESCRIPTION - Метаданные пакета</a></li>
+<li><a class="" href="namespace---%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">6</span> NAMESPACE - Зависимости пакета</a></li>
+<li class="book-part">Тестирование</li>
+<li><a class="" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-testthat.html"><span class="header-section-number">7</span> Разработка юнит-тестов к функциям пакета (пакет testthat)</a></li>
+<li class="book-part">Документация</li>
+<li><a class="" href="%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">8</span> Написание документации к функциям пакета</a></li>
+<li><a class="active" href="%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8-%D0%B8-%D0%BF%D1%80%D0%BE%D1%87%D0%B0%D1%8F-%D0%BE%D0%BF%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">9</span> Виньетки и прочая опциональная документация пакета</a></li>
+<li class="book-part">Прочее</li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></li>
+<li><a class="" href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></li>
+</ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/selesnow/r_package_course">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="виньетки-и-прочая-опциональная-документация-пакета" class="section level1" number="7">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="виньетки-и-прочая-опциональная-документация-пакета" class="section level1" number="9">
 <h1>
-<span class="header-section-number">Урок 7</span> Виньетки и прочая опциональная документация пакета<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8-%D0%B8-%D0%BF%D1%80%D0%BE%D1%87%D0%B0%D1%8F-%D0%BE%D0%BF%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Урок 9</span> Виньетки и прочая опциональная документация пакета<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8-%D0%B8-%D0%BF%D1%80%D0%BE%D1%87%D0%B0%D1%8F-%D0%BE%D0%BF%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h1>
 <hr>
 <p>В этом уроке мы разберёмся с опциональной документацией уровня пакета:</p>
@@ -89,15 +107,15 @@
 </ul>
 </div>
 <hr>
-<div id="видео-6" class="section level2" number="7.1">
+<div id="видео-8" class="section level2" number="9.1">
 <h2>
-<span class="header-section-number">7.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-8"><i class="fas fa-link"></i></a>
 </h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ojo8CZUPS2k?si=hzqdSa8xdl3fGo7A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
 </iframe>
-<div id="тайм-коды-6" class="section level3" number="7.1.1">
+<div id="тайм-коды-8" class="section level3" number="9.1.1">
 <h3>
-<span class="header-section-number">7.1.1</span> Тайм коды<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.1.1</span> Тайм коды<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-8"><i class="fas fa-link"></i></a>
 </h3>
 <p>00:00 Вступление<br>
 00:52 Что такое виньетки<br>
@@ -113,25 +131,25 @@
 37:44 Заключение<br></p>
 </div>
 </div>
-<div id="презентация-6" class="section level2" number="7.2">
+<div id="презентация-8" class="section level2" number="9.2">
 <h2>
-<span class="header-section-number">7.2</span> Презентация<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2</span> Презентация<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-8"><i class="fas fa-link"></i></a>
 </h2>
 <iframe src="https://www.slideshare.net/slideshow/embed_code/key/1Spz0NUMBV0H4Z?hostedIn=slideshare&amp;page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no">
 </iframe>
 </div>
-<div id="конспект-6" class="section level2" number="7.3">
+<div id="конспект-8" class="section level2" number="9.3">
 <h2>
-<span class="header-section-number">7.3</span> Конспект<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3</span> Конспект<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-8"><i class="fas fa-link"></i></a>
 </h2>
-<div id="виньетки" class="section level3" number="7.3.1">
+<div id="виньетки" class="section level3" number="9.3.1">
 <h3>
-<span class="header-section-number">7.3.1</span> Виньетки<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.1</span> Виньетки<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8"><i class="fas fa-link"></i></a>
 </h3>
 <p>Виньетка – Свободный тип документации пакета, в котором подробно разобрано как использовать ваш пакет для рещения какой то конкретной задачи.</p>
-<div id="рабочий-процесс-1" class="section level4" number="7.3.1.1">
+<div id="рабочий-процесс-2" class="section level4" number="9.3.1.1">
 <h4>
-<span class="header-section-number">7.3.1.1</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.1.1</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-2"><i class="fas fa-link"></i></a>
 </h4>
 <ol style="list-style-type: decimal">
 <li>Используйте функцию <code>usethis::use_vignette("my-vignette")</code>, которая сделает следующее:
@@ -151,9 +169,9 @@
 </ol>
 <p>Виньетки состоят из метаданных, текста и блоков кода, далее рассмотрим эти составляющие более подробно.</p>
 </div>
-<div id="метаданные-виньетки" class="section level4" number="7.3.1.2">
+<div id="метаданные-виньетки" class="section level4" number="9.3.1.2">
 <h4>
-<span class="header-section-number">7.3.1.2</span> Метаданные виньетки<a class="anchor" aria-label="anchor" href="#%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.1.2</span> Метаданные виньетки<a class="anchor" aria-label="anchor" href="#%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8"><i class="fas fa-link"></i></a>
 </h4>
 <p>Метаданные хранятся в YAML заголовках виньетки:</p>
 <ul>
@@ -169,13 +187,13 @@
 <code>date</code> – дата обновления виньетки.</li>
 </ul>
 </div>
-<div id="особенности-rmarkdown-разметки" class="section level4" number="7.3.1.3">
+<div id="особенности-rmarkdown-разметки" class="section level4" number="9.3.1.3">
 <h4>
-<span class="header-section-number">7.3.1.3</span> Особенности Rmarkdown разметки<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8-rmarkdown-%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%82%D0%BA%D0%B8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.1.3</span> Особенности Rmarkdown разметки<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8-rmarkdown-%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%82%D0%BA%D0%B8"><i class="fas fa-link"></i></a>
 </h4>
-<div id="разметка-текста" class="section level5" number="7.3.1.3.1">
+<div id="разметка-текста" class="section level5" number="9.3.1.3.1">
 <h5>
-<span class="header-section-number">7.3.1.3.1</span> Разметка текста<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%82%D0%BA%D0%B0-%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.1.3.1</span> Разметка текста<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%82%D0%BA%D0%B0-%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h5>
 <ul>
 <li>
@@ -192,9 +210,9 @@
 <code>^[]</code> - Сноска</li>
 </ul>
 </div>
-<div id="списки" class="section level5" number="7.3.1.3.2">
+<div id="списки" class="section level5" number="9.3.1.3.2">
 <h5>
-<span class="header-section-number">7.3.1.3.2</span> Списки<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.1.3.2</span> Списки<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B8"><i class="fas fa-link"></i></a>
 </h5>
 <p>Сиски бывают маркированные и нумероанные, ниже пример их создания:</p>
 <p>Маркерованный список:</p>
@@ -215,23 +233,23 @@
     3.1. tres.uno  
     3.2. tres.dos</code></pre>
 </div>
-<div id="как-добавить-в-виньетку-график" class="section level5" number="7.3.1.3.3">
+<div id="как-добавить-в-виньетку-график" class="section level5" number="9.3.1.3.3">
 <h5>
-<span class="header-section-number">7.3.1.3.3</span> Как добавить в виньетку график<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B2-%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D1%83-%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.1.3.3</span> Как добавить в виньетку график<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B2-%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D1%83-%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA"><i class="fas fa-link"></i></a>
 </h5>
 <p>График добавляется с помощью блока кода построения графика, ниже пример с использованием <code>ggplot2</code>:</p>
 <div class="inline-figure"><img src="img/vignett-1.png"></div>
 </div>
-<div id="как-добавить-в-виньетку-таблицы" class="section level5" number="7.3.1.3.4">
+<div id="как-добавить-в-виньетку-таблицы" class="section level5" number="9.3.1.3.4">
 <h5>
-<span class="header-section-number">7.3.1.3.4</span> Как добавить в виньетку таблицы<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B2-%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D1%83-%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D1%8B"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.1.3.4</span> Как добавить в виньетку таблицы<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B2-%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D1%83-%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D1%8B"><i class="fas fa-link"></i></a>
 </h5>
 <p>Таблицы добавляются аналогично графику в блоках исполняемого кода. Для построения таблиц вы можете использоваьт функцию knitr::kable(), либо функционал других пакетов: <code>DT</code>, <code>htmlTable</code>, <code>gt</code>, <code>kableExtra</code>. Для построения таблиц вам необходимо передать датафрейм в функцию преобразования датафрейма в html таблицу.</p>
 <p>Ниже небольшой пример построения таблиц:</p>
 <ul>
 <li><code><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable()</a></code></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table style="width:100%;" class="table table-sm">
 <colgroup>
@@ -716,7 +734,7 @@
 <ul>
 <li><code>htmlTables</code></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html">htmlTable</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 <thead><tr>
@@ -1978,7 +1996,7 @@ Volvo 142E
 <ul>
 <li><code>kableExtra</code></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: package 'kableExtra' was built under R version</span></span>
 <span><span class="co">#&gt; 4.3.1</span></span>
@@ -3245,13 +3263,13 @@ Volvo 142E
 <ul>
 <li><code>DT</code></li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d5ad604f427acf052ba6" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d5ad604f427acf052ba6">{"x":{"filter":"none","vertical":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],[6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],[160,160,108,258,360,225,360,146.7,140.8,167.6,167.6,275.8,275.8,275.8,472,460,440,78.7,75.7,71.1,120.1,318,304,350,400,79,120.3,95.1,351,145,301,121],[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92,3.92,3.07,3.07,3.07,2.93,3,3.23,4.08,4.93,4.22,3.7,2.76,3.15,3.73,3.08,4.08,4.43,3.77,4.22,3.62,3.54,4.11],[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3,18.9,17.4,17.6,18,17.98,17.82,17.42,19.47,18.52,19.9,20.01,16.87,17.3,15.41,17.05,18.9,16.7,16.9,14.5,15.5,14.6,18.6],[0,0,1,1,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,0,1],[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1],[4,4,4,3,3,3,3,4,4,4,4,3,3,3,3,3,3,4,4,4,3,3,3,3,3,4,5,5,5,5,5,4],[4,4,1,1,2,1,4,2,2,4,4,3,3,3,4,4,4,1,2,1,1,2,2,4,2,1,2,2,4,6,8,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><ul>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-37bce53a29ef4d7be8e8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-37bce53a29ef4d7be8e8">{"x":{"filter":"none","vertical":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],[6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],[160,160,108,258,360,225,360,146.7,140.8,167.6,167.6,275.8,275.8,275.8,472,460,440,78.7,75.7,71.1,120.1,318,304,350,400,79,120.3,95.1,351,145,301,121],[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92,3.92,3.07,3.07,3.07,2.93,3,3.23,4.08,4.93,4.22,3.7,2.76,3.15,3.73,3.08,4.08,4.43,3.77,4.22,3.62,3.54,4.11],[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3,18.9,17.4,17.6,18,17.98,17.82,17.42,19.47,18.52,19.9,20.01,16.87,17.3,15.41,17.05,18.9,16.7,16.9,14.5,15.5,14.6,18.6],[0,0,1,1,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,0,1],[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1],[4,4,4,3,3,3,3,4,4,4,4,3,3,3,3,3,3,4,4,4,3,3,3,3,3,4,5,5,5,5,5,4],[4,4,1,1,2,1,4,2,2,4,4,3,3,3,4,4,4,1,2,1,1,2,2,4,2,1,2,2,4,6,8,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><ul>
 <li><code>gt</code></li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com/">gt</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: package 'gt' was built under R version 4.3.1</span></span>
 <span></span>
@@ -3263,23 +3281,23 @@ Volvo 142E
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html">tab_source_note</a></span><span class="op">(</span></span>
 <span>    source_note <span class="op">=</span> <span class="st">"Встроенный набор данных mtcars"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div id="zqqvynueyz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zqqvynueyz table {
+<div id="xwleddhodf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xwleddhodf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zqqvynueyz thead, #zqqvynueyz tbody, #zqqvynueyz tfoot, #zqqvynueyz tr, #zqqvynueyz td, #zqqvynueyz th {
+#xwleddhodf thead, #xwleddhodf tbody, #xwleddhodf tfoot, #xwleddhodf tr, #xwleddhodf td, #xwleddhodf th {
   border-style: none;
 }
 
-#zqqvynueyz p {
+#xwleddhodf p {
   margin: 0;
   padding: 0;
 }
 
-#zqqvynueyz .gt_table {
+#xwleddhodf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3305,12 +3323,12 @@ Volvo 142E
   border-left-color: #D3D3D3;
 }
 
-#zqqvynueyz .gt_caption {
+#xwleddhodf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zqqvynueyz .gt_title {
+#xwleddhodf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3322,7 +3340,7 @@ Volvo 142E
   border-bottom-width: 0;
 }
 
-#zqqvynueyz .gt_subtitle {
+#xwleddhodf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3334,7 +3352,7 @@ Volvo 142E
   border-top-width: 0;
 }
 
-#zqqvynueyz .gt_heading {
+#xwleddhodf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3346,13 +3364,13 @@ Volvo 142E
   border-right-color: #D3D3D3;
 }
 
-#zqqvynueyz .gt_bottom_border {
+#xwleddhodf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zqqvynueyz .gt_col_headings {
+#xwleddhodf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3367,7 +3385,7 @@ Volvo 142E
   border-right-color: #D3D3D3;
 }
 
-#zqqvynueyz .gt_col_heading {
+#xwleddhodf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3387,7 +3405,7 @@ Volvo 142E
   overflow-x: hidden;
 }
 
-#zqqvynueyz .gt_column_spanner_outer {
+#xwleddhodf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3399,15 +3417,15 @@ Volvo 142E
   padding-right: 4px;
 }
 
-#zqqvynueyz .gt_column_spanner_outer:first-child {
+#xwleddhodf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zqqvynueyz .gt_column_spanner_outer:last-child {
+#xwleddhodf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zqqvynueyz .gt_column_spanner {
+#xwleddhodf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3419,11 +3437,11 @@ Volvo 142E
   width: 100%;
 }
 
-#zqqvynueyz .gt_spanner_row {
+#xwleddhodf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zqqvynueyz .gt_group_heading {
+#xwleddhodf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3449,7 +3467,7 @@ Volvo 142E
   text-align: left;
 }
 
-#zqqvynueyz .gt_empty_group_heading {
+#xwleddhodf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3464,15 +3482,15 @@ Volvo 142E
   vertical-align: middle;
 }
 
-#zqqvynueyz .gt_from_md > :first-child {
+#xwleddhodf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zqqvynueyz .gt_from_md > :last-child {
+#xwleddhodf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zqqvynueyz .gt_row {
+#xwleddhodf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3491,7 +3509,7 @@ Volvo 142E
   overflow-x: hidden;
 }
 
-#zqqvynueyz .gt_stub {
+#xwleddhodf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3504,7 +3522,7 @@ Volvo 142E
   padding-right: 5px;
 }
 
-#zqqvynueyz .gt_stub_row_group {
+#xwleddhodf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3518,15 +3536,15 @@ Volvo 142E
   vertical-align: top;
 }
 
-#zqqvynueyz .gt_row_group_first td {
+#xwleddhodf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zqqvynueyz .gt_row_group_first th {
+#xwleddhodf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zqqvynueyz .gt_summary_row {
+#xwleddhodf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3536,16 +3554,16 @@ Volvo 142E
   padding-right: 5px;
 }
 
-#zqqvynueyz .gt_first_summary_row {
+#xwleddhodf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zqqvynueyz .gt_first_summary_row.thick {
+#xwleddhodf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zqqvynueyz .gt_last_summary_row {
+#xwleddhodf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3555,7 +3573,7 @@ Volvo 142E
   border-bottom-color: #D3D3D3;
 }
 
-#zqqvynueyz .gt_grand_summary_row {
+#xwleddhodf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3565,7 +3583,7 @@ Volvo 142E
   padding-right: 5px;
 }
 
-#zqqvynueyz .gt_first_grand_summary_row {
+#xwleddhodf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3575,7 +3593,7 @@ Volvo 142E
   border-top-color: #D3D3D3;
 }
 
-#zqqvynueyz .gt_last_grand_summary_row_top {
+#xwleddhodf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3585,11 +3603,11 @@ Volvo 142E
   border-bottom-color: #D3D3D3;
 }
 
-#zqqvynueyz .gt_striped {
+#xwleddhodf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zqqvynueyz .gt_table_body {
+#xwleddhodf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3598,7 +3616,7 @@ Volvo 142E
   border-bottom-color: #D3D3D3;
 }
 
-#zqqvynueyz .gt_footnotes {
+#xwleddhodf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3612,7 +3630,7 @@ Volvo 142E
   border-right-color: #D3D3D3;
 }
 
-#zqqvynueyz .gt_footnote {
+#xwleddhodf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3621,7 +3639,7 @@ Volvo 142E
   padding-right: 5px;
 }
 
-#zqqvynueyz .gt_sourcenotes {
+#xwleddhodf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3635,7 +3653,7 @@ Volvo 142E
   border-right-color: #D3D3D3;
 }
 
-#zqqvynueyz .gt_sourcenote {
+#xwleddhodf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3643,63 +3661,63 @@ Volvo 142E
   padding-right: 5px;
 }
 
-#zqqvynueyz .gt_left {
+#xwleddhodf .gt_left {
   text-align: left;
 }
 
-#zqqvynueyz .gt_center {
+#xwleddhodf .gt_center {
   text-align: center;
 }
 
-#zqqvynueyz .gt_right {
+#xwleddhodf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zqqvynueyz .gt_font_normal {
+#xwleddhodf .gt_font_normal {
   font-weight: normal;
 }
 
-#zqqvynueyz .gt_font_bold {
+#xwleddhodf .gt_font_bold {
   font-weight: bold;
 }
 
-#zqqvynueyz .gt_font_italic {
+#xwleddhodf .gt_font_italic {
   font-style: italic;
 }
 
-#zqqvynueyz .gt_super {
+#xwleddhodf .gt_super {
   font-size: 65%;
 }
 
-#zqqvynueyz .gt_footnote_marks {
+#xwleddhodf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zqqvynueyz .gt_asterisk {
+#xwleddhodf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zqqvynueyz .gt_indent_1 {
+#xwleddhodf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zqqvynueyz .gt_indent_2 {
+#xwleddhodf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zqqvynueyz .gt_indent_3 {
+#xwleddhodf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zqqvynueyz .gt_indent_4 {
+#xwleddhodf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zqqvynueyz .gt_indent_5 {
+#xwleddhodf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -4184,9 +4202,9 @@ Volvo 142E
 <p>Как по мне наиболее функциональные таблицы получаются с использованием пакета <code>DT</code>.</p>
 </div>
 </div>
-<div id="опции-чанков" class="section level4" number="7.3.1.4">
+<div id="опции-чанков" class="section level4" number="9.3.1.4">
 <h4>
-<span class="header-section-number">7.3.1.4</span> Опции чанков<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%BF%D1%86%D0%B8%D0%B8-%D1%87%D0%B0%D0%BD%D0%BA%D0%BE%D0%B2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.1.4</span> Опции чанков<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%BF%D1%86%D0%B8%D0%B8-%D1%87%D0%B0%D0%BD%D0%BA%D0%BE%D0%B2"><i class="fas fa-link"></i></a>
 </h4>
 <p>Итак, виньетки состоят из текстов и блоков кода. Блоки коды выделяются тремя апострафоми, далее идут фигурные скобки, буква <code>r</code> и далее вы можете перечислить внутри скобок опции чанков. Ниже перечислю самые частоиспользуемые из них:</p>
 <ul>
@@ -4205,9 +4223,9 @@ Volvo 142E
 <p>Подробное описание всех доступных опций можно найти в статье <a href="https://yihui.org/knitr/options/">"Chunk options and package options"</a>.</p>
 </div>
 </div>
-<div id="readme" class="section level3" number="7.3.2">
+<div id="readme" class="section level3" number="9.3.2">
 <h3>
-<span class="header-section-number">7.3.2</span> README<a class="anchor" aria-label="anchor" href="#readme"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.2</span> README<a class="anchor" aria-label="anchor" href="#readme"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>README</code> – Файл направленный на новых пользователей вашего пакета. Он так же будет главной страницей сайта пакета, и репозитория пакета на GitHub.</p>
 <p>Файл <code>README</code> должен отвечать на следующие вопросы:</p>
@@ -4222,9 +4240,9 @@ Volvo 142E
 <li>Инструкции по установке с кодом, который можно скопировать и вставить в R.</li>
 <li>Обзор, описывающий основные компоненты пакета. Для более сложных пакетов это будет указывать на виньетки для более подробной информации. Это также хорошее место, чтобы описать, как ваш пакет вписывается в экосистему целевого домена.</li>
 </ul>
-<div id="рабочий-процесс-2" class="section level4" number="7.3.2.1">
+<div id="рабочий-процесс-3" class="section level4" number="9.3.2.1">
 <h4>
-<span class="header-section-number">7.3.2.1</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.2.1</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-3"><i class="fas fa-link"></i></a>
 </h4>
 <ol style="list-style-type: decimal">
 <li>Для создания README файла используйте функцию <code><a href="https://usethis.r-lib.org/reference/use_readme_rmd.html">usethis::use_readme_rmd()</a></code>.</li>
@@ -4233,23 +4251,23 @@ Volvo 142E
 </ol>
 </div>
 </div>
-<div id="news" class="section level3" number="7.3.3">
+<div id="news" class="section level3" number="9.3.3">
 <h3>
-<span class="header-section-number">7.3.3</span> NEWS<a class="anchor" aria-label="anchor" href="#news"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.3</span> NEWS<a class="anchor" aria-label="anchor" href="#news"><i class="fas fa-link"></i></a>
 </h3>
 <p>NEWS – Файл направленный на пользователей, которые уже используют ваш пакет. Данный файл содержит описание всех изменений в пакете.</p>
-<div id="рабочий-процесс-3" class="section level4" number="7.3.3.1">
+<div id="рабочий-процесс-4" class="section level4" number="9.3.3.1">
 <h4>
-<span class="header-section-number">7.3.3.1</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.3.1</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-4"><i class="fas fa-link"></i></a>
 </h4>
 <ol style="list-style-type: decimal">
 <li>Наиболее удобным способом его создания является функция <code><a href="https://usethis.r-lib.org/reference/use_news_md.html">usethis::use_news_md()</a></code>.</li>
 <li>Перед выпуском новой версии пакета используйте функцию <code><a href="https://usethis.r-lib.org/reference/use_version.html">usethis::use_version()</a></code>.</li>
 </ol>
 </div>
-<div id="оформление-news" class="section level4" number="7.3.3.2">
+<div id="оформление-news" class="section level4" number="9.3.3.2">
 <h4>
-<span class="header-section-number">7.3.3.2</span> Оформление NEWS<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-news"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.3.2</span> Оформление NEWS<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-news"><i class="fas fa-link"></i></a>
 </h4>
 <ul>
 <li>Каждое изменение должно быть частью маркированного списка.</li>
@@ -4258,9 +4276,9 @@ Volvo 142E
 </div>
 </div>
 </div>
-<div id="тест-5" class="section level2" number="7.4">
+<div id="тест-6" class="section level2" number="9.4">
 <h2>
-<span class="header-section-number">7.4</span> Тест<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4</span> Тест<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82-6"><i class="fas fa-link"></i></a>
 </h2>
 <iframe id="otp_wgt_6nlbbl6u2ahy2i" src="https://onlinetestpad.com/nlbbl6u2ahy2i" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_nlbbl6u2ahy2i'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
 </iframe>
@@ -4339,6 +4357,9 @@ Volvo 142E
 
 </div>
 </div>
+
+
+
 <script>
 
 /* update total correct if #webex-total_correct exists */
@@ -4545,15 +4566,30 @@ window.onload = function() {
 }
 
 </script><div class="chapter-nav">
-<div class="empty"></div>
-<div class="empty"></div>
+<div class="prev"><a href="%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">8</span> Написание документации к функциям пакета</a></div>
+<div class="next"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8-%D0%B8-%D0%BF%D1%80%D0%BE%D1%87%D0%B0%D1%8F-%D0%BE%D0%BF%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><span class="header-section-number">9</span> Виньетки и прочая опциональная документация пакета</a></li>
+<li>
+<a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-8"><span class="header-section-number">9.1</span> Видео</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-8"><span class="header-section-number">9.1.1</span> Тайм коды</a></li></ul>
+</li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-8"><span class="header-section-number">9.2</span> Презентация</a></li>
+<li>
+<a class="nav-link" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-8"><span class="header-section-number">9.3</span> Конспект</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8"><span class="header-section-number">9.3.1</span> Виньетки</a></li>
+<li><a class="nav-link" href="#readme"><span class="header-section-number">9.3.2</span> README</a></li>
+<li><a class="nav-link" href="#news"><span class="header-section-number">9.3.3</span> NEWS</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82-6"><span class="header-section-number">9.4</span> Тест</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          
+<li><a id="book-source" href="https://github.com/selesnow/r_package_course/blob/master/09-vignetts.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/selesnow/r_package_course/edit/master/09-vignetts.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -4565,7 +4601,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-09-11.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-10-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
