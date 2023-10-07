@@ -22,7 +22,7 @@
 ------
 
 ## Видео
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ojo8CZUPS2k?si=hzqdSa8xdl3fGo7A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ojo8CZUPS2k?si=hzqdSa8xdl3fGo7A&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### Тайм коды
 
