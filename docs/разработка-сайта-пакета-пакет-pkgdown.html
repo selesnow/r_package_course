@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Урок 8 Разработка сайта пакета (пакет pkgdown) | Курс 'Разработка пакетов на языке R'</title>
+<title>Урок 10 Разработка сайта пакета (пакет pkgdown) | Курс 'Разработка пакетов на языке R'</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="К этому уроку мы уже изучили множество типов документации, которые можно добавить в ваш пакет, в этом уроке мы разберёмся с тем, как объединить всю разработанную ранее документацию и сформировать...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Урок 8 Разработка сайта пакета (пакет pkgdown) | Курс 'Разработка пакетов на языке R'">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="Урок 10 Разработка сайта пакета (пакет pkgdown) | Курс 'Разработка пакетов на языке R'">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://selesnow.github.io/r_package_course/разработка-сайта-пакета-пакет-pkgdown.html">
 <meta property="og:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
 <meta property="og:description" content="К этому уроку мы уже изучили множество типов документации, которые можно добавить в ваш пакет, в этом уроке мы разберёмся с тем, как объединить всю разработанную ранее документацию и сформировать...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Урок 8 Разработка сайта пакета (пакет pkgdown) | Курс 'Разработка пакетов на языке R'">
+<meta name="twitter:title" content="Урок 10 Разработка сайта пакета (пакет pkgdown) | Курс 'Разработка пакетов на языке R'">
 <meta name="twitter:description" content="К этому уроку мы уже изучили множество типов документации, которые можно добавить в ваш пакет, в этом уроке мы разберёмся с тем, как объединить всю разработанную ранее документацию и сформировать...">
 <meta name="twitter:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -58,16 +58,36 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Урок 8</span> Разработка сайта пакета (пакет pkgdown)</a></li></ul>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="" href="%D0%B2%D0%B2%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5-%D1%81%D0%BB%D0%BE%D0%B2%D0%BE.html">Вводное слово</a></li>
+<li class="book-part">Начало разработки</li>
+<li><a class="" href="%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">1</span> Обзор рабочего процесса разработки пакета</a></li>
+<li><a class="" href="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D1%81-github.html"><span class="header-section-number">2</span> Настройка системы и интеграция с GitHub</a></li>
+<li class="book-part">Компоненты пакета</li>
+<li><a class="" href="%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8-%D0%BF%D0%BE-%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8-r-%D0%BA%D0%BE%D0%B4%D0%B0.html"><span class="header-section-number">3</span> Рекомендации по организации R кода</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%B2-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82.html"><span class="header-section-number">4</span> Добавление данных в пакет</a></li>
+<li><a class="" href="description---%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">5</span> DESCRIPTION - Метаданные пакета</a></li>
+<li><a class="" href="namespace---%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">6</span> NAMESPACE - Зависимости пакета</a></li>
+<li class="book-part">Тестирование</li>
+<li><a class="" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-testthat.html"><span class="header-section-number">7</span> Разработка юнит-тестов к функциям пакета (пакет testthat)</a></li>
+<li class="book-part">Документация</li>
+<li><a class="" href="%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">8</span> Написание документации к функциям пакета</a></li>
+<li><a class="" href="%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8-%D0%B8-%D0%BF%D1%80%D0%BE%D1%87%D0%B0%D1%8F-%D0%BE%D0%BF%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">9</span> Виньетки и прочая опциональная документация пакета</a></li>
+<li><a class="active" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%81%D0%B0%D0%B9%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-pkgdown.html"><span class="header-section-number">10</span> Разработка сайта пакета (пакет pkgdown)</a></li>
+<li class="book-part">Прочее</li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></li>
+<li><a class="" href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></li>
+</ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/selesnow/r_package_course">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="разработка-сайта-пакета-пакет-pkgdown" class="section level1" number="8">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="разработка-сайта-пакета-пакет-pkgdown" class="section level1" number="10">
 <h1>
-<span class="header-section-number">Урок 8</span> Разработка сайта пакета (пакет pkgdown)<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%81%D0%B0%D0%B9%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-pkgdown"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Урок 10</span> Разработка сайта пакета (пакет pkgdown)<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%81%D0%B0%D0%B9%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-pkgdown"><i class="fas fa-link"></i></a>
 </h1>
 <hr>
 <p>К этому уроку мы уже изучили множество типов документации, которые можно добавить в ваш пакет, в этом уроке мы разберёмся с тем, как объединить всю разработанную ранее документацию и сформировать из неё сайт вашего пакета.</p>
@@ -81,15 +101,15 @@
 </ul>
 </div>
 <hr>
-<div id="видео-7" class="section level2" number="8.1">
+<div id="видео-9" class="section level2" number="10.1">
 <h2>
-<span class="header-section-number">8.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-9"><i class="fas fa-link"></i></a>
 </h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3_kGMO-UV3M?si=75v_fA0Z02Lzi0dx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3_kGMO-UV3M?si=75v_fA0Z02Lzi0dx&amp;enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
 </iframe>
-<div id="тайм-коды-7" class="section level3" number="8.1.1">
+<div id="тайм-коды-9" class="section level3" number="10.1.1">
 <h3>
-<span class="header-section-number">8.1.1</span> Тайм коды<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.1</span> Тайм коды<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-9"><i class="fas fa-link"></i></a>
 </h3>
 <p>00:00 Вступление<br>
 01:13 Обзор рабочего процесса<br>
@@ -108,20 +128,20 @@
 23:51 Заключение<br></p>
 </div>
 </div>
-<div id="презентация-7" class="section level2" number="8.2">
+<div id="презентация-9" class="section level2" number="10.2">
 <h2>
-<span class="header-section-number">8.2</span> Презентация<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2</span> Презентация<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-9"><i class="fas fa-link"></i></a>
 </h2>
 <iframe src="https://www.slideshare.net/slideshow/embed_code/key/gD7WiHFfz7grkP?hostedIn=slideshare&amp;page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no">
 </iframe>
 </div>
-<div id="конспект-7" class="section level2" number="8.3">
+<div id="конспект-9" class="section level2" number="10.3">
 <h2>
-<span class="header-section-number">8.3</span> Конспект<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3</span> Конспект<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-9"><i class="fas fa-link"></i></a>
 </h2>
-<div id="рабочий-процесс-4" class="section level3" number="8.3.1">
+<div id="рабочий-процесс-5" class="section level3" number="10.3.1">
 <h3>
-<span class="header-section-number">8.3.1</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.1</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-5"><i class="fas fa-link"></i></a>
 </h3>
 <p>По гачалу может казаться, что создание сайта пакета весьма трудоёмкий процесс, но на самом деле создание первой версии пакета займёт у вас не более пяти минут. Рабочий процесс состоит из следующих 3 этапов:</p>
 <ol style="list-style-type: decimal">
@@ -146,9 +166,9 @@
 </ol>
 <p>Теперь у вашего пакета есть сайт, и при отправке любого коммита на GitHub он будет автоматически пересобираться.</p>
 </div>
-<div id="разделы-сайта-по-умолчанию" class="section level3" number="8.3.2">
+<div id="разделы-сайта-по-умолчанию" class="section level3" number="10.3.2">
 <h3>
-<span class="header-section-number">8.3.2</span> Разделы сайта по умолчанию<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%D1%8B-%D1%81%D0%B0%D0%B9%D1%82%D0%B0-%D0%BF%D0%BE-%D1%83%D0%BC%D0%BE%D0%BB%D1%87%D0%B0%D0%BD%D0%B8%D1%8E"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.2</span> Разделы сайта по умолчанию<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%D1%8B-%D1%81%D0%B0%D0%B9%D1%82%D0%B0-%D0%BF%D0%BE-%D1%83%D0%BC%D0%BE%D0%BB%D1%87%D0%B0%D0%BD%D0%B8%D1%8E"><i class="fas fa-link"></i></a>
 </h3>
 <p>Теперь давайте разберёмся из каких компоненотов документации был сгенерирован наш сайт. По умолчанию он имеет следующие разделы:</p>
 <ol style="list-style-type: decimal">
@@ -159,18 +179,18 @@
 <li>get started - данный раздел формируется из виньетки, название которой соответвует названию вашего пакета, т.е. <code>pkg_name.Rmd</code>. Если такой виньетки в вашем пакете нет, то раздел "Get started" не будет добавлен на навигационную панель.</li>
 </ol>
 </div>
-<div id="файл-_pkgdown.yml" class="section level3" number="8.3.3">
+<div id="файл-_pkgdown.yml" class="section level3" number="10.3.3">
 <h3>
-<span class="header-section-number">8.3.3</span> Файл _pkgdown.yml<a class="anchor" aria-label="anchor" href="#%D1%84%D0%B0%D0%B9%D0%BB-_pkgdown.yml"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.3</span> Файл _pkgdown.yml<a class="anchor" aria-label="anchor" href="#%D1%84%D0%B0%D0%B9%D0%BB-_pkgdown.yml"><i class="fas fa-link"></i></a>
 </h3>
 <p>Файл <code>_pkgdown.yml</code> является основным кофигом вашего сайта, и именну с его помощью вы можете контролировать и изменять его внешний вид и структуру любого его элемента. Вся остальная часть урока будет посвящена его настройке. По умолчанию этот файл содержит всего 3 строки:</p>
 <pre><code>url: https://selesnow.github.io/firstpackage/
 template:
   bootstrap: 5</code></pre>
 </div>
-<div id="группировка-списка-документации-функций" class="section level3" number="8.3.4">
+<div id="группировка-списка-документации-функций" class="section level3" number="10.3.4">
 <h3>
-<span class="header-section-number">8.3.4</span> Группировка списка документации функций<a class="anchor" aria-label="anchor" href="#%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B0-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.4</span> Группировка списка документации функций<a class="anchor" aria-label="anchor" href="#%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B0-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B9"><i class="fas fa-link"></i></a>
 </h3>
 <p>По умолчанию все функции представленные в разделе reference упорядочены в алфавитном порядке, что далеко не всегда удобно. Но вы можете настроить группировку функций в отдельные разделы, и отсортировать как порядок этих разделов, так и список функций, входящих в каждый раздел. Для управления списком функций в разделе reference добавьте их описание в поле reference файла <code>_pkgdown.yml</code>, ниже пример из моего пакета <code>rgoogleads</code>:</p>
 <pre><code>reference:
@@ -255,9 +275,9 @@ template:
 <code>contents</code> - список названий функций для включения в раздел</li>
 </ul>
 </div>
-<div id="организация-списка-статей" class="section level3" number="8.3.5">
+<div id="организация-списка-статей" class="section level3" number="10.3.5">
 <h3>
-<span class="header-section-number">8.3.5</span> Организация списка статей<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B0-%D1%81%D1%82%D0%B0%D1%82%D0%B5%D0%B9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.5</span> Организация списка статей<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B0-%D1%81%D1%82%D0%B0%D1%82%D0%B5%D0%B9"><i class="fas fa-link"></i></a>
 </h3>
 <p>Раздел <code>articles</code> состоит из статей, которые формируются из виньеток пакета. Вам не обязательно включать в сборку пакета абсолютно все статьи в виде виньеток. Виньетки вы добавляете функцией <code><a href="https://usethis.r-lib.org/reference/use_vignette.html">usethis::use_vignette()</a></code>, но, если вы хотите добавить статью в раздел <code>articles</code> сайта пакета, но не планируюете включать её в сборку пакета, используйте функцию <code><a href="https://usethis.r-lib.org/reference/use_vignette.html">usethis::use_article()</a></code>. В таком случае путь к этой статье будет добавлен в файл <code>.Rbuildignore</code>, и будет исключён из сборки пакета, а на сайте это будет обычная статья.</p>
 <p>Так же как и список функций, список статей на вашем сайте тоже можно группировать в разделы, и сортировать. За управление списком статей в файле <code>_pkgdown.yml</code> отвечает поле <code>articles</code>. Например, в пакете <code>dplyr</code> оно выглядит следующим образом:</p>
@@ -294,9 +314,9 @@ template:
 </ul>
 <p>Виньетки, которые не были перечислены в поле <code>articles</code> попадают в блок <code>Other</code>.</p>
 </div>
-<div id="навигационная-панель" class="section level3" number="8.3.6">
+<div id="навигационная-панель" class="section level3" number="10.3.6">
 <h3>
-<span class="header-section-number">8.3.6</span> Навигационная панель<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D0%B2%D0%B8%D0%B3%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F-%D0%BF%D0%B0%D0%BD%D0%B5%D0%BB%D1%8C"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.6</span> Навигационная панель<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D0%B2%D0%B8%D0%B3%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F-%D0%BF%D0%B0%D0%BD%D0%B5%D0%BB%D1%8C"><i class="fas fa-link"></i></a>
 </h3>
 <p>Контролироваьт навигационную панель вашего сайта можно с помощью поля <code>navbar</code> вашего <code>_pkgdown.yml</code>. Для примера на сайте пакета <code>rgoogleads</code> она описана следующим образом:</p>
 <pre><code>navbar:
@@ -334,9 +354,9 @@ template:
 </li>
 </ul>
 </div>
-<div id="боковая-панель" class="section level3" number="8.3.7">
+<div id="боковая-панель" class="section level3" number="10.3.7">
 <h3>
-<span class="header-section-number">8.3.7</span> Боковая панель<a class="anchor" aria-label="anchor" href="#%D0%B1%D0%BE%D0%BA%D0%BE%D0%B2%D0%B0%D1%8F-%D0%BF%D0%B0%D0%BD%D0%B5%D0%BB%D1%8C"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.7</span> Боковая панель<a class="anchor" aria-label="anchor" href="#%D0%B1%D0%BE%D0%BA%D0%BE%D0%B2%D0%B0%D1%8F-%D0%BF%D0%B0%D0%BD%D0%B5%D0%BB%D1%8C"><i class="fas fa-link"></i></a>
 </h3>
 <p>За боковую панель отвечает поле <code>home.sidebar</code>, вот небольшой пример её описания:</p>
 <pre><code>home:
@@ -367,9 +387,9 @@ template:
 </li>
 </ul>
 </div>
-<div id="тема-сайта" class="section level3" number="8.3.8">
+<div id="тема-сайта" class="section level3" number="10.3.8">
 <h3>
-<span class="header-section-number">8.3.8</span> Тема сайта<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D0%BC%D0%B0-%D1%81%D0%B0%D0%B9%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.8</span> Тема сайта<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D0%BC%D0%B0-%D1%81%D0%B0%D0%B9%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h3>
 <p>Помимо того, что вы можете изменять любые элемента сайта, вы в целом можете изменять его цветовую схему. Для этого посмотрите галерею тем на сайте <a href="https://bootswatch.com/">bootswatch</a>. И укажите название нужной темы в поле <code>template.bootswatch</code>.</p>
 <pre><code>url: https://selesnow.github.io/firstpackage/
@@ -377,12 +397,12 @@ template:
   bootstrap: 5
   bootswatch: solar</code></pre>
 </div>
-<div id="логотип-пакета" class="section level3" number="8.3.9">
+<div id="логотип-пакета" class="section level3" number="10.3.9">
 <h3>
-<span class="header-section-number">8.3.9</span> Логотип пакета<a class="anchor" aria-label="anchor" href="#%D0%BB%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.9</span> Логотип пакета<a class="anchor" aria-label="anchor" href="#%D0%BB%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h3>
 <p>Для начала создайте шестиугольный логотип вашего пакета либо в любом графическом редакторе, либо с помощью пакета <code>hexSticker</code>. Ниже небольшой пример создания логотипа с помощью изображения по ссылке, или графика <code>ggplot2</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/GuangchuangYu/hexSticker">hexSticker</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># из изображения</span></span>
@@ -431,9 +451,9 @@ template:
 <li>Включит логотип в ваш сайт</li>
 </ul>
 </div>
-<div id="добавляем-счётчик-google-analytics" class="section level3" number="8.3.10">
+<div id="добавляем-счётчик-google-analytics" class="section level3" number="10.3.10">
 <h3>
-<span class="header-section-number">8.3.10</span> Добавляем счётчик Google Analytics<a class="anchor" aria-label="anchor" href="#%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81%D1%87%D1%91%D1%82%D1%87%D0%B8%D0%BA-google-analytics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.10</span> Добавляем счётчик Google Analytics<a class="anchor" aria-label="anchor" href="#%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81%D1%87%D1%91%D1%82%D1%87%D0%B8%D0%BA-google-analytics"><i class="fas fa-link"></i></a>
 </h3>
 <p>Настроить отслеживание посещения сайта вашего пакета можно прописав в поле <code>template.params.ganalytics</code> идентификатор вашего аккаунта Google Analytics:</p>
 <pre><code>template:
@@ -442,9 +462,9 @@ template:
     ganalytics: UA-114798296-1</code></pre>
 </div>
 </div>
-<div id="тест-6" class="section level2" number="8.4">
+<div id="тест-7" class="section level2" number="10.4">
 <h2>
-<span class="header-section-number">8.4</span> Тест<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4</span> Тест<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82-7"><i class="fas fa-link"></i></a>
 </h2>
 <iframe id="otp_wgt_7xsedqfxdea7u" src="https://onlinetestpad.com/7xsedqfxdea7u" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_7xsedqfxdea7u'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
 </iframe>
@@ -523,6 +543,9 @@ template:
 
 </div>
 </div>
+
+
+
 <script>
 
 /* update total correct if #webex-total_correct exists */
@@ -729,15 +752,37 @@ window.onload = function() {
 }
 
 </script><div class="chapter-nav">
-<div class="empty"></div>
-<div class="empty"></div>
+<div class="prev"><a href="%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8-%D0%B8-%D0%BF%D1%80%D0%BE%D1%87%D0%B0%D1%8F-%D0%BE%D0%BF%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">9</span> Виньетки и прочая опциональная документация пакета</a></div>
+<div class="next"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%81%D0%B0%D0%B9%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-pkgdown"><span class="header-section-number">10</span> Разработка сайта пакета (пакет pkgdown)</a></li>
+<li>
+<a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-9"><span class="header-section-number">10.1</span> Видео</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-9"><span class="header-section-number">10.1.1</span> Тайм коды</a></li></ul>
+</li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-9"><span class="header-section-number">10.2</span> Презентация</a></li>
+<li>
+<a class="nav-link" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-9"><span class="header-section-number">10.3</span> Конспект</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-5"><span class="header-section-number">10.3.1</span> Рабочий процесс</a></li>
+<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%D1%8B-%D1%81%D0%B0%D0%B9%D1%82%D0%B0-%D0%BF%D0%BE-%D1%83%D0%BC%D0%BE%D0%BB%D1%87%D0%B0%D0%BD%D0%B8%D1%8E"><span class="header-section-number">10.3.2</span> Разделы сайта по умолчанию</a></li>
+<li><a class="nav-link" href="#%D1%84%D0%B0%D0%B9%D0%BB-_pkgdown.yml"><span class="header-section-number">10.3.3</span> Файл _pkgdown.yml</a></li>
+<li><a class="nav-link" href="#%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B0-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B9"><span class="header-section-number">10.3.4</span> Группировка списка документации функций</a></li>
+<li><a class="nav-link" href="#%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B0-%D1%81%D1%82%D0%B0%D1%82%D0%B5%D0%B9"><span class="header-section-number">10.3.5</span> Организация списка статей</a></li>
+<li><a class="nav-link" href="#%D0%BD%D0%B0%D0%B2%D0%B8%D0%B3%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F-%D0%BF%D0%B0%D0%BD%D0%B5%D0%BB%D1%8C"><span class="header-section-number">10.3.6</span> Навигационная панель</a></li>
+<li><a class="nav-link" href="#%D0%B1%D0%BE%D0%BA%D0%BE%D0%B2%D0%B0%D1%8F-%D0%BF%D0%B0%D0%BD%D0%B5%D0%BB%D1%8C"><span class="header-section-number">10.3.7</span> Боковая панель</a></li>
+<li><a class="nav-link" href="#%D1%82%D0%B5%D0%BC%D0%B0-%D1%81%D0%B0%D0%B9%D1%82%D0%B0"><span class="header-section-number">10.3.8</span> Тема сайта</a></li>
+<li><a class="nav-link" href="#%D0%BB%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><span class="header-section-number">10.3.9</span> Логотип пакета</a></li>
+<li><a class="nav-link" href="#%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81%D1%87%D1%91%D1%82%D1%87%D0%B8%D0%BA-google-analytics"><span class="header-section-number">10.3.10</span> Добавляем счётчик Google Analytics</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82-7"><span class="header-section-number">10.4</span> Тест</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          
+<li><a id="book-source" href="https://github.com/selesnow/r_package_course/blob/master/10-website.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/selesnow/r_package_course/edit/master/10-website.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -749,7 +794,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-09-11.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-10-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
