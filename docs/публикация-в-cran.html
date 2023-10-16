@@ -4,23 +4,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Урок 8 Публикация в CRAN | Курс 'Разработка пакетов на языке R'</title>
+<title>Урок 11 Публикация в CRAN | Курс 'Разработка пакетов на языке R'</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="К этому моменту за 10 предыдущих уроков курса мы изучили все этапы процесса разработки собственного пакета, в этом уроке мы поговорим о том, как опубликовать ваш готовый пакет в основном...">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
-<meta property="og:title" content="Урок 8 Публикация в CRAN | Курс 'Разработка пакетов на языке R'">
+<meta property="og:title" content="Урок 11 Публикация в CRAN | Курс 'Разработка пакетов на языке R'">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://selesnow.github.io/r_package_course/публикация-в-cran.html">
 <meta property="og:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
 <meta property="og:description" content="К этому моменту за 10 предыдущих уроков курса мы изучили все этапы процесса разработки собственного пакета, в этом уроке мы поговорим о том, как опубликовать ваш готовый пакет в основном...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Урок 8 Публикация в CRAN | Курс 'Разработка пакетов на языке R'">
+<meta name="twitter:title" content="Урок 11 Публикация в CRAN | Курс 'Разработка пакетов на языке R'">
 <meta name="twitter:description" content="К этому моменту за 10 предыдущих уроков курса мы изучили все этапы процесса разработки собственного пакета, в этом уроке мы поговорим о том, как опубликовать ваш готовый пакет в основном...">
 <meta name="twitter:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -53,16 +58,38 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Урок 8</span> Публикация в CRAN</a></li></ul>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="" href="%D0%B2%D0%B2%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5-%D1%81%D0%BB%D0%BE%D0%B2%D0%BE.html">Вводное слово</a></li>
+<li class="book-part">Начало разработки</li>
+<li><a class="" href="%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">1</span> Обзор рабочего процесса разработки пакета</a></li>
+<li><a class="" href="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D1%81-github.html"><span class="header-section-number">2</span> Настройка системы и интеграция с GitHub</a></li>
+<li class="book-part">Компоненты пакета</li>
+<li><a class="" href="%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8-%D0%BF%D0%BE-%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8-r-%D0%BA%D0%BE%D0%B4%D0%B0.html"><span class="header-section-number">3</span> Рекомендации по организации R кода</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%B2-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82.html"><span class="header-section-number">4</span> Добавление данных в пакет</a></li>
+<li><a class="" href="description---%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">5</span> DESCRIPTION - Метаданные пакета</a></li>
+<li><a class="" href="namespace---%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">6</span> NAMESPACE - Зависимости пакета</a></li>
+<li class="book-part">Тестирование</li>
+<li><a class="" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-testthat.html"><span class="header-section-number">7</span> Разработка юнит-тестов к функциям пакета (пакет testthat)</a></li>
+<li class="book-part">Документация</li>
+<li><a class="" href="%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">8</span> Написание документации к функциям пакета</a></li>
+<li><a class="" href="%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8-%D0%B8-%D0%BF%D1%80%D0%BE%D1%87%D0%B0%D1%8F-%D0%BE%D0%BF%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">9</span> Виньетки и прочая опциональная документация пакета</a></li>
+<li><a class="" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%81%D0%B0%D0%B9%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-pkgdown.html"><span class="header-section-number">10</span> Разработка сайта пакета (пакет pkgdown)</a></li>
+<li class="book-part">Публикацмя</li>
+<li><a class="active" href="%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F-%D0%B2-cran.html"><span class="header-section-number">11</span> Публикация в CRAN</a></li>
+<li class="book-part">Прочее</li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></li>
+<li><a class="" href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></li>
+</ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/selesnow/r_package_course">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="публикация-в-cran" class="section level1" number="8">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="публикация-в-cran" class="section level1" number="11">
 <h1>
-<span class="header-section-number">Урок 8</span> Публикация в CRAN<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F-%D0%B2-cran"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Урок 11</span> Публикация в CRAN<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F-%D0%B2-cran"><i class="fas fa-link"></i></a>
 </h1>
 <hr>
 <p>К этому моменту за 10 предыдущих уроков курса мы изучили все этапы процесса разработки собственного пакета, в этом уроке мы поговорим о том, как опубликовать ваш готовый пакет в основном репозитории хранения R пакетов - CRAN.</p>
@@ -71,15 +98,15 @@
 <p><em>Данный урок основан на главе <a href="https://r-pkgs.org/release.html">"Releasing to CRAN"</a> книги <a href="https://r-pkgs.org/">"R Packages (2e)"</a>, под авторством Хедли Викхема и Дженни Брайан.</em></p>
 </div>
 <hr>
-<div id="видео-7" class="section level2" number="8.1">
+<div id="видео-10" class="section level2" number="11.1">
 <h2>
-<span class="header-section-number">8.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-10"><i class="fas fa-link"></i></a>
 </h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FAwgtfGINoo?si=zol_sIU_wQ0Jahhk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FAwgtfGINoo?si=zol_sIU_wQ0Jahhk&amp;enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
 </iframe>
-<div id="тайм-коды-7" class="section level3" number="8.1.1">
+<div id="тайм-коды-10" class="section level3" number="11.1.1">
 <h3>
-<span class="header-section-number">8.1.1</span> Тайм коды<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1.1</span> Тайм коды<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-10"><i class="fas fa-link"></i></a>
 </h3>
 <p>00:00 Вступление<br>
 01:03 Настройка непрерывной интеграции для регулярной проверки вашего пакета на разных платформах с помощью GitHub Actions<br>
@@ -96,20 +123,20 @@
 28:22 Заключения<br></p>
 </div>
 </div>
-<div id="презентация-7" class="section level2" number="8.2">
+<div id="презентация-10" class="section level2" number="11.2">
 <h2>
-<span class="header-section-number">8.2</span> Презентация<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2</span> Презентация<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-10"><i class="fas fa-link"></i></a>
 </h2>
 <iframe src="https://www.slideshare.net/slideshow/embed_code/key/FEUT2ZcuiHFadz?hostedIn=slideshare&amp;page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no">
 </iframe>
 </div>
-<div id="конспект-7" class="section level2" number="8.3">
+<div id="конспект-10" class="section level2" number="11.3">
 <h2>
-<span class="header-section-number">8.3</span> Конспект<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3</span> Конспект<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-10"><i class="fas fa-link"></i></a>
 </h2>
-<div id="рабочий-процесс-1" class="section level3" number="8.3.1">
+<div id="рабочий-процесс-6" class="section level3" number="11.3.1">
 <h3>
-<span class="header-section-number">8.3.1</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3.1</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-6"><i class="fas fa-link"></i></a>
 </h3>
 <p>На этом этапе весь функционал вашего пакета уже реализован, ну или как минимум его MVP версия. И вы готовы поделиться с широкой общественностью вашей разработкой опубликовав свой пакет на CRAN. Этот процесс состоит из следующих этапов:</p>
 <ol style="list-style-type: decimal">
@@ -124,26 +151,26 @@
 </ol>
 <p>Теперь давайте немного подробнее разберём все этапы.</p>
 </div>
-<div id="безпрерывная-проверка-пакета" class="section level3" number="8.3.2">
+<div id="безпрерывная-проверка-пакета" class="section level3" number="11.3.2">
 <h3>
-<span class="header-section-number">8.3.2</span> Безпрерывная проверка пакета<a class="anchor" aria-label="anchor" href="#%D0%B1%D0%B5%D0%B7%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3.2</span> Безпрерывная проверка пакета<a class="anchor" aria-label="anchor" href="#%D0%B1%D0%B5%D0%B7%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h3>
 <p>В ходе курса я неоднократно говорил о том, что в процессе разработки пакета как можно чаще запускайте проверку с помощью функции <code><a href="https://devtools.r-lib.org/reference/check.html">devtools::check()</a></code>, поскольку это поможет быстро узнать об ошибке, что в свою очередь сильно облегчит её исправление. Минус запуска команды <code><a href="https://devtools.r-lib.org/reference/check.html">devtools::check()</a></code> заключается в том, что все проверки реализуются исключительно на вашей операционной системе, и с начтроенной вами средой. У пользователей вашего пакета вполне может быть другая ОС, и однозначно по другому будет настроена рабочая среда, поэтому в идеале проверки должны быть независимыми ни от операционной системы, ни тем более от её настроек и состояния рабочего окружение. Организовать безпрерывное тестирование на удалённых серверах, отдельно на Windows, Linux и MacOS можно настроив безпрерывную интеграцию с помощью сервиса GitHub Actions.</p>
 <p>Для этого откройте проект вашего пакета и запустите команду <code>usethis::use_github_action("check-standard")</code>. После чего в папке <code>.github/workflows</code> будет создан новый yml файл для настройки GitHub Action, который будет запускаться на GithUb при каждом вашем коммите, и запускать полный процес проверки вашего пакета на всех платформах, на которых работает R.</p>
 <p>Сервис GitHub Actions мы с вами уже использовали в уроке по разработке сайта пакета. Тогда мы настраивали автоматический пересбор сайта после каждого коммита.</p>
 </div>
-<div id="создайте-тикет-со-списком-действий" class="section level3" number="8.3.3">
+<div id="создайте-тикет-со-списком-действий" class="section level3" number="11.3.3">
 <h3>
-<span class="header-section-number">8.3.3</span> Создайте тикет со списком действий<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%B9%D1%82%D0%B5-%D1%82%D0%B8%D0%BA%D0%B5%D1%82-%D1%81%D0%BE-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%BE%D0%BC-%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D0%B9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3.3</span> Создайте тикет со списком действий<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%B9%D1%82%D0%B5-%D1%82%D0%B8%D0%BA%D0%B5%D1%82-%D1%81%D0%BE-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%BE%D0%BC-%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D0%B9"><i class="fas fa-link"></i></a>
 </h3>
 <p>Теперь создайте на GitHub специальный тикет со списком действий, необходмых при публикации пакета на CRAN, делается это с помощью команды <code><a href="https://usethis.r-lib.org/reference/use_release_issue.html">usethis::use_release_issue()</a></code>.</p>
 <p>Созданный тикет будет содержать примерно такой список:</p>
 <div class="inline-figure"><img src="img/cran-1t.png"></div>
 <p>Данный список содержит описание всех действий, которые вам необходимо выполниьт, что бы ваш пакет был опубликован в CRAN. Далее мы разберём основные действия более подробно.</p>
 </div>
-<div id="действия-при-первой-публикации-пакета" class="section level3" number="8.3.4">
+<div id="действия-при-первой-публикации-пакета" class="section level3" number="11.3.4">
 <h3>
-<span class="header-section-number">8.3.4</span> Действия при первой публикации пакета<a class="anchor" aria-label="anchor" href="#%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F-%D0%BF%D1%80%D0%B8-%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%B9-%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3.4</span> Действия при первой публикации пакета<a class="anchor" aria-label="anchor" href="#%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F-%D0%BF%D1%80%D0%B8-%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%B9-%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h3>
 <p>Если вы отправляете свой пакет на CRAN впервые, то для начала сделайте следующее:</p>
 <ul>
@@ -171,16 +198,16 @@ Description: Interface for loading data from 'Google Ads API',
     see &lt;https://developers.google.com/google-ads/api/docs/start&gt;. 
     Package provide function for authorization and loading reports.</code></pre>
 </div>
-<div id="дополнительные-проверки-перед-отправкой" class="section level3" number="8.3.5">
+<div id="дополнительные-проверки-перед-отправкой" class="section level3" number="11.3.5">
 <h3>
-<span class="header-section-number">8.3.5</span> Дополнительные проверки перед отправкой<a class="anchor" aria-label="anchor" href="#%D0%B4%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8-%D0%BF%D0%B5%D1%80%D0%B5%D0%B4-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%BE%D0%B9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3.5</span> Дополнительные проверки перед отправкой<a class="anchor" aria-label="anchor" href="#%D0%B4%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8-%D0%BF%D0%B5%D1%80%D0%B5%D0%B4-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%BE%D0%B9"><i class="fas fa-link"></i></a>
 </h3>
 <p>Далее стоит выполнить несколько дополнительных проверок.</p>
 <p>Функция <code>devtools::check(remote = TRUE, manual = TRUE)</code> за счёт установленных значений аргументов <code>remote</code> и <code>manual</code> добавляет в процесс проверки некоторые дополнительные этапы, которые так же включены в проверке CRAN.</p>
 <p>Далее вам надо использовать функцию <code><a href="https://rdrr.io/pkg/urlchecker/man/url_check.html">urlchecker::url_check()</a></code> для проверки корректности всех ссылок, которые вы указывали в документации своего пакета.</p>
 <p>Следующим запускаете проверку функцией <code><a href="https://devtools.r-lib.org/reference/check_win.html">devtools::check_win_devel()</a></code>, которая отправит ваш пакет на проверку на сервис win-builder CRAN. Результаты этой проверки вы получите на почту в течении 15-30 минут.</p>
 <p>Последняя рекомендуемая проверка - сервис Rhub. Для работы с ним используйте пакет <code>rhub</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rhub</span><span class="fu">::</span><span class="fu"><a href="https://r-hub.github.io/rhub/reference/validate_email.html">validate_email</a></span><span class="op">(</span><span class="st">'ваш имейл'</span><span class="op">)</span></span>
 <span><span class="fu">rhub</span><span class="fu">::</span><span class="fu"><a href="https://r-hub.github.io/rhub/reference/check_for_cran.html">check_for_cran</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Сначала вам необходимо валидировать ваш email, команда <code>rhub::validate_email('ваш имейл')</code> сгенерирует на вашу почту письмо с токеном, скопируйте его, и вставьте в консоль в ответ на запрос <code>Token:</code>.</p>
@@ -189,9 +216,9 @@ Description: Interface for loading data from 'Google Ads API',
 <p>На уведомление <code>checking CRAN incoming feasibility ... [8s/59s] WARNING Maintainer: ‘Alexey Seleznev &lt;selesnow@gmail.com&gt;’</code> можете не обращать внимание, это уведомление исключительно для команды CRAN, и не говорит о том. что в вашем пакете есть какие либо проблемы.</p>
 <p>Все вышеперечисленные проверки обязательно должны пройти успешно, т.е. результат не должен содержать ниодной ошибки и предупреждения (кроме того, о котором я написал выше), и желательно не сожержать уведомлений (NOTES).</p>
 </div>
-<div id="процесс-отправки-пакета" class="section level3" number="8.3.6">
+<div id="процесс-отправки-пакета" class="section level3" number="11.3.6">
 <h3>
-<span class="header-section-number">8.3.6</span> Процесс отправки пакета<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3.6</span> Процесс отправки пакета<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h3>
 <p>Если ваш пакет успещно прошел все перечисленные в предыдущем пункте проверки - вы готовы к его публикации на CRAN. Теперь пришло время изменить версию пакета командой <code><a href="https://usethis.r-lib.org/reference/use_version.html">usethis::use_version()</a></code>. Далее отправить пакет на CRAN одной из соедующих команд:</p>
 <ul>
@@ -203,9 +230,9 @@ Description: Interface for loading data from 'Google Ads API',
 <p>Каждая из этих функций в итоге отправляет пакет на CRAN, а уже сам CRAN отправляет вам на email письмо для валидации адреса. Откройте вашу почту и перейдите по ссылке указанной в письме. После чего вы будете перенаправлены на CRAN, где должны поставить несколько галочек, и подтвердить что выполнили все необходимые этапы подготовки вашего пакета перед его публикацией.</p>
 <p>Теперь ваш пакет находится в стадии проверки со стороны CRAN.</p>
 </div>
-<div id="проверка-пакета-на-стороне-cran" class="section level3" number="8.3.7">
+<div id="проверка-пакета-на-стороне-cran" class="section level3" number="11.3.7">
 <h3>
-<span class="header-section-number">8.3.7</span> Проверка пакета на стороне CRAN<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BD%D0%B0-%D1%81%D1%82%D0%BE%D1%80%D0%BE%D0%BD%D0%B5-cran"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3.7</span> Проверка пакета на стороне CRAN<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BD%D0%B0-%D1%81%D1%82%D0%BE%D1%80%D0%BE%D0%BD%D0%B5-cran"><i class="fas fa-link"></i></a>
 </h3>
 <p>Схематически весь дальнейший процесс проверки вашего пакета выглядит так:</p>
 <div class="inline-figure"><img src="img/cran-3.png"></div>
@@ -223,9 +250,9 @@ Description: Interface for loading data from 'Google Ads API',
 </ol>
 <p>Важно терпимо относится к полученному вами ответу и комментарию от сотрудника CRAN, даже если ваш пакет был отклонён. Внимательно почитай по какой именно причине его отклонили, внесите требуемые правки, переключите версию пакета, и начинайте всё с первого пункта. Опубликовать свой первый пакет в CRAN достаточно сложно, наберитесь терпения, и наверняка всё в итоге получится.</p>
 </div>
-<div id="ваш-пакет-опубликован-на-cran" class="section level3" number="8.3.8">
+<div id="ваш-пакет-опубликован-на-cran" class="section level3" number="11.3.8">
 <h3>
-<span class="header-section-number">8.3.8</span> Ваш пакет опубликован на CRAN<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B0%D1%88-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-%D0%BE%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%BE%D0%B2%D0%B0%D0%BD-%D0%BD%D0%B0-cran"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3.8</span> Ваш пакет опубликован на CRAN<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B0%D1%88-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-%D0%BE%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%BE%D0%B2%D0%B0%D0%BD-%D0%BD%D0%B0-cran"><i class="fas fa-link"></i></a>
 </h3>
 <p>Наконец вы получили следующее письмо от команды CRAN</p>
 <div class="inline-figure"><img src="img/cran-4.png"></div>
@@ -239,9 +266,9 @@ Description: Interface for loading data from 'Google Ads API',
 <p>Вот мы с вами и прошлись весь путь разработки собственного пакета, подробно разабрав все его этапы.</p>
 </div>
 </div>
-<div id="тест-5" class="section level2" number="8.4">
+<div id="тест-8" class="section level2" number="11.4">
 <h2>
-<span class="header-section-number">8.4</span> Тест<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4</span> Тест<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82-8"><i class="fas fa-link"></i></a>
 </h2>
 <iframe id="otp_wgt_37rsxeipxrivm" src="https://onlinetestpad.com/37rsxeipxrivm" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_37rsxeipxrivm'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">
 </iframe>
@@ -320,6 +347,9 @@ Description: Interface for loading data from 'Google Ads API',
 
 </div>
 </div>
+
+
+
 <script>
 
 /* update total correct if #webex-total_correct exists */
@@ -526,15 +556,35 @@ window.onload = function() {
 }
 
 </script><div class="chapter-nav">
-<div class="empty"></div>
-<div class="empty"></div>
+<div class="prev"><a href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%81%D0%B0%D0%B9%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-pkgdown.html"><span class="header-section-number">10</span> Разработка сайта пакета (пакет pkgdown)</a></div>
+<div class="next"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F-%D0%B2-cran"><span class="header-section-number">11</span> Публикация в CRAN</a></li>
+<li>
+<a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-10"><span class="header-section-number">11.1</span> Видео</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%D1%82%D0%B0%D0%B9%D0%BC-%D0%BA%D0%BE%D0%B4%D1%8B-10"><span class="header-section-number">11.1.1</span> Тайм коды</a></li></ul>
+</li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-10"><span class="header-section-number">11.2</span> Презентация</a></li>
+<li>
+<a class="nav-link" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-10"><span class="header-section-number">11.3</span> Конспект</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-6"><span class="header-section-number">11.3.1</span> Рабочий процесс</a></li>
+<li><a class="nav-link" href="#%D0%B1%D0%B5%D0%B7%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><span class="header-section-number">11.3.2</span> Безпрерывная проверка пакета</a></li>
+<li><a class="nav-link" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%B9%D1%82%D0%B5-%D1%82%D0%B8%D0%BA%D0%B5%D1%82-%D1%81%D0%BE-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%BE%D0%BC-%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D0%B9"><span class="header-section-number">11.3.3</span> Создайте тикет со списком действий</a></li>
+<li><a class="nav-link" href="#%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F-%D0%BF%D1%80%D0%B8-%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%B9-%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><span class="header-section-number">11.3.4</span> Действия при первой публикации пакета</a></li>
+<li><a class="nav-link" href="#%D0%B4%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8-%D0%BF%D0%B5%D1%80%D0%B5%D0%B4-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%BE%D0%B9"><span class="header-section-number">11.3.5</span> Дополнительные проверки перед отправкой</a></li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><span class="header-section-number">11.3.6</span> Процесс отправки пакета</a></li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BD%D0%B0-%D1%81%D1%82%D0%BE%D1%80%D0%BE%D0%BD%D0%B5-cran"><span class="header-section-number">11.3.7</span> Проверка пакета на стороне CRAN</a></li>
+<li><a class="nav-link" href="#%D0%B2%D0%B0%D1%88-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-%D0%BE%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%BE%D0%B2%D0%B0%D0%BD-%D0%BD%D0%B0-cran"><span class="header-section-number">11.3.8</span> Ваш пакет опубликован на CRAN</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82-8"><span class="header-section-number">11.4</span> Тест</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          
+<li><a id="book-source" href="https://github.com/selesnow/r_package_course/blob/master/11-cran.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/selesnow/r_package_course/edit/master/11-cran.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -546,7 +596,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-09-18.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-10-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
