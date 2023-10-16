@@ -1,78 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>Решение заданий | Курс 'Разработка пакетов на языке R'</title>
-
-    <meta name="author" content="Алексей Селезнёв" />
-  
-   <meta name="description" content="Бесплатный видео курс по разработке собственных пакетов на языке R." />
-   <meta name="generator" content="placeholder" />
-  <meta property="og:title" content="Решение заданий | Курс 'Разработка пакетов на языке R'" />
-  <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://selesnow.github.io/r_package_course" />
-  <meta property="og:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg" />
-  <meta property="og:description" content="Бесплатный видео курс по разработке собственных пакетов на языке R." />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Решение заданий | Курс 'Разработка пакетов на языке R'" />
-  
-  <meta name="twitter:description" content="Бесплатный видео курс по разработке собственных пакетов на языке R." />
-  <meta name="twitter:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg" />
-  <!-- JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
-    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
-    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
-    <script src="libs/bs3compat-0.4.2/transition.js"></script>
-    <script src="libs/bs3compat-0.4.2/tabs.js"></script>
-    <script src="libs/bs3compat-0.4.2/bs3compat.js"></script>
-    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
-    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
-    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-    <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-    <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-    <script src="libs/datatables-binding-0.29/datatables.js"></script>
-    <link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
-    <script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
-    <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-    <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script>
-    <script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Решение заданий | Курс 'Разработка пакетов на языке R'</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content="Урок 7: Тестирование После того как клонируете пакет, откройте его и запустите команду usethis::use_testthat(3). Далее запустите команду usethis::use_test('str_plus'), и в открывшийся файл...">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="Решение заданий | Курс 'Разработка пакетов на языке R'">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://selesnow.github.io/r_package_course/решение-заданий.html">
+<meta property="og:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
+<meta property="og:description" content="Урок 7: Тестирование После того как клонируете пакет, откройте его и запустите команду usethis::use_testthat(3). Далее запустите команду usethis::use_test('str_plus'), и в открывшийся файл...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Решение заданий | Курс 'Разработка пакетов на языке R'">
+<meta name="twitter:description" content="Урок 7: Тестирование После того как клонируете пакет, откройте его и запустите команду usethis::use_testthat(3). Далее запустите команду usethis::use_test('str_plus'), и в открывшийся файл...">
+<meta name="twitter:image" content="https://selesnow.github.io/r_package_course/img/cover.jpg">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'UA-114798296-1');
-    </script>
-    <link rel="shortcut icon" href="img/favicon.ico" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
-
-  <!-- CSS -->
-  <style type="text/css">
+    </script><link rel="shortcut icon" href="img/favicon.ico">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-      <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="include/webex.css" />
-  
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
-
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
-    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -84,48 +55,70 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-      </form>
+</form>
 
-      <nav aria-label="Table of contents">
-        <h2>Table of contents</h2>
-        <div id="book-toc"></div>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="" href="%D0%B2%D0%B2%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5-%D1%81%D0%BB%D0%BE%D0%B2%D0%BE.html">Вводное слово</a></li>
+<li class="book-part">Начало разработки</li>
+<li><a class="" href="%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">1</span> Обзор рабочего процесса разработки пакета</a></li>
+<li><a class="" href="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D1%81-github.html"><span class="header-section-number">2</span> Настройка системы и интеграция с GitHub</a></li>
+<li class="book-part">Компоненты пакета</li>
+<li><a class="" href="%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8-%D0%BF%D0%BE-%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8-r-%D0%BA%D0%BE%D0%B4%D0%B0.html"><span class="header-section-number">3</span> Рекомендации по организации R кода</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%B2-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82.html"><span class="header-section-number">4</span> Добавление данных в пакет</a></li>
+<li><a class="" href="description---%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">5</span> DESCRIPTION - Метаданные пакета</a></li>
+<li><a class="" href="namespace---%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">6</span> NAMESPACE - Зависимости пакета</a></li>
+<li class="book-part">Тестирование</li>
+<li><a class="" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-testthat.html"><span class="header-section-number">7</span> Разработка юнит-тестов к функциям пакета (пакет testthat)</a></li>
+<li class="book-part">Документация</li>
+<li><a class="" href="%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%D0%BC-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">8</span> Написание документации к функциям пакета</a></li>
+<li><a class="" href="%D0%B2%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%BA%D0%B8-%D0%B8-%D0%BF%D1%80%D0%BE%D1%87%D0%B0%D1%8F-%D0%BE%D0%BF%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.html"><span class="header-section-number">9</span> Виньетки и прочая опциональная документация пакета</a></li>
+<li><a class="" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D1%81%D0%B0%D0%B9%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-pkgdown.html"><span class="header-section-number">10</span> Разработка сайта пакета (пакет pkgdown)</a></li>
+<li class="book-part">Публикацмя</li>
+<li><a class="" href="%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F-%D0%B2-cran.html"><span class="header-section-number">11</span> Публикация в CRAN</a></li>
+<li class="book-part">Прочее</li>
+<li><a class="active" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></li>
+<li><a class="" href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></li>
+</ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+          <p><a id="book-repo" href="https://github.com/selesnow/r_package_course">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
-    </div>
-  </header>
-
-  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
-<div id="решение-заданий" class="section level1 unnumbered">
-<h1>Решение заданий</h1>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="решение-заданий" class="section level1 unnumbered">
+<h1>Решение заданий<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9"><i class="fas fa-link"></i></a>
+</h1>
 <div id="урок-7-тестирование" class="section level2 unnumbered">
-<h2>Урок 7: Тестирование</h2>
+<h2>Урок 7: Тестирование<a class="anchor" aria-label="anchor" href="#%D1%83%D1%80%D0%BE%D0%BA-7-%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><i class="fas fa-link"></i></a>
+</h2>
 <p>После того как клонируете пакет, откройте его и запустите команду <code>usethis::use_testthat(3)</code>.</p>
 <p>Далее запустите команду <code>usethis::use_test('str_plus')</code>, и в открывшийся файл <code>test-str_plus.R</code> добавьте следующие тесты:</p>
 <p>Файл с тестами к функции <code>R/str_plus.R</code>:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="решение-заданий.html#cb67-1" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">&quot;check concat length&quot;</span>, {</span>
-<span id="cb67-2"><a href="решение-заданий.html#cb67-2" tabindex="-1"></a>  <span class="fu">expect_length</span>(<span class="st">&quot;my&quot;</span> <span class="sc">%+%</span> <span class="st">&quot;little&quot;</span> <span class="sc">%+%</span> <span class="st">&quot;string&quot;</span>, <span class="dv">1</span>)</span>
-<span id="cb67-3"><a href="решение-заданий.html#cb67-3" tabindex="-1"></a>})</span>
-<span id="cb67-4"><a href="решение-заданий.html#cb67-4" tabindex="-1"></a></span>
-<span id="cb67-5"><a href="решение-заданий.html#cb67-5" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">&quot;check concat class&quot;</span>, {</span>
-<span id="cb67-6"><a href="решение-заданий.html#cb67-6" tabindex="-1"></a>  <span class="fu">expect_type</span>(<span class="st">&quot;my&quot;</span> <span class="sc">%+%</span> <span class="st">&quot;little&quot;</span> <span class="sc">%+%</span> <span class="st">&quot;string&quot;</span>, <span class="st">&#39;character&#39;</span>)</span>
-<span id="cb67-7"><a href="решение-заданий.html#cb67-7" tabindex="-1"></a>})</span>
-<span id="cb67-8"><a href="решение-заданий.html#cb67-8" tabindex="-1"></a></span>
-<span id="cb67-9"><a href="решение-заданий.html#cb67-9" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">&quot;check concat error&quot;</span>, {</span>
-<span id="cb67-10"><a href="решение-заданий.html#cb67-10" tabindex="-1"></a>  <span class="fu">expect_error</span>(<span class="st">&quot;my&quot;</span> <span class="sc">%+%</span> <span class="st">&quot;little&quot;</span> <span class="sc">/</span> <span class="dv">7</span>, <span class="at">regexp =</span> <span class="st">&#39;non-numeric argument to binary operator&#39;</span>)</span>
-<span id="cb67-11"><a href="решение-заданий.html#cb67-11" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"check concat length"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://testthat.r-lib.org/reference/expect_length.html">expect_length</a></span><span class="op">(</span><span class="st">"my"</span> <span class="op"><a href="https://ggplot2.tidyverse.org/reference/gg-add.html">%+%</a></span> <span class="st">"little"</span> <span class="op"><a href="https://ggplot2.tidyverse.org/reference/gg-add.html">%+%</a></span> <span class="st">"string"</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"check concat class"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://testthat.r-lib.org/reference/inheritance-expectations.html">expect_type</a></span><span class="op">(</span><span class="st">"my"</span> <span class="op"><a href="https://ggplot2.tidyverse.org/reference/gg-add.html">%+%</a></span> <span class="st">"little"</span> <span class="op"><a href="https://ggplot2.tidyverse.org/reference/gg-add.html">%+%</a></span> <span class="st">"string"</span>, <span class="st">'character'</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"check concat error"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_error</a></span><span class="op">(</span><span class="st">"my"</span> <span class="op"><a href="https://ggplot2.tidyverse.org/reference/gg-add.html">%+%</a></span> <span class="st">"little"</span> <span class="op">/</span> <span class="fl">7</span>, regexp <span class="op">=</span> <span class="st">'non-numeric argument to binary operator'</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Далее запустите команду <code>usethis::use_test('str_split')</code>, и в открывшийся файл <code>test-str_split.R</code> добавьте следующие тесты:</p>
 <p>Файл с тестами к фунции <code>R/str_split.R</code></p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="решение-заданий.html#cb68-1" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">&quot;check split value&quot;</span>, {</span>
-<span id="cb68-2"><a href="решение-заданий.html#cb68-2" tabindex="-1"></a>  <span class="fu">expect_equal</span>(<span class="st">&#39;The-little-text&#39;</span> <span class="sc">%/%</span> <span class="st">&quot;-&quot;</span>, <span class="fu">c</span>(<span class="st">&#39;The&#39;</span>, <span class="st">&#39;little&#39;</span>, <span class="st">&#39;text&#39;</span>))</span>
-<span id="cb68-3"><a href="решение-заданий.html#cb68-3" tabindex="-1"></a>})</span>
-<span id="cb68-4"><a href="решение-заданий.html#cb68-4" tabindex="-1"></a></span>
-<span id="cb68-5"><a href="решение-заданий.html#cb68-5" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">&quot;check split length&quot;</span>, {</span>
-<span id="cb68-6"><a href="решение-заданий.html#cb68-6" tabindex="-1"></a>  <span class="fu">expect_length</span>(<span class="st">&#39;The-little-text&#39;</span> <span class="sc">%/%</span> <span class="st">&quot;-&quot;</span>, <span class="dv">3</span>)</span>
-<span id="cb68-7"><a href="решение-заданий.html#cb68-7" tabindex="-1"></a>})</span></code></pre></div>
-<p>Запустите команду <code>devtools::test()</code> для выполнения тестов.</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"check split value"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://testthat.r-lib.org/reference/equality-expectations.html">expect_equal</a></span><span class="op">(</span><span class="st">'The-little-text'</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%/%</a></span> <span class="st">"-"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'The'</span>, <span class="st">'little'</span>, <span class="st">'text'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"check split length"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://testthat.r-lib.org/reference/expect_length.html">expect_length</a></span><span class="op">(</span><span class="st">'The-little-text'</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%/%</a></span> <span class="st">"-"</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<p>Запустите команду <code><a href="https://devtools.r-lib.org/reference/test.html">devtools::test()</a></code> для выполнения тестов.</p>
 
 </div>
 </div>
@@ -334,28 +327,29 @@ window.onload = function() {
   update_total_correct();
 }
 
-</script>
-  </main>
-
-  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page">
-      <h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+</script><div class="chapter-nav">
+<div class="prev"><a href="%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F-%D0%B2-cran.html"><span class="header-section-number">11</span> Публикация в CRAN</a></div>
+<div class="next"><a href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9">Решение заданий</a></li>
+<li><a class="nav-link" href="#%D1%83%D1%80%D0%BE%D0%BA-7-%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">Урок 7: Тестирование</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/selesnow/r_package_course/blob/master/98-solutions.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/selesnow/r_package_course/edit/master/98-solutions.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-      </div>
+</div>
     </nav>
-  </div>
+</div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5">
-  <div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
     <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-10-16.</p>
@@ -367,8 +361,5 @@ window.onload = function() {
 
 </div></div>
 </footer>
-
-
 </body>
-
 </html>
