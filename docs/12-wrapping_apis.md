@@ -1,11 +1,9 @@
-# (PART) Пакеты-обёртки {-}
+# (PART) Примеры пакетов {-}
 # Разработка пакета обёртки над API (пакет httr2)
 
 ------
 
 В этом видео мы разберёмся с тем, зачем покрывать код вашего пакета юнит-тестам, и как технически это реализовать.
-
-See [@r-pkg-book]
 
 ------
 
@@ -20,7 +18,7 @@ See [@r-pkg-book]
 ------
 
 ## Видео
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ktPGh7HY8Tg?si=XS5PXrZry2fzxOwa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ktPGh7HY8Tg?si=XS5PXrZry2fzxOwa&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### Тайм коды
 00:00 Вступление<Br>

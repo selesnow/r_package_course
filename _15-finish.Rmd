@@ -4,6 +4,19 @@
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8kErnhRmNnI?si=lwbDTBAMph8svipY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+------
+
+Поздравляю вас с прохождением курса “Разработка пакетов на языке R”. Надеюсь вы не зря потратили время на его прохождение, и сумели разобраться во всех тонкостях процесса разработки собственных пакетов. теперь вы можете делиться своими наработками с сообществом, и внести свой вклад в развития языка R.
+
+Буду благодарен всем, кто поддержит курс по этой [ссылке](https://secure.wayforpay.com/payment/r4excel_users), поделится ссылкой на него в социальных сетях, или хотя бы просто поставит лайк видео лекциям курса на YouTube.
+
+Успехов вам, и до встречи на следующих курсах!
+
+<span><img src="img/signature.png" width="250" align="left"/></span>
+<Br><Br><Br><Br><Br><Br>
+
+------
+
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 library(r2social)
 r2social::r2social.scripts()
