@@ -1130,8 +1130,8 @@ DT::datatable(mtcars)
 ```
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d324cc534e59df3438d2" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d324cc534e59df3438d2">{"x":{"filter":"none","vertical":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],[6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],[160,160,108,258,360,225,360,146.7,140.8,167.6,167.6,275.8,275.8,275.8,472,460,440,78.7,75.7,71.1,120.1,318,304,350,400,79,120.3,95.1,351,145,301,121],[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92,3.92,3.07,3.07,3.07,2.93,3,3.23,4.08,4.93,4.22,3.7,2.76,3.15,3.73,3.08,4.08,4.43,3.77,4.22,3.62,3.54,4.11],[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3,18.9,17.4,17.6,18,17.98,17.82,17.42,19.47,18.52,19.9,20.01,16.87,17.3,15.41,17.05,18.9,16.7,16.9,14.5,15.5,14.6,18.6],[0,0,1,1,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,0,1],[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1],[4,4,4,3,3,3,3,4,4,4,4,3,3,3,3,3,3,4,4,4,3,3,3,3,3,4,5,5,5,5,5,4],[4,4,1,1,2,1,4,2,2,4,4,3,3,3,4,4,4,1,2,1,1,2,2,4,2,1,2,2,4,6,8,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8310363de5d62892df7a" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8310363de5d62892df7a">{"x":{"filter":"none","vertical":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],[6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],[160,160,108,258,360,225,360,146.7,140.8,167.6,167.6,275.8,275.8,275.8,472,460,440,78.7,75.7,71.1,120.1,318,304,350,400,79,120.3,95.1,351,145,301,121],[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92,3.92,3.07,3.07,3.07,2.93,3,3.23,4.08,4.93,4.22,3.7,2.76,3.15,3.73,3.08,4.08,4.43,3.77,4.22,3.62,3.54,4.11],[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3,18.9,17.4,17.6,18,17.98,17.82,17.42,19.47,18.52,19.9,20.01,16.87,17.3,15.41,17.05,18.9,16.7,16.9,14.5,15.5,14.6,18.6],[0,0,1,1,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,0,1],[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1],[4,4,4,3,3,3,3,4,4,4,4,3,3,3,3,3,3,4,4,4,3,3,3,3,3,4,5,5,5,5,5,4],[4,4,1,1,2,1,4,2,2,4,4,3,3,3,4,4,4,1,2,1,1,2,2,4,2,1,2,2,4,6,8,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 * `gt`
@@ -1152,23 +1152,23 @@ gt(mtcars, rownames_to_stub = T) %>%
 ```
 
 ```{=html}
-<div id="kweiptkhie" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kweiptkhie table {
+<div id="olitlhugiw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#olitlhugiw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kweiptkhie thead, #kweiptkhie tbody, #kweiptkhie tfoot, #kweiptkhie tr, #kweiptkhie td, #kweiptkhie th {
+#olitlhugiw thead, #olitlhugiw tbody, #olitlhugiw tfoot, #olitlhugiw tr, #olitlhugiw td, #olitlhugiw th {
   border-style: none;
 }
 
-#kweiptkhie p {
+#olitlhugiw p {
   margin: 0;
   padding: 0;
 }
 
-#kweiptkhie .gt_table {
+#olitlhugiw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1194,12 +1194,12 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-left-color: #D3D3D3;
 }
 
-#kweiptkhie .gt_caption {
+#olitlhugiw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kweiptkhie .gt_title {
+#olitlhugiw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1211,7 +1211,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-bottom-width: 0;
 }
 
-#kweiptkhie .gt_subtitle {
+#olitlhugiw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1223,7 +1223,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-top-width: 0;
 }
 
-#kweiptkhie .gt_heading {
+#olitlhugiw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1235,13 +1235,13 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-right-color: #D3D3D3;
 }
 
-#kweiptkhie .gt_bottom_border {
+#olitlhugiw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kweiptkhie .gt_col_headings {
+#olitlhugiw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1256,7 +1256,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-right-color: #D3D3D3;
 }
 
-#kweiptkhie .gt_col_heading {
+#olitlhugiw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1276,7 +1276,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   overflow-x: hidden;
 }
 
-#kweiptkhie .gt_column_spanner_outer {
+#olitlhugiw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1288,15 +1288,15 @@ gt(mtcars, rownames_to_stub = T) %>%
   padding-right: 4px;
 }
 
-#kweiptkhie .gt_column_spanner_outer:first-child {
+#olitlhugiw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kweiptkhie .gt_column_spanner_outer:last-child {
+#olitlhugiw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kweiptkhie .gt_column_spanner {
+#olitlhugiw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1308,11 +1308,11 @@ gt(mtcars, rownames_to_stub = T) %>%
   width: 100%;
 }
 
-#kweiptkhie .gt_spanner_row {
+#olitlhugiw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kweiptkhie .gt_group_heading {
+#olitlhugiw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1338,7 +1338,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   text-align: left;
 }
 
-#kweiptkhie .gt_empty_group_heading {
+#olitlhugiw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1353,15 +1353,15 @@ gt(mtcars, rownames_to_stub = T) %>%
   vertical-align: middle;
 }
 
-#kweiptkhie .gt_from_md > :first-child {
+#olitlhugiw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kweiptkhie .gt_from_md > :last-child {
+#olitlhugiw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kweiptkhie .gt_row {
+#olitlhugiw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1380,7 +1380,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   overflow-x: hidden;
 }
 
-#kweiptkhie .gt_stub {
+#olitlhugiw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1393,7 +1393,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   padding-right: 5px;
 }
 
-#kweiptkhie .gt_stub_row_group {
+#olitlhugiw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1407,15 +1407,15 @@ gt(mtcars, rownames_to_stub = T) %>%
   vertical-align: top;
 }
 
-#kweiptkhie .gt_row_group_first td {
+#olitlhugiw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kweiptkhie .gt_row_group_first th {
+#olitlhugiw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kweiptkhie .gt_summary_row {
+#olitlhugiw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1425,16 +1425,16 @@ gt(mtcars, rownames_to_stub = T) %>%
   padding-right: 5px;
 }
 
-#kweiptkhie .gt_first_summary_row {
+#olitlhugiw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kweiptkhie .gt_first_summary_row.thick {
+#olitlhugiw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kweiptkhie .gt_last_summary_row {
+#olitlhugiw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1444,7 +1444,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#kweiptkhie .gt_grand_summary_row {
+#olitlhugiw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1454,7 +1454,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   padding-right: 5px;
 }
 
-#kweiptkhie .gt_first_grand_summary_row {
+#olitlhugiw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1464,7 +1464,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-top-color: #D3D3D3;
 }
 
-#kweiptkhie .gt_last_grand_summary_row_top {
+#olitlhugiw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1474,11 +1474,11 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#kweiptkhie .gt_striped {
+#olitlhugiw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kweiptkhie .gt_table_body {
+#olitlhugiw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1487,7 +1487,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#kweiptkhie .gt_footnotes {
+#olitlhugiw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1501,7 +1501,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-right-color: #D3D3D3;
 }
 
-#kweiptkhie .gt_footnote {
+#olitlhugiw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1510,7 +1510,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   padding-right: 5px;
 }
 
-#kweiptkhie .gt_sourcenotes {
+#olitlhugiw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1524,7 +1524,7 @@ gt(mtcars, rownames_to_stub = T) %>%
   border-right-color: #D3D3D3;
 }
 
-#kweiptkhie .gt_sourcenote {
+#olitlhugiw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1532,63 +1532,63 @@ gt(mtcars, rownames_to_stub = T) %>%
   padding-right: 5px;
 }
 
-#kweiptkhie .gt_left {
+#olitlhugiw .gt_left {
   text-align: left;
 }
 
-#kweiptkhie .gt_center {
+#olitlhugiw .gt_center {
   text-align: center;
 }
 
-#kweiptkhie .gt_right {
+#olitlhugiw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kweiptkhie .gt_font_normal {
+#olitlhugiw .gt_font_normal {
   font-weight: normal;
 }
 
-#kweiptkhie .gt_font_bold {
+#olitlhugiw .gt_font_bold {
   font-weight: bold;
 }
 
-#kweiptkhie .gt_font_italic {
+#olitlhugiw .gt_font_italic {
   font-style: italic;
 }
 
-#kweiptkhie .gt_super {
+#olitlhugiw .gt_super {
   font-size: 65%;
 }
 
-#kweiptkhie .gt_footnote_marks {
+#olitlhugiw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kweiptkhie .gt_asterisk {
+#olitlhugiw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kweiptkhie .gt_indent_1 {
+#olitlhugiw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kweiptkhie .gt_indent_2 {
+#olitlhugiw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kweiptkhie .gt_indent_3 {
+#olitlhugiw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kweiptkhie .gt_indent_4 {
+#olitlhugiw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kweiptkhie .gt_indent_5 {
+#olitlhugiw .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
