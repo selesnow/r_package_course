@@ -80,7 +80,9 @@
 <li class="book-part">Примеры пакетов</li>
 <li><a class="" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BE%D0%B1%D1%91%D1%80%D1%82%D0%BA%D0%B8-%D0%BD%D0%B0%D0%B4-api-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-httr2.html"><span class="header-section-number">12</span> Разработка пакета обёртки над API (пакет httr2)</a></li>
 <li><a class="" href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BE%D0%B1%D1%91%D1%80%D1%82%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-google-api-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-gargle.html"><span class="header-section-number">13</span> Разработка пакета обёртки для Google API (пакет gargle)</a></li>
+<li><a class="" href="%D0%BA%D0%B0%D0%BA-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-%D0%BA%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D1%8E-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2.html"><span class="header-section-number">14</span> Как создать коллекцию пакетов</a></li>
 <li class="book-part">Прочее</li>
+<li><a class="" href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5.html">Заключение</a></li>
 <li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решение заданий</a></li>
 <li><a class="" href="%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D1%83%D1%80%D1%81%D0%B0.html">Новости курса</a></li>
 </ul>
@@ -265,7 +267,7 @@ useDynLib(testthat, .registration = TRUE)</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Запускаете функцию <code><a href="https://devtools.r-lib.org/reference/document.html">devtools::document()</a></code> для генерации файла <code>NAMESPACE</code>.</li>
 </ol>
-<p>Но, где удобнее всего прописать roxygen комментарии для импорта функций и целых пакетов, если вы их многократно используете в своём коде? Первое, что наверняка придёт вам в голову - писать roxygen комментарии для импорта над. каждой функцией, в которой используются импортируемые объекты. Но это слишком избыточно, ведь один roxygen комментарий уже добавит нужную директутиву в файл <code>NAMESPACE</code>, поэтому имеет смысл прописать все комментарии для импорта объектов в одном месте, для чего наиболее удобно использовать функцию <code>usethis::usethis::use_package_doc()</code>. Данная функция создаёт файл <code>R/pkg-package.R</code>, в котом и будут собираться все ваши roxygen комментари для импорта над пустым объектом <code>NULL</code>, выглядит этот файл примерно так:</p>
+<p>Но, где удобнее всего прописать roxygen комментарии для импорта функций и целых пакетов, если вы их многократно используете в своём коде? Первое, что наверняка придёт вам в голову - писать roxygen комментарии для импорта над. каждой функцией, в которой используются импортируемые объекты. Но это слишком избыточно, ведь один roxygen комментарий уже добавит нужную директутиву в файл <code>NAMESPACE</code>, поэтому имеет смысл прописать все комментарии для импорта объектов в одном месте, для чего наиболее удобно использовать функцию <code><a href="https://usethis.r-lib.org/reference/use_package_doc.html">usethis::use_package_doc()</a></code>. Данная функция создаёт файл <code>R/pkg-package.R</code>, в котом и будут собираться все ваши roxygen комментари для импорта над пустым объектом <code>NULL</code>, выглядит этот файл примерно так:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The following block is used by usethis to automatically manage</span></span>
 <span><span class="co"># roxygen namespace tags. Modify with care!</span></span>
@@ -749,7 +751,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-10-30.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
