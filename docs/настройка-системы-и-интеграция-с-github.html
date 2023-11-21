@@ -22,7 +22,7 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.30/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
@@ -152,7 +152,7 @@
 <p>Некоторые опции usethis:</p>
 <ul>
 <li>
-<code>usethis.description</code> - именованный список полей DESCRIPTION по умолчанию для новых пакетов, созданных с помощью <code><a href="https://usethis.r-lib.org/reference/create_package.html">usethis::create_package()</a></code>
+<code>usethis.description</code> - именованный список полей DESCRIPTION по умолчанию для новых пакетов, созданных с помощью <code>usethis::create_package()</code>
 </li>
 <li>
 <code>usethis.full_name</code> – задаёт имя по умолчанию, которое будет использоваться например при создании файла лицензии</li>
@@ -162,7 +162,7 @@
 <code>usethis.destdir</code> - каталог по умолчанию для использования в <code>create_from_github()и use_course()</code>
 </li>
 </ul>
-<p>Наиболее простой способ задать опции - отредактироваьт глобальный файл .Rprofile, выполните команду <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_profile()</a></code>, после чего в RStudio откроется .Rprofile, далее добавьте в него код определния нудных опций:</p>
+<p>Наиболее простой способ задать опции - отредактироваьт глобальный файл .Rprofile, выполните команду <code>usethis::edit_r_profile()</code>, после чего в RStudio откроется .Rprofile, далее добавьте в него код определния нудных опций:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span></span>
 <span>  usethis.description <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
@@ -176,7 +176,7 @@
 <span>  usethis.destdir <span class="op">=</span> <span class="st">"C:/Users/SAMSUNG/Documents"</span>,</span>
 <span>  usethis.overwrite <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Теперь при создании пакета с помощью команды <code><a href="https://usethis.r-lib.org/reference/create_package.html">usethis::create_package()</a></code> файле DESCRIPTION автоматически будет заполняться поле с указанием автора пакета.</p>
+<p>Теперь при создании пакета с помощью команды <code>usethis::create_package()</code> файле DESCRIPTION автоматически будет заполняться поле с указанием автора пакета.</p>
 </div>
 <div id="настройка-системы" class="section level3" number="2.3.2">
 <h3>
@@ -193,14 +193,14 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://usethis.r-lib.org">usethis</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># подключаем Git</span></span>
-<span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git.html">use_git</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">use_git</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># имя для Git вы можете задать любое, им будут подписываться коммиты</span></span>
 <span><span class="co"># email должен быть связан с учётной записью GitHub</span></span>
-<span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git_config.html">use_git_config</a></span><span class="op">(</span>user.name <span class="op">=</span> <span class="st">"Your Name"</span>, user.email <span class="op">=</span> <span class="st">"your@gmail.com"</span><span class="op">)</span></span>
+<span><span class="fu">use_git_config</span><span class="op">(</span>user.name <span class="op">=</span> <span class="st">"Your Name"</span>, user.email <span class="op">=</span> <span class="st">"your@gmail.com"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># проверка настроек</span></span>
-<span><span class="fu"><a href="https://usethis.r-lib.org/reference/git_sitrep.html">git_sitrep</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">git_sitrep</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="интеграция-rstudio-с-github" class="section level3" number="2.3.3">
 <h3>
@@ -215,13 +215,13 @@
 </ol>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># получаем токен GitHub</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/github-token.html">create_github_token</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">create_github_token</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># добавляем токен в хранилище учётных данных</span></span>
-<span><span class="fu">gitcreds</span><span class="fu">::</span><span class="fu"><a href="https://gitcreds.r-lib.org/reference/gitcreds_get.html">gitcreds_set</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">gitcreds</span><span class="fu">::</span><span class="fu">gitcreds_set</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># пуьбликуем проект пакета</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_github.html">use_github</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_github</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div id="задание" class="section level2" number="2.4">
@@ -556,7 +556,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-06.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

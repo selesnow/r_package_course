@@ -22,7 +22,7 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.30/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
@@ -160,7 +160,7 @@
 <h3>
 <span class="header-section-number">11.3.2</span> Безпрерывная проверка пакета<a class="anchor" aria-label="anchor" href="#%D0%B1%D0%B5%D0%B7%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h3>
-<p>В ходе курса я неоднократно говорил о том, что в процессе разработки пакета как можно чаще запускайте проверку с помощью функции <code><a href="https://devtools.r-lib.org/reference/check.html">devtools::check()</a></code>, поскольку это поможет быстро узнать об ошибке, что в свою очередь сильно облегчит её исправление. Минус запуска команды <code><a href="https://devtools.r-lib.org/reference/check.html">devtools::check()</a></code> заключается в том, что все проверки реализуются исключительно на вашей операционной системе, и с начтроенной вами средой. У пользователей вашего пакета вполне может быть другая ОС, и однозначно по другому будет настроена рабочая среда, поэтому в идеале проверки должны быть независимыми ни от операционной системы, ни тем более от её настроек и состояния рабочего окружение. Организовать безпрерывное тестирование на удалённых серверах, отдельно на Windows, Linux и MacOS можно настроив безпрерывную интеграцию с помощью сервиса GitHub Actions.</p>
+<p>В ходе курса я неоднократно говорил о том, что в процессе разработки пакета как можно чаще запускайте проверку с помощью функции <code>devtools::check()</code>, поскольку это поможет быстро узнать об ошибке, что в свою очередь сильно облегчит её исправление. Минус запуска команды <code>devtools::check()</code> заключается в том, что все проверки реализуются исключительно на вашей операционной системе, и с начтроенной вами средой. У пользователей вашего пакета вполне может быть другая ОС, и однозначно по другому будет настроена рабочая среда, поэтому в идеале проверки должны быть независимыми ни от операционной системы, ни тем более от её настроек и состояния рабочего окружение. Организовать безпрерывное тестирование на удалённых серверах, отдельно на Windows, Linux и MacOS можно настроив безпрерывную интеграцию с помощью сервиса GitHub Actions.</p>
 <p>Для этого откройте проект вашего пакета и запустите команду <code>usethis::use_github_action("check-standard")</code>. После чего в папке <code>.github/workflows</code> будет создан новый yml файл для настройки GitHub Action, который будет запускаться на GithUb при каждом вашем коммите, и запускать полный процес проверки вашего пакета на всех платформах, на которых работает R.</p>
 <p>Сервис GitHub Actions мы с вами уже использовали в уроке по разработке сайта пакета. Тогда мы настраивали автоматический пересбор сайта после каждого коммита.</p>
 </div>
@@ -168,7 +168,7 @@
 <h3>
 <span class="header-section-number">11.3.3</span> Создайте тикет со списком действий<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%B9%D1%82%D0%B5-%D1%82%D0%B8%D0%BA%D0%B5%D1%82-%D1%81%D0%BE-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%BE%D0%BC-%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D0%B9"><i class="fas fa-link"></i></a>
 </h3>
-<p>Теперь создайте на GitHub специальный тикет со списком действий, необходмых при публикации пакета на CRAN, делается это с помощью команды <code><a href="https://usethis.r-lib.org/reference/use_release_issue.html">usethis::use_release_issue()</a></code>.</p>
+<p>Теперь создайте на GitHub специальный тикет со списком действий, необходмых при публикации пакета на CRAN, делается это с помощью команды <code>usethis::use_release_issue()</code>.</p>
 <p>Созданный тикет будет содержать примерно такой список:</p>
 <div class="inline-figure"><img src="img/cran-1t.png"></div>
 <p>Данный список содержит описание всех действий, которые вам необходимо выполниьт, что бы ваш пакет был опубликован в CRAN. Далее мы разберём основные действия более подробно.</p>
@@ -179,7 +179,7 @@
 </h3>
 <p>Если вы отправляете свой пакет на CRAN впервые, то для начала сделайте следующее:</p>
 <ul>
-<li>Создайте файл CRAN_COMMENTS.md с помощью функции <code><a href="https://usethis.r-lib.org/reference/use_cran_comments.html">usethis::use_cran_comments()</a></code>
+<li>Создайте файл CRAN_COMMENTS.md с помощью функции <code>usethis::use_cran_comments()</code>
 </li>
 <li>Добавьте в пакет файл <code>README</code>
 </li>
@@ -209,14 +209,14 @@ Description: Interface for loading data from 'Google Ads API',
 </h3>
 <p>Далее стоит выполнить несколько дополнительных проверок.</p>
 <p>Функция <code>devtools::check(remote = TRUE, manual = TRUE)</code> за счёт установленных значений аргументов <code>remote</code> и <code>manual</code> добавляет в процесс проверки некоторые дополнительные этапы, которые так же включены в проверке CRAN.</p>
-<p>Далее вам надо использовать функцию <code><a href="https://rdrr.io/pkg/urlchecker/man/url_check.html">urlchecker::url_check()</a></code> для проверки корректности всех ссылок, которые вы указывали в документации своего пакета.</p>
-<p>Следующим запускаете проверку функцией <code><a href="https://devtools.r-lib.org/reference/check_win.html">devtools::check_win_devel()</a></code>, которая отправит ваш пакет на проверку на сервис win-builder CRAN. Результаты этой проверки вы получите на почту в течении 15-30 минут.</p>
+<p>Далее вам надо использовать функцию <code>urlchecker::url_check()</code> для проверки корректности всех ссылок, которые вы указывали в документации своего пакета.</p>
+<p>Следующим запускаете проверку функцией <code>devtools::check_win_devel()</code>, которая отправит ваш пакет на проверку на сервис win-builder CRAN. Результаты этой проверки вы получите на почту в течении 15-30 минут.</p>
 <p>Последняя рекомендуемая проверка - сервис Rhub. Для работы с ним используйте пакет <code>rhub</code>:</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">rhub</span><span class="fu">::</span><span class="fu"><a href="https://r-hub.github.io/rhub/reference/validate_email.html">validate_email</a></span><span class="op">(</span><span class="st">'ваш имейл'</span><span class="op">)</span></span>
-<span><span class="fu">rhub</span><span class="fu">::</span><span class="fu"><a href="https://r-hub.github.io/rhub/reference/check_for_cran.html">check_for_cran</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">rhub</span><span class="fu">::</span><span class="fu">validate_email</span><span class="op">(</span><span class="st">'ваш имейл'</span><span class="op">)</span></span>
+<span><span class="fu">rhub</span><span class="fu">::</span><span class="fu">check_for_cran</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Сначала вам необходимо валидировать ваш email, команда <code>rhub::validate_email('ваш имейл')</code> сгенерирует на вашу почту письмо с токеном, скопируйте его, и вставьте в консоль в ответ на запрос <code>Token:</code>.</p>
-<p>И командой <code><a href="https://r-hub.github.io/rhub/reference/check_for_cran.html">rhub::check_for_cran()</a></code> отправляете ваш пакет на проверку. Также, в течении примерно 15 минут вы получите на почту ряд писем, каждое письмо сожержит информацию о проверке на одной конкретной платформе, и выглядеть они будут примерно так:</p>
+<p>И командой <code>rhub::check_for_cran()</code> отправляете ваш пакет на проверку. Также, в течении примерно 15 минут вы получите на почту ряд писем, каждое письмо сожержит информацию о проверке на одной конкретной платформе, и выглядеть они будут примерно так:</p>
 <div class="inline-figure"><img src="img/cran-2.png"></div>
 <p>На уведомление <code>checking CRAN incoming feasibility ... [8s/59s] WARNING Maintainer: ‘Alexey Seleznev &lt;selesnow@gmail.com&gt;’</code> можете не обращать внимание, это уведомление исключительно для команды CRAN, и не говорит о том. что в вашем пакете есть какие либо проблемы.</p>
 <p>Все вышеперечисленные проверки обязательно должны пройти успешно, т.е. результат не должен содержать ниодной ошибки и предупреждения (кроме того, о котором я написал выше), и желательно не сожержать уведомлений (NOTES).</p>
@@ -225,12 +225,12 @@ Description: Interface for loading data from 'Google Ads API',
 <h3>
 <span class="header-section-number">11.3.6</span> Процесс отправки пакета<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h3>
-<p>Если ваш пакет успещно прошел все перечисленные в предыдущем пункте проверки - вы готовы к его публикации на CRAN. Теперь пришло время изменить версию пакета командой <code><a href="https://usethis.r-lib.org/reference/use_version.html">usethis::use_version()</a></code>. Далее отправить пакет на CRAN одной из соедующих команд:</p>
+<p>Если ваш пакет успещно прошел все перечисленные в предыдущем пункте проверки - вы готовы к его публикации на CRAN. Теперь пришло время изменить версию пакета командой <code>usethis::use_version()</code>. Далее отправить пакет на CRAN одной из соедующих команд:</p>
 <ul>
 <li>
-<code><a href="https://devtools.r-lib.org/reference/submit_cran.html">devtools::submit_cran()</a></code> - упрощённая отправка</li>
+<code>devtools::submit_cran()</code> - упрощённая отправка</li>
 <li>
-<code><a href="https://devtools.r-lib.org/reference/release.html">devtools::release()</a></code> - повторно проводит вас по всему этапу подготовки пакета, задавая вопросы</li>
+<code>devtools::release()</code> - повторно проводит вас по всему этапу подготовки пакета, задавая вопросы</li>
 </ul>
 <p>Каждая из этих функций в итоге отправляет пакет на CRAN, а уже сам CRAN отправляет вам на email письмо для валидации адреса. Откройте вашу почту и перейдите по ссылке указанной в письме. После чего вы будете перенаправлены на CRAN, где должны поставить несколько галочек, и подтвердить что выполнили все необходимые этапы подготовки вашего пакета перед его публикацией.</p>
 <p>Теперь ваш пакет находится в стадии проверки со стороны CRAN.</p>
@@ -264,8 +264,8 @@ Description: Interface for loading data from 'Google Ads API',
 <p>и ваш пакет публикуется на CRAN.</p>
 <p>Сделайте ещё несколько шагов:</p>
 <ol style="list-style-type: decimal">
-<li>С помощью команды <code><a href="https://usethis.r-lib.org/reference/use_github_release.html">usethis::use_github_release()</a></code> отправьте стабильную версию вашего пакета на GitHub.</li>
-<li>Командой <code><a href="https://usethis.r-lib.org/reference/use_version.html">usethis::use_dev_version()</a></code> переключите локальную версию вашего пакета в режим разработки.</li>
+<li>С помощью команды <code>usethis::use_github_release()</code> отправьте стабильную версию вашего пакета на GitHub.</li>
+<li>Командой <code>usethis::use_dev_version()</code> переключите локальную версию вашего пакета в режим разработки.</li>
 <li>Поделитесь с сообществом новостью о том, что ваш новый пакет опубликован на CRAN, или что его новая версия там опубликована.</li>
 </ol>
 <p>Вот мы с вами и прошлись весь путь разработки собственного пакета, подробно разабрав все его этапы.</p>
@@ -601,7 +601,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-06.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

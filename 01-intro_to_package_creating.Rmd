@@ -50,16 +50,16 @@
 ### Процесс разработки пакета
 
 1. Создаём проект пакета с помощью команды `create_package()`
-2. Включаем контроль версий с помощью функции `use_git()`
-3. Добавляем лицензию командой `use_mit_licence()`
-4. Добавляем в пакет функции с помощью команды `use_r()`
-5. Документируем созданные функции добавляя специализированиы комментарии сочетанием клавиш **Ctrl+Alt+Shift+R**
-6. генерируем файлы документации функций командой `document()`
-7. Для тестирования добавляем в файл DESCRIPTION пакет `testthat` командой `use_testthat()`
-8. Добавляем для каждой функции юнит тесты командой `use_test()`
-9. Запускаем тестирование функций командой `test()`
-10. Для использования функций из стороних пакетов добавляем их в блок Imports файлв DESCRIPTION командой `use_package()`, в коде используем импортированные функции с помощью `package_name::function_name()`
-11. Проверяем пакет командой `check()`
+2. Включаем контроль версий с помощью функции `use_git()` *(урок 2 [Настройка системы и интеграция с GitHub])*
+3. Добавляем лицензию командой `use_mit_licence()` *(урок 5 [DESCRIPTION - Метаданные пакета])*
+4. Добавляем в пакет функции с помощью команды `use_r()` *(урок 5 [DESCRIPTION - Метаданные пакета])*
+5. Документируем созданные функции добавляя специализированиы комментарии сочетанием клавиш **Ctrl+Alt+Shift+R** *(урок 8 [Написание документации к функциям пакета])*
+6. генерируем файлы документации функций командой `document()` *(урок 8 [Написание документации к функциям пакета])*
+7. Для тестирования добавляем в файл DESCRIPTION пакет `testthat` командой `use_testthat()` *(урок 7 [Разработка юнит-тестов к функциям пакета (пакет testthat)])*
+8. Добавляем для каждой функции юнит тесты командой `use_test()` *(урок 7 [Разработка юнит-тестов к функциям пакета (пакет testthat)])*
+9. Запускаем тестирование функций командой `test()` *(урок 7 [Разработка юнит-тестов к функциям пакета (пакет testthat)])*
+10. Для использования функций из стороних пакетов добавляем их в блок Imports файлв DESCRIPTION командой `use_package()`, в коде используем импортированные функции с помощью `package_name::function_name()` *(урок 6 [NAMESPACE - Зависимости пакета])*
+11. Проверяем пакет командой `check()` *(урок 11 [Публикация в CRAN])*
 
 ## Тест
 <iframe id="otp_wgt_3q2sbgk6kmico" src="https://onlinetestpad.com/3q2sbgk6kmico" frameborder="0" style="width:100%;" onload="var f = document.getElementById('otp_wgt_3q2sbgk6kmico'); var h = 0; var listener = function (event) { if (event.origin.indexOf('onlinetestpad') == -1) { return; }; h = parseInt(event.data); if (!isNaN(h)) f.style.height = h + 'px'; }; function addEvent(elem, evnt, func) { if (elem.addEventListener) { elem.addEventListener(evnt, func, false); } else if (elem.attachEvent) { elem.attachEvent('on' + evnt, func); } else { elem['on' + evnt] = func; } }; addEvent(window, 'message', listener);" scrolling="no">

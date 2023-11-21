@@ -22,7 +22,7 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.30/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
@@ -174,7 +174,7 @@
 <li>Путь, URL адрес сервера, который состоит из: протокола (httpили https), хоста (httpbin.org), и порта (в нашем примере не использовался).</li>
 <li>Версия протокола HTTP. В данном случае эта информация нам не важна, т.к. обработка протокола идёт на более низком уровне.</li>
 </ul>
-<p>Далее идут заголовки запроса. В заголовках зачастую передаётся некоторая служебная информация, представленная в виде пар ключ-значение, разделенных знаком :. Заголовки в нашем примере были автоматически добавлены <code>httr2</code>, но вы можете переопределить их или добавить свои с помощью <code><a href="https://httr2.r-lib.org/reference/req_headers.html">req_headers()</a></code>:</p>
+<p>Далее идут заголовки запроса. В заголовках зачастую передаётся некоторая служебная информация, представленная в виде пар ключ-значение, разделенных знаком :. Заголовки в нашем примере были автоматически добавлены <code>httr2</code>, но вы можете переопределить их или добавить свои с помощью <code>req_headers()</code>:</p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span> <span class="fu">req_headers</span><span class="op">(</span></span>
@@ -191,7 +191,7 @@
 <span><span class="co">#&gt; Shoe-Size: 11</span></span>
 <span><span class="co">#&gt; Accept: application/json</span></span></code></pre></div>
 <p>Имена заголовков не чувствительны к регистру, и сервера игнорируют неизвестные им заголовки.</p>
-<p>Заголовки заканчиваются пустой строкой, за которой следует тело запроса. Приведённые выше запросы (как и все GET запросы) не имеют тела, поэтому давайте добавим его, чтобы посмотреть, что произойдет. функции семейства <code>req_body_*()</code> обеспечивают различные способы добавить данные к телу запроса. В качестве примера мы используем <code><a href="https://httr2.r-lib.org/reference/req_body.html">req_body_json()</a></code> для добавления данных в виде JSON структуры:</p>
+<p>Заголовки заканчиваются пустой строкой, за которой следует тело запроса. Приведённые выше запросы (как и все GET запросы) не имеют тела, поэтому давайте добавим его, чтобы посмотреть, что произойдет. функции семейства <code>req_body_*()</code> обеспечивают различные способы добавить данные к телу запроса. В качестве примера мы используем <code>req_body_json()</code> для добавления данных в виде JSON структуры:</p>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span> <span class="fu">req_body_json</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="st">"a"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -207,11 +207,11 @@
 <span><span class="co">#&gt; {"x":1,"y":"a"}</span></span></code></pre></div>
 <p>Что изменилось?</p>
 <ul>
-<li>Метод запроса автоматически изменился с GET на POST. POST - это стандартный метод отправки данных на веб-сервер, который автоматически используется всякий раз, когда вы добавляете тело запроса. Вы можете использовать <code><a href="https://httr2.r-lib.org/reference/req_method.html">req_method()</a></code> для переопределения метода.</li>
+<li>Метод запроса автоматически изменился с GET на POST. POST - это стандартный метод отправки данных на веб-сервер, который автоматически используется всякий раз, когда вы добавляете тело запроса. Вы можете использовать <code>req_method()</code> для переопределения метода.</li>
 <li>К запросу добавлены два новых заголовка: Content-Type и Content-Length. Они сообщают серверу, как интерпретировать тело - в нашем случае это JSON структура размером 15 байт.</li>
 <li>У запроса есть тело, состоящее из какого-то JSON.</li>
 </ul>
-<p>Разные API могут требовать различных вариантов кодировки тела запроса, поэтому httr2 предоставляет семейство функций, для реализации наиболее часто встречающихся форматов. Например, <code><a href="https://httr2.r-lib.org/reference/req_body.html">req_body_form()</a></code> преобразует тело запроса, в вид отправляемой браузером формы:</p>
+<p>Разные API могут требовать различных вариантов кодировки тела запроса, поэтому httr2 предоставляет семейство функций, для реализации наиболее часто встречающихся форматов. Например, <code>req_body_form()</code> преобразует тело запроса, в вид отправляемой браузером формы:</p>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span> <span class="fu">req_body_form</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"1"</span>, y <span class="op">=</span> <span class="st">"a"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -225,7 +225,7 @@
 <span><span class="co">#&gt; Content-Length: 7</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; x=1&amp;y=a</span></span></code></pre></div>
-<p>Для отправки данных большого объёма или бинарных файлов используйте <code><a href="https://httr2.r-lib.org/reference/req_body.html">req_body_multipart()</a></code>:</p>
+<p>Для отправки данных большого объёма или бинарных файлов используйте <code>req_body_multipart()</code>:</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span> <span class="fu">req_body_multipart</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"1"</span>, y <span class="op">=</span> <span class="st">"a"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -247,7 +247,7 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; a</span></span>
 <span><span class="co">#&gt; --------------------------cc86fca72508d8b0--</span></span></code></pre></div>
-<p>Если вам нужно отправить данные, закодированные в другой форме, вы можете использовать <code><a href="https://httr2.r-lib.org/reference/req_body.html">req_body_raw()</a></code> для добавления данных в тело и передать тип отправляемых данных в заголовке Content-Type.</p>
+<p>Если вам нужно отправить данные, закодированные в другой форме, вы можете использовать <code>req_body_raw()</code> для добавления данных в тело и передать тип отправляемых данных в заголовке Content-Type.</p>
 </div>
 <div id="отправка-запроса-и-обработка-ответа" class="section level3" number="12.3.2">
 <h3>
@@ -263,7 +263,7 @@
 <span><span class="co">#&gt; Status: 200 OK</span></span>
 <span><span class="co">#&gt; Content-Type: application/json</span></span>
 <span><span class="co">#&gt; Body: In memory (429 bytes)</span></span></code></pre></div>
-<p>Посмотреть имитацию полученного ответа можно с помощью <code><a href="https://httr2.r-lib.org/reference/resp_raw.html">resp_raw()</a></code>:</p>
+<p>Посмотреть имитацию полученного ответа можно с помощью <code>resp_raw()</code>:</p>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_raw</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; HTTP/1.1 200 OK</span></span>
@@ -299,7 +299,7 @@
 <p>Вы можете извлечь данные из ответа с помощью функций семейства <code>resp_()</code>:</p>
 <ul>
 <li>
-<code><a href="https://httr2.r-lib.org/reference/resp_status.html">resp_status()</a></code> возвращает код состояния и <code><a href="https://httr2.r-lib.org/reference/resp_status.html">resp_status_desc()</a></code> возвращает его описание:</li>
+<code>resp_status()</code> возвращает код состояния и <code>resp_status_desc()</code> возвращает его описание:</li>
 </ul>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_status</span><span class="op">(</span><span class="op">)</span></span>
@@ -307,7 +307,7 @@
 <span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_status_desc</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "OK"</span></span></code></pre></div>
 <ul>
-<li>Вы можете извлечь все заголовки используя <code><a href="https://httr2.r-lib.org/reference/resp_headers.html">resp_headers()</a></code> или получить значение конкретного заголовок с помощью <code><a href="https://httr2.r-lib.org/reference/resp_headers.html">resp_header()</a></code>:</li>
+<li>Вы можете извлечь все заголовки используя <code>resp_headers()</code> или получить значение конкретного заголовок с помощью <code>resp_header()</code>:</li>
 </ul>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_headers</span><span class="op">(</span><span class="op">)</span></span>
@@ -324,7 +324,7 @@
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_header</span><span class="op">(</span><span class="st">"ConTEnT-LeNgTH"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "429"</span></span></code></pre></div>
-<p>Тело ответа, так же как и тело запроса, в зависимости от устройства API может приходить в разных форматах. Для извлечения тела ответа используйте функции семейства <code>resp_body_*()</code>. В нашем примере мы получили ответ в виде JSON структуры, поэтому для его извлечения необходимо использовать <code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html">resp_body_json()</a></code>:</p>
+<p>Тело ответа, так же как и тело запроса, в зависимости от устройства API может приходить в разных форматах. Для извлечения тела ответа используйте функции семейства <code>resp_body_*()</code>. В нашем примере мы получили ответ в виде JSON структуры, поэтому для его извлечения необходимо использовать <code>resp_body_json()</code>:</p>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 1</span></span>
@@ -424,11 +424,11 @@
 <p>Тут я сделал несколько важных решений:</p>
 <ul>
 <li>Я решил указать значения по умолчанию для параметров <code>quantity</code> и <code>locale.</code> Это упрощает демонстрацию моей функции в этой статье.</li>
-<li>Я использовал значение по умолчанию <code>NULL</code> для аргумента seed . <code><a href="https://httr2.r-lib.org/reference/req_url.html">req_url_query()</a></code> автоматически отбрасывает аргументы со значением <code>NULL</code>, это означает, что в API не отправляется значение по умолчанию, но когда вы смотрите определение функции, вы видите, что значение seed установлено.</li>
+<li>Я использовал значение по умолчанию <code>NULL</code> для аргумента seed . <code>req_url_query()</code> автоматически отбрасывает аргументы со значением <code>NULL</code>, это означает, что в API не отправляется значение по умолчанию, но когда вы смотрите определение функции, вы видите, что значение seed установлено.</li>
 <li>Я автоматически добавляю ко всем параметрам запроса префикс, <code>_</code> т.к. имена параметров в API начинаются с <code>_</code>.</li>
 <li>Моя функция генерирует запрос, выполняет его и извлекает тело ответа. Такой подход будет работать в общих случаях с простыми API, для более сложных API возможно вам будет удобнее вернуть объект запроса, который можно изменить перед выполнением.</li>
 </ul>
-<p>Я использовал один приём: <code><a href="https://httr2.r-lib.org/reference/req_url.html">req_url_query()</a></code> использует динамические точки, поэтому можно использовать <code>!!!</code> для их преобразования, например <code>req_url_query(req, !!!list(</code>_quantity<code>= 1,</code>_locale<code>= "en_US"))</code> конвертируется в <code>req_url_query(req,</code>_quantity<code>= 1,</code>_locale<code>= "en_US")</code>.</p>
+<p>Я использовал один приём: <code>req_url_query()</code> использует динамические точки, поэтому можно использовать <code>!!!</code> для их преобразования, например <code>req_url_query(req, !!!list(</code>_quantity<code>= 1,</code>_locale<code>= "en_US"))</code> конвертируется в <code>req_url_query(req,</code>_quantity<code>= 1,</code>_locale<code>= "en_US")</code>.</p>
 </div>
 <div id="обёртывание-конечных-точек" class="section level5" number="12.3.3.1.2">
 <h5>
@@ -475,7 +475,7 @@
 <span><span class="co">#&gt;   .. .. ..$ longitude     : num -40.4</span></span>
 <span><span class="co">#&gt;   .. ..$ website  : chr "http://mills.com"</span></span>
 <span><span class="co">#&gt;   .. ..$ image    : chr "http://placeimg.com/640/480/people"</span></span></code></pre></div>
-<p>Можно сделать эту функцию ещё более удобной для пользователя, проверив типы ввода и преобразовав полученный результат в таблицу. Я по-быстрому накидал небольшой вариант преобразования полученного ответа в таблицу с использованием функционала пакета purrr; в зависимости от ваших потребностей и предпочтений вы можете использовать для той же операции базовый R или <code><a href="https://tidyr.tidyverse.org/reference/hoist.html">tidyr::hoist()</a></code>.</p>
+<p>Можно сделать эту функцию ещё более удобной для пользователя, проверив типы ввода и преобразовав полученный результат в таблицу. Я по-быстрому накидал небольшой вариант преобразования полученного ответа в таблицу с использованием функционала пакета purrr; в зависимости от ваших потребностей и предпочтений вы можете использовать для той же операции базовый R или <code>tidyr::hoist()</code>.</p>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/">purrr</a></span><span class="op">)</span></span>
 <span></span>
@@ -507,10 +507,10 @@
 <span>  <span class="op">)</span>  </span>
 <span>  </span>
 <span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
-<span>    firstname <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">data</span>, <span class="st">"firstname"</span><span class="op">)</span>,</span>
-<span>    lastname <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">data</span>, <span class="st">"lastname"</span><span class="op">)</span>,</span>
-<span>    email <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">data</span>, <span class="st">"email"</span><span class="op">)</span>,</span>
-<span>    gender <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">data</span>, <span class="st">"gender"</span><span class="op">)</span></span>
+<span>    firstname <span class="op">=</span> <span class="fu">map_chr</span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">data</span>, <span class="st">"firstname"</span><span class="op">)</span>,</span>
+<span>    lastname <span class="op">=</span> <span class="fu">map_chr</span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">data</span>, <span class="st">"lastname"</span><span class="op">)</span>,</span>
+<span>    email <span class="op">=</span> <span class="fu">map_chr</span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">data</span>, <span class="st">"email"</span><span class="op">)</span>,</span>
+<span>    gender <span class="op">=</span> <span class="fu">map_chr</span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">data</span>, <span class="st">"gender"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="fu">faker_person</span><span class="op">(</span><span class="st">"male"</span>, quantity <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -535,24 +535,24 @@
 <h5>
 <span class="header-section-number">12.3.3.2.1</span> Основы<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D1%8B"><i class="fas fa-link"></i></a>
 </h5>
-<p>httr2 предоставляет вам функции <code><a href="https://httr2.r-lib.org/reference/secrets.html">secret_encrypt()</a></code> и <code><a href="https://httr2.r-lib.org/reference/secrets.html">secret_decrypt()</a></code> позволяющие шифровать секретные данные, и использовать их в своём коде не беспокоясь о том, что они попадут в третьи руки. Процесс шифрования состоит из трёх основных шагов:</p>
+<p>httr2 предоставляет вам функции <code>secret_encrypt()</code> и <code>secret_decrypt()</code> позволяющие шифровать секретные данные, и использовать их в своём коде не беспокоясь о том, что они попадут в третьи руки. Процесс шифрования состоит из трёх основных шагов:</p>
 <ol style="list-style-type: decimal">
-<li>С помощью функции <code><a href="https://httr2.r-lib.org/reference/secrets.html">secret_make_key()</a></code> создаётся ключ шифрования, который используется для шифрования и дешифрования секретов с использованием симметричной криптографии:</li>
+<li>С помощью функции <code>secret_make_key()</code> создаётся ключ шифрования, который используется для шифрования и дешифрования секретов с использованием симметричной криптографии:</li>
 </ol>
 <div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">key</span> <span class="op">&lt;-</span> <span class="fu">secret_make_key</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">key</span></span>
 <span><span class="co">#&gt; [1] "-6cGNKmH2WTfH5pVUll-sg"</span></span></code></pre></div>
-<p>(Обратите внимание, что в <code><a href="https://httr2.r-lib.org/reference/secrets.html">secret_make_key()</a></code> используется криптографически безопасный генератор случайных чисел, предоставляемый OpenSSL; на него не влияют настройки RNG R, и нет никакого способа сделать его воспроизводимым.)</p>
+<p>(Обратите внимание, что в <code>secret_make_key()</code> используется криптографически безопасный генератор случайных чисел, предоставляемый OpenSSL; на него не влияют настройки RNG R, и нет никакого способа сделать его воспроизводимым.)</p>
 <ol start="2" style="list-style-type: decimal">
-<li>Далее шифруете секретные данные с помощью <code><a href="https://httr2.r-lib.org/reference/secrets.html">secret_encrypt()</a></code> и сохраняете полученный текст непосредственно в исходном коде вашего пакета:</li>
+<li>Далее шифруете секретные данные с помощью <code>secret_encrypt()</code> и сохраняете полученный текст непосредственно в исходном коде вашего пакета:</li>
 </ol>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">secret_scrambled</span> <span class="op">&lt;-</span> <span class="fu">secret_encrypt</span><span class="op">(</span><span class="st">"secret I need to work with an API"</span>, <span class="va">key</span><span class="op">)</span></span>
 <span><span class="va">secret_scrambled</span></span>
 <span><span class="co">#&gt; [1] "ohd9iBHJ66k5j8trIPVeENIPmINN2YWs4ceD1l6tz3B8GjotwFhI4f92lHDCSW_p6A"</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
-<li>При необходимости вы дешифруете ваши данные, используя <code><a href="https://httr2.r-lib.org/reference/secrets.html">secret_decrypt()</a></code>:</li>
+<li>При необходимости вы дешифруете ваши данные, используя <code>secret_decrypt()</code>:</li>
 </ol>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">secret_decrypt</span><span class="op">(</span><span class="va">secret_scrambled</span>, <span class="va">key</span><span class="op">)</span></span>
@@ -563,9 +563,9 @@
 <span class="header-section-number">12.3.3.2.2</span> Пакетные ключи и секретные данные<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BD%D1%8B%D0%B5-%D0%BA%D0%BB%D1%8E%D1%87%D0%B8-%D0%B8-%D1%81%D0%B5%D0%BA%D1%80%D0%B5%D1%82%D0%BD%D1%8B%D0%B5-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5"><i class="fas fa-link"></i></a>
 </h5>
 <p>Вы можете создать любое количество ключей шифрования, но я настоятельно рекомендую создавать один ключ для каждого пакета, который я буду называть ключом пакета. В этом разделе я покажу, как сохранить этот ключ, так чтобы к нему имели доступ только вы и написанные вами автоматические тесты.</p>
-<p>В httr2 заложена идея, что ключ должен хранится в переменной окружения. Итак, первый шаг — сделать созданный вами ключ пакета доступным на вашем локальном компьютере, добавив строку с переменной на уровене пользователя в файл <code>.Renviron</code> (который вы можете открыть или при необходимости создать с помощью <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code>):</p>
+<p>В httr2 заложена идея, что ключ должен хранится в переменной окружения. Итак, первый шаг — сделать созданный вами ключ пакета доступным на вашем локальном компьютере, добавив строку с переменной на уровене пользователя в файл <code>.Renviron</code> (который вы можете открыть или при необходимости создать с помощью <code>usethis::edit_r_environ()</code>):</p>
 <pre><code>YOURPACKAGE_KEY=key_you_generated_with_secret_make_key</code></pre>
-<p>Теперь (после перезапуска R) вы сможете воспользоваться специальной возможностью <code><a href="https://httr2.r-lib.org/reference/secrets.html">secret_encrypt()</a></code> и <code><a href="https://httr2.r-lib.org/reference/secrets.html">secret_decrypt()</a></code>: аргументом <code>key</code> может быть имя переменной среды, а не сам ключ шифрования. На самом деле, это наиболее эффективное использование данного аргумента.</p>
+<p>Теперь (после перезапуска R) вы сможете воспользоваться специальной возможностью <code>secret_encrypt()</code> и <code>secret_decrypt()</code>: аргументом <code>key</code> может быть имя переменной среды, а не сам ключ шифрования. На самом деле, это наиболее эффективное использование данного аргумента.</p>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">secret_scrambled</span> <span class="op">&lt;-</span> <span class="fu">secret_encrypt</span><span class="op">(</span><span class="st">"secret I need to work with an API"</span>, <span class="st">"YOURPACKAGE_KEY"</span><span class="op">)</span></span>
 <span><span class="va">secret_scrambled</span></span>
@@ -589,7 +589,7 @@
 <ul>
 <li>В виньетках вы можете запустить <code>knitr::opts_chunk(eval = secret_has_key("YOURPACKAGE_KEY"))</code>, чтобы код внутри чанков выполнялся только в том случае, если ваш ключ доступен.</li>
 <li>В примерах вы можете окружить блоки кода, для которых требуется ключ, с помощью <code>if (httr2::secret_has_key("YOURPACKAGE_KEY")) {}</code> .</li>
-<li>Тесты не требуют от вас дополнительных действий, т.к. когда <code><a href="https://httr2.r-lib.org/reference/secrets.html">secret_decrypt()</a></code> запускается в <code>testthat</code>, он автоматически запускает <code><a href="https://testthat.r-lib.org/reference/skip.html">skip()</a></code> для пропуска теста, если ключ недоступен.</li>
+<li>Тесты не требуют от вас дополнительных действий, т.к. когда <code>secret_decrypt()</code> запускается в <code>testthat</code>, он автоматически запускает <code>skip()</code> для пропуска теста, если ключ недоступен.</li>
 </ul>
 </div>
 </div>
@@ -633,7 +633,7 @@
 <span>  <span class="fu">req_url_path_append</span><span class="op">(</span><span class="st">"/reviews.json"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">req_url_query</span><span class="op">(</span>`api-key` <span class="op">=</span> <span class="st">"invalid"</span>, isbn <span class="op">=</span> <span class="fl">9780307476463</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Посмотреть, есть ли в ответе какая-либо дополнительная полезная информация, можно с помощью <code><a href="https://httr2.r-lib.org/reference/last_response.html">last_response()</a></code>:</p>
+<p>Посмотреть, есть ли в ответе какая-либо дополнительная полезная информация, можно с помощью <code>last_response()</code>:</p>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">last_response</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">resp</span></span>
@@ -641,7 +641,7 @@
 <p>Полезную дополнительную информация об ошибке можно найти в <code>faultstring</code>:</p>
 <div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">fault</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">faultstring</span></span></code></pre></div>
-<p>Для того, что бы наш пакет выводил эту дополнительную информацию об ошибках полученных в ходе работы с API необходимо использовать функцию <code><a href="https://httr2.r-lib.org/reference/req_error.html">req_error()</a></code> и её аргумент <code>body.</code> В body необходимо передать функцию, принимающую в качестве аргумента объект ответа от сервера, и возвращающую строку с дополнительной информацией о причине ошибке. Давайте попробуем доработать наш запрос:</p>
+<p>Для того, что бы наш пакет выводил эту дополнительную информацию об ошибках полученных в ходе работы с API необходимо использовать функцию <code>req_error()</code> и её аргумент <code>body.</code> В body необходимо передать функцию, принимающую в качестве аргумента объект ответа от сервера, и возвращающую строку с дополнительной информацией о причине ошибке. Давайте попробуем доработать наш запрос:</p>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nytimes_error_body</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">resp</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">fault</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">faultstring</span></span>
@@ -662,13 +662,13 @@
 <p>Существует два ограничения скорости: 4000 запросов в день и 10 запросов в минуту. Вы должны выдержать паузу в 6 секунд между запросами, чтобы избежать превышения предельного лимита количества отправленных запросов в минуту. Если вам нужен более высокий предел скорости, свяжитесь с нами по дресу <a href="mailto:code@nytimes.com" class="email">code@nytimes.com</a>.</p>
 </blockquote>
 <p>Не редко API в ответе возвращают допонительную информацию, о том, какую паузу необходимо выждать для успешной отправки следующего запроса, если вы превысили какой то из описанных выще лимитов. Часто эта информация хранится в заголовке <code>Retry-After</code>.</p>
-<p>Я намеренно нарушил лимит скорости, быстро сделав 11 запросов; к сожалению, хотя код статуса ответа был стандартным 429 (Too many requests), он не содержал ни в теле ответа, ни в заголовках никакой информации о том, какую паузу необходимо выдержать перед отправкой следующего запроса. Это означает, что мы не можем использовать <code><a href="https://httr2.r-lib.org/reference/req_retry.html">req_retry()</a></code>, которая ожидает информацию о времени таймаута в ответе сервера. Вместо этого мы будем использовать <code><a href="https://httr2.r-lib.org/reference/req_throttle.html">req_throttle()</a></code>, которая позволяет ограничить количество отправляемых запросов, в данном случае мы будем уверены, что отправляем не более 10 запросов каждые 60 секунд:</p>
+<p>Я намеренно нарушил лимит скорости, быстро сделав 11 запросов; к сожалению, хотя код статуса ответа был стандартным 429 (Too many requests), он не содержал ни в теле ответа, ни в заголовках никакой информации о том, какую паузу необходимо выдержать перед отправкой следующего запроса. Это означает, что мы не можем использовать <code>req_retry()</code>, которая ожидает информацию о времени таймаута в ответе сервера. Вместо этого мы будем использовать <code>req_throttle()</code>, которая позволяет ограничить количество отправляемых запросов, в данном случае мы будем уверены, что отправляем не более 10 запросов каждые 60 секунд:</p>
 <div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">"https://api.nytimes.com/svc/books/v3"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">req_url_path_append</span><span class="op">(</span><span class="st">"/reviews.json"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">req_url_query</span><span class="op">(</span>`api-key` <span class="op">=</span> <span class="st">"invalid"</span>, isbn <span class="op">=</span> <span class="fl">9780307476463</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">req_throttle</span><span class="op">(</span><span class="fl">10</span> <span class="op">/</span> <span class="fl">60</span><span class="op">)</span></span></code></pre></div>
-<p>По умолчанию <code><a href="https://httr2.r-lib.org/reference/req_throttle.html">req_throttle()</a></code> разделяет ограничение на все запросы к указанному хосту (т.е. api.nytimes.com). Поскольку документы предполагают, что ограничение скорости применяется к отдельным конечным точкам API, вы можете использовать аргумент realm, чтобы более точно определить конечную точку, на которую действует указанное вами ограничение скорости отправки запроса:</p>
+<p>По умолчанию <code>req_throttle()</code> разделяет ограничение на все запросы к указанному хосту (т.е. api.nytimes.com). Поскольку документы предполагают, что ограничение скорости применяется к отдельным конечным точкам API, вы можете использовать аргумент realm, чтобы более точно определить конечную точку, на которую действует указанное вами ограничение скорости отправки запроса:</p>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">"https://api.nytimes.com/svc/books/v3"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">req_url_path_append</span><span class="op">(</span><span class="st">"/reviews.json"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -736,7 +736,7 @@
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">key</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span>  </span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://testthat.r-lib.org/reference/is_testing.html">is_testing</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu">is_testing</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu">testing_key</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"No API key found, please supply with `api_key` argument or with NYTIMES_KEY env var"</span><span class="op">)</span> </span>
@@ -809,26 +809,26 @@
 <span></span>
 <span><span class="co"># авторизация</span></span>
 <span><span class="st">"https://www.facebook.com/v18.0/dialog/oauth"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/urltools/man/param_set.html">param_set</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"client_id"</span>,     value <span class="op">=</span> <span class="va">app_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/urltools/man/param_set.html">param_set</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"display"</span>,       value <span class="op">=</span> <span class="st">"popup"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/urltools/man/param_set.html">param_set</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"redirect_uri"</span>,  value <span class="op">=</span> <span class="st">"https://selesnow.github.io/rfacebookstat/getToken/get_token.html"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/urltools/man/param_set.html">param_set</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"response_type"</span>, value <span class="op">=</span> <span class="st">"token"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/urltools/man/param_set.html">param_set</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"scope"</span>,         value <span class="op">=</span> <span class="va">scopes</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">param_set</span><span class="op">(</span>key <span class="op">=</span> <span class="st">"client_id"</span>,     value <span class="op">=</span> <span class="va">app_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">param_set</span><span class="op">(</span>key <span class="op">=</span> <span class="st">"display"</span>,       value <span class="op">=</span> <span class="st">"popup"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">param_set</span><span class="op">(</span>key <span class="op">=</span> <span class="st">"redirect_uri"</span>,  value <span class="op">=</span> <span class="st">"https://selesnow.github.io/rfacebookstat/getToken/get_token.html"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">param_set</span><span class="op">(</span>key <span class="op">=</span> <span class="st">"response_type"</span>, value <span class="op">=</span> <span class="st">"token"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">param_set</span><span class="op">(</span>key <span class="op">=</span> <span class="st">"scope"</span>,         value <span class="op">=</span> <span class="va">scopes</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html">browseURL</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">shorttime_token</span> <span class="op">&lt;-</span> <span class="st">"ПОЛУЧЕНЫЙ ВАМИ КРАТКОСРОЧНЫЙ ТОКЕН"</span></span>
 <span></span>
 <span><span class="co"># обмен на долгосрочный токен</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html">browseURL</a></span><span class="op">(</span><span class="st">'https://developers.facebook.com/docs/facebook-login/guides/access-tokens/get-long-lived'</span><span class="op">)</span></span>
-<span><span class="va">lt_token</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/request.html">request</a></span><span class="op">(</span><span class="st">"https://graph.facebook.com/oauth/access_token"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://httr2.r-lib.org/reference/req_url.html">req_url_query</a></span><span class="op">(</span></span>
+<span><span class="va">lt_token</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">"https://graph.facebook.com/oauth/access_token"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_query</span><span class="op">(</span></span>
 <span>    grant_type <span class="op">=</span> <span class="st">"fb_exchange_token"</span>,</span>
 <span>    client_id <span class="op">=</span> <span class="va">app_id</span>,</span>
 <span>    client_secret <span class="op">=</span> <span class="st">"40ed3b067df92249372c7501d512c198"</span>,</span>
 <span>    fb_exchange_token <span class="op">=</span> <span class="va">shorttime_token</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://httr2.r-lib.org/reference/req_perform.html">req_perform</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html">resp_body_json</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><code>scopes</code> - это набор разрешений, т.е. с помощью этого параметра вы можете дать определённые права вашему токену, примерно также, как вы расшариваете доступ к какому то сервису на других пользователей, указав их роль, тем самым регулируя их возможности на просмотр или редактивание данных. Посмотреть список разрешений в Facebook API можно <a href="https://developers.facebook.com/docs/permissions/reference">тут</a>.</p>
 <p>Т.к. мы проверили наш код авторизации, теперь мы можем упаковать его в готовую функцию:</p>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
@@ -837,24 +837,24 @@
 <span>  <span class="va">scopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">scopes</span>, collapse <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="st">"https://www.facebook.com/v18.0/dialog/oauth"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/urltools/man/param_set.html">param_set</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"client_id"</span>,     value <span class="op">=</span> <span class="va">app_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/urltools/man/param_set.html">param_set</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"display"</span>,       value <span class="op">=</span> <span class="st">"popup"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/urltools/man/param_set.html">param_set</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"redirect_uri"</span>,  value <span class="op">=</span> <span class="st">"https://selesnow.github.io/rfacebookstat/getToken/get_token.html"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/urltools/man/param_set.html">param_set</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"response_type"</span>, value <span class="op">=</span> <span class="st">"token"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/urltools/man/param_set.html">param_set</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"scope"</span>,         value <span class="op">=</span> <span class="va">scopes</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">param_set</span><span class="op">(</span>key <span class="op">=</span> <span class="st">"client_id"</span>,     value <span class="op">=</span> <span class="va">app_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">param_set</span><span class="op">(</span>key <span class="op">=</span> <span class="st">"display"</span>,       value <span class="op">=</span> <span class="st">"popup"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">param_set</span><span class="op">(</span>key <span class="op">=</span> <span class="st">"redirect_uri"</span>,  value <span class="op">=</span> <span class="st">"https://selesnow.github.io/rfacebookstat/getToken/get_token.html"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">param_set</span><span class="op">(</span>key <span class="op">=</span> <span class="st">"response_type"</span>, value <span class="op">=</span> <span class="st">"token"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">param_set</span><span class="op">(</span>key <span class="op">=</span> <span class="st">"scope"</span>,         value <span class="op">=</span> <span class="va">scopes</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html">browseURL</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="va">shorttime_token</span> <span class="op">&lt;-</span> <span class="fu">askpass</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/askpass/man/askpass.html">askpass</a></span><span class="op">(</span><span class="st">"Please enter your API key"</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="va">lt_token</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/request.html">request</a></span><span class="op">(</span><span class="st">"https://graph.facebook.com/oauth/access_token"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://httr2.r-lib.org/reference/req_url.html">req_url_query</a></span><span class="op">(</span></span>
+<span>  <span class="va">lt_token</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">"https://graph.facebook.com/oauth/access_token"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">req_url_query</span><span class="op">(</span></span>
 <span>      grant_type <span class="op">=</span> <span class="st">"fb_exchange_token"</span>,</span>
 <span>      client_id <span class="op">=</span> <span class="va">app_id</span>,</span>
 <span>      client_secret <span class="op">=</span> <span class="va">client_secret</span>,</span>
 <span>      fb_exchange_token <span class="op">=</span> <span class="va">shorttime_token</span></span>
 <span>    <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://httr2.r-lib.org/reference/req_perform.html">req_perform</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html">resp_body_json</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"FB_APIKEY"</span><span class="op">=</span><span class="va">lt_token</span><span class="op">$</span><span class="va">access_token</span><span class="op">)</span></span>
 <span>  <span class="va">lt_token</span></span>
@@ -873,22 +873,22 @@
   "https://graph.facebook.com/me?access_token=ACCESS-TOKEN"</code></pre>
 <p>В R код это можно перевести следующим образом:</p>
 <div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/request.html">request</a></span><span class="op">(</span><span class="st">'https://graph.facebook.com/'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://httr2.r-lib.org/reference/req_url.html">req_url_path</a></span><span class="op">(</span><span class="st">'me'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://httr2.r-lib.org/reference/req_url.html">req_url_query</a></span><span class="op">(</span>access_token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"FB_APIKEY"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://httr2.r-lib.org/reference/req_perform.html">req_perform</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html">resp_body_json</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">'https://graph.facebook.com/'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_path</span><span class="op">(</span><span class="st">'me'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_query</span><span class="op">(</span>access_token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"FB_APIKEY"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Так же указав дополнительный параметр <code>metadata</code> можно запросить метаданные узла, в справке приведён следующий пример:</p>
 <pre><code>curl -i -X GET \
   "https://graph.facebook.com/USER-ID?
     metadata=1&amp;access_token=ACCESS-TOKEN"</code></pre>
 <p>В R это выглядит так:</p>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/request.html">request</a></span><span class="op">(</span><span class="st">'https://graph.facebook.com/'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://httr2.r-lib.org/reference/req_url.html">req_url_path</a></span><span class="op">(</span><span class="st">'me'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://httr2.r-lib.org/reference/req_url.html">req_url_query</a></span><span class="op">(</span>access_token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"FB_APIKEY"</span><span class="op">)</span>, metadata <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://httr2.r-lib.org/reference/req_perform.html">req_perform</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html">resp_body_json</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">'https://graph.facebook.com/'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_path</span><span class="op">(</span><span class="st">'me'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">req_url_query</span><span class="op">(</span>access_token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"FB_APIKEY"</span><span class="op">)</span>, metadata <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>В результате мы получим список метаданных в виде списка:</p>
 <pre><code>{
   "name": "Jane Smith",
@@ -912,22 +912,22 @@
 ...</code></pre>
 <p>Имеет смысл преобразовать полученый список в таблицу с тремя полями: name, description, type:</p>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">metadata_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">metadata</span><span class="op">$</span><span class="va">fields</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest_wider.html">unnest_wider</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">metadata_res</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>metadata <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">metadata</span><span class="op">$</span><span class="va">fields</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">unnest_wider</span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span></span></code></pre></div>
 <p>Теперь мы можем обернуть эндпоинт для получения метаданных узла <code>/me</code> в функцию:</p>
 <div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># заворачиваем в функцию</span></span>
 <span><span class="va">fb_get_metadata</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
-<span>  <span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/request.html">request</a></span><span class="op">(</span><span class="st">'https://graph.facebook.com/'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://httr2.r-lib.org/reference/req_url.html">req_url_path</a></span><span class="op">(</span><span class="st">'me'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://httr2.r-lib.org/reference/req_url.html">req_url_query</a></span><span class="op">(</span>access_token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"FB_APIKEY"</span><span class="op">)</span>, metadata <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://httr2.r-lib.org/reference/req_perform.html">req_perform</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html">resp_body_json</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu">request</span><span class="op">(</span><span class="st">'https://graph.facebook.com/'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">req_url_path</span><span class="op">(</span><span class="st">'me'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">req_url_query</span><span class="op">(</span>access_token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"FB_APIKEY"</span><span class="op">)</span>, metadata <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">req_perform</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">resp_body_json</span><span class="op">(</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># разворачиваем ответ</span></span>
-<span>  <span class="va">metadata_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">metadata</span><span class="op">$</span><span class="va">fields</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest_wider.html">unnest_wider</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span></span>
+<span>  <span class="va">metadata_res</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>metadata <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">metadata</span><span class="op">$</span><span class="va">fields</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">unnest_wider</span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="va">metadata_res</span></span>
 <span>  </span>
@@ -1259,7 +1259,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-06.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

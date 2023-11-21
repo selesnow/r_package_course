@@ -22,7 +22,7 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.30/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
@@ -137,7 +137,7 @@
 <h2>
 <span class="header-section-number">5.3</span> Конспект<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-4"><i class="fas fa-link"></i></a>
 </h2>
-<p>Задача файла DESCRIPTION— хранить важные метаданные о вашем пакете. При создании пакета функцией <code><a href="https://usethis.r-lib.org/reference/create_package.html">usethis::create_package()</a></code> в созданном проекте будет сразу добавлен минимальный пример файл DESCRIPTION.</p>
+<p>Задача файла DESCRIPTION— хранить важные метаданные о вашем пакете. При создании пакета функцией <code>usethis::create_package()</code> в созданном проекте будет сразу добавлен минимальный пример файл DESCRIPTION.</p>
 <pre><code>Package: package_name
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
@@ -217,15 +217,15 @@ RoxygenNote: 7.2.3</code></pre>
 <p>данное поле отвечает за тип лицензии вашего пакета, лицензия может регулировать законные права сторонних разработчиков на использование вашего кода, и в частности всего пакета в их собственных разработках или публикациях. Важно понимать, что это, по сути, машиночитаемое <code>License</code> поле, и не стоит заполнять его руками, для каждого типа лицензии в пакете <code>usethis</code> есть отдельная функция, которая заполняет поле <code>License</code> и добавляет в ваш пакет отдельный файл с описанием лицензии.</p>
 <ul>
 <li>
-<code><a href="https://usethis.r-lib.org/reference/licenses.html">use_mit_license()</a></code> – если вам нужна лицензия, чтобы люди могли использовать ваш код с минимальными ограничениями</li>
+<code>use_mit_license()</code> – если вам нужна лицензия, чтобы люди могли использовать ваш код с минимальными ограничениями</li>
 <li>
-<code><a href="https://usethis.r-lib.org/reference/licenses.html">use_gpl_license()</a></code> - если вам нужна лицензия с авторским левом, чтобы все производные и пакеты вашего кода также имели открытый исходный код</li>
+<code>use_gpl_license()</code> - если вам нужна лицензия с авторским левом, чтобы все производные и пакеты вашего кода также имели открытый исходный код</li>
 <li>
-<code><a href="https://usethis.r-lib.org/reference/licenses.html">use_cc0_license()</a></code> - если ваш пакет в основном содержит данные, а не код, и вам нужны минимальные ограничения</li>
+<code>use_cc0_license()</code> - если ваш пакет в основном содержит данные, а не код, и вам нужны минимальные ограничения</li>
 <li>
-<code><a href="https://usethis.r-lib.org/reference/licenses.html">use_ccby_license()</a></code> – если ваш пакет содержит только данные, но вы хотите указания вашего авторства</li>
+<code>use_ccby_license()</code> – если ваш пакет содержит только данные, но вы хотите указания вашего авторства</li>
 <li>
-<code><a href="https://usethis.r-lib.org/reference/licenses.html">use_proprietary_license()</a></code> - если вы не хотите делать свой код открытым (На CRAN не пустят)</li>
+<code>use_proprietary_license()</code> - если вы не хотите делать свой код открытым (На CRAN не пустят)</li>
 </ul>
 </div>
 <div id="imports-suggests-depends" class="section level3" number="5.3.5">
@@ -236,23 +236,23 @@ RoxygenNote: 7.2.3</code></pre>
 <li>Пакеты, перечисленные в, <code>Imports</code> необходимы вашим пользователям во время выполнения и будут установлены (или потенциально обновлены), когда пользователи установят ваш пакет через <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.</li>
 <li>Пакеты, перечисленные в, <code>Suggests</code> либо необходимы для задач разработки, либо могут разблокировать дополнительные возможности пакета для ваших пользователей.</li>
 </ul>
-<p>Для добавления необходимых пакетов в зависимости, т.е. в поля <code>Imports</code> или <code>Description</code> используйте функцию <code><a href="https://usethis.r-lib.org/reference/use_package.html">usethis::use_package()</a></code>.</p>
+<p>Для добавления необходимых пакетов в зависимости, т.е. в поля <code>Imports</code> или <code>Description</code> используйте функцию <code>usethis::use_package()</code>.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_package.html">use_package</a></span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span> <span class="co"># Default is "Imports"</span></span>
+<code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_package</span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span> <span class="co"># Default is "Imports"</span></span>
 <span><span class="co">#&gt; ✔ Adding 'dplyr' to Imports field in DESCRIPTION</span></span>
 <span><span class="co">#&gt; • Refer to functions with `dplyr::fun()`</span></span>
 <span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_package.html">use_package</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, <span class="st">"Suggests"</span><span class="op">)</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_package</span><span class="op">(</span><span class="st">"ggplot2"</span>, <span class="st">"Suggests"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ✔ Adding 'ggplot2' to Suggests field in DESCRIPTION</span></span>
 <span><span class="co">#&gt; • Use `requireNamespace("ggplot2", quietly = TRUE)` to test if package is installed</span></span>
 <span><span class="co">#&gt; • Then directly refer to functions with `ggplot2::fun()`</span></span></code></pre></div>
 <p>Так же вы можете использовать аргумент <code>min_version</code> для указания минимальной или текущей версии пакета, от которого щависит ваш пакет:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># exact version</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_package.html">use_package</a></span><span class="op">(</span><span class="st">"dplyr"</span>, min_version <span class="op">=</span> <span class="st">"1.0.0"</span><span class="op">)</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_package</span><span class="op">(</span><span class="st">"dplyr"</span>, min_version <span class="op">=</span> <span class="st">"1.0.0"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># min version = currently installed version</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_package.html">use_package</a></span><span class="op">(</span><span class="st">"dplyr"</span>, min_version <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_package</span><span class="op">(</span><span class="st">"dplyr"</span>, min_version <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="другие-поля" class="section level3" number="5.3.6">
 <h3>
@@ -608,7 +608,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-06.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
