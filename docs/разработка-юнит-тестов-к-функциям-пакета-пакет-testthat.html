@@ -22,7 +22,7 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.30/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
@@ -144,7 +144,7 @@
 <p>Обычно при разработке пакета вы в любом случае тестируюете свои функции, но наверняка идёте по следующему сценарию:</p>
 <ol style="list-style-type: decimal">
 <li>Добавляете в пакет новую функцию</li>
-<li>Загружаете весь функционал пакета с помощью <code>devtools::load_all()</code>
+<li>Загружаете весь функционал пакета с помощью <code><a href="https://devtools.r-lib.org/reference/load_all.html">devtools::load_all()</a></code>
 </li>
 <li>В ручном режиме тестируете новую функцию в консоли</li>
 <li>В случае ошибки вносите изменения и повторяете итерацию</li>
@@ -164,10 +164,10 @@
 <li>Создастся файл <code>tests/testthat.R</code>, который отвечает за запуск ваших тестов.</li>
 <li>Создание функций и тестов к ним осуществляется двумя функциями:</li>
 <li>
-<code>usethis::use_r()</code> – создаёт файл будущей функции в каталоге R/;</li>
+<code><a href="https://usethis.r-lib.org/reference/use_r.html">usethis::use_r()</a></code> – создаёт файл будущей функции в каталоге R/;</li>
 <li>
-<code>usethis::use_test()</code> – создаёт файл <code>test-function_name.R</code> с тестами для функции в каталоге <code>tests/testthat/</code>.</li>
-<li>Запуск тестов осуществляется функцией <code>devtools::test()</code>.</li>
+<code><a href="https://usethis.r-lib.org/reference/use_r.html">usethis::use_test()</a></code> – создаёт файл <code>test-function_name.R</code> с тестами для функции в каталоге <code>tests/testthat/</code>.</li>
+<li>Запуск тестов осуществляется функцией <code><a href="https://devtools.r-lib.org/reference/test.html">devtools::test()</a></code>.</li>
 </ol>
 </div>
 <div id="организация-тестов" class="section level3" number="7.3.3">
@@ -237,46 +237,46 @@
 <p>Пакет <code>testthat</code> сожержит более 40 различных функций-ожиданий. Ниже перечислю основные:</p>
 <ul>
 <li>
-<code>expect_equal()</code>, <code>expect_identical()</code> - Возвращает ли код ожидаемое значение?</li>
+<code><a href="https://testthat.r-lib.org/reference/equality-expectations.html">expect_equal()</a></code>, <code><a href="https://testthat.r-lib.org/reference/equality-expectations.html">expect_identical()</a></code> - Возвращает ли код ожидаемое значение?</li>
 <li>
-<code>expect_type()</code>, <code>expect_s3_class()</code>, <code>expect_s4_class()</code> - Возвращает ли код объект, унаследованный от ожидаемого базового типа, класса S3 или класса S4?</li>
+<code><a href="https://testthat.r-lib.org/reference/inheritance-expectations.html">expect_type()</a></code>, <code><a href="https://testthat.r-lib.org/reference/inheritance-expectations.html">expect_s3_class()</a></code>, <code><a href="https://testthat.r-lib.org/reference/inheritance-expectations.html">expect_s4_class()</a></code> - Возвращает ли код объект, унаследованный от ожидаемого базового типа, класса S3 или класса S4?</li>
 <li>
-<code>expect_error()</code>, <code>expect_warning()</code>, <code>expect_message()</code>, <code>expect_condition()</code> - Выдает ли код ошибку, предупреждение, сообщение или другое условие?</li>
+<code><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_error()</a></code>, <code><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_warning()</a></code>, <code><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_message()</a></code>, <code><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_condition()</a></code> - Выдает ли код ошибку, предупреждение, сообщение или другое условие?</li>
 <li>
-<code>expect_length()</code> - Возвращает ли код вектор указанной длины?</li>
+<code><a href="https://testthat.r-lib.org/reference/expect_length.html">expect_length()</a></code> - Возвращает ли код вектор указанной длины?</li>
 <li>
-<code>expect_lt()</code>, <code>expect_lte()</code>, <code>expect_gt()</code>, <code>expect_gte()</code> - Возвращает ли код число больше/меньше ожидаемого значения?</li>
+<code><a href="https://testthat.r-lib.org/reference/comparison-expectations.html">expect_lt()</a></code>, <code><a href="https://testthat.r-lib.org/reference/comparison-expectations.html">expect_lte()</a></code>, <code><a href="https://testthat.r-lib.org/reference/comparison-expectations.html">expect_gt()</a></code>, <code><a href="https://testthat.r-lib.org/reference/comparison-expectations.html">expect_gte()</a></code> - Возвращает ли код число больше/меньше ожидаемого значения?</li>
 <li>
-<code>expect_named()</code> - Возвращает ли код вектор с (заданными) именами?</li>
+<code><a href="https://testthat.r-lib.org/reference/expect_named.html">expect_named()</a></code> - Возвращает ли код вектор с (заданными) именами?</li>
 </ul>
 <p>Функции ожидания вы вполне можете использовать интерактивно:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://testthat.r-lib.org">testthat</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># ожидания</span></span>
-<span><span class="fu">expect_equal</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span> <span class="op">+</span> <span class="fl">1e-7</span><span class="op">)</span>     <span class="co"># не строгое соответствие</span></span>
-<span><span class="fu">expect_identical</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span> <span class="op">+</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="co"># строгое соответствие</span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/equality-expectations.html">expect_equal</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span> <span class="op">+</span> <span class="fl">1e-7</span><span class="op">)</span>     <span class="co"># не строгое соответствие</span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/equality-expectations.html">expect_identical</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span> <span class="op">+</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="co"># строгое соответствие</span></span>
 <span></span>
 <span><span class="co"># проверка на ошибки</span></span>
-<span><span class="fu">expect_error</span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="st">"a"</span><span class="op">)</span></span>
-<span><span class="fu">expect_warning</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_error</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="st">"a"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_warning</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># тест возвращает ошибку, но не ту, которую мы проверяем</span></span>
 <span><span class="co"># изза опечатки в названии функции</span></span>
 <span><span class="fu">stringr</span><span class="fu">::</span><span class="fu">str_duq</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_dup.html">str_dup</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">expect_error</span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu">str_duq</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">expect_error</span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu">str_duq</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, regexp <span class="op">=</span> <span class="st">"recycle"</span><span class="op">)</span></span>
-<span><span class="fu">expect_error</span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_dup.html">str_dup</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, regexp <span class="op">=</span> <span class="st">"recycle"</span><span class="op">)</span></span>
-<span><span class="fu">expect_error</span><span class="op">(</span><span class="fu">str_dup</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, class <span class="op">=</span> <span class="st">"vctrs_error_incompatible_size"</span><span class="op">)</span></span></code></pre></div>
-<p>Отдельно стоит обратить внимание на второй аргумент, который мы используем в функции <code>expect_error()</code>, данный аргумент не является обязательным, но крайне рекомендуется к использования. Дело в том, что по умолчанию функция <code>expect_error()</code> всего лишь проверяет, что указанный в первом аргументе код завершается ошибкой, но не проверяет какой именно, если не использовать её дополнительные аргументы. Так, например, этот тест может ошибочно быть успешно выполнен если вы просто опечатались в названии функции, которую тестировали.</p>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_error</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu">str_duq</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_error</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu">str_duq</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, regexp <span class="op">=</span> <span class="st">"recycle"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_error</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_dup.html">str_dup</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, regexp <span class="op">=</span> <span class="st">"recycle"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_error</a></span><span class="op">(</span><span class="fu">str_dup</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, class <span class="op">=</span> <span class="st">"vctrs_error_incompatible_size"</span><span class="op">)</span></span></code></pre></div>
+<p>Отдельно стоит обратить внимание на второй аргумент, который мы используем в функции <code><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_error()</a></code>, данный аргумент не является обязательным, но крайне рекомендуется к использования. Дело в том, что по умолчанию функция <code><a href="https://testthat.r-lib.org/reference/expect_error.html">expect_error()</a></code> всего лишь проверяет, что указанный в первом аргументе код завершается ошибкой, но не проверяет какой именно, если не использовать её дополнительные аргументы. Так, например, этот тест может ошибочно быть успешно выполнен если вы просто опечатались в названии функции, которую тестировали.</p>
 </div>
 <div id="запуск-тестов" class="section level3" number="7.3.5">
 <h3>
 <span class="header-section-number">7.3.5</span> Запуск тестов<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2"><i class="fas fa-link"></i></a>
 </h3>
-<p>Т.к. наша новая функция теперь покрыта тестами мы можем их запустить командой <code>devtools::test()</code>, результаты работы будут выглядеть следующим образом:</p>
+<p>Т.к. наша новая функция теперь покрыта тестами мы можем их запустить командой <code><a href="https://devtools.r-lib.org/reference/test.html">devtools::test()</a></code>, результаты работы будут выглядеть следующим образом:</p>
 <pre><code>══ Results ══════════════════════════════════
 Duration: 0.4 s
 
@@ -315,7 +315,7 @@ Duration: 0.4 s
 <li>
 <code>Failure (test-str_split.R:6:3)</code> - в каком тестовом файле был проваленный тест, и в какой строке этого фалйа была ошибка</li>
 <li>
-<code>test split length</code> - описание того, что проваленный тест проверяет, первый аргумент функции <code>test_that()</code>
+<code>test split length</code> - описание того, что проваленный тест проверяет, первый аргумент функции <code><a href="https://testthat.r-lib.org/reference/test_that.html">test_that()</a></code>
 </li>
 <li>
 <code>"one two three"%/%" "</code> - какой код тестировался</li>
@@ -332,14 +332,14 @@ Duration: 0.4 s
 <span class="header-section-number">7.3.7.1</span> Создание snapshot теста<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-snapshot-%D1%82%D0%B5%D1%81%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h4>
 <p>Этот функционал был добавлен в <code>testthat</code> версии 3.0.0.</p>
-<p>Snapshot тесты запоминают вывод, который был в консоли при первом его выполнении, и в будущем сравнивают текущий вывод полученный при запуске тестов, с зафиксированным при первом запуске значениям. Этот тип тестов работает только в пакетном (не интерактивном) режиме работы, т.е. их можно запустить командой <code>devtools::test()</code> или <code>devtools::test_file()</code>.</p>
+<p>Snapshot тесты запоминают вывод, который был в консоли при первом его выполнении, и в будущем сравнивают текущий вывод полученный при запуске тестов, с зафиксированным при первом запуске значениям. Этот тип тестов работает только в пакетном (не интерактивном) режиме работы, т.е. их можно запустить командой <code><a href="https://devtools.r-lib.org/reference/test.html">devtools::test()</a></code> или <code><a href="https://devtools.r-lib.org/reference/devtools-deprecated.html">devtools::test_file()</a></code>.</p>
 <p>При первом запуске создаётся папка <code>tests/testthat/_snaps/</code> в которую и будут собираться снимки вывода результата работы функции в виде <code>.md</code> файлов.
 При каждом следующем запуске теста, вывод работы функции будет сравниваться с созданным ранее эталоном.</p>
 <p>Добавим snapshot тест в нашу новую функцию:</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># snapshot test -----------------------------------------------------------</span></span>
-<span><span class="fu">test_that</span><span class="op">(</span><span class="st">"test str split output"</span>, <span class="op">{</span></span>
-<span>  <span class="fu">expect_snapshot</span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"test str split output"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://testthat.r-lib.org/reference/expect_snapshot.html">expect_snapshot</a></span><span class="op">(</span></span>
 <span>    <span class="st">"Alexey Seleznev"</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%/%</a></span> <span class="st">" "</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
@@ -366,10 +366,10 @@ Duration: 0.4 s
 <p>Я намеренно добавил этот вывод консоли скриншотом, что бы вы увидели, что консоль выделяет зелёным цветом то, что несоответвывало эталонному снимку при запуске тестирования.</p>
 <p>Получается функцию мы исправили, но теперь нам необходимо обновить снимок, сделать это можно с помощью следующих функций:</p>
 <ul>
-<li>Команда <code>testthat::snapshot_review()</code> запускает Shiny приложение для локального просмотра отличия в выводе функции, по сравнению с эталоном.</li>
-<li>Команда <code>testthat::snapshot_accept()</code> позволяет обновить эталонный снимок теста.</li>
+<li>Команда <code><a href="https://testthat.r-lib.org/reference/snapshot_accept.html">testthat::snapshot_review()</a></code> запускает Shiny приложение для локального просмотра отличия в выводе функции, по сравнению с эталоном.</li>
+<li>Команда <code><a href="https://testthat.r-lib.org/reference/snapshot_accept.html">testthat::snapshot_accept()</a></code> позволяет обновить эталонный снимок теста.</li>
 </ul>
-<p>Т.е. далее команда <code>testthat::snapshot_accept()</code> просто обновит ваш эталонный снимок, а команда <code>testthat::snapshot_review()</code> позволит более детально изучить что пошло не так с помощью небольшого Shiny приложения:</p>
+<p>Т.е. далее команда <code><a href="https://testthat.r-lib.org/reference/snapshot_accept.html">testthat::snapshot_accept()</a></code> просто обновит ваш эталонный снимок, а команда <code><a href="https://testthat.r-lib.org/reference/snapshot_accept.html">testthat::snapshot_review()</a></code> позволит более детально изучить что пошло не так с помощью небольшого Shiny приложения:</p>
 <div class="inline-figure"><img src="img/testing-2.png"></div>
 <p>В приложении более подробно выделено то, что не соответвует при тесте эталонному снимку. Нажав кнопку <code>Skip</code> вы оставляете прежный эталонный снимок, нажав кнопку <code>Accept</code> вы внесёте в него изменения.</p>
 </div>
@@ -749,7 +749,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-21.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

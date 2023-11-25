@@ -5,8 +5,6 @@ account: selesnow
 server: bookdown.org
 hostUrl: https://bookdown.org/__api__
 appId: 13373
-bundleId: 91147
+bundleId: 91148
 url: https://bookdown.org/selesnow/r_package_course/
 version: 1
-asMultiple: FALSE
-asStatic: FALSE

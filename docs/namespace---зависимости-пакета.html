@@ -22,7 +22,7 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.30/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
@@ -254,7 +254,7 @@ useDynLib(testthat, .registration = TRUE)</code></pre>
 </h3>
 <p>Весь рабочий процесс по добавлению зависимостей в пакет состоит из следующих этапов:</p>
 <ol style="list-style-type: decimal">
-<li>Изначально добавляете с помощью команды <code>usethis::use_package()</code> необходимые пакеты в нужные поля файла <code>DESCRIPTION</code>.</li>
+<li>Изначально добавляете с помощью команды <code><a href="https://usethis.r-lib.org/reference/use_package.html">usethis::use_package()</a></code> необходимые пакеты в нужные поля файла <code>DESCRIPTION</code>.</li>
 <li>Над кодом функций используйте специальные roxygen комментарии <code>import</code> для импорта всего пространства имён стороннего пакета, или <code>importFrom</code>, для импорта отдельный функций из сторонних пакетов.</li>
 </ol>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
@@ -265,9 +265,9 @@ useDynLib(testthat, .registration = TRUE)</code></pre>
 <span>  <span class="va">...</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
-<li>Запускаете функцию <code>devtools::document()</code> для генерации файла <code>NAMESPACE</code>.</li>
+<li>Запускаете функцию <code><a href="https://devtools.r-lib.org/reference/document.html">devtools::document()</a></code> для генерации файла <code>NAMESPACE</code>.</li>
 </ol>
-<p>Но, где удобнее всего прописать roxygen комментарии для импорта функций и целых пакетов, если вы их многократно используете в своём коде? Первое, что наверняка придёт вам в голову - писать roxygen комментарии для импорта над. каждой функцией, в которой используются импортируемые объекты. Но это слишком избыточно, ведь один roxygen комментарий уже добавит нужную директутиву в файл <code>NAMESPACE</code>, поэтому имеет смысл прописать все комментарии для импорта объектов в одном месте, для чего наиболее удобно использовать функцию <code>usethis::use_package_doc()</code>. Данная функция создаёт файл <code>R/pkg-package.R</code>, в котом и будут собираться все ваши roxygen комментари для импорта над пустым объектом <code>NULL</code>, выглядит этот файл примерно так:</p>
+<p>Но, где удобнее всего прописать roxygen комментарии для импорта функций и целых пакетов, если вы их многократно используете в своём коде? Первое, что наверняка придёт вам в голову - писать roxygen комментарии для импорта над. каждой функцией, в которой используются импортируемые объекты. Но это слишком избыточно, ведь один roxygen комментарий уже добавит нужную директутиву в файл <code>NAMESPACE</code>, поэтому имеет смысл прописать все комментарии для импорта объектов в одном месте, для чего наиболее удобно использовать функцию <code><a href="https://usethis.r-lib.org/reference/use_package_doc.html">usethis::use_package_doc()</a></code>. Данная функция создаёт файл <code>R/pkg-package.R</code>, в котом и будут собираться все ваши roxygen комментари для импорта над пустым объектом <code>NULL</code>, выглядит этот файл примерно так:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The following block is used by usethis to automatically manage</span></span>
 <span><span class="co"># roxygen namespace tags. Modify with care!</span></span>
@@ -275,7 +275,7 @@ useDynLib(testthat, .registration = TRUE)</code></pre>
 <span><span class="co">#' @importFrom glue glue_collapse</span></span>
 <span><span class="co">## usethis namespace: end</span></span>
 <span><span class="cn">NULL</span></span></code></pre></div>
-<p>Далее вы будете добавлять в этот файл roxygen комментари с помощью <code>use_import_from()</code>.</p>
+<p>Далее вы будете добавлять в этот файл roxygen комментари с помощью <code><a href="https://usethis.r-lib.org/reference/use_import_from.html">use_import_from()</a></code>.</p>
 </div>
 <div id="когда-необходимо-экспортировать-объекты-из-сторонних-пакетов" class="section level3" number="6.3.6">
 <h3>
@@ -347,7 +347,7 @@ useDynLib(testthat, .registration = TRUE)</code></pre>
 <span>    <span class="fu">g</span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>В тестах вы можете использовать функцию <code>testthat::skip_if_not_installed()</code> для пропуска тестов, если у пользовтаеля не установлены необходимые для их выполнения пакетов.</p>
+<p>В тестах вы можете использовать функцию <code><a href="https://testthat.r-lib.org/reference/skip.html">testthat::skip_if_not_installed()</a></code> для пропуска тестов, если у пользовтаеля не установлены необходимые для их выполнения пакетов.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">test_that</span><span class="op">(</span><span class="st">"basic plot builds without error"</span>, <span class="op">{</span></span>
 <span>  <span class="fu">skip_if_not_installed</span><span class="op">(</span><span class="st">"sf"</span><span class="op">)</span></span>
@@ -358,10 +358,10 @@ useDynLib(testthat, .registration = TRUE)</code></pre>
 <span>    ncol <span class="op">=</span> <span class="fl">2</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">nc</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu">st_as_sf</span><span class="op">(</span></span>
+<span>  <span class="va">nc</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span></span>
 <span>    <span class="fu">data_frame</span><span class="op">(</span></span>
 <span>      NAME <span class="op">=</span> <span class="st">"ashe"</span>,</span>
-<span>      geometry <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu">st_sfc</span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu">st_polygon</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">nc_tiny_coords</span><span class="op">)</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span>
+<span>      geometry <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html">st_polygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">nc_tiny_coords</span><span class="op">)</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
@@ -751,7 +751,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-21.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

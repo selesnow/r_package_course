@@ -22,7 +22,7 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.30/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
@@ -158,20 +158,20 @@
 <li>Авторизация:
 <ul>
 <li>
-<code>token_fetch()</code> – запрос учётных данных;</li>
+<code><a href="https://gargle.r-lib.org/reference/token_fetch.html">token_fetch()</a></code> – запрос учётных данных;</li>
 </ul>
 </li>
 <li>Компоновка и отправка HTTP запроса:
 <ul>
 <li>
-<code>request_build()</code> – составление запроса;</li>
+<code><a href="https://gargle.r-lib.org/reference/request_develop.html">request_build()</a></code> – составление запроса;</li>
 <li>
-<code>request_make()</code> и <code>request_retry()</code> – отправка запроса;</li>
+<code><a href="https://gargle.r-lib.org/reference/request_make.html">request_make()</a></code> и <code><a href="https://gargle.r-lib.org/reference/request_retry.html">request_retry()</a></code> – отправка запроса;</li>
 </ul>
 </li>
 <li>Парсинг полученного ответа:</li>
 <li>
-<code>response_process()</code> – парсинг ответа.</li>
+<code><a href="https://gargle.r-lib.org/reference/response_process.html">response_process()</a></code> – парсинг ответа.</li>
 </ul>
 <p>Ниже пример кода работы с Google Ads API с помощью пакета gargle:</p>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
@@ -186,7 +186,7 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Авторизация</span></span>
-<span><span class="va">cred</span> <span class="op">&lt;-</span> <span class="fu">token_fetch</span><span class="op">(</span></span>
+<span><span class="va">cred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://gargle.r-lib.org/reference/token_fetch.html">token_fetch</a></span><span class="op">(</span></span>
 <span>  scopes  <span class="op">=</span> <span class="st">'https://www.googleapis.com/auth/adwords'</span>,</span>
 <span>  app     <span class="op">=</span> <span class="va">app</span>,</span>
 <span>  email   <span class="op">=</span> <span class="st">'me@gmail.com'</span>,</span>
@@ -194,7 +194,7 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Создаём запрос</span></span>
-<span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">request_build</span><span class="op">(</span></span>
+<span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://gargle.r-lib.org/reference/request_develop.html">request_build</a></span><span class="op">(</span></span>
 <span>  method   <span class="op">=</span> <span class="st">"GET"</span>,</span>
 <span>  path     <span class="op">=</span> <span class="st">'v14/customers:listAccessibleCustomers'</span>,</span>
 <span>  token    <span class="op">=</span> <span class="va">cred</span>,</span>
@@ -202,7 +202,7 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Отправляем запрос</span></span>
-<span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">request_retry</span><span class="op">(</span></span>
+<span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://gargle.r-lib.org/reference/request_retry.html">request_retry</a></span><span class="op">(</span></span>
 <span>  <span class="va">req</span>,</span>
 <span>  <span class="fu"><a href="https://httr.r-lib.org/reference/add_headers.html">add_headers</a></span><span class="op">(</span></span>
 <span>    `developer-token`<span class="op">=</span> <span class="st">"DEVELOPER_TOKEN"</span></span>
@@ -212,9 +212,9 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Парсим ответ</span></span>
-<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">response_process</span><span class="op">(</span><span class="va">resp</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://gargle.r-lib.org/reference/response_process.html">response_process</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span></span></code></pre></div>
 <p>В приведённом выше коде вам необходимо подставить полученные ранее учётные данные, т.е. CLIENT_ID и CLIENT_SECRET.</p>
-<p>Некоторые Google API, например Google Ads API, требуют от вас дополнительные авторизационные данные, в данном случае developer-token, о таких особенностях вы узнаете из раздела авторизации в справке нужного вам API. В данном случае мы прокидываем токен разработчика в специальном заголовке <code>developer-token</code> внутри функции <code>request_retry()</code>.</p>
+<p>Некоторые Google API, например Google Ads API, требуют от вас дополнительные авторизационные данные, в данном случае developer-token, о таких особенностях вы узнаете из раздела авторизации в справке нужного вам API. В данном случае мы прокидываем токен разработчика в специальном заголовке <code>developer-token</code> внутри функции <code><a href="https://gargle.r-lib.org/reference/request_retry.html">request_retry()</a></code>.</p>
 <p>Аргументы <code>max_tries_total</code> и <code>max_total_wait_time_in_seconds</code> позволяют управлять политикой повторных отправок запросов в случае временных ошибок, первый аргумент позволяет указать количество повторных попыток отправки запроса, а второй отвечает за тайм аут в секундах между попытки отправки запроса.</p>
 </div>
 <div id="процесс-создания-пакета-на-основе-gargle" class="section level3" number="13.3.3">
@@ -229,7 +229,7 @@
 <li>Используйте помощники roxygen от gargle для создания документации для ваших функций аутентификации. Это избавляет вас от необходимости писать документы и вы 6. наследуете стандартные формулировки.</li>
 <li>Используйте функции <code>YOURPKG_token()</code> и <code>YOURPKG_api_key()</code> (определенные в стандартном интерфейсе аутентификации), чтобы вставить токен или ключ API в запросы вашего пакета.</li>
 </ol>
-<p>Файл <code>R/YOURPKG_auth.R</code> будет содержать интерфейс авторизации вашего пакета, в основе этого интерйеса, как вы уже убедились из первого примера работы с пакетом <code>gargle</code>, будет функция <code>token_fetch()</code>, ниже упрощённый пример её использования внутри пакета <code>googledrive</code>:</p>
+<p>Файл <code>R/YOURPKG_auth.R</code> будет содержать интерфейс авторизации вашего пакета, в основе этого интерйеса, как вы уже убедились из первого примера работы с пакетом <code>gargle</code>, будет функция <code><a href="https://gargle.r-lib.org/reference/token_fetch.html">token_fetch()</a></code>, ниже упрощённый пример её использования внутри пакета <code>googledrive</code>:</p>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BE%D0%B1%D1%91%D1%80%D1%82%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-google-api-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-gargle.html#cb115-1" tabindex="-1"></a><span class="co"># googledrive::</span></span>
 <span id="cb115-2"><a href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BE%D0%B1%D1%91%D1%80%D1%82%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-google-api-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-gargle.html#cb115-2" tabindex="-1"></a>drive_auth <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">email =</span> gargle<span class="sc">::</span><span class="fu">gargle_oauth_email</span>(),</span>
 <span id="cb115-3"><a href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BE%D0%B1%D1%91%D1%80%D1%82%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-google-api-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-gargle.html#cb115-3" tabindex="-1"></a>                       <span class="at">path =</span> <span class="cn">NULL</span>,</span>
@@ -264,7 +264,7 @@
 <h3>
 <span class="header-section-number">13.3.4</span> Интерфейс авторизации<a class="anchor" aria-label="anchor" href="#%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8"><i class="fas fa-link"></i></a>
 </h3>
-<p>Наиболее простым способом добавить интерфейс авторизации в свой пакет - просто скопировать его из файла <a href="https://github.com/tidyverse/googledrive/blob/main/R/drive_auth.R">drive_auth.R</a> и немного доработать его под ваш пакет, переназвав функции, и изменив дефолтные значения аргументов <code>package</code> и <code>scopes</code> в функции <code>gargle::token_fetch()</code>.</p>
+<p>Наиболее простым способом добавить интерфейс авторизации в свой пакет - просто скопировать его из файла <a href="https://github.com/tidyverse/googledrive/blob/main/R/drive_auth.R">drive_auth.R</a> и немного доработать его под ваш пакет, переназвав функции, и изменив дефолтные значения аргументов <code>package</code> и <code>scopes</code> в функции <code><a href="https://gargle.r-lib.org/reference/token_fetch.html">gargle::token_fetch()</a></code>.</p>
 <p>Scopes это набор разрешений, т.е. доступов, которые пользователь будет предоставлять вашего OAuth клиенту. информацию о том, какие именно разрешения нужны будут вашему пакету вы найдёте в справке к нужному вам API, в разделе Scopes. Для примера Google Ads API требует разрешение <code>https://www.googleapis.com/auth/adwords</code>, Google Drive API <code>ttps://www.googleapis.com/auth/drive</code>.</p>
 <p>Сам интерфейс автоизации будет состоять из следующих функций:</p>
 <ul>
@@ -288,12 +288,12 @@
 <h3>
 <span class="header-section-number">13.3.5</span> Состояние авторизации в ходе сеанса<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D0%B5-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8-%D0%B2-%D1%85%D0%BE%D0%B4%D0%B5-%D1%81%D0%B5%D0%B0%D0%BD%D1%81%D0%B0"><i class="fas fa-link"></i></a>
 </h3>
-<p>Авторизация это динамическая сущность, поэтому в вашем пакете должен быть создан объект <code>gargle::AuthState</code>, который будет отвечать за изменения состояния авторизации. Создавать его надо внутри функции <code>.OnLoad()</code> в файле <code>zzz.R</code>:</p>
+<p>Авторизация это динамическая сущность, поэтому в вашем пакете должен быть создан объект <code><a href="https://gargle.r-lib.org/reference/AuthState-class.html">gargle::AuthState</a></code>, который будет отвечать за изменения состояния авторизации. Создавать его надо внутри функции <code>.OnLoad()</code> в файле <code>zzz.R</code>:</p>
 <div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">.onLoad</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">libname</span>, <span class="va">pkgname</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/getFromNamespace.html">assignInMyNamespace</a></span><span class="op">(</span></span>
 <span>    <span class="st">".auth"</span>,</span>
-<span>    <span class="fu">gargle</span><span class="fu">::</span><span class="fu">init_AuthState</span><span class="op">(</span>package <span class="op">=</span> <span class="st">"googledrive"</span>, auth_active <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>    <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/init_AuthState.html">init_AuthState</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"googledrive"</span>, auth_active <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># other stuff</span></span>
@@ -303,7 +303,7 @@
 <h3>
 <span class="header-section-number">13.3.6</span> Подпись запросов токеном авторизации<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%BE%D0%B4%D0%BF%D0%B8%D1%81%D1%8C-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2-%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%D0%BE%D0%BC-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8"><i class="fas fa-link"></i></a>
 </h3>
-<p>После того, как вы прописали в своём пакете интерфейс авторизации, и добавили объект <code>.auth</code>, для получения из этого объекта самого токена, и подписи запросов используйте функцию типа <code>drive_token()</code>, передав её в аргумент <code>token</code> при компоновке самого запроса с помозью функции <code>request_build()</code>. Ниже пример основной функции компонубщей и отправляющей запросы из пакета googledrive:</p>
+<p>После того, как вы прописали в своём пакете интерфейс авторизации, и добавили объект <code>.auth</code>, для получения из этого объекта самого токена, и подписи запросов используйте функцию типа <code>drive_token()</code>, передав её в аргумент <code>token</code> при компоновке самого запроса с помозью функции <code><a href="https://gargle.r-lib.org/reference/request_develop.html">request_build()</a></code>. Ниже пример основной функции компонубщей и отправляющей запросы из пакета googledrive:</p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BE%D0%B1%D1%91%D1%80%D1%82%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-google-api-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-gargle.html#cb117-1" tabindex="-1"></a><span class="co"># googledrive::</span></span>
 <span id="cb117-2"><a href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BE%D0%B1%D1%91%D1%80%D1%82%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-google-api-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-gargle.html#cb117-2" tabindex="-1"></a>request_generate <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">endpoint =</span> <span class="fu">character</span>(),</span>
 <span id="cb117-3"><a href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%BE%D0%B1%D1%91%D1%80%D1%82%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-google-api-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-gargle.html#cb117-3" tabindex="-1"></a>                             <span class="at">params =</span> <span class="fu">list</span>(),</span>
@@ -657,7 +657,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-21.</p>
+    <p>"<strong>Курс 'Разработка пакетов на языке R'</strong>" was written by Алексей Селезнёв. It was last built on 2023-11-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
