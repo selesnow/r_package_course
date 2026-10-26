@@ -5,8 +5,8 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-url: https://selesnow.github.io/r_package_course
-cover-image: img/cover.jpg
+url: https://alexey-seleznev.pro/r_package_course
+cover-image: img/cover.png
 description: |
   Бесплатный видео курс по разработке собственных пакетов на языке R.
 biblio-style: apalike
@@ -18,7 +18,7 @@ csl: chicago-fullnote-bibliography.csl
 ------
 
 ## О курсе {-}
-<a href="https://selesnow.github.io"><img src="img/cover.png" align="right" alt="Cover image" class="cover" width="230" height="366" /></a>Мое знакомство с языком R началось в 2016 году, когда я решил использовать его для сбора данных через API из различных рекламных платформ. Для некоторых из них уже существовали готовые решения в виде пакетов, но для менее известных площадок пришлось создавать собственные инструменты. Тогда я столкнулся с ограниченностью существующих ресурсов и решил самостоятельно разобраться в создании R-пакетов.
+<a href="https://alexey-seleznev.pro"><img src="img/cover.png" align="right" alt="Cover image" class="cover" width="230" height="366" /></a>Мое знакомство с языком R началось в 2016 году, когда я решил использовать его для сбора данных через API из различных рекламных платформ. Для некоторых из них уже существовали готовые решения в виде пакетов, но для менее известных площадок пришлось создавать собственные инструменты. Тогда я столкнулся с ограниченностью существующих ресурсов и решил самостоятельно разобраться в создании R-пакетов.
 
 На тот момент подробных руководств было мало, и я приходил к пониманию процесса методом проб и ошибок. Используя базовые функциональности R, такие как функция package.skeleton(), я разрабатывал пакеты. Этот опыт был насыщен избытком ненужной ручной работы, например я руками редактировал все `.Rmd` файлы, из которых далее генерируются HTML файлы с документацией к функциям.
 
@@ -43,7 +43,7 @@ csl: chicago-fullnote-bibliography.csl
 
 К тому же, если у вас есть вопросы по одной из лекций курса, вы можете задавать его под видео лекции на YouTube, это приветствуется, и на такие комментарии я с радостью отвечу.
 
-Буду рад любой конструктивной критике, и предложениям по улучшению курса "разработка пакетов на языке R", направлять их можно мне на почту selesnow@gmail.com. Если вы хотите выразить благодарность мне за курс, то в конце раздела описано как это можно сделать.
+Буду рад любой конструктивной критике, и предложениям по улучшению курса "разработка пакетов на языке R", направлять их можно мне на почту me@alexey-seleznev.pro. Если вы хотите выразить благодарность мне за курс, то в конце раздела описано как это можно сделать.
 
 ## Рекомендации по прохождению курса {-}
 Данный курс состоит из 14 видеолекций общей продолжительностью более 6 часов. В конце каждого урока вы найдете небольшой тест или задание для закрепления материала лекции. Прохождение тестов не является обязательным, тем не менее я крайне советую пройти тест после просмотра лекции. Тесты помогут акцентировать ваше внимание на наиболее важных моментах урока и проверить, насколько вы усвоили материал.
@@ -57,7 +57,7 @@ csl: chicago-fullnote-bibliography.csl
 
 ## Об авторе {-}
 Меня зовут Алексей Селезнёв, с 2008 года я являюсь практикующим аналитиком. На данный момент основной моей деятельностью является развитие отдела аналитики в агентстве интернет-маркетинга [Netpeak](https://https://netpeak.group/).
-<a href="https://selesnow.github.io"><img src="img/author.png" width="200" height="200" align="left" alt="Алексей Селезнёв" hspace="20" vspace="7" /></a>
+<a href="https://alexey-seleznev.pro"><img src="img/author.png" width="200" height="200" align="left" alt="Алексей Селезнёв" hspace="20" vspace="7" /></a>
 
 Мною были разработаны такие R пакеты как: `rgoogleads`, `rfacebookstat`, `timeperiodsR` и некоторые другие. На данный момент написанные мной пакеты только с CRAN были установленны более 200 000 раз.
 
@@ -73,10 +73,10 @@ csl: chicago-fullnote-bibliography.csl
 Как я уже писал выше, помимо курса "Разработка пакетов на языке R" у меня есть ряд других бесплатных курсов:
 
 1. [Язык R для интернет маркетинга](https://r-for-marketing.netpeak.net/auth/sign/in), для начинающих, требуется бесплатная регистрация
-2. [Язык R для пользователей Excel](https://selesnow.github.io/r4excel_users/), для начинающих
-3. [Введение в dplyr 1.0.0](https://selesnow.github.io/dplyr_1_0_0_course), средней уровень сложности
-4. [Циклы и функционалы в языке R](https://selesnow.github.io/iterations_in_r/), средней уровень сложности
-5. [Разработка telegram ботов на языке R](https://selesnow.github.io/build_telegram_bot_using_r/), высокий уровень сложности
+2. [Язык R для пользователей Excel](https://alexey-seleznev.pro/r4excel_users/), для начинающих
+3. [Введение в dplyr 1.0.0](https://alexey-seleznev.pro/dplyr_1_0_0_course), средней уровень сложности
+4. [Циклы и функционалы в языке R](https://alexey-seleznev.pro/iterations_in_r/), средней уровень сложности
+5. [Разработка telegram ботов на языке R](https://alexey-seleznev.pro/build_telegram_bot_using_r/), высокий уровень сложности
 
 ## Каналы автора {-}
 Если вы интересуетесь языком R, применяете его в работе, или планируете изучать, то думаю вам будут интересны мои каналы, о которых я писал выше. Буду рад видеть вас среди подписчиков:
@@ -119,7 +119,7 @@ _Дата обновления курса: `r format(Sys.Date(), "%d.%m.%Y")`_
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 library(r2social)
 r2social::r2social.scripts()
-r2social::shareButton(link = "https://selesnow.github.io/r_package_course/", position = "inline", whatsapp = T, telegram = T, instagram = T)
+r2social::shareButton(link = "https://alexey-seleznev.pro/r_package_course/", position = "inline", whatsapp = T, telegram = T, instagram = T)
 r2social::connectButton(link = 'https://t.me/R4marketing', link.out = F, telegram = T, position = 'left')
 r2social::connectButton(link = 'https://www.youtube.com/R4marketing/?sub_confirmation=1', link.out = F, youtube = T, position = 'right', display.inline = FALSE)
 ```

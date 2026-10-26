@@ -130,49 +130,49 @@ usethis::use_github()
 
 ```{=html}
 <div class="r2social-link-container r2social-social-inline">
-<a href="https://www.facebook.com/sharer/sharer.php?u=https://selesnow.github.io/r_package_course/" target="_r2socialxlink">
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://alexey-seleznev.pro/r_package_course/" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#1877f2">
 <div class="r2social-icons-inline r2s-ico-facebook"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">facebook</p>
 </div>
 </a>
-<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://selesnow.github.io/r_package_course/" target="_r2socialxlink">
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://alexey-seleznev.pro/r_package_course/" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#0A66C2">
 <div class="r2social-icons-inline r2s-ico-linkedin"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">linkedin</p>
 </div>
 </a>
-<a href="https://twitter.com/intent/tweet?url=https://selesnow.github.io/r_package_course/&amp;text=" target="_r2socialxlink">
+<a href="https://twitter.com/intent/tweet?url=https://alexey-seleznev.pro/r_package_course/&amp;text=" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#1DA1F2">
 <div class="r2social-icons-inline r2s-ico-twitter"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">twitter</p>
 </div>
 </a>
-<a href="https://web.whatsapp.com/send?text= https://selesnow.github.io/r_package_course/" target="_r2socialxlink">
+<a href="https://web.whatsapp.com/send?text= https://alexey-seleznev.pro/r_package_course/" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#24cc63">
 <div class="r2social-icons-inline r2s-ico-whatsapp"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">whatsapp</p>
 </div>
 </a>
-<a href="https://reddit.com/submit?url=https://selesnow.github.io/r_package_course/&amp;title=" target="_r2socialxlink">
+<a href="https://reddit.com/submit?url=https://alexey-seleznev.pro/r_package_course/&amp;title=" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#FF5700">
 <div class="r2social-icons-inline r2s-ico-reddit"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">reddit</p>
 </div>
 </a>
-<a href="https://service.weibo.com/share/share.php?url=https://selesnow.github.io/r_package_course/&amp;title=" target="_r2socialxlink">
+<a href="https://service.weibo.com/share/share.php?url=https://alexey-seleznev.pro/r_package_course/&amp;title=" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#ce1126">
 <div class="r2social-icons-inline r2s-ico-weibo"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">weibo</p>
 </div>
 </a>
-<a href="https://www.xing.com/app/user?op=share&amp;url=https://selesnow.github.io/r_package_course/" target="_r2socialxlink">
+<a href="https://www.xing.com/app/user?op=share&amp;url=https://alexey-seleznev.pro/r_package_course/" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#C32AA3">
 <div class="r2social-icons-inline r2s-ico-instagram"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">instagram</p>
 </div>
 </a>
-<a href="https://telegram.me/share/url?url=https://selesnow.github.io/r_package_course/&amp;text=" target="_r2socialxlink">
+<a href="https://telegram.me/share/url?url=https://alexey-seleznev.pro/r_package_course/&amp;text=" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#0088cc">
 <div class="r2social-icons-inline r2s-ico-telegram"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">telegram</p>

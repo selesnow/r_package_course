@@ -5,7 +5,7 @@ date: "2023-11-25"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-url: https://selesnow.github.io/r_package_course
+url: https://alexey-seleznev.pro/r_package_course
 cover-image: img/cover.jpg
 description: |
   Бесплатный видео курс по разработке собственных пакетов на языке R.
@@ -18,7 +18,7 @@ csl: chicago-fullnote-bibliography.csl
 ------
 
 ## О курсе {-}
-<a href="https://selesnow.github.io"><img src="img/cover.png" align="right" alt="Cover image" class="cover" width="230" height="366" /></a>Мое знакомство с языком R началось в 2016 году, когда я решил использовать его для сбора данных через API из различных рекламных платформ. Для некоторых из них уже существовали готовые решения в виде пакетов, но для менее известных площадок пришлось создавать собственные инструменты. Тогда я столкнулся с ограниченностью существующих ресурсов и решил самостоятельно разобраться в создании R-пакетов.
+<a href="https://alexey-seleznev.pro"><img src="img/cover.png" align="right" alt="Cover image" class="cover" width="230" height="366" /></a>Мое знакомство с языком R началось в 2016 году, когда я решил использовать его для сбора данных через API из различных рекламных платформ. Для некоторых из них уже существовали готовые решения в виде пакетов, но для менее известных площадок пришлось создавать собственные инструменты. Тогда я столкнулся с ограниченностью существующих ресурсов и решил самостоятельно разобраться в создании R-пакетов.
 
 На тот момент подробных руководств было мало, и я приходил к пониманию процесса методом проб и ошибок. Используя базовые функциональности R, такие как функция package.skeleton(), я разрабатывал пакеты. Этот опыт был насыщен избытком ненужной ручной работы, например я руками редактировал все `.Rmd` файлы, из которых далее генерируются HTML файлы с документацией к функциям.
 
@@ -43,7 +43,7 @@ csl: chicago-fullnote-bibliography.csl
 
 К тому же, если у вас есть вопросы по одной из лекций курса, вы можете задавать его под видео лекции на YouTube, это приветствуется, и на такие комментарии я с радостью отвечу.
 
-Буду рад любой конструктивной критике, и предложениям по улучшению курса "разработка пакетов на языке R", направлять их можно мне на почту selesnow@gmail.com. Если вы хотите выразить благодарность мне за курс, то в конце раздела описано как это можно сделать.
+Буду рад любой конструктивной критике, и предложениям по улучшению курса "разработка пакетов на языке R", направлять их можно мне на почту me@alexey-seleznev.pro. Если вы хотите выразить благодарность мне за курс, то в конце раздела описано как это можно сделать.
 
 ## Рекомендации по прохождению курса {-}
 Данный курс состоит из 14 видеолекций общей продолжительностью более 6 часов. В конце каждого урока вы найдете небольшой тест или задание для закрепления материала лекции. Прохождение тестов не является обязательным, тем не менее я крайне советую пройти тест после просмотра лекции. Тесты помогут акцентировать ваше внимание на наиболее важных моментах урока и проверить, насколько вы усвоили материал.
@@ -57,7 +57,7 @@ csl: chicago-fullnote-bibliography.csl
 
 ## Об авторе {-}
 Меня зовут Алексей Селезнёв, с 2008 года я являюсь практикующим аналитиком. На данный момент основной моей деятельностью является развитие отдела аналитики в агентстве интернет-маркетинга [Netpeak](https://https://netpeak.group/).
-<a href="https://selesnow.github.io"><img src="img/author.png" width="200" height="200" align="left" alt="Алексей Селезнёв" hspace="20" vspace="7" /></a>
+<a href="https://alexey-seleznev.pro"><img src="img/author.png" width="200" height="200" align="left" alt="Алексей Селезнёв" hspace="20" vspace="7" /></a>
 
 Мною были разработаны такие R пакеты как: `rgoogleads`, `rfacebookstat`, `timeperiodsR` и некоторые другие. На данный момент написанные мной пакеты только с CRAN были установленны более 200 000 раз.
 
@@ -73,10 +73,10 @@ csl: chicago-fullnote-bibliography.csl
 Как я уже писал выше, помимо курса "Разработка пакетов на языке R" у меня есть ряд других бесплатных курсов:
 
 1. [Язык R для интернет маркетинга](https://r-for-marketing.netpeak.net/auth/sign/in), для начинающих, требуется бесплатная регистрация
-2. [Язык R для пользователей Excel](https://selesnow.github.io/r4excel_users/), для начинающих
-3. [Введение в dplyr 1.0.0](https://selesnow.github.io/dplyr_1_0_0_course), средней уровень сложности
-4. [Циклы и функционалы в языке R](https://selesnow.github.io/iterations_in_r/), средней уровень сложности
-5. [Разработка telegram ботов на языке R](https://selesnow.github.io/build_telegram_bot_using_r/), высокий уровень сложности
+2. [Язык R для пользователей Excel](https://alexey-seleznev.pro/r4excel_users/), для начинающих
+3. [Введение в dplyr 1.0.0](https://alexey-seleznev.pro/dplyr_1_0_0_course), средней уровень сложности
+4. [Циклы и функционалы в языке R](https://alexey-seleznev.pro/iterations_in_r/), средней уровень сложности
+5. [Разработка telegram ботов на языке R](https://alexey-seleznev.pro/build_telegram_bot_using_r/), высокий уровень сложности
 
 ## Каналы автора {-}
 Если вы интересуетесь языком R, применяете его в работе, или планируете изучать, то думаю вам будут интересны мои каналы, о которых я писал выше. Буду рад видеть вас среди подписчиков:
@@ -123,49 +123,49 @@ _Дата обновления курса: 25.11.2023_
 
 ```{=html}
 <div class="r2social-link-container r2social-social-inline">
-<a href="https://www.facebook.com/sharer/sharer.php?u=https://selesnow.github.io/r_package_course/" target="_r2socialxlink">
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://alexey-seleznev.pro/r_package_course/" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#1877f2">
 <div class="r2social-icons-inline r2s-ico-facebook"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">facebook</p>
 </div>
 </a>
-<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://selesnow.github.io/r_package_course/" target="_r2socialxlink">
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://alexey-seleznev.pro/r_package_course/" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#0A66C2">
 <div class="r2social-icons-inline r2s-ico-linkedin"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">linkedin</p>
 </div>
 </a>
-<a href="https://twitter.com/intent/tweet?url=https://selesnow.github.io/r_package_course/&amp;text=" target="_r2socialxlink">
+<a href="https://twitter.com/intent/tweet?url=https://alexey-seleznev.pro/r_package_course/&amp;text=" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#1DA1F2">
 <div class="r2social-icons-inline r2s-ico-twitter"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">twitter</p>
 </div>
 </a>
-<a href="https://web.whatsapp.com/send?text= https://selesnow.github.io/r_package_course/" target="_r2socialxlink">
+<a href="https://web.whatsapp.com/send?text= https://alexey-seleznev.pro/r_package_course/" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#24cc63">
 <div class="r2social-icons-inline r2s-ico-whatsapp"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">whatsapp</p>
 </div>
 </a>
-<a href="https://reddit.com/submit?url=https://selesnow.github.io/r_package_course/&amp;title=" target="_r2socialxlink">
+<a href="https://reddit.com/submit?url=https://alexey-seleznev.pro/r_package_course/&amp;title=" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#FF5700">
 <div class="r2social-icons-inline r2s-ico-reddit"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">reddit</p>
 </div>
 </a>
-<a href="https://service.weibo.com/share/share.php?url=https://selesnow.github.io/r_package_course/&amp;title=" target="_r2socialxlink">
+<a href="https://service.weibo.com/share/share.php?url=https://alexey-seleznev.pro/r_package_course/&amp;title=" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#ce1126">
 <div class="r2social-icons-inline r2s-ico-weibo"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">weibo</p>
 </div>
 </a>
-<a href="https://www.xing.com/app/user?op=share&amp;url=https://selesnow.github.io/r_package_course/" target="_r2socialxlink">
+<a href="https://www.xing.com/app/user?op=share&amp;url=https://alexey-seleznev.pro/r_package_course/" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#C32AA3">
 <div class="r2social-icons-inline r2s-ico-instagram"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">instagram</p>
 </div>
 </a>
-<a href="https://telegram.me/share/url?url=https://selesnow.github.io/r_package_course/&amp;text=" target="_r2socialxlink">
+<a href="https://telegram.me/share/url?url=https://alexey-seleznev.pro/r_package_course/&amp;text=" target="_r2socialxlink">
 <div class="social-btn-inline" style="background-color:#0088cc">
 <div class="r2social-icons-inline r2s-ico-telegram"></div>
 <p class="order-1 google-font margin-telgram" style="color:black">telegram</p>
